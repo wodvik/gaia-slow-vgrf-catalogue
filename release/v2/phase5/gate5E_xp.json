@@ -1,0 +1,34 @@
+{
+  "n_total": 2859,
+  "n_finite_GSPPhot": 1963,
+  "by_tier_GSPPhot_MH": {
+    "tier_AB": {
+      "n_with_finite_MH": 235,
+      "MH": {
+        "n": 235,
+        "p16": -1.268312,
+        "p50": -0.5308,
+        "p84": -0.101892
+      }
+    },
+    "tier_ABC": {
+      "n_with_finite_MH": 426,
+      "MH": {
+        "n": 426,
+        "p16": -1.2024,
+        "p50": -0.5004,
+        "p84": -0.1007
+      }
+    },
+    "tier_X_excluded": {
+      "n_with_finite_MH": 1484,
+      "MH": {
+        "n": 1484,
+        "p16": -0.59482,
+        "p50": -0.1567,
+        "p84": 0.0087
+      }
+    }
+  },
+  "note": "GSP-Phot DR3 native; Andrae+2023 is a recalibration of this same input, expected median offset ~0.1 dex."
+}

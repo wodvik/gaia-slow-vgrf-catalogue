@@ -1,0 +1,24 @@
+{
+  "n_processed": 2859,
+  "tier_counts": {
+    "A": 214,
+    "B": 120,
+    "C": 298,
+    "D": 77,
+    "X": 2150
+  },
+  "headline_tier_B": 334,
+  "tier_C_total": 632,
+  "v1_published_count": 1248,
+  "v1_csv_count": 2859,
+  "vgrf_cut_kms": 25.0,
+  "mc_base": 500,
+  "mc_refined_count": 456,
+  "mc_ultra_count": 241,
+  "elapsed_seconds": 2.1,
+  "convergence_100_star": {
+    "max_abs_dP": 0.05379999999999996,
+    "median_abs_dP": 0.008099999999999996,
+    "p84_abs_dP": 0.028223999999999992
+  }
+}

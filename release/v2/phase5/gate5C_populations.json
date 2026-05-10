@@ -1,0 +1,76 @@
+{
+  "by_tier": {
+    "tier_AB": {
+      "n": 335,
+      "counts": {
+        "Aurora": 6,
+        "Splash": 16,
+        "GSE": 3,
+        "low_MH_no_alpha": 58,
+        "intermediate_MH_no_alpha": 148,
+        "disk": 11,
+        "unclassified": 93
+      },
+      "fracs": {
+        "Aurora": 0.0179,
+        "Splash": 0.0478,
+        "GSE": 0.009,
+        "low_MH_no_alpha": 0.1731,
+        "intermediate_MH_no_alpha": 0.4418,
+        "disk": 0.0328,
+        "unclassified": 0.2776
+      }
+    },
+    "tier_ABC": {
+      "n": 635,
+      "counts": {
+        "Aurora": 8,
+        "Splash": 26,
+        "GSE": 10,
+        "low_MH_no_alpha": 87,
+        "intermediate_MH_no_alpha": 291,
+        "disk": 19,
+        "unclassified": 194
+      },
+      "fracs": {
+        "Aurora": 0.0126,
+        "Splash": 0.0409,
+        "GSE": 0.0157,
+        "low_MH_no_alpha": 0.137,
+        "intermediate_MH_no_alpha": 0.4583,
+        "disk": 0.0299,
+        "unclassified": 0.3055
+      }
+    },
+    "tier_X": {
+      "n": 2153,
+      "counts": {
+        "Aurora": 8,
+        "Splash": 34,
+        "GSE": 15,
+        "low_MH_no_alpha": 101,
+        "intermediate_MH_no_alpha": 1101,
+        "disk": 247,
+        "unclassified": 647
+      },
+      "fracs": {
+        "Aurora": 0.0037,
+        "Splash": 0.0158,
+        "GSE": 0.007,
+        "low_MH_no_alpha": 0.0469,
+        "intermediate_MH_no_alpha": 0.5114,
+        "disk": 0.1147,
+        "unclassified": 0.3005
+      }
+    }
+  },
+  "global": {},
+  "headline": {
+    "n_TierABC": 635,
+    "n_with_alpha_chem": 55,
+    "n_GSPPhot_only_no_alpha": 378,
+    "Aurora_fraction_of_alphasubsample": 0.0311284046692607,
+    "Splash_fraction_of_alphasubsample": 0.10116731517509728,
+    "GSE_fraction_of_alphasubsample": 0.038910505836575876
+  }
+}

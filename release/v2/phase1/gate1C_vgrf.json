@@ -1,0 +1,15 @@
+{
+  "n_processed": 2859,
+  "vgrf_cutoff_kms": 25.0,
+  "counts_below_cut_by_variant": {
+    "default": 709,
+    "grav22": 807,
+    "lsr6": 882,
+    "rb20": 576
+  },
+  "n_v1_below_cut": 2859,
+  "vgrf_shift_vs_v1_p16": 20.399847501562455,
+  "vgrf_shift_vs_v1_p50": 39.76356260953774,
+  "vgrf_shift_vs_v1_p84": 63.33955055568674,
+  "n_dropped_nonfinite": 0
+}

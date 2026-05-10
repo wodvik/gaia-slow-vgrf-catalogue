@@ -1,0 +1,23 @@
+{
+  "n_static_bridgers_TierABC": 0,
+  "n_barred_bridgers_TierABC": 10,
+  "v1_reported_bridgers_count": 24,
+  "fine_integration_steps": 10001,
+  "fine_step_Myr": 0.4,
+  "bridger_summary": {
+    "median_R_peri_2Myr_pc": 281.7254737019539,
+    "median_R_peri_0p4Myr_pc": 212.2497409582138,
+    "median_R_apo_kpc": 16.346671104431152,
+    "median_EJ_drift_2Myr": 0.06749559814161346,
+    "median_EJ_drift_0p4Myr": 0.06749559814161346,
+    "n_with_chemistry": 6
+  },
+  "interpretation_indicators": {
+    "n_population_Splash": 0,
+    "n_population_GSE": 0,
+    "n_population_Aurora": 0,
+    "n_population_disk": 0,
+    "n_population_low_MH": 0,
+    "n_population_unclassified": 5
+  }
+}

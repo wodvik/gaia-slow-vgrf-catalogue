@@ -1,0 +1,18 @@
+{
+  "n_total": 2859,
+  "n_prior_mean_exact": 1551,
+  "n_prior_mean_band_pm0p01": 1551,
+  "frac_prior_mean": 0.5424973767051416,
+  "tier_AB_n_total": 334,
+  "tier_AB_n_in_prior_cell": 142,
+  "tier_AB_n_in_real_cell": 192,
+  "tier_AB_sumw_total": 539.160168062346,
+  "tier_AB_sumw_real_cells": 255.16016806234597,
+  "tier_AB_sumw_prior_cells": 284.0,
+  "tier_AB_upweight_total": 1.6142520001866647,
+  "tier_AB_upweight_real_cells_only": 1.328959208658052,
+  "tier_AB_upweight_prior_cells_only": 2.0,
+  "tier_ABC_n_total": 632,
+  "tier_ABC_n_in_prior_cell": 284,
+  "tier_ABC_n_in_real_cell": 348
+}

@@ -1,0 +1,98 @@
+{
+  "n_sources": 2859,
+  "n_realisations_per_branch": 2000,
+  "branch_description": {
+    "independent": "Production-like BJ split-normal distance draw independent of astrometric draw.",
+    "parallax_anticorrelated": "Stress-test BJ split-normal draw using z_distance=-z_parallax."
+  },
+  "parallax_snr": {
+    "Tier_A_median": 42.902712,
+    "Tier_AB_median": 33.147024,
+    "Tier_ABC_median": 22.6846975
+  },
+  "independent": {
+    "counts": {
+      "A": 214,
+      "B_increment": 117,
+      "AplusB": 331,
+      "C_increment": 300,
+      "AplusBplusC": 631
+    },
+    "stats": [
+      {
+        "label": "independent_A",
+        "n": 214,
+        "median_Rperi_pc": 113.52099105715752,
+        "median_Rapo_kpc": 8.194353103637695,
+        "median_ecc": 0.9730663597583771,
+        "retrograde_frac_Lz_lt_0": 0.6214953271028038
+      },
+      {
+        "label": "independent_AB",
+        "n": 331,
+        "median_Rperi_pc": 125.55396556854248,
+        "median_Rapo_kpc": 8.16679573059082,
+        "median_ecc": 0.970331072807312,
+        "retrograde_frac_Lz_lt_0": 0.6132930513595166
+      },
+      {
+        "label": "independent_ABC",
+        "n": 631,
+        "median_Rperi_pc": 147.37318456172943,
+        "median_Rapo_kpc": 8.095144271850586,
+        "median_ecc": 0.9623120427131653,
+        "retrograde_frac_Lz_lt_0": 0.6988906497622821
+      }
+    ]
+  },
+  "parallax_anticorrelated": {
+    "counts": {
+      "A": 212,
+      "B_increment": 118,
+      "AplusB": 330,
+      "C_increment": 301,
+      "AplusBplusC": 631
+    },
+    "stats": [
+      {
+        "label": "copula_stress_A",
+        "n": 212,
+        "median_Rperi_pc": 112.86308616399765,
+        "median_Rapo_kpc": 8.194353103637695,
+        "median_ecc": 0.973165363073349,
+        "retrograde_frac_Lz_lt_0": 0.6132075471698113
+      },
+      {
+        "label": "copula_stress_AB",
+        "n": 330,
+        "median_Rperi_pc": 125.97260624170303,
+        "median_Rapo_kpc": 8.162761688232422,
+        "median_ecc": 0.9700775444507599,
+        "retrograde_frac_Lz_lt_0": 0.6151515151515151
+      },
+      {
+        "label": "copula_stress_ABC",
+        "n": 631,
+        "median_Rperi_pc": 144.83259618282318,
+        "median_Rapo_kpc": 8.07882308959961,
+        "median_ecc": 0.962337851524353,
+        "retrograde_frac_Lz_lt_0": 0.6973058637083994
+      }
+    ]
+  },
+  "same_run_deltas": {
+    "median_abs_delta_P": 0.004,
+    "p95_abs_delta_P": 0.02100000000000002,
+    "max_abs_delta_P": 0.049000000000000044,
+    "n_crossing_P_0p95": 10,
+    "n_crossing_P_0p84": 3,
+    "n_crossing_P_0p50": 10
+  },
+  "overlap_with_current_catalogue": {
+    "current_A_count": 214,
+    "current_AB_count": 334,
+    "current_ABC_count": 632,
+    "copula_AB_overlap_with_current_AB": 326,
+    "copula_ABC_overlap_with_current_ABC": 627
+  }
+}

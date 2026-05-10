@@ -1,0 +1,64 @@
+{
+  "omega_p_kms_kpc": -37.5,
+  "n_total": 10078,
+  "bands": {
+    "vgrf_25_50": {
+      "n": 1955,
+      "n_finite": 1955,
+      "frac_within_0p3_OLR_raw": 0.015856777493606138,
+      "frac_within_0p3_OLR_weighted": 0.012943989141790685,
+      "frac_within_0p3_4_1_raw": 0.0035805626598465474,
+      "frac_within_0p3_4_1_weighted": 0.0017204069533537257,
+      "frac_within_0p3_ILR_raw": 0.0020460358056265983,
+      "frac_within_0p3_ILR_weighted": 0.002622285592008855,
+      "median_R_peri_pc": 153.9839208126068,
+      "median_z_max_pc": 1735.0149154663086,
+      "median_ecc": 0.9157447218894958
+    },
+    "vgrf_50_100": {
+      "n": 2586,
+      "n_finite": 2586,
+      "frac_within_0p3_OLR_raw": 0.004640371229698376,
+      "frac_within_0p3_OLR_weighted": 0.005068708767828731,
+      "frac_within_0p3_4_1_raw": 0.00580046403712297,
+      "frac_within_0p3_4_1_weighted": 0.0035722136008345022,
+      "frac_within_0p3_ILR_raw": 0.01082753286929621,
+      "frac_within_0p3_ILR_weighted": 0.0178679914553234,
+      "median_R_peri_pc": 477.8086096048355,
+      "median_z_max_pc": 1829.7561407089233,
+      "median_ecc": 0.7904514372348785
+    },
+    "vgrf_100_200": {
+      "n": 2788,
+      "n_finite": 2788,
+      "frac_within_0p3_OLR_raw": 0.023672883787661407,
+      "frac_within_0p3_OLR_weighted": 0.018939861307542875,
+      "frac_within_0p3_4_1_raw": 0.015064562410329985,
+      "frac_within_0p3_4_1_weighted": 0.005839559739457148,
+      "frac_within_0p3_ILR_raw": 0.020086083213773313,
+      "frac_within_0p3_ILR_weighted": 0.033965863040483726,
+      "median_R_peri_pc": 1797.4990606307983,
+      "median_z_max_pc": 1653.2689332962036,
+      "median_ecc": 0.42433130741119385
+    },
+    "vgrf_200_260": {
+      "n": 2749,
+      "n_finite": 2749,
+      "frac_within_0p3_OLR_raw": 0.03710440160058203,
+      "frac_within_0p3_OLR_weighted": 0.01965235748290058,
+      "frac_within_0p3_4_1_raw": 0.0261913423062932,
+      "frac_within_0p3_4_1_weighted": 0.008145202580502867,
+      "frac_within_0p3_ILR_raw": 0.005820298290287377,
+      "frac_within_0p3_ILR_weighted": 0.009186806413549685,
+      "median_R_peri_pc": 2852.618455886841,
+      "median_z_max_pc": 1833.1193923950195,
+      "median_ecc": 0.2884867191314697
+    }
+  },
+  "slow_TierABC": {
+    "n": 631,
+    "frac_within_0p3_OLR": 0.009508716323296355,
+    "frac_within_0p3_4_1": 0.01584786053882726,
+    "frac_within_0p3_ILR": 0.0
+  }
+}

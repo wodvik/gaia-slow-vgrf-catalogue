@@ -1,0 +1,78 @@
+{
+  "agama_version": "1.0.157 compiled on May  3 2026",
+  "approach": "Hunter+2024 example (peer-review-clean composition)",
+  "no_bulge_double_counting": true,
+  "summary_per_variant": {
+    "static_simple": {
+      "Vc_phiavg_R0_kms": 219.50509285057902,
+      "Vc_phi0_R0_kms": 219.50509285057905,
+      "Vc_R0_min_kms": 219.505092850579,
+      "Vc_R0_max_kms": 219.50509285057908,
+      "Vc_max_kms": 225.61351879407974,
+      "Mass_enc_50kpc_msun": 360318441744.5952,
+      "Mass_enc_200kpc_msun": 805134623009.5247
+    },
+    "static_full": {
+      "Vc_phiavg_R0_kms": 228.82879850233735,
+      "Vc_phi0_R0_kms": 228.82879850233735,
+      "Vc_R0_min_kms": 228.82879850233735,
+      "Vc_R0_max_kms": 228.82879850233738,
+      "Vc_max_kms": 229.05414445355558,
+      "Mass_enc_50kpc_msun": 402650225948.64185,
+      "Mass_enc_200kpc_msun": 944588227753.6141
+    },
+    "barred_default": {
+      "Vc_phiavg_R0_kms": 228.82213061537686,
+      "Vc_phi0_R0_kms": 229.86300762210774,
+      "Vc_R0_min_kms": 227.16113125552755,
+      "Vc_R0_max_kms": 231.36252198250793,
+      "Vc_max_kms": 229.046734123147,
+      "Mass_enc_50kpc_msun": 402644917944.5256,
+      "Mass_enc_200kpc_msun": 944582932967.0566
+    },
+    "barred_slow": {
+      "Vc_phiavg_R0_kms": 228.82213061537686,
+      "Vc_phi0_R0_kms": 229.86300762210774,
+      "Vc_R0_min_kms": 227.16113125552755,
+      "Vc_R0_max_kms": 231.36252198250793,
+      "Vc_max_kms": 229.046734123147,
+      "Mass_enc_50kpc_msun": 402644917944.5256,
+      "Mass_enc_200kpc_msun": 944582932967.0566
+    },
+    "barred_fast": {
+      "Vc_phiavg_R0_kms": 228.82213061537686,
+      "Vc_phi0_R0_kms": 229.86300762210774,
+      "Vc_R0_min_kms": 227.16113125552755,
+      "Vc_R0_max_kms": 231.36252198250793,
+      "Vc_max_kms": 229.046734123147,
+      "Mass_enc_50kpc_msun": 402644917944.5256,
+      "Mass_enc_200kpc_msun": 944582932967.0566
+    },
+    "static_full_halo_0p85": {
+      "Vc_phiavg_R0_kms": 216.6138971893477,
+      "Vc_phi0_R0_kms": 216.6138971893477,
+      "Vc_R0_min_kms": 216.6138971893477,
+      "Vc_R0_max_kms": 216.61389718934774,
+      "Vc_max_kms": 217.87934520258455,
+      "Mass_enc_50kpc_msun": 298103813560.58417,
+      "Mass_enc_200kpc_msun": 657784024354.7324
+    },
+    "static_full_halo_1p15": {
+      "Vc_phiavg_R0_kms": 240.423912272655,
+      "Vc_phi0_R0_kms": 240.42391227265503,
+      "Vc_R0_min_kms": 240.423912272655,
+      "Vc_R0_max_kms": 240.42391227265506,
+      "Vc_max_kms": 240.43644587008777,
+      "Mass_enc_50kpc_msun": 507196638336.69934,
+      "Mass_enc_200kpc_msun": 1231392431152.4954
+    }
+  },
+  "R0_kpc": 8.178,
+  "V0_kms": 232.0,
+  "bar_omegas": {
+    "default": 37.5,
+    "slow": 33.0,
+    "fast": 41.0
+  },
+  "gate_physical_ok": true
+}

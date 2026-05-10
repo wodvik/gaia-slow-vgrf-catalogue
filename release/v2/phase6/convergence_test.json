@@ -1,0 +1,9 @@
+{
+  "n_test_stars": 100,
+  "Rp_pc_max_diff_p50": 7.9716891050338745,
+  "Rp_pc_p84_diff_p50": 3.6431163549423196,
+  "ecc_max_diff_p50": 0.0020590745734397897,
+  "ecc_p84_diff_p50": 0.0009316590632080102,
+  "spec_R_peri_50pc": true,
+  "spec_ecc_0p005": true
+}

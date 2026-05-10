@@ -1,0 +1,9 @@
+{
+  "n_TierABC": 632,
+  "median_R_peri_pc_old": 146.1028903722763,
+  "median_R_peri_pc_fine": 139.98831808567047,
+  "n_R_peri_lt_100pc_old": 207,
+  "n_R_peri_lt_100pc_fine": 220,
+  "n_min_rsph_lt_10pc_old": 0,
+  "n_min_rsph_lt_10pc_fine": 1
+}
