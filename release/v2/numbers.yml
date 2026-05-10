@@ -55,16 +55,18 @@ selection_function:
   tier_abc_prior_mean_cells: 284
   tier_abc_calibrated_cells: 348
 chemistry:
-  alpha_classified_tier_abc: 63
-  not_alpha_classified_tier_abc: 569
+  alpha_classified_tier_abc: 53
+  not_alpha_classified_tier_abc: 579
   splash_alpha_subset_n: 26
-  splash_alpha_subset_frac_pct: 41.3
-  disk_alpha_subset_n: 19
-  disk_alpha_subset_frac_pct: 30.2
-  gse_alpha_subset_n: 10
-  gse_alpha_subset_frac_pct: 15.9
-  aurora_alpha_subset_n: 8
-  aurora_alpha_subset_frac_pct: 12.7
+  splash_alpha_subset_frac_pct: 49.1
+  disk_alpha_subset_n: 1
+  disk_alpha_subset_frac_pct: 1.9
+  gse_alpha_subset_n: 9
+  gse_alpha_subset_frac_pct: 17.0
+  aurora_alpha_subset_n: 7
+  aurora_alpha_subset_frac_pct: 13.2
+  unclassified_alpha_subset_n: 10
+  unclassified_alpha_subset_frac_pct: 18.9
 sgr_a:
   candidates_evaluated: 4
   p_lt_10pc_gt_0p5: 0

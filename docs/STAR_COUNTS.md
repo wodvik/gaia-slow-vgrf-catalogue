@@ -34,7 +34,7 @@ filters; they are shipped pre-cut for casual reuse.
 | Headline catalogue, Gold subsets, abstract count | **Tier A+B** | **334** |
 | Highest-confidence empirical anchor, robustness checks | Tier A | 214 |
 | Orbit medians (e, R_peri, R_apo), MC propagation, population distributions | Tier A+B+C | 632 |
-| Splash/GSE/Aurora/disc fractions (chemistry) | α-classified subset within Tier A+B+C | 63 |
+| Splash/GSE/Aurora/disc fractions (chemistry) | alpha-classified subset within Tier A+B+C | 53 |
 | Selection-function context (full inverse weighting) | Tier A+B effective | 539 |
 | Selection-function context (conservative bracket) | Tier A+B effective | 398 |
 | Sgr A* candidate evaluation | Tier A+B+C | 4 |
@@ -53,7 +53,7 @@ or `populations_v2.fits` on `source_id` works without modification.
 
 - The **539 / 398 selection-function effective counts** are
   population-scale weights, not per-star membership flags.
-- The **63 α-classified subset** is bounded by spectroscopic coverage,
+- The **53 alpha-classified subset** is bounded by spectroscopic coverage,
   not by tier; chemistry-region fractions are quoted only inside it.
 - The **0–10 bridger range** is a sensitivity bracket across barred
   pattern speeds, not a robust population fraction.

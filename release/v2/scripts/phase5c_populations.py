@@ -83,12 +83,22 @@ def main():
     if xp["tier"].dtype == object and isinstance(xp["tier"].iloc[0], (bytes, bytearray)):
         xp["tier"] = xp["tier"].str.decode("utf-8")
 
-    # Build base table: one row per star in Tier A/B/C/D, with best
-    # available [Fe/H] and [alpha/Fe].
+    # Build base table: one row per star, with best available [Fe/H] and
+    # [alpha/Fe]. A few sources have both APOGEE and GALAH rows in the
+    # chemistry table; use a deterministic one-row-per-source view for
+    # population bookkeeping so tier counts cannot be inflated by joins.
+    chem["survey_rank"] = chem["survey"].map({"APOGEE": 0, "GALAH": 1}).fillna(9)
+    chem["finite_rank"] = ~(
+        np.isfinite(chem["FeH"].astype(float))
+        & np.isfinite(chem["alpha_proxy"].astype(float))
+    )
+    chem_one = (chem.sort_values(["source_id", "finite_rank", "survey_rank"])
+                    .drop_duplicates("source_id", keep="first"))
+
     base = xp[["source_id", "tier", "P_vgrf_below_25",
                "vgrf_default", "MH_xp"]].copy()
     base = base.merge(
-        chem[["source_id", "FeH", "MgFe", "alpha_proxy", "survey"]],
+        chem_one[["source_id", "FeH", "MgFe", "alpha_proxy", "survey"]],
         on="source_id", how="left", suffixes=("", "_chem")
     )
     # Coalesce: prefer APOGEE/GALAH FeH if present, else GSP-Phot MH
@@ -119,32 +129,31 @@ def main():
         fracs = {p: round(counts[p] / n, 4) for p in pops}
         summary["by_tier"][lab] = {"n": n, "counts": counts, "fracs": fracs}
 
-    # Headline interpretation: how much of Tier A+B+C is each population
+    # Headline interpretation: one-row-per-source alpha-chemistry subset
+    # within Tier A+B+C. These counts are the only population-region counts
+    # used in the manuscript.
     AB_C = summary["by_tier"]["tier_ABC"]
+    alpha_mask = (base["tier"].isin(["A", "B", "C"]) &
+                  base["FeH"].notna() &
+                  base["alpha_proxy"].notna())
+    alpha_counts = {
+        p: int(((base["population"] == p) & alpha_mask).sum())
+        for p in ["Aurora", "Splash", "GSE", "disk", "unclassified"]
+    }
+    n_alpha = int(alpha_mask.sum())
     summary["headline"] = {
         "n_TierABC": AB_C["n"],
-        "n_with_alpha_chem": int((base["tier"].isin(["A", "B", "C"]) &
-                                   base["alpha_proxy"].notna()).sum()),
+        "n_with_alpha_chem": n_alpha,
+        "alpha_subsample_counts": alpha_counts,
+        "alpha_subsample_fracs": {
+            p: (alpha_counts[p] / max(n_alpha, 1))
+            for p in alpha_counts
+        },
         "n_GSPPhot_only_no_alpha": (AB_C["counts"]["low_MH_no_alpha"] +
                                      AB_C["counts"]["intermediate_MH_no_alpha"]),
-        "Aurora_fraction_of_alphasubsample": (
-            AB_C["counts"]["Aurora"] /
-            max(AB_C["counts"]["Aurora"] + AB_C["counts"]["Splash"] +
-                AB_C["counts"]["GSE"] + AB_C["counts"]["disk"] +
-                AB_C["counts"]["unclassified"], 1)
-        ),
-        "Splash_fraction_of_alphasubsample": (
-            AB_C["counts"]["Splash"] /
-            max(AB_C["counts"]["Aurora"] + AB_C["counts"]["Splash"] +
-                AB_C["counts"]["GSE"] + AB_C["counts"]["disk"] +
-                AB_C["counts"]["unclassified"], 1)
-        ),
-        "GSE_fraction_of_alphasubsample": (
-            AB_C["counts"]["GSE"] /
-            max(AB_C["counts"]["Aurora"] + AB_C["counts"]["Splash"] +
-                AB_C["counts"]["GSE"] + AB_C["counts"]["disk"] +
-                AB_C["counts"]["unclassified"], 1)
-        ),
+        "Aurora_fraction_of_alphasubsample": alpha_counts["Aurora"] / max(n_alpha, 1),
+        "Splash_fraction_of_alphasubsample": alpha_counts["Splash"] / max(n_alpha, 1),
+        "GSE_fraction_of_alphasubsample": alpha_counts["GSE"] / max(n_alpha, 1),
     }
 
     (OUT / "gate5C_populations.json").write_text(json.dumps(summary, indent=2))

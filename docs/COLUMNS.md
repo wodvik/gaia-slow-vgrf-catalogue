@@ -31,7 +31,7 @@ Headline Tier A+B catalogue. Rows: 334. Columns: 26.
 | `vgrf_grav22` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `vgrf_lsr6` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `vgrf_rb20` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
-| `P_vgrf_below_25` | km/s | Monte Carlo probability that Vgrf is below 25 km/s. |
+| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that Vgrf is below 25 km/s. |
 | `mc_realisations` | count or identifier | Column carried by the pipeline product; see manuscript methods and scripts for derivation. |
 | `tier` | category | Velocity-threshold membership tier: A, B, C, D, or X as defined in the manuscript. |
 
@@ -64,7 +64,7 @@ Tier A high-confidence subset. Rows: 214. Columns: 26.
 | `vgrf_grav22` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `vgrf_lsr6` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `vgrf_rb20` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
-| `P_vgrf_below_25` | km/s | Monte Carlo probability that Vgrf is below 25 km/s. |
+| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that Vgrf is below 25 km/s. |
 | `mc_realisations` | count or identifier | Column carried by the pipeline product; see manuscript methods and scripts for derivation. |
 | `tier` | category | Velocity-threshold membership tier: A, B, C, D, or X as defined in the manuscript. |
 
@@ -97,7 +97,7 @@ Master candidate catalogue. Rows: 2859. Columns: 26.
 | `vgrf_grav22` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `vgrf_lsr6` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `vgrf_rb20` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
-| `P_vgrf_below_25` | km/s | Monte Carlo probability that Vgrf is below 25 km/s. |
+| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that Vgrf is below 25 km/s. |
 | `mc_realisations` | count or identifier | Column carried by the pipeline product; see manuscript methods and scripts for derivation. |
 | `tier` | category | Velocity-threshold membership tier: A, B, C, D, or X as defined in the manuscript. |
 
@@ -124,7 +124,7 @@ Point-estimate orbit catalogue. Rows: 2859. Columns: 44.
 |---|---|---|
 | `source_id` | count or identifier | Gaia DR3 source identifier. |
 | `tier` | category | Velocity-threshold membership tier: A, B, C, D, or X as defined in the manuscript. |
-| `P_vgrf_below_25` | km/s | Monte Carlo probability that Vgrf is below 25 km/s. |
+| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that Vgrf is below 25 km/s. |
 | `vgrf_default` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `rv_quality` | category | Column carried by the pipeline product; see manuscript methods and scripts for derivation. |
 | `x_kpc` | kpc | Column carried by the pipeline product; see manuscript methods and scripts for derivation. |
@@ -202,7 +202,7 @@ APOGEE/GALAH chemistry matches. Rows: 141. Columns: 14.
 |---|---|---|
 | `source_id` | count or identifier | Gaia DR3 source identifier. |
 | `tier` | category | Velocity-threshold membership tier: A, B, C, D, or X as defined in the manuscript. |
-| `P_vgrf_below_25` | km/s | Monte Carlo probability that Vgrf is below 25 km/s. |
+| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that Vgrf is below 25 km/s. |
 | `vgrf_default` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `rv_quality` | category | Column carried by the pipeline product; see manuscript methods and scripts for derivation. |
 | `Teff` | K | Column carried by the pipeline product; see manuscript methods and scripts for derivation. |
@@ -217,13 +217,13 @@ APOGEE/GALAH chemistry matches. Rows: 141. Columns: 14.
 
 ## `release/v2/phase5/populations_v2.fits`
 
-Chemistry and population labels. Rows: 2865. Columns: 13.
+Chemistry and population labels. Rows: 2859. Columns: 13.
 
 | Column | Unit | Description |
 |---|---|---|
 | `source_id` | count or identifier | Gaia DR3 source identifier. |
 | `tier` | category | Velocity-threshold membership tier: A, B, C, D, or X as defined in the manuscript. |
-| `P_vgrf_below_25` | km/s | Monte Carlo probability that Vgrf is below 25 km/s. |
+| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that Vgrf is below 25 km/s. |
 | `vgrf_default` | km/s | Galactic rest-frame speed under the named solar-parameter convention. |
 | `MH_xp` | dex | Metallicity estimate or selected metallicity proxy. |
 | `FeH` | dex | Metallicity estimate or selected metallicity proxy. |

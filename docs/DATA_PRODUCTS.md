@@ -12,6 +12,12 @@ public release will be archived on Zenodo with a persistent DOI.
   `P(Vgrf < 25 km/s) > 0.84`.
 - `release/v2/phase1/catalogue_tierA.fits` - 214-star high-confidence core with
   `P(Vgrf < 25 km/s) > 0.95`.
+- `release/v2/mrt/catalogue_tierAB_mrt.txt` - AAS-style ASCII
+  machine-readable version of the Tier A+B headline catalogue.
+- `release/v2/mrt/catalogue_tierA_mrt.txt` - AAS-style ASCII
+  machine-readable version of the Tier A catalogue.
+- `release/data/` - compact upstream CSV inputs needed by the retained
+  scripts, excluding large trajectory caches.
 
 ## Selection Function
 
@@ -48,4 +54,3 @@ public release will be archived on Zenodo with a persistent DOI.
   diagnostics.
 - `release/v2/phase14/*` - focused sensitivity products for distance coupling,
   control reweighting, central-approach interpolation, and clustering checks.
-
