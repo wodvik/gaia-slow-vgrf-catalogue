@@ -1,8 +1,7 @@
 # Gaia DR3 Slow-Vgrf Catalogue Expanded Release
 
-This is the expanded review-stage release for the probabilistic Gaia DR3
-slow-Galactic-rest-frame-speed catalogue. It supersedes the older
-334/632-star draft products.
+This is the first public review-stage release for the probabilistic Gaia DR3
+slow-Galactic-rest-frame-speed catalogue.
 
 ## Key Counts
 
