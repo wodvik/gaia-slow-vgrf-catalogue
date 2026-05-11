@@ -1,0 +1,24 @@
+\begin{center}
+\refstepcounter{table}\label{tab:rv_quality_sensitivity}
+\begin{minipage}{\columnwidth}
+\small\textbf{Table \thetable.} Sensitivity of the main orbit summaries to
+removing stars flagged as poor by the internal Gaia DR3 RVS-quality screen.
+Values are point-estimate QA diagnostics; the qualitative compact,
+radial-orbit result is unchanged.
+\end{minipage}
+\vspace{0.4ex}
+
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\hline\hline
+Sample & $N$ & median $\Rperi$ (pc) & median $e$ & retrograde frac. \\
+\hline
+Tier~A+B+C, all RV qualities        & 1{,}835 & 117 & 0.962 & 57.2\% \\
+Tier~A+B+C, excluding poor RVS      & 1{,}743 & 117 & 0.962 & 57.4\% \\
+Tier~A+B, all RV qualities          & 517 & 120 & 0.972 & 57.3\% \\
+Tier~A+B, excluding poor RVS        & 482 & 121 & 0.972 & 57.5\% \\
+\hline
+\end{tabular}}
+\end{center}

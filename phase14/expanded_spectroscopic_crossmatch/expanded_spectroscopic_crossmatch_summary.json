@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-05-10T12:23:47.130904",
+  "n_input": 20829,
+  "batch_size": 500,
+  "surveys": {
+    "apogee_dr17": {
+      "n_matches": 604,
+      "match_rate": 0.02899803159057084,
+      "table": "III/286/catalog",
+      "id_column": "GaiaEDR3"
+    },
+    "galah_dr3": {
+      "n_matches": 489,
+      "match_rate": 0.023476883191703875,
+      "table": "J/MNRAS/506/150/stars",
+      "id_column": "GaiaEDR3"
+    }
+  },
+  "n_unique_any_apogee_galah": 1047,
+  "unique_match_rate": 0.05026645542272793
+}

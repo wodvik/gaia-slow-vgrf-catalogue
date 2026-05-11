@@ -1,0 +1,128 @@
+# Gaia slow-Vgrf catalogue review-stage configuration.
+# This file documents the expanded, parent-complete 2026-05-10 release.
+
+release:
+  tag: expanded-fullmc-20260510
+  manuscript: main.tex
+
+# ----- Source catalogues and local products -----
+input:
+  # Local Gaia DR3 source mirror used for the parent-buffer scan.
+  # This raw mirror is not redistributed in the review bundle.
+  gaia_source_mirror_dir: D:/GAIA/csv
+
+  # Broad parent buffer from the local mirror, using a preliminary
+  # legacy Vgrf < 200 km/s screen. Omitted from the reviewer zip for size.
+  parent_buffer_csv: D:/GAIA/parent_scan/gaia_parent_buffer_vgrf200_full.csv
+  n_parent_buffer_unique_source_ids: 5867654
+
+  # Expanded near-threshold candidate pool after final distance, zero-point,
+  # solar-frame, and velocity-threshold propagation steps.
+  expanded_candidate_csv: D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv
+  n_expanded_candidate_pool: 20829
+
+  # Convenience path retained for scripts that expect input.source_csv.
+  source_csv: D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv
+
+  # Legacy v1/v2 preselection retained only for provenance comparisons.
+  legacy_source_csv: release/data/slow_stars_enriched_orbits.csv
+  n_legacy_preselection: 2859
+
+outputs:
+  expanded_master_fits: catalogues/catalogue_expanded_master.fits
+  expanded_tierA_fits: catalogues/catalogue_expanded_tierA.fits
+  expanded_tierAB_fits: catalogues/catalogue_expanded_tierAB.fits
+  expanded_tierABC_fits: catalogues/catalogue_expanded_tierABC.fits
+  expanded_orbits_tierABC_fits: catalogues/catalogue_expanded_orbits_tierABC.fits
+  expanded_orbit_mc_fits: phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits
+  expanded_orbit_mc_csv: phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv
+  expanded_selection_function_fits: phase14/expanded_selection_function.fits
+  expanded_selection_function_summary_csv: phase14/expanded_selection_function_summary.csv
+  expanded_selection_function_summary_json: phase14/expanded_selection_function_summary.json
+
+# ----- Solar / LSR variants -----
+solar_variants:
+  default:
+    R0_kpc: 8.178
+    z_sun_pc: 25.0
+    Vc_kms: 232.0
+    U_kms: 11.1
+    V_kms: 12.24
+    W_kms: 7.25
+  grav22:
+    R0_kpc: 8.275
+    z_sun_pc: 25.0
+    Vc_kms: 229.0
+    U_kms: 11.1
+    V_kms: 12.24
+    W_kms: 7.25
+  lsr6:
+    R0_kpc: 8.178
+    z_sun_pc: 25.0
+    Vc_kms: 232.0
+    U_kms: 11.1
+    V_kms: 6.0
+    W_kms: 7.25
+  rb20:
+    R0_kpc: 8.178
+    z_sun_pc: 25.0
+    Vc_kms: 248.5
+    U_kms: 11.1
+    V_kms: 12.24
+    W_kms: 7.25
+
+# ----- Catalogue definition -----
+vgrf_cutoff_kms: 25.0
+tiers:
+  A: 0.95
+  B: 0.84
+  C: 0.50
+  D: 0.0
+
+# ----- Velocity-threshold Monte Carlo tiering -----
+mc:
+  base_realisations: 500
+  refine_realisations: 5000
+  ultra_realisations: 10000
+  refine_lo: 0.30
+  refine_hi: 0.70
+  ultra_window_kms: 2.0
+  random_seed: 20260502
+  n_jobs: -1
+
+# ----- Orbit Monte Carlo for the expanded Tier A+B+C catalogue -----
+orbit_mc:
+  potential: Hunter2024_axisymmetric_static
+  n_tierABC: 1835
+  realisations_per_star: 5000
+  convergence_stars: 100
+  convergence_realisations: 10000
+  random_seed: 20260510
+  OMP_NUM_THREADS: 32
+
+# ----- Bar pattern speeds -----
+bar_pattern_speeds_kms_kpc:
+  default: 37.5
+  slow: 33.0
+  fast: 41.0
+
+# ----- Distance estimator preference -----
+distance_priority:
+  - bailer_jones_2021_photogeo
+  - starhorse2_anders_2022
+  - inv_parallax_zpcorr
+
+# ----- Lindegren et al. 2021 ZP validity window -----
+zpt_validity:
+  G_min: 6.0
+  G_max: 21.0
+  nu_eff_min: 1.1
+  nu_eff_max: 1.9
+  pseudocolour_min: 1.24
+  pseudocolour_max: 1.72
+  asp_solved_allowed: [31, 95]
+
+compute:
+  cache_dir: cache
+  log_dir: logs
+  use_joblib: true

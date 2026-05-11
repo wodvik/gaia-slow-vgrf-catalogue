@@ -1,0 +1,27 @@
+\begin{deluxetable*}{llrrrr}
+\tablecaption{Sensitivity battery status for the expanded Tier~A+B+C
+catalogue ($N=1{,}835$).  The default static and barred point-estimate
+orbit products have been regenerated from the parent-complete candidate
+pool.  Halo-mass and bar-pattern-speed rows are point-estimate sensitivity
+runs using the same expanded initial conditions; the distance-estimator
+row remains a non-orbit tiering stress test.\label{tab:sensitivity}}
+\tablehead{\colhead{Axis} & \colhead{Variant} &
+\colhead{Med.\ $\Rperi$} & \colhead{Med.\ $\Rapo$} &
+\colhead{Med.\ $e$} & \colhead{$N$ bridgers} \\
+& & \colhead{(pc)} & \colhead{(\kpc)} & & }
+\startdata
+Default static & Hunter+2024 axisymmetric & 117 & 7.43 & 0.962 & 3 \\
+Default barred & Hunter/Sormani barred, $\Omega_p=37.5$ & 56 & 7.28 & 0.985 & 32 \\
+\hline
+Halo mass & $0.85\times M_{\rm halo}$ & 127 & 7.44 & 0.960 & 3 \\
+Halo mass & $1.15\times M_{\rm halo}$ & 118 & 7.44 & 0.962 & 3 \\
+Bar pattern speed & $\Omega_p=33\,\kms\,\kpc^{-1}$ & 78 & 8.05 & 0.978 & 21 \\
+Bar pattern speed & $\Omega_p=41\,\kms\,\kpc^{-1}$ & 80 & 8.22 & 0.978 & 38 \\
+Distance estimator & BJ/parallax coupling stress test & --- & --- & --- & no tier-scale change \\
+\enddata
+\tablecomments{The default rows use the higher-resolution orbit products
+reported in the main orbit table. Halo-mass and bar-speed rows use a
+uniform 1,001-step point-estimate sensitivity integration, so small
+differences in the repeated default values are trajectory-sampling
+differences rather than changes to the catalogue definition.}
+\end{deluxetable*}

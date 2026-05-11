@@ -1,0 +1,25 @@
+\begin{center}
+\refstepcounter{table}\label{tab:threshold}
+\begin{minipage}{\columnwidth}
+\small\textbf{Table \thetable.} Threshold sensitivity. Counts at
+varying $\vgrf$ cuts and the corresponding orbital eccentricity
+distribution under the point-estimate Hunter+2024 orbit integration.
+The $\vgrf<25\,\kms$ threshold used as the headline is a practical
+operating cut, not a sharp physical boundary.
+\end{minipage}
+\vspace{0.4ex}
+
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\hline\hline
+$\vgrf$ cut (\kms) & $N$ point & $N$ Tier~A+B+C & Median $e$ & $e>0.95$ (\%) \\
+\hline
+$<10$  &   169 &   162 & 0.987 & 99.4 \\
+$<15$  &   550 &   527 & 0.978 & 91.3 \\
+$<20$  & 1{,}337 & 1{,}181 & 0.969 & 75.8 \\
+$<25$  & 2{,}591 & 1{,}835 & 0.962 & 65.7 \\
+\hline
+\end{tabular}}
+\end{center}

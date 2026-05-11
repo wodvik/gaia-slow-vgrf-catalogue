@@ -1,0 +1,30 @@
+\begin{deluxetable*}{lcrrrrr}
+\tablecaption{Candidate Sgr~A* approachers from the expanded
+Tier~A+B+C catalogue.  Candidate rows are seeded from the closest
+point-estimate static and barred integrations, then re-evaluated with
+$5{,}000$-realisation Monte Carlo orbit propagation and three-point
+quadratic interpolation of $r_{\rm sph}^2(t)$ around each sampled
+minimum.\label{tab:sgrA_candidates}}
+\tablehead{\colhead{Gaia DR3 source\_id} & \colhead{Tier} &
+\colhead{Potential} &
+\colhead{$r_{\rm sph,min}$ p16} & \colhead{p50} & \colhead{p84} &
+\colhead{$P(<10\,$pc$)$ \,/\, $P(<100\,$pc$)$} \\
+& & & \multicolumn{3}{c}{(pc)} & }
+\startdata
+4254009869393663744 & C & barred & 19 & 46 & 111 & 0.037 \,/\, \textbf{0.810} \\
+5916045256703964544 & C & barred & 21 & 59 & 160 & 0.036 \,/\, \textbf{0.687} \\
+3617059489180390144 & B & static & 36 & 103 & 234 & 0.020 \,/\, 0.490 \\
+4038757589074380800 & C & static & 25 & 136 & 358 & 0.057 \,/\, 0.453 \\
+5605836330306291968 & B & barred & 38 & 123 & 282 & 0.013 \,/\, 0.432 \\
+4233272259754700544 & C & static & 36 & 120 & 275 & 0.029 \,/\, 0.426 \\
+5605836330306291968 & B & static & 49 & 165 & 377 & 0.010 \,/\, 0.334 \\
+5072114831911527808 & C & barred & 233 & 493 & 929 & 0.001 \,/\, 0.061 \\
+\enddata
+\tablecomments{No expanded-catalogue candidate satisfies
+$P(r_{\rm sph,min}<10\,{\rm pc})>0.5$.  Two barred-potential Tier~C
+candidates satisfy the softer $P(r_{\rm sph,min}<100\,{\rm pc})>0.5$
+criterion.  The closest point-estimate barred candidate
+(\texttt{5072114831911527808}, 7.8 pc) is not robust under observational
+uncertainty.  A source may appear twice when it is selected independently
+by the static and barred seed lists.}
+\end{deluxetable*}

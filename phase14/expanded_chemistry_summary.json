@@ -1,0 +1,63 @@
+{
+  "n_expanded_master": 20829,
+  "tier_counts": {
+    "A": 276,
+    "B": 241,
+    "C": 1318,
+    "D": 756,
+    "X": 18238
+  },
+  "tier_AB": 517,
+  "tier_ABC": 1835,
+  "gsp_phot": {
+    "tier_AB_finite_MH": 359,
+    "tier_ABC_finite_MH": 1214,
+    "tier_AB_MH": {
+      "n": 359,
+      "p16": -1.0877679999999998,
+      "p50": -0.3744,
+      "p84": -0.069928
+    },
+    "tier_ABC_MH": {
+      "n": 1214,
+      "p16": -0.9071999999999999,
+      "p50": -0.2468,
+      "p84": -0.03654000000000002
+    }
+  },
+  "spectroscopy": {
+    "rows_total_in_expanded_master": 1093,
+    "unique_total_in_expanded_master": 1047,
+    "tier_ABC_rows": 123,
+    "tier_ABC_unique": 119,
+    "tier_ABC_with_finite_alpha": 113,
+    "tier_ABC_APOGEE_rows": 61,
+    "tier_ABC_GALAH_rows": 62,
+    "note": "APOGEE/GALAH rows come from the full expanded Phase 14W exact-source-id crossmatch."
+  },
+  "alpha_subsample": {
+    "n": 113,
+    "counts": {
+      "Splash": 53,
+      "GSE": 23,
+      "Aurora": 19,
+      "disk": 2,
+      "unclassified": 16
+    },
+    "fractions": {
+      "Splash": 0.4690265486725664,
+      "GSE": 0.20353982300884957,
+      "Aurora": 0.168141592920354,
+      "disk": 0.017699115044247787,
+      "unclassified": 0.1415929203539823
+    },
+    "median_FeH": -0.7975,
+    "median_FeH_by_population": {
+      "Splash": -0.615114,
+      "GSE": -1.0291,
+      "Aurora": -1.384598,
+      "disk": -0.1067295,
+      "unclassified": -1.1431870000000002
+    }
+  }
+}

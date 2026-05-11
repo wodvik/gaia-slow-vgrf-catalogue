@@ -16,6 +16,8 @@ dependencies:
   - tqdm
   - pip
   - pip:
+      # AGAMA may require platform-specific compilation; see
+      # README-submission.md if pip cannot build it on the target system.
       - agama>=1.0
       - astroquery
       - gaia-zeropoint

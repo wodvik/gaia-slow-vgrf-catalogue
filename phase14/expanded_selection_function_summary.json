@@ -1,0 +1,75 @@
+{
+  "input": "catalogues/catalogue_expanded_master.fits",
+  "output_fits": "phase14/expanded_selection_function.fits",
+  "sf_floor": 0.02,
+  "n_rows": 20829,
+  "n_invalid_sf": 830,
+  "samples": [
+    {
+      "sample": "expanded_candidate_pool",
+      "n_unweighted": 20829,
+      "n_valid_sf": 19999,
+      "n_invalid_sf": 830,
+      "sf_value_p16": 0.5,
+      "sf_value_p50": 0.5,
+      "sf_value_p84": 0.8571428571428571,
+      "sum_inverse_sf_weight": 37256.256823883596,
+      "median_inverse_sf_weight": 2.0
+    },
+    {
+      "sample": "Tier A",
+      "n_unweighted": 276,
+      "n_valid_sf": 274,
+      "n_invalid_sf": 2,
+      "sf_value_p16": 0.5,
+      "sf_value_p50": 0.6666666666666666,
+      "sf_value_p84": 0.9285714285714286,
+      "sum_inverse_sf_weight": 435.65864165309813,
+      "median_inverse_sf_weight": 1.5
+    },
+    {
+      "sample": "Tier B",
+      "n_unweighted": 241,
+      "n_valid_sf": 237,
+      "n_invalid_sf": 4,
+      "sf_value_p16": 0.5,
+      "sf_value_p50": 0.5,
+      "sf_value_p84": 0.8571428571428571,
+      "sum_inverse_sf_weight": 408.3697810787555,
+      "median_inverse_sf_weight": 2.0
+    },
+    {
+      "sample": "Tier C",
+      "n_unweighted": 1318,
+      "n_valid_sf": 1261,
+      "n_invalid_sf": 57,
+      "sf_value_p16": 0.5,
+      "sf_value_p50": 0.5,
+      "sf_value_p84": 0.8571428571428571,
+      "sum_inverse_sf_weight": 2324.0259010213563,
+      "median_inverse_sf_weight": 2.0
+    },
+    {
+      "sample": "Tier A+B",
+      "n_unweighted": 517,
+      "n_valid_sf": 511,
+      "n_invalid_sf": 6,
+      "sf_value_p16": 0.5,
+      "sf_value_p50": 0.6666666666666666,
+      "sf_value_p84": 0.8999999999999999,
+      "sum_inverse_sf_weight": 844.0284227318537,
+      "median_inverse_sf_weight": 1.5
+    },
+    {
+      "sample": "Tier A+B+C",
+      "n_unweighted": 1835,
+      "n_valid_sf": 1772,
+      "n_invalid_sf": 63,
+      "sf_value_p16": 0.5,
+      "sf_value_p50": 0.5,
+      "sf_value_p84": 0.875,
+      "sum_inverse_sf_weight": 3168.0543237532097,
+      "median_inverse_sf_weight": 2.0
+    }
+  ]
+}

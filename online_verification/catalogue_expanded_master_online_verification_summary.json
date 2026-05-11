@@ -1,0 +1,39 @@
+{
+  "catalogue": "catalogues/catalogue_expanded_master.fits",
+  "gaia_archive_table": "gaiadr3.gaia_source",
+  "gaia_tap_sync_endpoint": "https://gea.esac.esa.int/tap-server/tap/sync",
+  "rows_local": 20829,
+  "unique_source_ids_local": 20829,
+  "rows_recovered_online": 20829,
+  "missing_source_ids": 0,
+  "discrepancies": 0,
+  "tolerances": {
+    "ra": 1e-09,
+    "dec": 1e-09,
+    "parallax": 1e-09,
+    "pmra": 1e-09,
+    "pmdec": 1e-09,
+    "radial_velocity": 1e-06,
+    "phot_g_mean_mag": 1e-06
+  },
+  "compared_by_column": {
+    "ra": 20829,
+    "dec": 20829,
+    "parallax": 20829,
+    "pmra": 20829,
+    "pmdec": 20829,
+    "radial_velocity": 20829,
+    "phot_g_mean_mag": 20829
+  },
+  "max_abs_delta_by_column": {
+    "ra": 1.1368683772161603e-13,
+    "dec": 7.105427357601002e-15,
+    "parallax": 7.105427357601002e-15,
+    "pmra": 8.526512829121202e-14,
+    "pmdec": 5.684341886080802e-14,
+    "radial_velocity": 0.0,
+    "phot_g_mean_mag": 0.0
+  },
+  "missing_csv": "online_verification/catalogue_expanded_master_missing_source_ids.csv",
+  "discrepancies_csv": "online_verification/catalogue_expanded_master_discrepancies.csv"
+}

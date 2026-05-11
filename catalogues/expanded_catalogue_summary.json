@@ -1,0 +1,51 @@
+{
+  "n_processed": 20829,
+  "n_unique_source_id": 20829,
+  "n_old_preselection": 2859,
+  "n_outside_old": 17970,
+  "tier_counts": {
+    "A": 276,
+    "B": 241,
+    "C": 1318,
+    "D": 756,
+    "X": 18238
+  },
+  "tier_counts_old_preselection": {
+    "A": 215,
+    "B": 119,
+    "C": 299,
+    "D": 76,
+    "X": 2150
+  },
+  "tier_counts_outside_old": {
+    "A": 61,
+    "B": 122,
+    "C": 1019,
+    "D": 680,
+    "X": 16088
+  },
+  "headline_tier_A_plus_B": 517,
+  "orbit_summary_tier_A_plus_B_plus_C": 1835,
+  "point_estimate_vgrf_lt25": 2591,
+  "point_estimate_vgrf_lt25_outside_old": 1882,
+  "legacy_v_total_grf_lt25": 2859,
+  "mc_realisations_counts": {
+    "500": 18081,
+    "5000": 1551,
+    "10000": 1197
+  },
+  "rv_quality_counts": {
+    "marginal": 89,
+    "ok": 19862,
+    "poor": 878
+  },
+  "P_vgrf_below_25_range": [
+    0.0,
+    1.0
+  ],
+  "input_csv": "D:\\GAIA\\parent_scan\\expanded_candidates_mc_tiered.csv",
+  "master_fits": "catalogues/catalogue_expanded_master.fits",
+  "tierA_fits": "catalogues/catalogue_expanded_tierA.fits",
+  "tierAB_fits": "catalogues/catalogue_expanded_tierAB.fits",
+  "tierABC_fits": "catalogues/catalogue_expanded_tierABC.fits"
+}
