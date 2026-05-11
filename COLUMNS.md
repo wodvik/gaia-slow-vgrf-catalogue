@@ -1,10 +1,10 @@
-# Catalogue Column Dictionary
+﻿# Catalogue Column Dictionary
 
-This file defines the columns used in the expanded review-stage FITS and
+This file defines the columns used in the first public review-stage FITS and
 CSV catalogue products. Gaia `source_id` values are stored as integer
 identifiers and should not be converted to floating point.
 
-## Expanded Master And Tier Subset Catalogues
+## Master And Tier Subset Catalogues
 
 These columns appear in:
 
@@ -54,10 +54,10 @@ These columns appear in:
 | `P_vgrf_below_25` | dimensionless | Monte Carlo probability that `Vgrf < 25 km/s`; this is a probability and has no velocity unit. |
 | `mc_realisations` | none | Number of velocity-threshold Monte Carlo realisations used for this source. |
 | `tier` | none | Probability tier: A (`P>0.95`), B (`0.84<P<=0.95`), C (`0.50<P<=0.84`), D (point-estimate below 25 km/s but `P<=0.50`), or X. |
-| `source_in_old_preselection` | boolean | Whether the source was present in the older 2,859-source legacy preselection. |
+| `source_in_old_preselection` | boolean | Whether the source was present in the preliminary 2,859-source development preselection. |
 | `parent_scan_file` | none | Gaia mirror CSV file from which the source was recovered during the parent-buffer scan. |
 
-## Expanded Point-Estimate Orbit Catalogue
+## Point-Estimate Orbit Catalogue
 
 These columns appear in:
 
@@ -72,12 +72,12 @@ not observables.
 | Column | Unit | Description |
 |---|---:|---|
 | `source_id` | none | Gaia DR3 source identifier. |
-| `tier` | none | Probability tier copied from the expanded master catalogue. |
+| `tier` | none | Probability tier copied from the master catalogue. |
 | `P_vgrf_below_25` | dimensionless | Monte Carlo threshold-membership probability. |
-| `rv_quality` | none | Internal Gaia DR3 RVS-quality class copied from the expanded master catalogue. |
+| `rv_quality` | none | Internal Gaia DR3 RVS-quality class copied from the master catalogue. |
 | `rvs_quality_ok` | boolean | True when `rv_quality == "ok"`. |
-| `source_in_old_preselection` | boolean | Whether the source was present in the older 2,859-source legacy preselection. |
-| `vgrf_default_exact` | km/s | Final adopted point-estimate Galactic-rest-frame speed from the expanded catalogue pipeline. |
+| `source_in_old_preselection` | boolean | Whether the source was present in the preliminary 2,859-source development preselection. |
+| `vgrf_default_exact` | km/s | Final adopted point-estimate Galactic-rest-frame speed from the catalogue pipeline. |
 | `vgrf_default_orbit_ic` | km/s | Galactic-rest-frame speed recomputed from the orbit-integration initial condition. |
 | `dist_pc_final_screen` | pc | Adopted distance used for the orbit initial condition. |
 | `dist_source_final_screen` | none | Distance provenance label used for the orbit initial condition. |
@@ -111,7 +111,7 @@ not observables.
 | `Omega_R`, `Omega_z`, `Omega_phi` | km/s/kpc | AGAMA radial, vertical, and azimuthal orbital frequencies in the static potential. |
 | `res_ratio_OmegaR_over_dPhi` | dimensionless | Resonance diagnostic `Omega_R/(Omega_phi - Omega_p)` evaluated relative to the default bar pattern speed. |
 
-## Expanded Orbit Monte Carlo Catalogue
+## Orbit Monte Carlo Catalogue
 
 These columns appear in:
 
@@ -121,7 +121,7 @@ These columns appear in:
 | Column | Unit | Description |
 |---|---:|---|
 | `source_id` | none | Gaia DR3 source identifier. |
-| `tier` | none | Probability tier copied from the expanded master catalogue. |
+| `tier` | none | Probability tier copied from the master catalogue. |
 | `P_vgrf_below_25` | dimensionless | Monte Carlo threshold-membership probability. |
 | `vgrf_default_exact` | km/s | Final adopted point-estimate Galactic-rest-frame speed used for the orbit-MC product. |
 | `mc_realisations` | none | Number of velocity-threshold Monte Carlo realisations for the source. |
@@ -135,7 +135,7 @@ These columns appear in:
 | `J_z_p16`, `J_z_p50`, `J_z_p84` | kpc km/s | 16th, 50th, and 84th percentiles of vertical action from AGAMA. |
 | `J_phi_p16`, `J_phi_p50`, `J_phi_p84` | kpc km/s | 16th, 50th, and 84th percentiles of azimuthal action/angular momentum proxy from AGAMA; sign distinguishes prograde and retrograde motion in the adopted convention. |
 
-## Expanded Selection-Function Catalogue
+## Selection-Function Catalogue
 
 These columns appear in:
 
@@ -144,12 +144,12 @@ These columns appear in:
 | Column | Unit | Description |
 |---|---:|---|
 | `source_id` | none | Gaia DR3 source identifier. |
-| `tier` | none | Probability tier copied from the expanded master catalogue. |
-| `l` | deg | Galactic longitude copied from the expanded master catalogue for positional context. |
-| `b` | deg | Galactic latitude copied from the expanded master catalogue for positional context. |
+| `tier` | none | Probability tier copied from the master catalogue. |
+| `l` | deg | Galactic longitude copied from the master catalogue for positional context. |
+| `b` | deg | Galactic latitude copied from the master catalogue for positional context. |
 | `grvs_mag` | mag | Gaia RVS magnitude supplied as the GaiaUnlimited `g` coordinate. |
 | `bp_rp` | mag | Gaia BP-RP colour supplied as the GaiaUnlimited colour coordinate; missing colours are filled with the finite catalogue median for evaluation. |
 | `sf_value` | dimensionless | Castro-Ginard et al. (2023) Gaia DR3 RVS selection-function value returned by GaiaUnlimited. |
 | `sf_weight` | dimensionless | Contextual inverse-selection weight, computed as `1/max(sf_value, 0.02)` for finite values. |
 | `sf_invalid` | boolean | True when GaiaUnlimited returned a non-finite selection-function value for the source. |
-| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that `Vgrf < 25 km/s`, copied from the expanded master catalogue. |
+| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that `Vgrf < 25 km/s`, copied from the master catalogue. |

@@ -1,11 +1,11 @@
-# Phase 14P compact-group search
+﻿# Phase 14P compact-group search
 
 Purpose: check whether the slow-Vgrf release catalogue contains an obvious
 present-day open/globular-cluster-like aggregate.
 
 Method: DBSCAN/FoF searches in 3D Galactocentric position, with optional
-3D velocity coherence. Inputs are the expanded master catalogue and
-expanded point-estimate orbit table; no Gaia archive rescan is required.
+3D velocity coherence. Inputs are the master catalogue and
+point-estimate orbit table; no Gaia archive rescan is required.
 
 ## Result
 
@@ -22,7 +22,7 @@ Interpretation: an actual compact bound cluster in this catalogue would be
 expected to produce multiple stars within tens of parsecs, usually also
 with small relative velocities. The closest headline Tier A+B pair is
 already about 39 pc apart, and no three-star compact clump appears when
-the sample is expanded to Tier A+B+C.
+the sample is broadened to Tier A+B+C.
 
 Caveat: this is a present-day compactness check, not a full cluster
 membership paper. A complete literature-grade test would also crossmatch

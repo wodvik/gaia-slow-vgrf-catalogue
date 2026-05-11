@@ -1,6 +1,6 @@
-# Gaia DR3 Online Verification Report
+﻿# Gaia DR3 Online Verification Report
 
-This audit checked the expanded v2 catalogue products against the public ESA
+This audit checked the catalogue products against the public ESA
 Gaia Archive TAP service, querying `gaiadr3.gaia_source` by `source_id`.
 
 Endpoint used:

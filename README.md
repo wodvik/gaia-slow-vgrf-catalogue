@@ -1,17 +1,19 @@
-# Gaia DR3 Slow-Vgrf Catalogue Expanded Release
+﻿# Gaia DR3 Slow-Vgrf Catalogue
 
 This is the first public review-stage release for the probabilistic Gaia DR3
 slow-Galactic-rest-frame-speed catalogue.
 
 ## Key Counts
 
-- Expanded propagated candidate pool: 20,829 stars
+- Propagated candidate pool: 20,829 stars
 - Tier A (`P(Vgrf < 25 km/s) > 0.95`): 276 stars
 - Tier A+B headline catalogue (`P > 0.84`): 517 stars
 - Tier A+B+C orbit-summary catalogue (`P > 0.50`): 1,835 stars
 - Corrected point-estimate `Vgrf < 25 km/s`: 2,591 stars
 
 ## Primary Catalogue Products
+
+Some product filenames retain expanded as an internal build label; this is the first public release.
 
 - `catalogues/catalogue_expanded_master.fits`
 - `catalogues/catalogue_expanded_tierA.fits`
@@ -29,12 +31,12 @@ floating point.
 
 ## Verification
 
-The expanded v2 catalogue source IDs were independently checked against
+The catalogue source IDs were independently checked against
 the ESA Gaia Archive `gaiadr3.gaia_source` table by `source_id`.
 
 - Tier A+B: 517/517 recovered, 0 discrepancies
 - Tier A+B+C: 1,835/1,835 recovered, 0 discrepancies
-- Expanded master: 20,829/20,829 recovered, 0 discrepancies
+- Master catalogue: 20,829/20,829 recovered, 0 discrepancies
 
 The verification report and script are in `online_verification/`.
 

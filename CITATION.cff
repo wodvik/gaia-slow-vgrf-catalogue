@@ -1,4 +1,4 @@
-cff-version: 1.2.0
+﻿cff-version: 1.2.0
 message: "If you use this catalogue or software, please cite the associated manuscript and archived Zenodo release once available."
 title: "A Probabilistic Gaia DR3 Catalogue of Stars with Very Low Galactic Rest-Frame Speeds"
 type: dataset
@@ -9,5 +9,5 @@ authors:
 repository-code: "https://github.com/wodvik/gaia-slow-vgrf-catalogue"
 version: "1.0.0-review"
 date-released: "2026-05-10"
-abstract: "Expanded review-stage software, manuscript, and derived data products for a probabilistic Gaia DR3 catalogue of stars selected by very low Galactic rest-frame speed."
+abstract: "First public review-stage software, manuscript, and derived data products for a probabilistic Gaia DR3 catalogue of stars selected by very low Galactic rest-frame speed."
 

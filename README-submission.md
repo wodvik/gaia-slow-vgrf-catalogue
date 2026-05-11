@@ -1,6 +1,6 @@
-# Submission Reproducibility Runbook
+﻿# Submission Reproducibility Runbook
 
-This runbook describes the expanded review-stage release for the
+This runbook describes the first public review-stage release for the
 probabilistic Gaia DR3 slow-Vgrf catalogue. It is intended for referees
 and archive curators who want to understand which products can be
 reproduced from the reviewer bundle alone and which require external raw
@@ -8,12 +8,12 @@ catalogues.
 
 ## Release Identity
 
-- Release tag: `expanded-fullmc-20260510`
+- Release tag: `v1.0.0-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
-- Reviewer bundle: `_review_bundle_expanded_20260510_fullmc.zip`
+- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.0_review.zip`
 - Headline catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 517 stars
 - Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,835 stars
-- Expanded propagated candidate pool: 20,829 stars
+- Propagated candidate pool: 20,829 stars
 - Broad parent buffer scanned from local Gaia DR3 mirror: 5,867,654 unique source IDs
 
 ## Environment
@@ -25,7 +25,7 @@ conda env create -f environment.yml
 conda activate gaia2026-v2
 ```
 
-AGAMA was run from WSL for the orbit calculations. The full expanded
+AGAMA was run from WSL for the orbit calculations. The full
 orbit Monte Carlo used `OMP_NUM_THREADS=32`.
 
 AGAMA can require platform-specific compilation. If the pip install in
@@ -44,7 +44,7 @@ steps from the same conda environment.
 - `LICENSE.md`: data and code license statement.
 - `scripts/`: review-stage pipeline scripts.
 - `catalogues/`: FITS/CSV catalogue products.
-- `phase14/expanded_orbit_mc/`: full expanded orbit Monte Carlo products.
+- `phase14/expanded_orbit_mc/`: full orbit Monte Carlo products.
 
 ## What Can Be Reproduced From The Bundle Alone
 
@@ -77,7 +77,7 @@ released catalogue products.
 
 ## Production Command Ledger
 
-The expanded parent-buffer scan was run against the local Gaia DR3 CSV
+The parent-buffer scan was run against the local Gaia DR3 CSV
 mirror at `D:/GAIA/csv`, writing chunk-by-chunk to:
 
 ```text
@@ -91,7 +91,7 @@ WSL paths such as `/mnt/d/GAIA/...`, and
 `C:/Users/humbl/GAIA2026` corresponds to `/mnt/c/Users/humbl/GAIA2026`.
 No released FITS/MRT catalogue requires those paths for normal use.
 
-The final full expanded orbit Monte Carlo was run from WSL with:
+The final full orbit Monte Carlo was run from WSL with:
 
 ```bash
 cd /mnt/c/Users/humbl/GAIA2026
@@ -120,7 +120,7 @@ local default paths documenting the exact production environment; the
 inputs and outputs are also listed explicitly in `config.yml` so they can
 be remapped on another machine.
 
-The expanded catalogue has been evaluated with GaiaUnlimited's
+The catalogue has been evaluated with GaiaUnlimited's
 Castro-Ginard et al. (2023) Gaia DR3 RVS selection function. The per-star
 table is `phase14/expanded_selection_function.fits`, with summaries in
 `phase14/expanded_selection_function_summary.csv` and

@@ -1,4 +1,4 @@
-# Expanded Sgr A* approacher refinement
+﻿# Sgr A* approacher refinement
 
 - MC realisations per candidate: 5000
 - Candidate seeds: top 4 by point-estimate minimum spherical distance in each of static and barred integrations.
