@@ -3,6 +3,8 @@
 This is the first public review-stage release for the probabilistic Gaia DR3
 slow-Galactic-rest-frame-speed catalogue.
 
+Zenodo DOI: [10.5281/zenodo.20116135](https://doi.org/10.5281/zenodo.20116135)
+
 ## Key Counts
 
 - Propagated candidate pool: 20,829 stars

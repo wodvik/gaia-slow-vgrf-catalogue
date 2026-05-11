@@ -11,6 +11,7 @@ catalogues.
 - Release tag: `v1.0.0-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
 - Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.0_review.zip`
+- Zenodo DOI: `10.5281/zenodo.20116135`
 - Headline catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 517 stars
 - Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,835 stars
 - Propagated candidate pool: 20,829 stars
