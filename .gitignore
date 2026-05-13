@@ -12,4 +12,7 @@ venv/
 *.toc
 *.synctex.gz
 _qa_pages/
-
+_review_bundle*/
+arxiv_submission_v1/
+presentation_playground/
+reviewphase/
