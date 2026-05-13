@@ -99,7 +99,8 @@ def main(argv: list[str] | None = None) -> int:
     log(f"selected {len(candidates)} candidate/potential rows")
 
     pot_axi = agama.Potential(file=str(base.WORK / "MWPotentialHunter24_axi.ini"))
-    pot_rot = agama.Potential(file=str(base.WORK / "MWPotentialHunter24_rot_default.ini"))
+    pot_full = agama.Potential(file=str(base.WORK / "MWPotentialHunter24_full.ini"))
+    pot_bar = agama.Potential(potential=pot_full, rotation=base.ANGLE_BAR)
     rng = np.random.default_rng(base.SEED + 14000)
 
     draw_rows: list[dict] = []
@@ -109,7 +110,7 @@ def main(argv: list[str] | None = None) -> int:
         sid = int(cand["source_id"])
         pot_name = str(cand["potential"])
         tier = str(cand["tier"])
-        pot = pot_axi if pot_name == "static" else pot_rot
+        pot = pot_axi if pot_name == "static" else pot_bar
         log(
             f"candidate {sid} ({pot_name}, Tier {tier}), "
             f"point min={cand['point_min_rsph_pc']:.2f} pc"

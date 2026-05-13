@@ -28,6 +28,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 GYR = 1.0 / 0.9778
 T_INT = 4.0 * GYR
 TRAJSIZE = 1001
+ANGLE_BAR = -0.44
 
 agama.setUnits(length=1, mass=1, velocity=1)
 
@@ -76,7 +77,8 @@ def main() -> int:
     stars = pd.read_csv(IN)
     ic = stars[["x_kpc", "y_kpc", "z_kpc", "vx_kms", "vy_kms", "vz_kms"]].to_numpy(float)
     pot_axi = agama.Potential(file=str(WORK / "MWPotentialHunter24_axi.ini"))
-    pot_rot = agama.Potential(file=str(WORK / "MWPotentialHunter24_rot_phase6_default.ini"))
+    pot_full = agama.Potential(file=str(WORK / "MWPotentialHunter24_full.ini"))
+    pot_bar = agama.Potential(potential=pot_full, rotation=ANGLE_BAR)
     delta_low = agama.Potential(type="NFW", scaleRadius=19.6, mass=1.27e12 * (0.85 - 1.0))
     delta_high = agama.Potential(type="NFW", scaleRadius=19.6, mass=1.27e12 * (1.15 - 1.0))
     variants = []
@@ -99,8 +101,8 @@ def main() -> int:
     ]:
         omega = -omega_abs
         print(f"[14V] integrating {label} for {len(ic)} stars", flush=True)
-        res = agama.orbit(potential=pot_rot, ic=ic, time=T_INT, trajsize=TRAJSIZE, Omega=omega)
-        tab = reduce_orbits(res, pot=pot_rot, omega=omega)
+        res = agama.orbit(potential=pot_bar, ic=ic, time=T_INT, trajsize=TRAJSIZE, Omega=omega)
+        tab = reduce_orbits(res, pot=pot_bar, omega=omega)
         tab.insert(0, "variant", label)
         variants.append(tab)
 

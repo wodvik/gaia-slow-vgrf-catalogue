@@ -36,33 +36,33 @@
     "variant": "bar_omega33",
     "kind": "barred",
     "n": 1835,
-    "median_R_peri_pc": 78.47204804420471,
-    "median_R_apo_kpc": 8.05229377746582,
-    "median_ecc": 0.9780948758125305,
-    "n_R_peri_lt_100pc": 1119,
-    "n_bridgers": 21,
-    "EJ_drift_p84": 0.03215694186099393
+    "median_R_peri_pc": 95.00164538621902,
+    "median_R_apo_kpc": 8.358471870422363,
+    "median_ecc": 0.9715086221694946,
+    "n_R_peri_lt_100pc": 953,
+    "n_bridgers": 9,
+    "EJ_drift_p84": 9.941252868292797e-07
   },
   {
     "variant": "bar_omega37p5",
     "kind": "barred",
     "n": 1835,
-    "median_R_peri_pc": 77.55237072706223,
-    "median_R_apo_kpc": 8.162063598632812,
-    "median_ecc": 0.9779304265975952,
-    "n_R_peri_lt_100pc": 1122,
-    "n_bridgers": 31,
-    "EJ_drift_p84": 0.033040698672093916
+    "median_R_peri_pc": 92.62172877788544,
+    "median_R_apo_kpc": 8.38126277923584,
+    "median_ecc": 0.9731838703155518,
+    "n_R_peri_lt_100pc": 981,
+    "n_bridgers": 22,
+    "EJ_drift_p84": 1.0414354568074297e-06
   },
   {
     "variant": "bar_omega41",
     "kind": "barred",
     "n": 1835,
-    "median_R_peri_pc": 80.2200436592102,
-    "median_R_apo_kpc": 8.216991424560547,
-    "median_ecc": 0.97809237241745,
-    "n_R_peri_lt_100pc": 1102,
-    "n_bridgers": 38,
-    "EJ_drift_p84": 0.03284118911659903
+    "median_R_peri_pc": 85.23665368556976,
+    "median_R_apo_kpc": 8.024503707885742,
+    "median_ecc": 0.9755627512931824,
+    "n_R_peri_lt_100pc": 1079,
+    "n_bridgers": 24,
+    "EJ_drift_p84": 1.0833337020743074e-06
   }
 ]

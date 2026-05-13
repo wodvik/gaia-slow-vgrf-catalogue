@@ -39,6 +39,7 @@ WORK = REPO / "release/v2/phase3_agama/_hunter24_workdir"
 
 DEFAULT_SOLAR = CONFIG["solar_variants"]["default"]
 OMEGA_P_DEFAULT = -float(CONFIG["bar_pattern_speeds_kms_kpc"]["default"])
+ANGLE_BAR = -0.44
 GYR_TO_AGAMA = 1.0 / 0.9778
 T_INTEGRATE = 4.0 * GYR_TO_AGAMA
 TRAJ_STEPS = 2001
@@ -214,10 +215,11 @@ def run(args: argparse.Namespace) -> dict:
     df, ic = initial_conditions(df)
 
     pot_axi = agama.Potential(file=str(WORK / "MWPotentialHunter24_axi.ini"))
-    pot_rot = agama.Potential(file=str(WORK / "MWPotentialHunter24_rot_default.ini"))
+    pot_full = agama.Potential(file=str(WORK / "MWPotentialHunter24_full.ini"))
+    pot_bar = agama.Potential(potential=pot_full, rotation=ANGLE_BAR)
 
     static = integrate(ic, pot_axi, 0.0, "static")
-    barred = integrate(ic, pot_rot, OMEGA_P_DEFAULT, "barred")
+    barred = integrate(ic, pot_bar, OMEGA_P_DEFAULT, "barred")
     try:
         actions = stackel_actions(ic, pot_axi)
     except Exception as exc:

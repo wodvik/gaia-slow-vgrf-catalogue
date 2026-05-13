@@ -5,6 +5,8 @@ slow-Galactic-rest-frame-speed catalogue.
 
 Zenodo DOI: [10.5281/zenodo.20116135](https://doi.org/10.5281/zenodo.20116135)
 
+Release version: `v1.0.1-review` (see `RELEASE_NOTES.md`).
+
 ## Key Counts
 
 - Propagated candidate pool: 20,829 stars
@@ -31,6 +33,13 @@ Some product filenames retain expanded as an internal build label; this is the f
 values should be treated as integer identifiers and never converted to
 floating point.
 
+## Manuscript Files
+
+- `main.tex` and `main.pdf` are the compile-ready manuscript source and
+  default LaTeX output names.
+- `Humble_2026_Gaia_DR3_slow_vgrf_catalogue_manuscript.pdf` is a
+  descriptive copy of the same PDF for archive browsing.
+
 ## Verification
 
 The catalogue source IDs were independently checked against
@@ -43,6 +52,9 @@ the ESA Gaia Archive `gaiadr3.gaia_source` table by `source_id`.
 The verification report and script are in `online_verification/`.
 
 ## Reproducibility
+
+`phase14/` contains final review-stage validation and sensitivity
+products. The name is a pipeline provenance label; see `phase14/README.md`.
 
 `README-submission.md` describes which products can be reproduced from
 the release package alone and which require external catalogues or the

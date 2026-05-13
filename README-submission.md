@@ -8,7 +8,7 @@ catalogues.
 
 ## Release Identity
 
-- Release tag: `v1.0.0-review`
+- Release tag: `v1.0.1-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
 - Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.0_review.zip`
 - Zenodo DOI: `10.5281/zenodo.20116135`
@@ -46,6 +46,10 @@ steps from the same conda environment.
 - `scripts/`: review-stage pipeline scripts.
 - `catalogues/`: FITS/CSV catalogue products.
 - `phase14/expanded_orbit_mc/`: full orbit Monte Carlo products.
+- `phase14/README.md`: explanation of the final validation/sensitivity
+  product directory and its pipeline-stage naming.
+- `RELEASE_NOTES.md`: review-stage version history and corrected barred
+  sensitivity values.
 
 ## What Can Be Reproduced From The Bundle Alone
 
@@ -112,6 +116,19 @@ The output files are:
 - `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
 - `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits_summary.json`
 - `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits_convergence_10000.csv`
+
+The corrected barred-potential sensitivity products were regenerated with:
+
+```bash
+python3 release/v2/scripts/phase0g_expanded_orbits.py
+python3 release/v2/scripts/phase14v_expanded_potential_sensitivity.py
+python3 release/v2/scripts/phase14q_expanded_sgrA_refinement.py \
+  --n-samp 5000 --chunk-size 500 --n-per-potential 5
+```
+
+These commands update the point-estimate orbit catalogue, potential
+sensitivity tables, and Sgr A* approacher refinement products used by the
+current manuscript.
 
 ## Known Limitations
 
