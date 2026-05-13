@@ -1,13 +1,13 @@
 """
-Audit the Phase 0 Gaia parent-buffer scan.
+Audit the Gaia parent-buffer scan.
 
 This summarizes the broad legacy-Vgrf buffer and compares it with the
 historical slow_stars_enriched_orbits.csv preselection. It is intentionally
 lightweight and chunked so it can run on a large buffer CSV.
 
 Outputs:
-  release/v2/parent_scan/gate0_parent_buffer_summary.json
-  release/v2/parent_scan/gate0_new_legacy_lt25_candidates.csv
+  parent_scan/gate0_parent_buffer_summary.json
+  parent_scan/gate0_new_legacy_lt25_candidates.csv
 """
 
 from __future__ import annotations
@@ -21,10 +21,10 @@ import numpy as np
 import pandas as pd
 
 
-REPO = Path(__file__).resolve().parents[3]
-DEFAULT_SCAN_DIR = REPO / "release" / "v2" / "parent_scan"
+REPO = Path(__file__).resolve().parents[1]
+DEFAULT_SCAN_DIR = REPO / "parent_scan"
 DEFAULT_BUFFER = DEFAULT_SCAN_DIR / "gaia_parent_buffer_vgrf200_full.csv"
-DEFAULT_OLD = REPO / "release" / "data" / "slow_stars_enriched_orbits.csv"
+DEFAULT_OLD = REPO / "external" / "slow_stars_enriched_orbits.csv"
 THRESHOLDS = [25, 50, 75, 100, 125, 150, 175, 200]
 
 

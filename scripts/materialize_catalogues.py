@@ -1,9 +1,9 @@
 """
-Materialize the expanded MC-tiered candidate table into release/v2 products.
+Materialize the expanded MC-tiered candidate table into public catalogue products.
 
 This is the bridge from the parent-buffer rebuild back into the paper/release
 tree. It writes a compact FITS master catalogue plus Tier A and Tier A+B subset
-FITS files, without overwriting the original v2 products.
+FITS files.
 """
 
 from __future__ import annotations
@@ -17,9 +17,9 @@ import pandas as pd
 from astropy.table import Table
 
 
-REPO = Path(__file__).resolve().parents[3]
+REPO = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = Path("D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
-DEFAULT_OUT = REPO / "release" / "v2" / "phase0_expanded"
+DEFAULT_OUT = REPO / "catalogues"
 
 CORE_COLUMNS = [
     "source_id",
@@ -67,7 +67,7 @@ CORE_COLUMNS = [
 
 
 def classify_rvs_quality(df: pd.DataFrame) -> np.ndarray:
-    """Apply the same Gaia DR3 RVS-quality classes used by phase1b."""
+    """Apply the Gaia DR3 RVS-quality classes used by the catalogue build."""
     n = len(df)
     quality = np.full(n, "ok", dtype=object)
 

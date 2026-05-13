@@ -1,4 +1,4 @@
-﻿% =============================================================================
+% =============================================================================
 % A Gaia DR3 Catalogue of Stars with Very Low Galactic Rest-Frame Speeds
 % Rodney Humble -- AASTeX v6.31 for ApJ
 % =============================================================================
@@ -178,7 +178,7 @@ inventory of all such stars in the Milky Way.  It is a Gaia DR3 6D
 catalogue defined by a simple instantaneous kinematic state and reported
 with explicit threshold-membership probabilities.
 
-\input{tables/v15/tab_sample_accounting.tex}
+\input{tables/tab_sample_accounting.tex}
 
 To keep the role of each count unambiguous, Table~\ref{tab:sample_usage}
 maps each tier and derived sample to the results it anchors. The
@@ -188,9 +188,9 @@ broader Tier~A+B+C sample ($N=1{,}835$). Selection-function and
 chemistry diagnostics are reported only as population-scale context,
 never as a redefinition of the headline.
 
-\input{tables/v15/tab_sample_usage.tex}
+\input{tables/tab_sample_usage.tex}
 
-\input{tables/v15/tab_headline_catalogue_sample.tex}
+\input{tables/tab_headline_catalogue_sample.tex}
 
 \subsection{Quality Control} \label{sec:quality}
 
@@ -213,7 +213,7 @@ observability context, because many slow stars occupy sparse
 colour--magnitude cells where the Gaia DR3 RVS selection-function tool
 returns its prior mean.
 
-\input{tables/v15/tab_rv_quality_sensitivity.tex}
+\input{tables/tab_rv_quality_sensitivity.tex}
 
 \subsection{Velocity-Threshold Uncertainty} \label{sec:vgrf_mc}
 
@@ -453,7 +453,7 @@ and simple descriptive properties of the sample.  The corresponding
 effect of the Gold cut on the model-derived orbit summaries is reported
 separately in Section~\ref{sec:robustness}.
 
-\input{tables/v15/tab_gold_empirical.tex}
+\input{tables/tab_gold_empirical.tex}
 
 \subsection{Velocity-Threshold Membership Is Probabilistic}
 \label{sec:vgrf_membership_results}
@@ -467,11 +467,11 @@ star.  Monte Carlo propagation gives 276 stars in Tier~A
 uses Tier~A+B as the headline catalogue and Tier~A+B+C for broader
 population-level orbit summaries.
 
-\input{tables/v15/tab_vgrf_membership.tex}
+\input{tables/tab_vgrf_membership.tex}
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig_phase14_pvgrf_vs_vgrf.pdf}
+\includegraphics[width=\columnwidth]{figures/fig03_threshold_probability.pdf}
 \caption{Velocity-threshold membership probability versus corrected
 point-estimate $\vgrf$ for the propagated Gaia DR3 candidate pool.  The
 horizontal dashed lines mark the Tier~A, Tier~A+B, and Tier~A+B+C
@@ -551,9 +551,9 @@ are not treated as whole-catalogue population assignments.}
 \label{fig:alpha_fe}
 \end{figure}
 
-\input{tables/v15/tab_spectroscopic.tex}
+\input{tables/tab_spectroscopic.tex}
 
-\input{tables/v15/tab_population_decomp.tex}
+\input{tables/tab_population_decomp.tex}
 
 \subsection{Sky Distribution, Observer Geometry, and Selection}
 \label{sec:sky}
@@ -581,7 +581,7 @@ the GaiaUnlimited DR3-RVS implementation and release the per-star
 selection-function table, but inverse-selection weighted counts are not
 used as headline population counts.
 
-\input{tables/v15/tab_selection_function.tex}
+\input{tables/tab_selection_function.tex}
 
 \begin{figure*}[!htbp]
 \centering
@@ -616,7 +616,7 @@ velocity-stratified control comparison, halo-mass variants, barred
 potential variants, and central-reach counts are retained as explicitly
 labelled point-estimate diagnostics.
 
-\input{tables/v15/tab_orbit_statistic_ledger.tex}
+\input{tables/tab_orbit_statistic_ledger.tex}
 
 \subsection{In the Adopted Model, the Sample Is Strongly Radially
   Biased} \label{sec:eccentricity}
@@ -641,7 +641,7 @@ the real inner Galaxy is barred and non-axisymmetric on those scales; the
 barred Hunter/Sormani variant in Section~\ref{sec:robustness} brackets
 this sensitivity.
 
-\input{tables/v15/tab_orbit_summary.tex}
+\input{tables/tab_orbit_summary.tex}
 
 \begin{figure}[!htbp]
 \centering
@@ -696,7 +696,7 @@ for individual inner-Galaxy orbits and for the bridger sensitivity test,
 but the matched-control comparison does not support OLR accumulation as
 the primary explanation for the catalogue.
 
-\input{tables/v15/tab_band_comparison.tex}
+\input{tables/tab_band_comparison.tex}
 
 \begin{figure}[!htbp]
 \centering
@@ -744,7 +744,7 @@ median time fraction in the solar annulus ($7<R<9$\kpc) rises from
 are therefore not merely solar-radius apocentre snapshots; they are
 strongly inner-reaching orbits observed during a low-speed phase.
 
-\input{tables/v15/tab_dwell.tex}
+\input{tables/tab_dwell.tex}
 
 \subsection{Inner-Galaxy Reach and Selection Limits} \label{sec:reach}
 
@@ -780,9 +780,9 @@ propagation are used to identify robust close-passage candidates rather
 than to treat nominal closest approaches as definitive
 \citep{BailerJones2022}.
 
-\input{tables/v15/tab_reach.tex}
+\input{tables/tab_reach.tex}
 
-\input{tables/v15/tab_sgrA_candidates.tex}
+\input{tables/tab_sgrA_candidates.tex}
 
 The radial-reach tail is also potential-sensitive.  Three Tier~A+B+C
 stars satisfy the bridger criterion ($\Rperi<2$\kpc{} and
@@ -806,7 +806,7 @@ Tier~A+B catalogue, and all Gold stars have finite action solutions in
 the adopted static potential.  The subset is intended for individual-star
 follow-up rather than for redefining the full catalogue.
 
-\input{tables/v15/tab_gold_dynamical.tex}
+\input{tables/tab_gold_dynamical.tex}
 
 \paragraph{Threshold sensitivity within the current local sample.}
 The 25\kms threshold is a practical operating cut, not a special physical
@@ -815,7 +815,7 @@ per-star $P(\vgrf<25\kms)$ values and tier labels rather than only a hard
 threshold flag; alternative threshold cuts can be reconstructed directly
 from the machine-readable catalogue.
 
-\input{tables/v15/tab_threshold.tex}
+\input{tables/tab_threshold.tex}
 
 \paragraph{Velocity-threshold Monte Carlo propagation.}
 Adaptive Monte Carlo propagation was run for all 20{,}829
@@ -825,7 +825,7 @@ source, with 5{,}000-realisation refinement in the transition region and
 boundary.  The resulting tier labels, rather than a single point
 estimate, define the catalogue.
 
-\input{tables/v15/tab_mc.tex}
+\input{tables/tab_mc.tex}
 
 \paragraph{Halo-mass sensitivity on the full Tier~A+B+C catalogue.}
 A full-sample halo-mass sensitivity study was repeated for the Tier~A+B+C catalogue, bracketing recent Milky Way mass estimates
@@ -867,11 +867,11 @@ sample), the median \vgrf{} is similar ($16.57$\kms{} vs.\
 $15.72$\kms), and 100\% retain $e > 0.8$.  The high-eccentricity claim
 survives this additional quality cut.
 
-\input{tables/v15/tab_potential.tex}
+\input{tables/tab_potential.tex}
 
-\input{tables/v15/tab_solar_variants.tex}
+\input{tables/tab_solar_variants.tex}
 
-\input{tables/v15/tab_sensitivity.tex}
+\input{tables/tab_sensitivity.tex}
 
 \subsection{Energy and Angular-Momentum Distribution}
 \label{sec:elz}
@@ -960,7 +960,7 @@ clusters or compact associations.  This does not rule out common
 accretion-related origins or action-space substructure, which need not
 remain compact in present-day position.
 
-\input{tables/v15/tab_cluster_search.tex}
+\input{tables/tab_cluster_search.tex}
 
 The spectroscopic cross-match sharpens the physical picture while
 stopping short of an origin claim.  The alpha-classified subset contains

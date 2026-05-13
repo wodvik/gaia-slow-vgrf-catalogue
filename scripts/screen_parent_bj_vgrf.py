@@ -1,7 +1,7 @@
 """
-Apply Bailer-Jones distances to the Phase 0C parent-buffer shortlist.
+Apply Bailer-Jones distances to the zero-point-corrected parent-buffer shortlist.
 
-The Phase 0C screen is intentionally conservative and uses L21-corrected
+The zero-point-corrected screen is intentionally conservative and uses L21-corrected
 inverse-parallax distances. This script queries Bailer-Jones+2021
 photogeometric distances only for that manageable shortlist, recomputes Vgrf
 with BJ distances where available, and reports whether stars outside the old
@@ -22,7 +22,7 @@ import pandas as pd
 from astropy.table import Table, vstack
 
 
-REPO = Path(__file__).resolve().parents[3]
+REPO = Path(__file__).resolve().parents[1]
 DEFAULT_SCREEN = Path("D:/GAIA/parent_scan/gaia_parent_buffer_zpcorr_inv_screen_vgrf50.csv")
 DEFAULT_OUT_DIR = Path("D:/GAIA/parent_scan")
 
@@ -119,8 +119,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if finite.any():
         vgrf[finite] = compute_vgrf_with_distance(df.loc[finite], dist_pc[finite])
 
-    df["dist_pc_phase0d"] = dist_pc
-    df["dist_source_phase0d"] = dist_source
+    df["dist_pc_bj_screen"] = dist_pc
+    df["dist_source_bj_screen"] = dist_source
     df["vgrf_bj_or_inv"] = vgrf
 
     old = df["source_in_old_preselection"].astype(bool).to_numpy()

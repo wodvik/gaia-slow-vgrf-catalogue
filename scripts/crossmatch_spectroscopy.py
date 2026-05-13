@@ -1,4 +1,4 @@
-"""Phase 14W -- full expanded APOGEE/GALAH spectroscopic cross-match.
+"""full expanded APOGEE/GALAH spectroscopic cross-match.
 
 Queries VizieR TAP for the full 20,829-source expanded candidate pool
 using exact Gaia EDR3/DR3 source identifiers. Results are checkpointed
@@ -17,9 +17,9 @@ import pandas as pd
 from astropy.table import Table
 from astroquery.utils.tap.core import TapPlus
 
-REPO = Path(__file__).resolve().parents[2].parent
-MASTER = REPO / "release/v2/phase0_expanded/catalogue_expanded_master.fits"
-OUT = REPO / "release/v2/phase14/expanded_spectroscopic_crossmatch"
+REPO = Path(__file__).resolve().parents[1]
+MASTER = REPO / "catalogues/catalogue_expanded_master.fits"
+OUT = REPO / "analysis_products/expanded_spectroscopic_crossmatch"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # Use HTTP because the local Windows Python certificate store does not

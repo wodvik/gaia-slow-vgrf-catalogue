@@ -161,7 +161,7 @@ def write_discrepancies(path: Path, discrepancies: list[Discrepancy]) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("catalogue", type=Path)
-    parser.add_argument("--out-dir", type=Path, default=Path("release/v2/online_verification"))
+    parser.add_argument("--out-dir", type=Path, default=Path("online_verification"))
     parser.add_argument("--chunk-size", type=int, default=250)
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--retries", type=int, default=4)

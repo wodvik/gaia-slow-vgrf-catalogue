@@ -1,16 +1,16 @@
-﻿# Submission Reproducibility Runbook
+# Submission Reproducibility Runbook
 
 This runbook describes the first public review-stage release for the
 probabilistic Gaia DR3 slow-Vgrf catalogue. It is intended for referees
 and archive curators who want to understand which products can be
-reproduced from the reviewer bundle alone and which require external raw
+reproduced from the repository package alone and which require external raw
 catalogues.
 
 ## Release Identity
 
 - Release tag: `v1.0.1-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
-- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.0_review.zip`
+- Repository package: `gaia-slow-vgrf-catalogue`
 - Zenodo DOI: `10.5281/zenodo.20116135`
 - Headline catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 517 stars
 - Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,835 stars
@@ -23,7 +23,7 @@ Create the software environment from:
 
 ```bash
 conda env create -f environment.yml
-conda activate gaia2026-v2
+conda activate gaia-slow-vgrf
 ```
 
 AGAMA was run from WSL for the orbit calculations. The full
@@ -45,9 +45,9 @@ steps from the same conda environment.
 - `LICENSE.md`: data and code license statement.
 - `scripts/`: review-stage pipeline scripts.
 - `catalogues/`: FITS/CSV catalogue products.
-- `phase14/expanded_orbit_mc/`: full orbit Monte Carlo products.
-- `phase14/README.md`: explanation of the final validation/sensitivity
-  product directory and its pipeline-stage naming.
+- `analysis_products/expanded_orbit_mc/`: full orbit Monte Carlo products.
+- `analysis_products/README.md`: explanation of the final validation and
+  sensitivity product directory.
 - `RELEASE_NOTES.md`: review-stage version history and corrected barred
   sensitivity values.
 
@@ -77,7 +77,7 @@ one large local intermediate product:
   size: `D:/GAIA/parent_scan/gaia_parent_buffer_vgrf200_full.csv`
 
 The parent-buffer CSV is reproducible from the local Gaia DR3 source
-mirror with the Phase 0 scanner. It is not needed to inspect or use the
+mirror with the parent-buffer scanner. It is not needed to inspect or use the
 released catalogue products.
 
 ## Production Command Ledger
@@ -92,17 +92,16 @@ D:/GAIA/parent_scan/
 On another machine, remap the local paths in `config.yml` and command
 arguments before rerunning scripts. The production defaults document this
 release environment: Windows paths such as `D:/GAIA/...` correspond to
-WSL paths such as `/mnt/d/GAIA/...`, and
-`C:/Users/humbl/GAIA2026` corresponds to `/mnt/c/Users/humbl/GAIA2026`.
+WSL paths such as `/mnt/d/GAIA/...`.
 No released FITS/MRT catalogue requires those paths for normal use.
 
 The final full orbit Monte Carlo was run from WSL with:
 
 ```bash
-cd /mnt/c/Users/humbl/GAIA2026
+cd /path/to/gaia-slow-vgrf-catalogue
 OMP_NUM_THREADS=32 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-python3 release/v2/scripts/phase14x_expanded_mc_orbits.py \
-  --out-dir /mnt/c/Users/humbl/GAIA2026/release/v2/phase14/expanded_orbit_mc \
+python3 scripts/compute_mc_orbits.py \
+  --out-dir analysis_products/expanded_orbit_mc \
   --n-samp 5000 \
   --chunk-size 25 \
   --n-convergence 10000 \
@@ -112,17 +111,17 @@ python3 release/v2/scripts/phase14x_expanded_mc_orbits.py \
 
 The output files are:
 
-- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
-- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
-- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits_summary.json`
-- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits_convergence_10000.csv`
+- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
+- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
+- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits_summary.json`
+- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits_convergence_10000.csv`
 
 The corrected barred-potential sensitivity products were regenerated with:
 
 ```bash
-python3 release/v2/scripts/phase0g_expanded_orbits.py
-python3 release/v2/scripts/phase14v_expanded_potential_sensitivity.py
-python3 release/v2/scripts/phase14q_expanded_sgrA_refinement.py \
+python3 scripts/compute_catalogue_orbits.py
+python3 scripts/compute_potential_sensitivity.py
+python3 scripts/refine_expanded_sgra_candidates.py \
   --n-samp 5000 --chunk-size 500 --n-per-potential 5
 ```
 
@@ -132,7 +131,7 @@ current manuscript.
 
 ## Known Limitations
 
-The reviewer bundle is a reproducibility and inspection package, not a
+The repository package is a reproducibility and inspection package, not a
 full redistribution of the Gaia DR3 source table. Some scripts retain
 local default paths documenting the exact production environment; the
 inputs and outputs are also listed explicitly in `config.yml` so they can
@@ -140,8 +139,8 @@ be remapped on another machine.
 
 The catalogue has been evaluated with GaiaUnlimited's
 Castro-Ginard et al. (2023) Gaia DR3 RVS selection function. The per-star
-table is `phase14/expanded_selection_function.fits`, with summaries in
-`phase14/expanded_selection_function_summary.csv` and
-`phase14/expanded_selection_function_summary.json`. Inverse-selection
+table is `analysis_products/expanded_selection_function.fits`, with summaries in
+`analysis_products/expanded_selection_function_summary.csv` and
+`analysis_products/expanded_selection_function_summary.json`. Inverse-selection
 weighted sums are retained as contextual observability diagnostics, not
 as volume-complete headline population counts.

@@ -1,4 +1,4 @@
-﻿# Gaia DR3 Slow-Vgrf Catalogue
+# Gaia DR3 Slow-Vgrf Catalogue
 
 This is the first public review-stage release for the probabilistic Gaia DR3
 slow-Galactic-rest-frame-speed catalogue.
@@ -24,10 +24,10 @@ Some product filenames retain expanded as an internal build label; this is the f
 - `catalogues/catalogue_expanded_tierAB.fits`
 - `catalogues/catalogue_expanded_tierABC.fits`
 - `catalogues/catalogue_expanded_orbits_tierABC.fits`
-- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
-- `phase14/expanded_selection_function.fits`
-- `mrt/catalogue_tierA_mrt.txt`
-- `mrt/catalogue_tierAB_mrt.txt`
+- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
+- `analysis_products/expanded_selection_function.fits`
+- `machine_readable_tables/catalogue_tierA_mrt.txt`
+- `machine_readable_tables/catalogue_tierAB_mrt.txt`
 
 `COLUMNS.md` defines the public FITS/CSV/MRT columns. Gaia `source_id`
 values should be treated as integer identifiers and never converted to
@@ -53,8 +53,8 @@ The verification report and script are in `online_verification/`.
 
 ## Reproducibility
 
-`phase14/` contains final review-stage validation and sensitivity
-products. The name is a pipeline provenance label; see `phase14/README.md`.
+`analysis_products/` contains final review-stage validation and sensitivity
+products; see `analysis_products/README.md`.
 
 `README-submission.md` describes which products can be reproduced from
 the release package alone and which require external catalogues or the

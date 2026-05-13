@@ -3,7 +3,7 @@
 Evaluates the Castro-Ginard et al. (2023) Gaia DR3 RVS selection
 function, via gaiaunlimited, for the parent-complete expanded catalogue.
 
-Outputs are written under release/v2/phase14 and are intended to replace
+Outputs are written under analysis_products and are intended to replace
 the temporary "selection-function status" note used before the WSL
 gaiaunlimited/healpy stack was available.
 """
@@ -20,9 +20,9 @@ from astropy.coordinates import SkyCoord
 import astropy.units as u
 
 
-REPO = Path(__file__).resolve().parents[3]
-IN_FITS = REPO / "release/v2/phase0_expanded/catalogue_expanded_master.fits"
-OUT = REPO / "release/v2/phase14"
+REPO = Path(__file__).resolve().parents[1]
+IN_FITS = REPO / "catalogues/catalogue_expanded_master.fits"
+OUT = REPO / "analysis_products"
 OUT_FITS = OUT / "expanded_selection_function.fits"
 OUT_CSV = OUT / "expanded_selection_function_summary.csv"
 OUT_JSON = OUT / "expanded_selection_function_summary.json"

@@ -13,12 +13,12 @@ import pandas as pd
 from astropy.table import Table
 
 
-REPO = Path(__file__).resolve().parents[3]
-MASTER = REPO / "release/v2/phase0_expanded/catalogue_expanded_master.fits"
-ORBITS = REPO / "release/v2/phase0_expanded/catalogue_expanded_orbits_tierABC.fits"
-ENERGY = REPO / "release/v2/phase14/expanded_static_energy.csv"
-FIG = REPO / "release/figures"
-OUT = REPO / "release/v2/phase14"
+REPO = Path(__file__).resolve().parents[1]
+MASTER = REPO / "catalogues/catalogue_expanded_master.fits"
+ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
+ENERGY = REPO / "analysis_products/expanded_static_energy.csv"
+FIG = REPO / "figures"
+OUT = REPO / "analysis_products"
 
 TIER_STYLE = {
     "A": {"color": "#b2182b", "marker": "o", "size": 12, "alpha": 0.85, "label": "Tier A"},
@@ -88,7 +88,7 @@ def plot_pvgrf(master: pd.DataFrame) -> None:
     ax.set_ylabel(r"$P(V_\mathrm{GRF}<25\,\mathrm{km\,s}^{-1})$")
     ax.legend(loc="center right", fontsize=5.8, frameon=True)
     fig.tight_layout()
-    save(fig, "fig_phase14_pvgrf_vs_vgrf.pdf")
+    save(fig, "fig03_threshold_probability.pdf")
 
 
 def plot_sky(master: pd.DataFrame) -> None:
@@ -209,7 +209,7 @@ def main() -> int:
         "n_tier_ab": int(master["tier"].isin(["A", "B"]).sum()),
         "n_tier_abc": int(master["tier"].isin(["A", "B", "C"]).sum()),
         "figures": [
-            "fig_phase14_pvgrf_vs_vgrf.pdf",
+            "fig03_threshold_probability.pdf",
             "fig05_sky_aitoff.pdf",
             "fig07_rperi_rapo.pdf",
             "fig08_toomre_diagram.pdf",

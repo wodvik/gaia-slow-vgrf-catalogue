@@ -1,4 +1,4 @@
-name: gaia2026-v2
+name: gaia-slow-vgrf
 channels:
   - conda-forge
 dependencies:

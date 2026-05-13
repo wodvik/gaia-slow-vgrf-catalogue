@@ -1,6 +1,6 @@
 {
   "input": "catalogues/catalogue_expanded_master.fits",
-  "output_fits": "phase14/expanded_selection_function.fits",
+  "output_fits": "analysis_products/expanded_selection_function.fits",
   "sf_floor": 0.02,
   "n_rows": 20829,
   "n_invalid_sf": 830,

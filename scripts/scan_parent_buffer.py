@@ -1,9 +1,9 @@
 """
-Phase 0 parent-buffer scan for the Gaia DR3 slow-Vgrf catalogue.
+parent-buffer parent-buffer scan for the Gaia DR3 slow-Vgrf catalogue.
 
 This script scans the local Gaia DR3 CSV mirror and writes a broad legacy
 low-Vgrf buffer from the full Gaia 6D parent sample. The buffer is intentionally
-wider than the final 25 km/s catalogue threshold so that later phases can prove
+wider than the final 25 km/s catalogue threshold so that later checks can prove
 that the final probabilistic catalogue was not limited by the old <25 km/s
 preselection.
 
@@ -14,9 +14,9 @@ The scan is designed for an external mechanical drive:
   - compact per-file progress and a JSON manifest
 
 Default output:
-  release/v2/parent_scan/gaia_parent_buffer_vgrf200_full.csv
-  release/v2/parent_scan/gaia_parent_buffer_scan_state.json
-  release/v2/parent_scan/gaia_parent_buffer_scan_manifest.json
+  parent_scan/gaia_parent_buffer_vgrf200_full.csv
+  parent_scan/gaia_parent_buffer_scan_state.json
+  parent_scan/gaia_parent_buffer_scan_manifest.json
 """
 
 from __future__ import annotations
@@ -35,9 +35,9 @@ import numpy as np
 import pandas as pd
 
 
-REPO = Path(__file__).resolve().parents[3]
+REPO = Path(__file__).resolve().parents[1]
 DEFAULT_DATA_DIR = Path("D:/GAIA/csv")
-DEFAULT_OUT_DIR = REPO / "release" / "v2" / "parent_scan"
+DEFAULT_OUT_DIR = REPO / "parent_scan"
 
 K = 4.74047
 U_SUN = 11.1

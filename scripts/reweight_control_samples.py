@@ -18,12 +18,12 @@ import pandas as pd
 from astropy.table import Table
 
 
-REPO = Path(__file__).resolve().parents[3]
-MASTER = REPO / "release/v2/phase0_expanded/catalogue_expanded_master.fits"
-ORBITS = REPO / "release/v2/phase0_expanded/catalogue_expanded_orbits_tierABC.fits"
-CONTROLS = REPO / "release/v2/phase5/control_orbits.fits"
-OUT = REPO / "release/v2/phase14"
-FIG = REPO / "release/figures"
+REPO = Path(__file__).resolve().parents[1]
+MASTER = REPO / "catalogues/catalogue_expanded_master.fits"
+ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
+CONTROLS = REPO / "external/control_orbits.fits"
+OUT = REPO / "analysis_products"
+FIG = REPO / "figures"
 
 BANDS = [
     ("slow", "Slow <25", "#d62728"),

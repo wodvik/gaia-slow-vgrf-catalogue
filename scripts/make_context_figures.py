@@ -2,8 +2,8 @@
 
 Computes orbit-event coordinates for the expanded Tier A+B+C catalogue
 and regenerates:
-  - release/figures/fig01_edge_on_Rgc_Zgc.pdf
-  - release/figures/fig02_face_on_Xgc_Ygc.pdf
+  - figures/fig01_edge_on_Rgc_Zgc.pdf
+  - figures/fig02_face_on_Xgc_Ygc.pdf
 
 Run from WSL when the coordinate cache must be built because AGAMA is
 installed in the WSL Python environment.
@@ -27,11 +27,11 @@ import pandas as pd
 from astropy.table import Table
 
 
-REPO = Path(__file__).resolve().parents[3]
-ORBITS = REPO / "release/v2/phase0_expanded/catalogue_expanded_orbits_tierABC.fits"
-WORK = REPO / "release/v2/phase3_agama/_hunter24_workdir"
-OUT = REPO / "release/v2/phase14"
-FIG = REPO / "release/figures"
+REPO = Path(__file__).resolve().parents[1]
+ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
+WORK = REPO / "external/hunter24_workdir"
+OUT = REPO / "analysis_products"
+FIG = REPO / "figures"
 CACHE = OUT / "expanded_orbit_event_positions.csv"
 SUMMARY = OUT / "expanded_context_figures_summary.json"
 

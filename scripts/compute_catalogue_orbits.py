@@ -3,10 +3,10 @@ Expanded-catalogue point-estimate orbit integration.
 
 Run under WSL, where AGAMA is installed:
 
-    wsl -- python3 /mnt/c/Users/humbl/GAIA2026/release/v2/scripts/phase0g_expanded_orbits.py
+    wsl -- python3 scripts/compute_catalogue_orbits.py
 
-This integrates the expanded Tier A+B+C sample from Phase 0E in the same
-Hunter+2024 static and barred potentials used by the manuscript's v2 Phase 4.
+This integrates the expanded Tier A+B+C sample in the Hunter+2024 static and
+barred potentials used by the manuscript.
 """
 
 from __future__ import annotations
@@ -26,16 +26,16 @@ from astropy.table import Table
 import agama
 
 
-if platform.system().lower() == "linux":
-    REPO = Path("/mnt/c/Users/humbl/GAIA2026")
-    DEFAULT_INPUT = Path("/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
-else:
-    REPO = Path("C:/Users/humbl/GAIA2026")
-    DEFAULT_INPUT = Path("D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
+REPO = Path(__file__).resolve().parents[1]
+DEFAULT_INPUT = (
+    Path("/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
+    if platform.system().lower() == "linux"
+    else Path("D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
+)
 
-CONFIG = yaml.safe_load((REPO / "release/v2/config.yml").read_text())
-OUT = REPO / "release/v2/phase0_expanded"
-WORK = REPO / "release/v2/phase3_agama/_hunter24_workdir"
+CONFIG = yaml.safe_load((REPO / "config.yml").read_text())
+OUT = REPO / "catalogues"
+WORK = REPO / "external/hunter24_workdir"
 
 DEFAULT_SOLAR = CONFIG["solar_variants"]["default"]
 OMEGA_P_DEFAULT = -float(CONFIG["bar_pattern_speeds_kms_kpc"]["default"])
@@ -48,7 +48,7 @@ agama.setUnits(length=1, mass=1, velocity=1)
 
 
 def log(msg: str) -> None:
-    print(f"[phase0g t={time.time() - T0:7.1f}s] {msg}", flush=True)
+    print(f"[catalogue-orbits t={time.time() - T0:7.1f}s] {msg}", flush=True)
 
 
 def galcen_frame() -> coord.Galactocentric:

@@ -1,5 +1,5 @@
 {
-  "phase": "14X",
+  "product": "orbit_monte_carlo",
   "created_utc": "2026-05-10T22:16:49Z",
   "input_csv": "/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv",
   "n_tierABC": 1835,
@@ -11,9 +11,9 @@
     "OMP_NUM_THREADS": "32"
   },
   "outputs": {
-    "fits": "phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits",
-    "csv": "phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv",
-    "chunks_dir": "phase14/expanded_orbit_mc/chunks"
+    "fits": "analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits",
+    "csv": "analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv",
+    "chunks_dir": "analysis_products/expanded_orbit_mc/chunks"
   },
   "headline": {
     "R_peri_p50_pc": {
@@ -135,7 +135,7 @@
   "convergence": {
     "n_convergence_stars": 100,
     "n_convergence_realisations": 10000,
-    "convergence_csv": "phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits_convergence_10000.csv",
+    "convergence_csv": "analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits_convergence_10000.csv",
     "R_peri_kpc_p50": {
       "n": 100,
       "p16": 0.08588393226265904,

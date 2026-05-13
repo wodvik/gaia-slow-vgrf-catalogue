@@ -1,4 +1,4 @@
-"""Phase 14V -- expanded potential sensitivity table.
+"""expanded potential sensitivity table.
 
 Runs compact point-estimate sensitivity checks from the expanded
 Tier A+B+C orbit initial conditions:
@@ -8,7 +8,7 @@ Tier A+B+C orbit initial conditions:
 * barred Hunter/Sormani variants at Omega_p = 33, 37.5, 41 km/s/kpc
 
 This is intentionally a table-level sensitivity pass, not a replacement
-for the full Phase 6 posterior orbit battery.
+for the full earlier Sgr A* posterior orbit battery.
 """
 from __future__ import annotations
 
@@ -19,10 +19,10 @@ import agama
 import numpy as np
 import pandas as pd
 
-REPO = Path(__file__).resolve().parents[2].parent
-OUT = REPO / "release/v2/phase14"
-WORK = REPO / "release/v2/phase3_agama/_hunter24_workdir"
-IN = REPO / "release/v2/phase0_expanded/catalogue_expanded_orbits_tierABC.csv"
+REPO = Path(__file__).resolve().parents[1]
+OUT = REPO / "analysis_products"
+WORK = REPO / "external/hunter24_workdir"
+IN = REPO / "catalogues/catalogue_expanded_orbits_tierABC.csv"
 OUT.mkdir(parents=True, exist_ok=True)
 
 GYR = 1.0 / 0.9778

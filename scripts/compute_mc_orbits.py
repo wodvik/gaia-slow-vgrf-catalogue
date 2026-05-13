@@ -1,8 +1,7 @@
-"""Phase 14X -- full expanded-catalogue Monte Carlo orbit propagation.
+"""Full expanded-catalogue Monte Carlo orbit propagation.
 
-This is the expanded replacement for the older Phase 6A orbit-MC pass.
-It runs a high-sample static-potential orbit Monte Carlo for every
-Tier A+B+C star in the expanded catalogue.
+This runs a high-sample static-potential orbit Monte Carlo for every Tier A+B+C
+star in the expanded catalogue.
 
 Default plan:
   - 5,000 realisations for each expanded Tier A+B+C star.
@@ -11,7 +10,7 @@ Default plan:
 
 Run under WSL, where AGAMA is installed:
 
-    wsl -- python3 /mnt/c/Users/humbl/GAIA2026/release/v2/scripts/phase14x_expanded_mc_orbits.py
+    wsl -- python3 scripts/compute_mc_orbits.py
 """
 from __future__ import annotations
 
@@ -31,16 +30,16 @@ import yaml
 from astropy.table import Table
 
 
-if platform.system().lower() == "linux":
-    REPO = Path("/mnt/c/Users/humbl/GAIA2026")
-    DEFAULT_INPUT = Path("/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
-else:
-    REPO = Path("C:/Users/humbl/GAIA2026")
-    DEFAULT_INPUT = Path("D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
+REPO = Path(__file__).resolve().parents[1]
+DEFAULT_INPUT = (
+    Path("/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
+    if platform.system().lower() == "linux"
+    else Path("D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
+)
 
-CONFIG = yaml.safe_load((REPO / "release/v2/config.yml").read_text())
-OUT = REPO / "release/v2/phase14/expanded_orbit_mc"
-WORK = REPO / "release/v2/phase3_agama/_hunter24_workdir"
+CONFIG = yaml.safe_load((REPO / "config.yml").read_text())
+OUT = REPO / "analysis_products/expanded_orbit_mc"
+WORK = REPO / "external/hunter24_workdir"
 SEED = int(CONFIG["mc"]["random_seed"])
 GYR = 1.0 / 0.9778
 
@@ -48,7 +47,7 @@ agama.setUnits(length=1, mass=1, velocity=1)
 
 
 def log(message: str) -> None:
-    print(f"[14X-expanded-orbit-MC t={time.time() - T0:8.1f}s] {message}", flush=True)
+    print(f"[mc-orbits t={time.time() - T0:8.1f}s] {message}", flush=True)
 
 
 def galcen_frame() -> coord.Galactocentric:
@@ -329,7 +328,7 @@ def main() -> int:
     full = combine_chunks(chunks_dir, OUT)
     convergence = run_convergence(df, pot, af, args)
     summary = {
-        "phase": "14X",
+        "product": "orbit_monte_carlo",
         "created_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "input_csv": str(args.input_csv),
         "n_tierABC": int(len(df)),

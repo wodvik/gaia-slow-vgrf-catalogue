@@ -1,4 +1,4 @@
-﻿# Catalogue Column Dictionary
+# Catalogue Column Dictionary
 
 This file defines the columns used in the first public review-stage FITS and
 CSV catalogue products. Gaia `source_id` values are stored as integer
@@ -8,10 +8,10 @@ identifiers and should not be converted to floating point.
 
 These columns appear in:
 
-- `catalogue_expanded_master.fits`
-- `catalogue_expanded_tierA.fits`
-- `catalogue_expanded_tierAB.fits`
-- `catalogue_expanded_tierABC.fits`
+- `catalogues/catalogue_expanded_master.fits`
+- `catalogues/catalogue_expanded_tierA.fits`
+- `catalogues/catalogue_expanded_tierAB.fits`
+- `catalogues/catalogue_expanded_tierABC.fits`
 
 | Column | Unit | Description |
 |---|---:|---|
@@ -61,8 +61,8 @@ These columns appear in:
 
 These columns appear in:
 
-- `catalogue_expanded_orbits_tierABC.fits`
-- `catalogue_expanded_orbits_tierABC.csv`
+- `catalogues/catalogue_expanded_orbits_tierABC.fits`
+- `catalogues/catalogue_expanded_orbits_tierABC.csv`
 
 This product contains one row per Tier A+B+C star. Orbit quantities are
 point-estimate summaries in the adopted Hunter+2024 static potential and
@@ -115,8 +115,8 @@ not observables.
 
 These columns appear in:
 
-- `catalogue_expanded_orbit_mc_tierABC.fits`
-- `catalogue_expanded_orbit_mc_tierABC.csv`
+- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
+- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
 
 | Column | Unit | Description |
 |---|---:|---|
@@ -139,7 +139,7 @@ These columns appear in:
 
 These columns appear in:
 
-- `phase14/expanded_selection_function.fits`
+- `analysis_products/expanded_selection_function.fits`
 
 | Column | Unit | Description |
 |---|---:|---|

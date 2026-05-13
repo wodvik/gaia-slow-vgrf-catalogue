@@ -11,10 +11,10 @@ from pathlib import Path
 import numpy as np
 from astropy.table import Table
 
-REPO = Path(__file__).resolve().parents[2].parent
-OUT = REPO / "release/v2/mrt"
+REPO = Path(__file__).resolve().parents[1]
+OUT = REPO / "machine_readable_tables"
 OUT.mkdir(parents=True, exist_ok=True)
-TABLE_OUT = REPO / "release/tables/v15"
+TABLE_OUT = REPO / "tables"
 
 COLUMNS = [
     ("source_id", "none", "Gaia DR3 source identifier"),
@@ -116,7 +116,7 @@ def _write_sample_tex(path: Path, table: Table) -> None:
     sample = table[np.array([_value(row, "rv_quality") == "ok" for row in table])][:8]
     lines = [
         r"\begin{deluxetable*}{rrrrcrll}",
-        r"\tablecaption{Sample rows from the expanded Tier~A+B headline catalogue. The full table is available in machine-readable form in the review package as \path{release/v2/mrt/catalogue_tierAB_mrt.txt}; the FITS version is \path{release/v2/phase0_expanded/catalogue_expanded_tierAB.fits}.\label{tab:headline_catalogue_sample}}",
+        r"\tablecaption{Sample rows from the expanded Tier~A+B headline catalogue. The full table is available in machine-readable form in the review package as \path{machine_readable_tables/catalogue_tierAB_mrt.txt}; the FITS version is \path{catalogues/catalogue_expanded_tierAB.fits}.\label{tab:headline_catalogue_sample}}",
         r"\tablehead{",
         r"\colhead{Gaia DR3 source\_id} & \colhead{R.A.} & \colhead{Decl.} & \colhead{$\vgrf$} & \colhead{$P(\vgrf<25)$} & \colhead{$N_{\rm MC}$} & \colhead{Tier} & \colhead{RVS QC}\\",
         r"\colhead{} & \colhead{(deg)} & \colhead{(deg)} & \colhead{(\kms)} & \colhead{} & \colhead{} & \colhead{} & \colhead{}",
@@ -143,8 +143,8 @@ def _write_sample_tex(path: Path, table: Table) -> None:
 
 
 def main() -> int:
-    tier_a = Table.read(REPO / "release/v2/phase0_expanded/catalogue_expanded_tierA.fits")
-    tier_ab = Table.read(REPO / "release/v2/phase0_expanded/catalogue_expanded_tierAB.fits")
+    tier_a = Table.read(REPO / "catalogues/catalogue_expanded_tierA.fits")
+    tier_ab = Table.read(REPO / "catalogues/catalogue_expanded_tierAB.fits")
     tier_a.sort("source_id")
     tier_ab.sort("source_id")
     _write_mrt(OUT / "catalogue_tierA_mrt.txt", "Tier A slow-Vgrf catalogue", tier_a)

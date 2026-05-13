@@ -1,7 +1,7 @@
-"""Phase 14P -- present-day compact-group sanity check.
+"""present-day compact-group sanity check.
 
 This checks whether the slow-Vgrf catalogue contains an obvious open/globular
-cluster-like aggregate at the present epoch. It uses the released v2 catalogue
+cluster-like aggregate at the present epoch. It uses the released catalogue
 and orbit-table Galactocentric positions/velocities, then runs physically
 interpretable DBSCAN/FoF searches in 3D position and 3D velocity.
 
@@ -19,10 +19,10 @@ from astropy.table import Table, join
 from scipy.spatial.distance import pdist, squareform
 from sklearn.cluster import DBSCAN
 
-REPO = Path(__file__).resolve().parents[3]
-CATALOGUE = REPO / "release/v2/phase0_expanded/catalogue_expanded_master.fits"
-ORBITS = REPO / "release/v2/phase0_expanded/catalogue_expanded_orbits_tierABC.fits"
-OUT_DIR = REPO / "release/v2/phase14"
+REPO = Path(__file__).resolve().parents[1]
+CATALOGUE = REPO / "catalogues/catalogue_expanded_master.fits"
+ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
+OUT_DIR = REPO / "analysis_products"
 
 G_PC_MSUN_KMS2 = 0.00430091
 
@@ -213,7 +213,7 @@ def write_csv(path: Path, rows: list[dict], fieldnames: list[str] | None = None)
 
 def write_markdown(path: Path, summaries: list[dict], group_rows: list[dict]) -> None:
     lines = [
-        "# Phase 14P compact-group search",
+        "# Compact-group search",
         "",
         "Purpose: check whether the slow-Vgrf release catalogue contains an obvious",
         "present-day open/globular-cluster-like aggregate.",

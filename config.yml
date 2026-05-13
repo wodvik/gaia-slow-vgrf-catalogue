@@ -1,4 +1,4 @@
-﻿# Gaia slow-Vgrf catalogue review-stage configuration.
+# Gaia slow-Vgrf catalogue review-stage configuration.
 # This file documents the expanded, parent-complete 2026-05-10 release.
 
 release:
@@ -25,7 +25,7 @@ input:
   source_csv: D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv
 
   # Legacy v1/v2 preselection retained only for provenance comparisons.
-  legacy_source_csv: release/data/slow_stars_enriched_orbits.csv
+  legacy_source_csv: external/slow_stars_enriched_orbits.csv
   n_legacy_preselection: 2859
 
 outputs:
@@ -34,11 +34,11 @@ outputs:
   expanded_tierAB_fits: catalogues/catalogue_expanded_tierAB.fits
   expanded_tierABC_fits: catalogues/catalogue_expanded_tierABC.fits
   expanded_orbits_tierABC_fits: catalogues/catalogue_expanded_orbits_tierABC.fits
-  expanded_orbit_mc_fits: phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits
-  expanded_orbit_mc_csv: phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv
-  expanded_selection_function_fits: phase14/expanded_selection_function.fits
-  expanded_selection_function_summary_csv: phase14/expanded_selection_function_summary.csv
-  expanded_selection_function_summary_json: phase14/expanded_selection_function_summary.json
+  expanded_orbit_mc_fits: analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits
+  expanded_orbit_mc_csv: analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv
+  expanded_selection_function_fits: analysis_products/expanded_selection_function.fits
+  expanded_selection_function_summary_csv: analysis_products/expanded_selection_function_summary.csv
+  expanded_selection_function_summary_json: analysis_products/expanded_selection_function_summary.json
 
 # ----- Solar / LSR variants -----
 solar_variants:

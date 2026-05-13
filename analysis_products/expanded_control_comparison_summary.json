@@ -58,7 +58,7 @@
     }
   ],
   "outputs": {
-    "summary_csv": "phase14/expanded_control_comparison_summary.csv",
-    "weights_csv": "phase14/expanded_control_weights.csv"
+    "summary_csv": "analysis_products/expanded_control_comparison_summary.csv",
+    "weights_csv": "analysis_products/expanded_control_weights.csv"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "phase": "14Q",
+  "product": "expanded_sgra_refinement",
   "created_utc": "2026-05-13T03:54:34Z",
-  "expanded_catalogue": "/mnt/c/Users/humbl/GAIA2026/release/v2/phase0_expanded/catalogue_expanded_orbits_tierABC.fits",
+  "expanded_catalogue": "catalogues/catalogue_expanded_orbits_tierABC.fits",
   "n_realisations_per_candidate": 5000,
   "n_per_potential_seeded": 5,
   "trajsize": 40001,
@@ -355,10 +355,10 @@
     }
   ],
   "outputs": {
-    "draws_csv": "/mnt/c/Users/humbl/GAIA2026/release/v2/phase14/expanded_sgrA_refinement_draws.csv",
-    "deterministic_csv": "/mnt/c/Users/humbl/GAIA2026/release/v2/phase14/expanded_sgrA_refinement_deterministic.csv",
-    "summary_csv": "/mnt/c/Users/humbl/GAIA2026/release/v2/phase14/expanded_sgrA_refinement_summary.csv",
-    "summary_json": "/mnt/c/Users/humbl/GAIA2026/release/v2/phase14/expanded_sgrA_refinement_summary.json",
-    "summary_md": "/mnt/c/Users/humbl/GAIA2026/release/v2/phase14/expanded_sgrA_refinement_summary.md"
+    "draws_csv": "analysis_products/expanded_sgrA_refinement_draws.csv",
+    "deterministic_csv": "analysis_products/expanded_sgrA_refinement_deterministic.csv",
+    "summary_csv": "analysis_products/expanded_sgrA_refinement_summary.csv",
+    "summary_json": "analysis_products/expanded_sgrA_refinement_summary.json",
+    "summary_md": "analysis_products/expanded_sgrA_refinement_summary.md"
   }
 }

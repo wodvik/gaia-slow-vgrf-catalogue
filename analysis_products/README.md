@@ -1,8 +1,7 @@
-# Phase 14 Validation Products
+# Analysis Products
 
 This directory contains final review-stage validation and sensitivity
-products for the public catalogue release. The `phase14` name is a pipeline
-provenance label, not an astronomy standard.
+products for the public catalogue release.
 
 For archive users, the important products are:
 
