@@ -1,5 +1,20 @@
 # Release Notes
 
+## v1.0.3-review - 2026-06-03
+
+This layout-only update refreshes the manuscript PDF after the v1.0.2-review
+archive. Catalogue files, numerical products, selection-function products, and
+headline science quantities are unchanged from v1.0.2-review.
+
+- Removed a forced page break before the single-column inner-Galaxy table block
+  so the Bailer-Jones overlap paragraph is no longer stranded on an almost
+  blank page.
+- Kept the Sgr A* candidate table and its cumulative-probability figure together
+  before the robustness section, preserving table/figure order while reducing
+  visible whitespace.
+- Regenerated `main.pdf` and the descriptive manuscript copy
+  `Humble_2026_Gaia_DR3_slow_vgrf_catalogue_manuscript.pdf`.
+
 ## v1.0.2-review - 2026-06-01
 
 This review-stage update packages the referee-panel provenance reconciliation

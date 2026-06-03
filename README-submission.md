@@ -8,9 +8,9 @@ catalogues.
 
 ## Release Identity
 
-- Release tag: `v1.0.2-review`
+- Release tag: `v1.0.3-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
-- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.2_review.zip`
+- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.3_review.zip`
 - Zenodo concept DOI: `10.5281/zenodo.20116134`
 - Headline catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 517 stars
 - Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,835 stars

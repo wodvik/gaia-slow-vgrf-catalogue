@@ -250,7 +250,7 @@ def main() -> int:
     OUT_JSON.write_text(json.dumps(payload, indent=2))
     STATUS.write_text(
         "# Expanded Selection-Function Status\n\n"
-        "Release: v1.0.2-review\n\n"
+        "Release: v1.0.3-review\n\n"
         "The expanded parent-complete catalogue has been evaluated with "
         "the Castro-Ginard et al. (2023) Gaia DR3 RVS selection function "
         "through `gaiaunlimited.selectionfunctions.DR3RVSSelectionFunction` "

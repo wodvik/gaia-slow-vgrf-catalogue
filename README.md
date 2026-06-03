@@ -5,7 +5,7 @@ slow-Galactic-rest-frame-speed catalogue.
 
 Zenodo concept DOI: [10.5281/zenodo.20116134](https://doi.org/10.5281/zenodo.20116134)
 
-Release version: `v1.0.2-review` (see `RELEASE_NOTES.md`).
+Release version: `v1.0.3-review` (see `RELEASE_NOTES.md`).
 
 ## Key Counts
 
