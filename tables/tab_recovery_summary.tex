@@ -1,0 +1,20 @@
+\begin{center}
+\refstepcounter{table}\label{tab:recovery_summary}
+\begin{minipage}{\columnwidth}
+\small\textbf{Table \thetable.} GeDR3mock injection--recovery summary.  Each true-$V_{\rm grf}$ bin contains controlled kinematic injections into GeDR3mock sightlines, photometry, stellar parameters, and Gaia-like uncertainties after the initial $G<17$, $G_{\rm RVS}<14$, and $3500<T_{\rm eff}<7000$ K observability cuts.  $N_{\rm RVS}$ is the number passing a stochastic GaiaUnlimited DR3-RVS draw evaluated with the same v1 convention used for the catalogue, $g=G_{\rm RVS}$ and $c=BP{-}RP$; $N_{\varpi}$ is the number passing $\varpi_{\rm corr}/\sigma_\varpi>5$; $N_{\rm input}$ is the intersection entering the 500-realisation velocity-threshold Monte Carlo; and $N_{\rm rec}$ is the number recovered as Tier A, B, or C ($P(V_{\rm grf}<25\,{\rm km\,s^{-1}})>0.5$).
+\end{minipage}
+\vspace{0.4ex}
+
+\footnotesize
+\setlength{\tabcolsep}{1pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\hline\hline
+True $\vgrf$ bin & $N_{\rm true}$ & $N_{\rm RVS}$ & $N_{\varpi}$ & $N_{\rm input}$ & $N_{\rm rec}$ & $N_{\rm rec}/N_{\rm true}$ \\
+\hline
+0--25 & 10,000 & 7,001 & 9,891 & 6,944 & 6,086 & 0.609 \\
+25--50 & 10,000 & 7,035 & 9,896 & 6,972 & 282 & 0.028 \\
+50--100 & 10,000 & 7,090 & 9,889 & 7,030 & 1 & 0.0001 \\
+100--200 & 10,000 & 6,966 & 9,879 & 6,906 & 0 & 0.000 \\
+\hline
+\end{tabular}
+\end{center}

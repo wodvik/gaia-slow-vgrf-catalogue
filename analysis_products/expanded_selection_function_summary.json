@@ -1,6 +1,12 @@
 {
   "input": "catalogues/catalogue_expanded_master.fits",
   "output_fits": "analysis_products/expanded_selection_function.fits",
+  "gaiaunlimited_model": "DR3RVSSelectionFunction",
+  "gaiaunlimited_version": "0.3.2",
+  "healpix_order": 5,
+  "healpix_nside": 32,
+  "parent_count_nan_encoded_as_zero": true,
+  "low_parent_count_threshold": 10,
   "sf_floor": 0.02,
   "n_rows": 20829,
   "n_invalid_sf": 830,
@@ -14,7 +20,11 @@
       "sf_value_p50": 0.5,
       "sf_value_p84": 0.8571428571428571,
       "sum_inverse_sf_weight": 37256.256823883596,
-      "median_inverse_sf_weight": 2.0
+      "median_inverse_sf_weight": 2.0,
+      "n_low_parent_count": 17204,
+      "frac_low_parent_count_pct": 86.02430121506076,
+      "sum_inverse_sf_weight_low_parent_count": 33286.57261904761,
+      "frac_inverse_sf_weight_low_parent_count_pct": 89.34491936857391
     },
     {
       "sample": "Tier A",
@@ -25,7 +35,11 @@
       "sf_value_p50": 0.6666666666666666,
       "sf_value_p84": 0.9285714285714286,
       "sum_inverse_sf_weight": 435.65864165309813,
-      "median_inverse_sf_weight": 1.5
+      "median_inverse_sf_weight": 1.5,
+      "n_low_parent_count": 220,
+      "frac_low_parent_count_pct": 80.2919708029197,
+      "sum_inverse_sf_weight_low_parent_count": 377.5789682539683,
+      "frac_inverse_sf_weight_low_parent_count_pct": 86.66853636169188
     },
     {
       "sample": "Tier B",
@@ -36,7 +50,11 @@
       "sf_value_p50": 0.5,
       "sf_value_p84": 0.8571428571428571,
       "sum_inverse_sf_weight": 408.3697810787555,
-      "median_inverse_sf_weight": 2.0
+      "median_inverse_sf_weight": 2.0,
+      "n_low_parent_count": 208,
+      "frac_low_parent_count_pct": 87.76371308016877,
+      "sum_inverse_sf_weight_low_parent_count": 374.0269841269841,
+      "frac_inverse_sf_weight_low_parent_count_pct": 91.59026976456215
     },
     {
       "sample": "Tier C",
@@ -47,7 +65,11 @@
       "sf_value_p50": 0.5,
       "sf_value_p84": 0.8571428571428571,
       "sum_inverse_sf_weight": 2324.0259010213563,
-      "median_inverse_sf_weight": 2.0
+      "median_inverse_sf_weight": 2.0,
+      "n_low_parent_count": 1088,
+      "frac_low_parent_count_pct": 86.28072957969866,
+      "sum_inverse_sf_weight_low_parent_count": 2079.1261904761905,
+      "frac_inverse_sf_weight_low_parent_count_pct": 89.46226414957174
     },
     {
       "sample": "Tier A+B",
@@ -58,7 +80,11 @@
       "sf_value_p50": 0.6666666666666666,
       "sf_value_p84": 0.8999999999999999,
       "sum_inverse_sf_weight": 844.0284227318537,
-      "median_inverse_sf_weight": 1.5
+      "median_inverse_sf_weight": 1.5,
+      "n_low_parent_count": 428,
+      "frac_low_parent_count_pct": 83.7573385518591,
+      "sum_inverse_sf_weight_low_parent_count": 751.6059523809524,
+      "frac_inverse_sf_weight_low_parent_count_pct": 89.04983909762672
     },
     {
       "sample": "Tier A+B+C",
@@ -69,7 +95,112 @@
       "sf_value_p50": 0.5,
       "sf_value_p84": 0.875,
       "sum_inverse_sf_weight": 3168.0543237532097,
-      "median_inverse_sf_weight": 2.0
+      "median_inverse_sf_weight": 2.0,
+      "n_low_parent_count": 1516,
+      "frac_low_parent_count_pct": 85.55304740406321,
+      "sum_inverse_sf_weight_low_parent_count": 2830.7321428571427,
+      "frac_inverse_sf_weight_low_parent_count_pct": 89.35238646739997
+    }
+  ],
+  "low_parent_count_audit": [
+    {
+      "sample": "candidate_pool",
+      "region": "full",
+      "N": 20829,
+      "N_valid": 19999,
+      "sum_inv_S": 37256.256823883596,
+      "f_n_lt10_pct": 86.02430121506076,
+      "n_lt10_count": 17204,
+      "f_sum_n_lt10_pct": 89.34491936857391,
+      "sum_inv_S_n_lt10": 33286.57261904761
+    },
+    {
+      "sample": "TierA",
+      "region": "full",
+      "N": 276,
+      "N_valid": 274,
+      "sum_inv_S": 435.65864165309813,
+      "f_n_lt10_pct": 80.2919708029197,
+      "n_lt10_count": 220,
+      "f_sum_n_lt10_pct": 86.66853636169188,
+      "sum_inv_S_n_lt10": 377.5789682539683
+    },
+    {
+      "sample": "TierB",
+      "region": "full",
+      "N": 241,
+      "N_valid": 237,
+      "sum_inv_S": 408.3697810787555,
+      "f_n_lt10_pct": 87.76371308016877,
+      "n_lt10_count": 208,
+      "f_sum_n_lt10_pct": 91.59026976456215,
+      "sum_inv_S_n_lt10": 374.0269841269841
+    },
+    {
+      "sample": "TierC",
+      "region": "full",
+      "N": 1318,
+      "N_valid": 1261,
+      "sum_inv_S": 2324.0259010213563,
+      "f_n_lt10_pct": 86.28072957969866,
+      "n_lt10_count": 1088,
+      "f_sum_n_lt10_pct": 89.46226414957174,
+      "sum_inv_S_n_lt10": 2079.1261904761905
+    },
+    {
+      "sample": "TierAB",
+      "region": "full",
+      "N": 517,
+      "N_valid": 511,
+      "sum_inv_S": 844.0284227318537,
+      "f_n_lt10_pct": 83.7573385518591,
+      "n_lt10_count": 428,
+      "f_sum_n_lt10_pct": 89.04983909762672,
+      "sum_inv_S_n_lt10": 751.6059523809524
+    },
+    {
+      "sample": "TierABC",
+      "region": "full",
+      "N": 1835,
+      "N_valid": 1772,
+      "sum_inv_S": 3168.0543237532097,
+      "f_n_lt10_pct": 85.55304740406321,
+      "n_lt10_count": 1516,
+      "f_sum_n_lt10_pct": 89.35238646739997,
+      "sum_inv_S_n_lt10": 2830.7321428571427
+    },
+    {
+      "sample": "TierA",
+      "region": "inner_l330_30",
+      "N": 35,
+      "N_valid": 34,
+      "sum_inv_S": 47.01007683485125,
+      "f_n_lt10_pct": 58.8235294117647,
+      "n_lt10_count": 20,
+      "f_sum_n_lt10_pct": 66.1526523508204,
+      "sum_inv_S_n_lt10": 31.098412698412698
+    },
+    {
+      "sample": "TierAB",
+      "region": "inner_l330_30",
+      "N": 79,
+      "N_valid": 78,
+      "sum_inv_S": 122.6307996967082,
+      "f_n_lt10_pct": 66.66666666666667,
+      "n_lt10_count": 52,
+      "f_sum_n_lt10_pct": 73.83823062587702,
+      "sum_inv_S_n_lt10": 90.54841269841269
+    },
+    {
+      "sample": "TierABC",
+      "region": "inner_l330_30",
+      "N": 715,
+      "N_valid": 664,
+      "sum_inv_S": 1260.0641596311666,
+      "f_n_lt10_pct": 82.68072289156626,
+      "n_lt10_count": 549,
+      "f_sum_n_lt10_pct": 85.18459535185453,
+      "sum_inv_S_n_lt10": 1073.3805555555555
     }
   ]
 }

@@ -1,4 +1,4 @@
-"""expanded-catalogue Sgr A* approacher refinement.
+"""Phase 14Q -- expanded-catalogue Sgr A* approacher refinement.
 
 This reruns the Sgr A* close-approach Monte Carlo for the expanded
 parent-complete Tier A+B+C catalogue.  Candidate seeds are selected from
@@ -22,14 +22,15 @@ import refine_sgra_event_candidates as base
 
 
 REPO = Path(__file__).resolve().parents[1]
-OUT = REPO / "analysis_products"
-MASTER = REPO / "catalogues/catalogue_expanded_master.fits"
-ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
-SRC = REPO / "external/slow_stars_expanded_candidates_vgrf50.csv"
+BUNDLE = REPO
+OUT = BUNDLE / "analysis_products"
+MASTER = BUNDLE / "catalogues" / "catalogue_expanded_master.fits"
+ORBITS = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.fits"
+SRC = REPO / "data/slow_stars_expanded_candidates_vgrf50.csv"
 
 
 def log(message: str) -> None:
-    print(f"[expanded-sgra t={time.time() - T0:7.1f}s] {message}", flush=True)
+    print(f"[14Q-expanded-SgrA t={time.time() - T0:7.1f}s] {message}", flush=True)
 
 
 def clean_tier(series: pd.Series) -> pd.Series:
@@ -171,7 +172,7 @@ def main(argv: list[str] | None = None) -> int:
         "n_P_lt_100pc_gt_0p1": int(np.sum(summary_df["interp_P_lt_100pc"] > 0.1)),
     }
     payload = {
-        "product": "expanded_sgra_refinement",
+        "phase": "14Q",
         "created_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "expanded_catalogue": str(ORBITS),
         "n_realisations_per_candidate": int(args.n_samp),

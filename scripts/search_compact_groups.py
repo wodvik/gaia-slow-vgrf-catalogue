@@ -1,4 +1,4 @@
-"""present-day compact-group sanity check.
+"""Phase 14P -- present-day compact-group sanity check.
 
 This checks whether the slow-Vgrf catalogue contains an obvious open/globular
 cluster-like aggregate at the present epoch. It uses the released catalogue
@@ -22,7 +22,7 @@ from sklearn.cluster import DBSCAN
 REPO = Path(__file__).resolve().parents[1]
 CATALOGUE = REPO / "catalogues/catalogue_expanded_master.fits"
 ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
-OUT_DIR = REPO / "analysis_products"
+OUT_DIR = REPO / "phase14"
 
 G_PC_MSUN_KMS2 = 0.00430091
 
@@ -213,7 +213,7 @@ def write_csv(path: Path, rows: list[dict], fieldnames: list[str] | None = None)
 
 def write_markdown(path: Path, summaries: list[dict], group_rows: list[dict]) -> None:
     lines = [
-        "# Compact-group search",
+        "# Phase 14P compact-group search",
         "",
         "Purpose: check whether the slow-Vgrf release catalogue contains an obvious",
         "present-day open/globular-cluster-like aggregate.",

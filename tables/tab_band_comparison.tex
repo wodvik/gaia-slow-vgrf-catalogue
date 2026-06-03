@@ -1,4 +1,4 @@
-﻿\begin{center}
+\begin{center}
 \refstepcounter{table}\label{tab:band_comparison}
 \begin{minipage}{\columnwidth}
 \small\textbf{Table \thetable.} Matched-control comparison across
@@ -11,23 +11,22 @@ ultraharmonic) within $\pm 0.3$.
 \end{minipage}
 \vspace{0.4ex}
 
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lrrrrr}
+\small
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lrrrrr@{}}
 \hline\hline
-Sample & $N$ & Median $\Rperi$ & Median $\Rapo$ & OLR (\%) & 4{:}1 (\%) \\
-       &     & (pc)            & (kpc)          &           &              \\
+Sample & $N$ & $\Rperi$ & $\Rapo$ & OLR & 4{:}1 \\
 \hline
-slow Tier~A+B+C        & 1{,}835 & 117 & 7.4 & 1.85 & 1.80 \\
-control $25$--$50\,\kms$  & 1{,}955 & 140 & 3.2 & 1.09 & 0.29 \\
-control $50$--$100\,\kms$ & 2{,}586 & 428 & 3.7 & 0.51 & 0.57 \\
-control $100$--$200\,\kms$& 2{,}788 & 1{,}397 & 4.0 & 2.55 & 0.96 \\
-control $200$--$260\,\kms$& 2{,}749 & 2{,}260 & 4.8 & 2.93 & 1.22 \\
+slow A+B+C             & 1{,}835 & 112 & 7.4 & 1.85 & 1.80 \\
+25--50                 & 1{,}955 & 140 & 3.2 & 1.09 & 0.29 \\
+50--100                & 2{,}586 & 428 & 3.7 & 0.51 & 0.57 \\
+100--200               & 2{,}788 & 1{,}397 & 4.0 & 2.55 & 0.96 \\
+200--260               & 2{,}749 & 2{,}260 & 4.8 & 2.93 & 1.22 \\
 \hline
-\end{tabular}}
+\end{tabular}
 \par\smallskip
-\scriptsize The slow row uses the parent-complete Tier~A+B+C
-catalogue. Control rows use the same integrated control catalogues
-re-weighted against the slow-sample observability marginals.
+\footnotesize Control-row labels are $\vgrf$ bands in \kms; $\Rperi$ is
+in pc and $\Rapo$ is in kpc. The slow row uses the parent-complete
+Tier~A+B+C catalogue. Control rows use the same integrated control
+catalogues re-weighted against the slow-sample observability marginals.
 \end{center}

@@ -1,27 +1,29 @@
-﻿\begin{table*}[!htbp]
-\centering
-\caption{Present-day compact-group search for the low-\vgrf{}
-catalogue.  Separations are computed in 3D Galactocentric position
-using the adopted default distances and Solar frame.
-\label{tab:cluster_search}}
+\begin{center}
+\refstepcounter{table}\label{tab:cluster_search}
+\begin{minipage}{\columnwidth}
+\small\textbf{Table \thetable.} DBSCAN present-day compact-group sensitivity grid for the low-\vgrf{} catalogue.  Entries give the number of compact groups found in 3D Galactocentric position space for Tier~A+B / Tier~A+B+C.
+\end{minipage}
+\vspace{0.4ex}
+
 \scriptsize
-\setlength{\tabcolsep}{8pt}
-\begin{tabular}{lrrrr}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
 \hline\hline
-Sample & $N$ & Closest pair (pc) & Pairs $<25$ pc & Compact groups \\
+$\varepsilon$ (pc) & \multicolumn{5}{c}{\texttt{min\_samples}} \\
+\cline{2-6}
+ & 3 & 4 & 5 & 7 & 10 \\
 \hline
-Tier A+B & 517 & 38.9 & 0 & 0 \\
-Tier A+B+C & 1{,}835 & 20.2 & 3 & 0 \\
+5  & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+10 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+15 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+25 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+50 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
 \hline
 \end{tabular}
 \vspace{0.5ex}
 
-\begin{minipage}{0.92\textwidth}
+\begin{minipage}{0.95\columnwidth}
 \footnotesize
-\textit{Note.} Compact groups are DBSCAN/FoF detections with at least
-three members under open-cluster-like position--velocity thresholds
-($<25$ pc and $<5$\kms), plus more permissive checks out to 100 pc
-and 10\kms{} for at least five members. The Tier~A+B+C sample
-contains three close pairs below 25 pc, but no compact multi-member group.
+\textit{Note.} The search uses the \citet{Ester1996} DBSCAN algorithm in present-day 3D Galactocentric position space, with $\varepsilon$ varied from 5 to 50\,pc and \texttt{min\_samples} from 3 to 10.  The paired entries are Tier~A+B / Tier~A+B+C group counts.  The closest Tier~A+B pair is 38.9\,pc, while Tier~A+B+C contains three pairs below 25\,pc but no three-member group at any grid point.  This grid follows the parameter-sensitivity guidance of \citet{Schubert2017}.
 \end{minipage}
-\end{table*}
+\end{center}

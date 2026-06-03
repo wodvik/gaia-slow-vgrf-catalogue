@@ -110,6 +110,7 @@ not observables.
 | `J_R`, `J_z`, `J_phi` | kpc km/s | AGAMA Staeckel-fudge radial, vertical, and azimuthal actions in the static potential. |
 | `Omega_R`, `Omega_z`, `Omega_phi` | km/s/kpc | AGAMA radial, vertical, and azimuthal orbital frequencies in the static potential. |
 | `res_ratio_OmegaR_over_dPhi` | dimensionless | Resonance diagnostic `Omega_R/(Omega_phi - Omega_p)` evaluated relative to the default bar pattern speed. |
+| `barred_ftlyap_norm` | dimensionless | Finite-time Lyapunov indicator from the default barred Hunter/Sormani integration at `|Omega_p|=37.5 km/s/kpc`. Values are populated for the WP-5 chaos-diagnostic subset and `NaN` otherwise; values of order unity indicate strongly chaotic finite-time behaviour in Agama's convention. |
 
 ## Orbit Monte Carlo Catalogue
 
@@ -151,5 +152,7 @@ These columns appear in:
 | `bp_rp` | mag | Gaia BP-RP colour supplied as the GaiaUnlimited colour coordinate; missing colours are filled with the finite catalogue median for evaluation. |
 | `sf_value` | dimensionless | Castro-Ginard et al. (2023) Gaia DR3 RVS selection-function value returned by GaiaUnlimited. |
 | `sf_weight` | dimensionless | Contextual inverse-selection weight, computed as `1/max(sf_value, 0.02)` for finite values. |
+| `sf_parent_count` | none | GaiaUnlimited DR3-RVS parent count `n` in the source's nearest `(HEALPix, G_RVS, BP-RP)` cell. Cells absent from the GaiaUnlimited `dr3-rvs-nk.h5` grid are encoded as `0`, matching the `p=0.5` prior-mean fill used for `sf_value`. |
+| `sf_prior_dominated_n_lt10` | boolean | True when `sf_parent_count < 10`; this is the per-source flag used to reproduce the low-parent-count fractions in Table `tab_selection_function`. |
 | `sf_invalid` | boolean | True when GaiaUnlimited returned a non-finite selection-function value for the source. |
 | `P_vgrf_below_25` | dimensionless | Monte Carlo probability that `Vgrf < 25 km/s`, copied from the master catalogue. |

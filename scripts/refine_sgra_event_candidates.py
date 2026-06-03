@@ -1,14 +1,14 @@
-"""Sgr A* event-minimum cadence refinement.
+"""Phase 14D -- Sgr A* event-minimum cadence refinement.
 
 Reviewer concern:
     The Sgr A* approacher counts were measured from sampled trajectory
     outputs. Even at 0.1 Myr cadence, a close passage could fall between
-    samples. This script repeats the four-candidate earlier Sgr A* MC locally and
+    samples. This script repeats the four-candidate Phase 6 MC locally and
     compares each sampled-grid minimum with a three-point quadratic
     interpolation of r_sph^2(t) around the sampled minimum.
 
-No Gaia query is made. Inputs are staged intermediate products and the
-same source CSV used by the release build.
+No Gaia query is made. Inputs are the staged Phase 1/4/6 products and the
+same source CSV used by the review-stage release.
 
 Outputs
 -------
@@ -35,10 +35,11 @@ from astropy.table import Table
 
 
 REPO = Path(__file__).resolve().parents[1]
-CONFIG = yaml.safe_load((REPO / "config.yml").read_text())
-OUT = REPO / "analysis_products"
+BUNDLE = REPO
+CONFIG = yaml.safe_load((BUNDLE / "config.yml").read_text())
+OUT = BUNDLE / "analysis_products"
 OUT.mkdir(parents=True, exist_ok=True)
-WORK = REPO / "external/hunter24_workdir"
+WORK = REPO / "phase3_agama/_hunter24_workdir"
 
 OMEGA_P = -float(CONFIG["bar_pattern_speeds_kms_kpc"]["default"])
 ANGLE_BAR = -0.44
@@ -59,7 +60,7 @@ CANDIDATES = [
 
 
 def log(message: str) -> None:
-    print(f"[sgra-refinement t={time.time() - T0:7.1f}s] {message}", flush=True)
+    print(f"[14D-SgrA t={time.time() - T0:7.1f}s] {message}", flush=True)
 
 
 def decode_tier(s: pd.Series) -> pd.Series:
@@ -292,8 +293,8 @@ def summarize_candidate(draws: pd.DataFrame, deterministic: pd.DataFrame | None 
 
 def load_catalogues() -> tuple[pd.DataFrame, pd.DataFrame]:
     src = pd.read_csv(REPO / CONFIG["input"]["source_csv"])
-    zp = Table.read(REPO / "external/catalogue_zpcorr.fits").to_pandas()
-    dist = Table.read(REPO / "external/catalogue_dist.fits").to_pandas()
+    zp = Table.read(REPO / "phase1/catalogue_zpcorr.fits").to_pandas()
+    dist = Table.read(REPO / "phase1/catalogue_dist.fits").to_pandas()
     df_all = (
         src.merge(zp[["source_id", "parallax_zpcorr"]], on="source_id")
         .merge(
@@ -302,16 +303,16 @@ def load_catalogues() -> tuple[pd.DataFrame, pd.DataFrame]:
         )
     )
 
-    orbits = Table.read(REPO / "external/catalogue_v2_orbits.fits").to_pandas()
+    orbits = Table.read(REPO / "phase4/catalogue_v2_orbits.fits").to_pandas()
     orbits["tier"] = decode_tier(orbits["tier"])
     return df_all, orbits
 
 
 def write_markdown(summary: dict, summary_df: pd.DataFrame) -> None:
     lines = [
-        "# Sgr A* event-minimum refinement",
+        "# Phase 14D Sgr A* Event-Minimum Refinement",
         "",
-        f"- Method: 0.1 Myr earlier Sgr A* trajectory grid plus three-point quadratic interpolation of r_sph^2(t) around each sampled minimum.",
+        f"- Method: 0.1 Myr Phase 6 trajectory grid plus three-point quadratic interpolation of r_sph^2(t) around each sampled minimum.",
         f"- MC realisations per candidate: {summary['n_realisations_per_candidate']}",
         f"- Integration span: {TIME_GYR:.1f} Gyr; grid cadence: {DT_MYR:.1f} Myr.",
         f"- Strict P(<10 pc)>0.5 confirmed count: grid {summary['counts']['grid_n_P_lt_10pc_gt_0p5']}, interpolated {summary['counts']['interp_n_P_lt_10pc_gt_0p5']}.",
@@ -356,7 +357,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--skip-deterministic",
         action="store_true",
-        help="skip point-estimate refinement from earlier orbit initial conditions",
+        help="skip point-estimate refinement from Phase 4 initial conditions",
     )
     args = parser.parse_args(argv)
 
@@ -367,8 +368,8 @@ def main(argv: list[str] | None = None) -> int:
     log(f"n_samp={args.n_samp}, chunk_size={args.chunk_size}, trajsize={TRAJSIZE}")
 
     df_all, orbits = load_catalogues()
-    legacy_sgra_mc = json.loads((REPO / "external/sgrA_candidate_mc.json").read_text())
-    legacy_sgra_mc_by_sid = {int(r["source_id"]): r for r in legacy_sgra_mc["candidates"]}
+    phase6 = json.loads((REPO / "phase6/sgrA_candidate_mc.json").read_text())
+    phase6_by_sid = {int(r["source_id"]): r for r in phase6["candidates"]}
 
     pot_axi = agama.Potential(file=str(WORK / "MWPotentialHunter24_axi.ini"))
     pot_full = agama.Potential(file=str(WORK / "MWPotentialHunter24_full.ini"))
@@ -412,15 +413,15 @@ def main(argv: list[str] | None = None) -> int:
         sub = draws_df.loc[draws_df["source_id"] == sid].reset_index(drop=True)
         det = det_df.loc[det_df["source_id"] == sid].reset_index(drop=True) if len(det_df) else None
         row = summarize_candidate(sub, det)
-        p6 = legacy_sgra_mc_by_sid[sid]
+        p6 = phase6_by_sid[sid]
         row.update(
             {
-                "legacy_sgra_mc_P_lt_10pc": float(p6["P_lt_10pc"]),
-                "legacy_sgra_mc_P_lt_100pc": float(p6["P_lt_100pc"]),
-                "legacy_sgra_mc_min_rsph_pc_p50": float(p6["min_rsph_pc_p50"]),
-                "grid_minus_legacy_sgra_mc_P_lt_10pc": row["grid_P_lt_10pc"] - float(p6["P_lt_10pc"]),
-                "grid_minus_legacy_sgra_mc_P_lt_100pc": row["grid_P_lt_100pc"] - float(p6["P_lt_100pc"]),
-                "grid_minus_legacy_sgra_mc_p50_pc": row["grid_min_rsph_pc_p50"] - float(p6["min_rsph_pc_p50"]),
+                "phase6_P_lt_10pc": float(p6["P_lt_10pc"]),
+                "phase6_P_lt_100pc": float(p6["P_lt_100pc"]),
+                "phase6_min_rsph_pc_p50": float(p6["min_rsph_pc_p50"]),
+                "grid_minus_phase6_P_lt_10pc": row["grid_P_lt_10pc"] - float(p6["P_lt_10pc"]),
+                "grid_minus_phase6_P_lt_100pc": row["grid_P_lt_100pc"] - float(p6["P_lt_100pc"]),
+                "grid_minus_phase6_p50_pc": row["grid_min_rsph_pc_p50"] - float(p6["min_rsph_pc_p50"]),
             }
         )
         summaries.append(row)
@@ -431,10 +432,10 @@ def main(argv: list[str] | None = None) -> int:
     counts = {
         "grid_n_P_lt_10pc_gt_0p5": int(np.sum(summary_df["grid_P_lt_10pc"] > 0.5)),
         "interp_n_P_lt_10pc_gt_0p5": int(np.sum(summary_df["interp_P_lt_10pc"] > 0.5)),
-        "legacy_sgra_mc_n_P_lt_10pc_gt_0p5": int(legacy_sgra_mc["n_confirmed_lt_10pc_P_gt_0p5"]),
+        "phase6_n_P_lt_10pc_gt_0p5": int(phase6["n_confirmed_lt_10pc_P_gt_0p5"]),
         "grid_n_P_lt_100pc_gt_0p5": int(np.sum(summary_df["grid_P_lt_100pc"] > 0.5)),
         "interp_n_P_lt_100pc_gt_0p5": int(np.sum(summary_df["interp_P_lt_100pc"] > 0.5)),
-        "legacy_sgra_mc_n_P_lt_100pc_gt_0p5": int(legacy_sgra_mc["n_confirmed_lt_100pc_P_gt_0p5"]),
+        "phase6_n_P_lt_100pc_gt_0p5": int(phase6["n_confirmed_lt_100pc_P_gt_0p5"]),
     }
     interpretation = (
         "Quadratic interpolation only decreases or preserves the sampled-grid "
@@ -444,16 +445,16 @@ def main(argv: list[str] | None = None) -> int:
         "the <100 pc count as a soft inner-Galaxy approach statistic rather "
         "than a strict Sgr A* passage claim."
     )
-    if counts["interp_n_P_lt_100pc_gt_0p5"] == counts["legacy_sgra_mc_n_P_lt_100pc_gt_0p5"]:
-        interpretation += " The P(<100 pc)>0.5 candidate count is unchanged from the legacy Sgr A* Monte Carlo."
+    if counts["interp_n_P_lt_100pc_gt_0p5"] == counts["phase6_n_P_lt_100pc_gt_0p5"]:
+        interpretation += " The P(<100 pc)>0.5 candidate count is unchanged from Phase 6."
     else:
         interpretation += (
-            " The P(<100 pc)>0.5 candidate count differs from the legacy Sgr A* Monte Carlo because "
+            " The P(<100 pc)>0.5 candidate count differs from Phase 6 because "
             "one marginal candidate sits on the 100 pc boundary."
         )
 
     summary = {
-        "product": "sgra_event_refinement",
+        "phase": "14D",
         "created_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "method": "three-point quadratic interpolation of r_sph^2(t) around each 0.1 Myr sampled minimum",
         "uses_existing_repo_data_only": True,

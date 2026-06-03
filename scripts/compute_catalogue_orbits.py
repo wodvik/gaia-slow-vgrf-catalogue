@@ -3,10 +3,12 @@ Expanded-catalogue point-estimate orbit integration.
 
 Run under WSL, where AGAMA is installed:
 
-    wsl -- python3 scripts/compute_catalogue_orbits.py
+    python3 scripts/compute_catalogue_orbits.py
 
-This integrates the expanded Tier A+B+C sample in the Hunter+2024 static and
-barred potentials used by the manuscript.
+This integrates the expanded Tier A+B+C sample from Phase 0E in the same
+Hunter+2024 static and barred potentials used by the manuscript's v2 Phase 4.
+The cylindrical pericentre is read from the parabola-interpolated minimum at
+dR=0, with trajsize=40001 as the trajectory readout backstop.
 """
 
 from __future__ import annotations
@@ -26,29 +28,29 @@ from astropy.table import Table
 import agama
 
 
-REPO = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = (
-    Path("/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
-    if platform.system().lower() == "linux"
-    else Path("D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
-)
+if platform.system().lower() == "linux":
+    REPO = Path(__file__).resolve().parents[1]
+    DEFAULT_INPUT = Path("/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
+else:
+    REPO = Path(__file__).resolve().parents[1]
+    DEFAULT_INPUT = Path("D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv")
 
 CONFIG = yaml.safe_load((REPO / "config.yml").read_text())
 OUT = REPO / "catalogues"
-WORK = REPO / "external/hunter24_workdir"
+WORK = REPO / "phase3_agama/_hunter24_workdir"
 
 DEFAULT_SOLAR = CONFIG["solar_variants"]["default"]
 OMEGA_P_DEFAULT = -float(CONFIG["bar_pattern_speeds_kms_kpc"]["default"])
 ANGLE_BAR = -0.44
 GYR_TO_AGAMA = 1.0 / 0.9778
 T_INTEGRATE = 4.0 * GYR_TO_AGAMA
-TRAJ_STEPS = 2001
+TRAJ_STEPS = 40001
 
 agama.setUnits(length=1, mass=1, velocity=1)
 
 
 def log(msg: str) -> None:
-    print(f"[catalogue-orbits t={time.time() - T0:7.1f}s] {msg}", flush=True)
+    print(f"[phase0g t={time.time() - T0:7.1f}s] {msg}", flush=True)
 
 
 def galcen_frame() -> coord.Galactocentric:
@@ -125,6 +127,21 @@ def classify_rvs_quality(df: pd.DataFrame) -> np.ndarray:
     return quality
 
 
+def pmin(R):
+    """Exact pericentre via parabolic interpolation at dR sign-changes."""
+    dR = np.diff(R)
+    idx = np.where((dR[:-1] < 0) & (dR[1:] > 0))[0] + 1
+    best = float(R.min())
+    for k in idx:
+        y0, y1, y2 = R[k-1], R[k], R[k+1]
+        den = y0 - 2*y1 + y2
+        if den > 0:
+            ym = y1 - (y0 - y2)**2 / (8.0*den)
+            if ym < best:
+                best = ym
+    return best
+
+
 def orbit_summary(traj: np.ndarray, pot, omega_p: float) -> dict:
     x, y, z, vx, vy, vz = (traj[:, i] for i in range(6))
     R_cyl = np.sqrt(x * x + y * y)
@@ -136,12 +153,14 @@ def orbit_summary(traj: np.ndarray, pot, omega_p: float) -> dict:
     E_J = E - omega_p * Lz
     dR = np.diff(R_cyl)
     n_peri = int(np.sum((dR[:-1] < 0) & (dR[1:] > 0)))
+    rperi = float(pmin(R_cyl))
+    rapo = float(R_cyl.max())
     return {
-        "R_peri_kpc": float(R_cyl.min()),
-        "R_apo_kpc": float(R_cyl.max()),
+        "R_peri_kpc": rperi,
+        "R_apo_kpc": rapo,
         "z_max_kpc": float(np.abs(z).max()),
         "min_r_sph_kpc": float(r_sph.min()),
-        "ecc": float((R_cyl.max() - R_cyl.min()) / (R_cyl.max() + R_cyl.min())),
+        "ecc": float((rapo - rperi) / (rapo + rperi)),
         "n_peri": n_peri,
         "E_drift_rel": float(abs((E[-1] - E[0]) / E[0])),
         "E_range_rel": float((E.max() - E.min()) / abs(E.mean())),
@@ -264,6 +283,8 @@ def run(args: argparse.Namespace) -> dict:
         "input_csv": str(args.input_csv),
         "output_fits": str(out_path),
         "output_csv": str(csv_path),
+        "trajsize": TRAJ_STEPS,
+        "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0",
         "n_integrated_tierABC": int(len(out)),
         "n_tierAB": int(tier_ab.sum()),
         "n_tierABC": int(tier_abc.sum()),

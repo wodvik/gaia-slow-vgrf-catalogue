@@ -1,24 +1,45 @@
-﻿\begin{center}
+\begin{center}
 \refstepcounter{table}\label{tab:potential}
 \begin{minipage}{\columnwidth}
 \small\textbf{Table \thetable.} Galactic-potential sensitivity for the
 catalogue.  Values use point-estimate integrations for all
-Tier~A+B+C stars; the default row in this table uses the same 1,001-step
-trajectory sampling as the halo-mass variants.
+Tier~A+B+C stars; all rows use the same 40{,}001-point,
+parabola-interpolated trajectory readout.  $N_{\rm bridge}$
+counts stars with $\Rperi<2$\kpc{} and $\Rapo>15$\kpc.
+Barred median pericentres are resolution-limited readouts at this
+sampling; bridger and central-reach counts are the stable barred diagnostics.
 \end{minipage}
 \vspace{0.4ex}
 
-\scriptsize
-\setlength{\tabcolsep}{4pt}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lrrrr}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrr@{}}
 \hline\hline
-Variant & Median $e$ & $e>0.95$ & Median $\Rperi$ & Median $\Rapo$ \\
-        &            & (\%) & (pc) & (\kpc) \\
+Variant & $\tilde e$ & $e>0.95$ (\%) \\
 \hline
-default Hunter+2024 static & 0.961 & 64.1 & 122 & 7.43 \\
-halo mass $0.85\times$ default & 0.960 & 62.0 & 127 & 7.44 \\
-halo mass $1.15\times$ default & 0.962 & 66.1 & 118 & 7.44 \\
+Hunter+2024 static & 0.964 & 67.5 \\
+Halo mass $0.85\times$ & 0.962 & 65.3 \\
+Halo mass $1.15\times$ & 0.965 & 69.2 \\
+Barred $\Omega_p=24$ & 0.996 & 93.7 \\
+Barred $\Omega_p=28$ & 0.996 & 93.0 \\
+Bar angle sweep & $\approx 0.996$ & 91.0--95.4 \\
+Halo flattening sweep & 0.963--0.964 & 65.9--67.8 \\
+Portail+2017 M2M bar & 0.996 & 94.2 \\
 \hline
-\end{tabular}}
+\end{tabular}
+\par\smallskip
+\begin{tabular}{@{}lrrr@{}}
+\hline\hline
+Variant & $\widetilde{\Rperi}$ (pc) & $\widetilde{\Rapo}$ (\kpc) & $N_{\rm br}$ \\
+\hline
+Hunter+2024 static & 112 & 7.43 & 3 \\
+Halo mass $0.85\times$ & 116 & 7.44 & 3 \\
+Halo mass $1.15\times$ & 109 & 7.44 & 3 \\
+Barred $\Omega_p=24$ & $\lesssim 14$ & 8.00 & 6 \\
+Barred $\Omega_p=28$ & $\lesssim 14$ & 8.00 & 6 \\
+Bar angle sweep & $\lesssim 13$--$\lesssim 15$ & 8.30--8.45 & 17--22 \\
+Halo flattening sweep & 112--115 & 7.43--7.45 & 3--3 \\
+Portail+2017 M2M bar & $\lesssim 14$ & 8.42 & 13 \\
+\hline
+\end{tabular}
 \end{center}

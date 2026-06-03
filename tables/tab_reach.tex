@@ -1,30 +1,37 @@
 \begin{center}
 \refstepcounter{table}\label{tab:reach}
-\begin{minipage}{\columnwidth}
+\begin{minipage}{\linewidth}
 \small\textbf{Table \thetable.} Inner-galaxy reach of the Tier~A+B+C
-catalogue ($N=1{,}835$). Counts are point-estimate diagnostics for stars
-with small pericentre, very small minimum spherical distance, and
+catalogue ($N=1{,}835$). Counts are 40{,}001-point, parabola-interpolated
+point-estimate diagnostics for stars
+with small cylindrical in-plane pericentre $\Rperi=\min\sqrt{x^2+y^2}$,
+very small minimum spherical Galactocentric distance $r_{\rm sph}$, and
 "extreme reach" trajectories spanning the disc-to-halo radial range; the
 Monte Carlo orbit summary is reported separately in
-Table~\ref{tab:orbit_summary}. The bridger count
-($\Rperi<2$\,kpc \& $\Rapo>15$\,kpc) is integrated under the
-Hunter+2024 static and barred potentials.
+Table~\ref{tab:orbit_summary}. The Static and Barred columns integrate
+under the Hunter+2024 static and barred potentials respectively; the
+Portail+2017 column uses the made-to-measure inner-Galaxy barred
+potential (Sormani-Vasiliev Agama recipe) rotated at $\Omega_p=37.5$\,km
+s$^{-1}$ kpc$^{-1}$ to bracket the bridger count against an independent
+gravitational background. Bridger-row uncertainties are Gehrels (1986)
+Poisson 68\% intervals. The barred median pericentre readout remains
+sampling-sensitive at tens-of-pc scales, so threshold counts are the more
+stable barred inner-reach diagnostic.
 \end{minipage}
 \vspace{0.4ex}
 
-\scriptsize
-\setlength{\tabcolsep}{4pt}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lrr}
+\small
+\setlength{\tabcolsep}{0pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
 \hline\hline
-Reach diagnostic & Static & Barred \\
+Diagnostic & Static & Hunter+24 & Portail+17 \\
 \hline
-$\Rperi<100$\,pc                                 & 789 & 1{,}226 \\
-$\Rperi<50$\,pc                                  & 421 & 660 \\
-$\Rperi<10$\,pc                                  & 58  & 39  \\
-Min $r_{\rm sph}<100$\,pc                        & 172 & 270 \\
-Min $r_{\rm sph}<10$\,pc                         & 0   & 0   \\
-Bridgers ($\Rperi<2$\,kpc \& $\Rapo>15$\,kpc)    & 3   & 22 \\
+$\Rperi<100$\,pc          & 824                & 1{,}543            & 1{,}571 \\
+$\Rperi<50$\,pc           & 453                & 1{,}431            & 1{,}469 \\
+$\Rperi<10$\,pc           & 88                 & 629                & 607 \\
+Min $r_{\rm sph}<100$\,pc & 252                & 760                & 721 \\
+Min $r_{\rm sph}<10$\,pc  & 4                  & 7                  & 3 \\
+Bridgers                  & $3^{+2.9}_{-1.6}$  & $22^{+5.7}_{-4.6}$ & $13^{+4.7}_{-3.6}$ \\
 \hline
-\end{tabular}}
+\end{tabular*}
 \end{center}

@@ -1,9 +1,9 @@
 """
 Expanded-candidate point-estimate and MC tiering pass.
 
-This script takes the Bailer-Jones distance-screened expanded candidate table, recomputes exact
+This script takes the Phase 0D expanded candidate table, recomputes exact
 Astropy Galactocentric point-estimate Vgrf values, and assigns
-P(Vgrf < 25 km/s) tiers using the adaptive velocity-tiering schedule:
+P(Vgrf < 25 km/s) tiers using the same adaptive schedule as Phase 1D:
 
   - 500 realisations for all expanded candidates
   - 5000 realisations for base-pass P in (0.30, 0.70)
@@ -28,7 +28,7 @@ import astropy.units as u
 
 
 REPO = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = REPO / "release" / "data" / "slow_stars_expanded_candidates_vgrf50.csv"
+DEFAULT_INPUT = REPO / "data" / "slow_stars_expanded_candidates_vgrf50.csv"
 DEFAULT_OUT_DIR = Path("D:/GAIA/parent_scan")
 
 VGRF_CUT = 25.0

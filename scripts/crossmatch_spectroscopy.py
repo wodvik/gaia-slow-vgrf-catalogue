@@ -1,4 +1,4 @@
-"""full expanded APOGEE/GALAH spectroscopic cross-match.
+"""Phase 14W -- full expanded APOGEE/GALAH spectroscopic cross-match.
 
 Queries VizieR TAP for the full 20,829-source expanded candidate pool
 using exact Gaia EDR3/DR3 source identifiers. Results are checkpointed

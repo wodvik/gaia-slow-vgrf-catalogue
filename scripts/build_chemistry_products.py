@@ -1,10 +1,10 @@
-"""expanded catalogue chemistry synchronization.
+"""Phase 14U -- expanded catalogue chemistry synchronization.
 
 This pass keeps the expanded paper internally synchronized with the full
-APOGEE/GALAH cross-match when available, falling back to the
+Phase 14W APOGEE/GALAH cross-match when available, falling back to the
 legacy cached matches only if the full expanded files are absent.
 
-Outputs are written under analysis_products so the cached chemistry
+Outputs are written under phase14 so the legacy Phase 5
 products remain intact and auditable.
 """
 from __future__ import annotations
@@ -21,12 +21,12 @@ OUT = REPO / "analysis_products"
 OUT.mkdir(parents=True, exist_ok=True)
 
 MASTER = REPO / "catalogues/catalogue_expanded_master.fits"
-SRC = REPO / "external/slow_stars_expanded_candidates_vgrf50.csv"
+SRC = REPO / "data/slow_stars_expanded_candidates_vgrf50.csv"
 XDIR = REPO / "analysis_products/expanded_spectroscopic_crossmatch"
 APOGEE = XDIR / "apogee_dr17_expanded_crossmatch.csv"
 GALAH = XDIR / "galah_dr3_expanded_crossmatch.csv"
-APOGEE_FALLBACK = REPO / "external/crossmatch_apogee.csv"
-GALAH_FALLBACK = REPO / "external/crossmatch_galah.csv"
+APOGEE_FALLBACK = REPO / "data/crossmatch_apogee.csv"
+GALAH_FALLBACK = REPO / "data/crossmatch_galah.csv"
 
 
 def decode_strings(df: pd.DataFrame) -> pd.DataFrame:
@@ -189,7 +189,7 @@ def main() -> int:
             "tier_ABC_with_finite_alpha": int(alpha_mask.sum()),
             "tier_ABC_APOGEE_rows": int(((spec["survey"] == "APOGEE") & spec["tier"].isin(["A", "B", "C"])).sum()),
             "tier_ABC_GALAH_rows": int(((spec["survey"] == "GALAH") & spec["tier"].isin(["A", "B", "C"])).sum()),
-            "note": "APOGEE/GALAH rows come from the full expanded exact-source-id APOGEE/GALAH crossmatch." if (APOGEE.exists() and GALAH.exists()) else "APOGEE/GALAH rows are cached legacy crossmatches; they are synchronized to expanded tiers but are not a complete expanded-catalogue crossmatch.",
+            "note": "APOGEE/GALAH rows come from the full expanded Phase 14W exact-source-id crossmatch." if (APOGEE.exists() and GALAH.exists()) else "APOGEE/GALAH rows are cached legacy crossmatches; they are synchronized to expanded tiers but are not a complete expanded-catalogue crossmatch.",
         },
         "alpha_subsample": {
             "n": int(alpha_mask.sum()),

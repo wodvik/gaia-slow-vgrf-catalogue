@@ -1,4 +1,4 @@
-"""expanded potential sensitivity table.
+"""Phase 14V -- expanded potential sensitivity table.
 
 Runs compact point-estimate sensitivity checks from the expanded
 Tier A+B+C orbit initial conditions:
@@ -8,7 +8,7 @@ Tier A+B+C orbit initial conditions:
 * barred Hunter/Sormani variants at Omega_p = 33, 37.5, 41 km/s/kpc
 
 This is intentionally a table-level sensitivity pass, not a replacement
-for the full earlier Sgr A* posterior orbit battery.
+for the full Phase 6 posterior orbit battery.
 """
 from __future__ import annotations
 
@@ -20,17 +20,33 @@ import numpy as np
 import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
-OUT = REPO / "analysis_products"
-WORK = REPO / "external/hunter24_workdir"
-IN = REPO / "catalogues/catalogue_expanded_orbits_tierABC.csv"
+BUNDLE = REPO
+OUT = BUNDLE / "analysis_products"
+WORK = REPO / "phase3_agama/_hunter24_workdir"
+IN = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.csv"
 OUT.mkdir(parents=True, exist_ok=True)
 
 GYR = 1.0 / 0.9778
 T_INT = 4.0 * GYR
-TRAJSIZE = 1001
+TRAJSIZE = 40001
 ANGLE_BAR = -0.44
 
 agama.setUnits(length=1, mass=1, velocity=1)
+
+
+def pmin(R):
+    """Exact pericentre via parabolic interpolation at dR sign-changes."""
+    dR = np.diff(R)
+    idx = np.where((dR[:-1] < 0) & (dR[1:] > 0))[0] + 1
+    best = float(R.min())
+    for k in idx:
+        y0, y1, y2 = R[k-1], R[k], R[k+1]
+        den = y0 - 2*y1 + y2
+        if den > 0:
+            ym = y1 - (y0 - y2)**2 / (8.0*den)
+            if ym < best:
+                best = ym
+    return best
 
 
 def reduce_orbits(result, pot=None, omega=None):
@@ -40,12 +56,14 @@ def reduce_orbits(result, pot=None, omega=None):
         x, y, z, vx, vy, vz = (arr[:, j] for j in range(6))
         rcyl = np.sqrt(x * x + y * y)
         rsph = np.sqrt(rcyl * rcyl + z * z)
+        rperi = float(pmin(rcyl))
+        rapo = float(rcyl.max())
         row = {
-            "R_peri_kpc": float(rcyl.min()),
-            "R_apo_kpc": float(rcyl.max()),
+            "R_peri_kpc": rperi,
+            "R_apo_kpc": rapo,
             "z_max_kpc": float(np.abs(z).max()),
             "min_r_sph_kpc": float(rsph.min()),
-            "ecc": float((rcyl.max() - rcyl.min()) / (rcyl.max() + rcyl.min())),
+            "ecc": float((rapo - rperi) / (rapo + rperi)),
         }
         if pot is not None and omega is not None:
             lz = x * vy - y * vx
@@ -112,7 +130,10 @@ def main() -> int:
     summary_rows = []
     for variant, group in all_rows.groupby("variant", sort=False):
         kind = "barred" if variant.startswith("bar_") else "static"
-        summary_rows.append(summarise(variant, kind, group))
+        row = summarise(variant, kind, group)
+        row["trajsize"] = TRAJSIZE
+        row["pericentre_method"] = "parabola-interpolated cylindrical R minimum at dR=0"
+        summary_rows.append(row)
     summary = pd.DataFrame(summary_rows)
     summary.to_csv(OUT / "expanded_potential_sensitivity_summary.csv", index=False)
     (OUT / "expanded_potential_sensitivity_summary.json").write_text(

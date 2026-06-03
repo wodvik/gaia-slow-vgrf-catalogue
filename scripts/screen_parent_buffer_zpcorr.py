@@ -25,7 +25,7 @@ import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
 DEFAULT_BUFFER = Path("D:/GAIA/parent_scan/gaia_parent_buffer_vgrf200_full_dedup.csv")
-DEFAULT_OLD = REPO / "external" / "slow_stars_enriched_orbits.csv"
+DEFAULT_OLD = REPO / "data" / "slow_stars_enriched_orbits.csv"
 DEFAULT_OUT_DIR = Path("D:/GAIA/parent_scan")
 
 K = 4.74047

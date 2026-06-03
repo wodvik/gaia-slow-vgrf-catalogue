@@ -88,7 +88,7 @@ def plot_pvgrf(master: pd.DataFrame) -> None:
     ax.set_ylabel(r"$P(V_\mathrm{GRF}<25\,\mathrm{km\,s}^{-1})$")
     ax.legend(loc="center right", fontsize=5.8, frameon=True)
     fig.tight_layout()
-    save(fig, "fig03_threshold_probability.pdf")
+    save(fig, "fig_phase14_pvgrf_vs_vgrf.pdf")
 
 
 def plot_sky(master: pd.DataFrame) -> None:
@@ -209,7 +209,7 @@ def main() -> int:
         "n_tier_ab": int(master["tier"].isin(["A", "B"]).sum()),
         "n_tier_abc": int(master["tier"].isin(["A", "B", "C"]).sum()),
         "figures": [
-            "fig03_threshold_probability.pdf",
+            "fig_phase14_pvgrf_vs_vgrf.pdf",
             "fig05_sky_aitoff.pdf",
             "fig07_rperi_rapo.pdf",
             "fig08_toomre_diagram.pdf",

@@ -3,15 +3,15 @@
 This runbook describes the first public review-stage release for the
 probabilistic Gaia DR3 slow-Vgrf catalogue. It is intended for referees
 and archive curators who want to understand which products can be
-reproduced from the repository package alone and which require external raw
+reproduced from the reviewer bundle alone and which require external raw
 catalogues.
 
 ## Release Identity
 
-- Release tag: `v1.0.1-review`
+- Release tag: `v1.0.2-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
-- Repository package: `gaia-slow-vgrf-catalogue`
-- Zenodo DOI: `10.5281/zenodo.20116135`
+- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.2_review.zip`
+- Zenodo concept DOI: `10.5281/zenodo.20116134`
 - Headline catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 517 stars
 - Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,835 stars
 - Propagated candidate pool: 20,829 stars
@@ -23,7 +23,7 @@ Create the software environment from:
 
 ```bash
 conda env create -f environment.yml
-conda activate gaia-slow-vgrf
+conda activate gaia2026-v2
 ```
 
 AGAMA was run from WSL for the orbit calculations. The full
@@ -46,8 +46,8 @@ steps from the same conda environment.
 - `scripts/`: review-stage pipeline scripts.
 - `catalogues/`: FITS/CSV catalogue products.
 - `analysis_products/expanded_orbit_mc/`: full orbit Monte Carlo products.
-- `analysis_products/README.md`: explanation of the final validation and
-  sensitivity product directory.
+- `analysis_products/README.md`: explanation of the final validation/sensitivity
+  product directory and its pipeline-stage naming.
 - `RELEASE_NOTES.md`: review-stage version history and corrected barred
   sensitivity values.
 
@@ -77,10 +77,16 @@ one large local intermediate product:
   size: `D:/GAIA/parent_scan/gaia_parent_buffer_vgrf200_full.csv`
 
 The parent-buffer CSV is reproducible from the local Gaia DR3 source
-mirror with the parent-buffer scanner. It is not needed to inspect or use the
+mirror with the Phase 0 scanner. It is not needed to inspect or use the
 released catalogue products.
 
 ## Production Command Ledger
+
+> **Note on paths in this section.** The commands below use the public
+> repository layout (`scripts/...`, `catalogues/...`, and
+> `analysis_products/...`). Raw local inputs under `D:/GAIA/...` are not
+> redistributed and must be regenerated or remapped before rerunning the
+> full raw-to-release pipeline.
 
 The parent-buffer scan was run against the local Gaia DR3 CSV
 mirror at `D:/GAIA/csv`, writing chunk-by-chunk to:
@@ -92,7 +98,8 @@ D:/GAIA/parent_scan/
 On another machine, remap the local paths in `config.yml` and command
 arguments before rerunning scripts. The production defaults document this
 release environment: Windows paths such as `D:/GAIA/...` correspond to
-WSL paths such as `/mnt/d/GAIA/...`.
+WSL paths such as `/mnt/d/GAIA/...`, and
+the repository root should be mounted or checked out where WSL can read it.
 No released FITS/MRT catalogue requires those paths for normal use.
 
 The final full orbit Monte Carlo was run from WSL with:
@@ -131,7 +138,7 @@ current manuscript.
 
 ## Known Limitations
 
-The repository package is a reproducibility and inspection package, not a
+The reviewer bundle is a reproducibility and inspection package, not a
 full redistribution of the Gaia DR3 source table. Some scripts retain
 local default paths documenting the exact production environment; the
 inputs and outputs are also listed explicitly in `config.yml` so they can

@@ -1,5 +1,5 @@
 {
-  "product": "orbit_monte_carlo",
+  "phase": "14X",
   "created_utc": "2026-05-10T22:16:49Z",
   "input_csv": "/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv",
   "n_tierABC": 1835,

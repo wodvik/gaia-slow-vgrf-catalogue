@@ -29,7 +29,7 @@ from astropy.table import Table
 
 REPO = Path(__file__).resolve().parents[1]
 ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
-WORK = REPO / "external/hunter24_workdir"
+WORK = REPO / "phase3_agama/_hunter24_workdir"
 OUT = REPO / "analysis_products"
 FIG = REPO / "figures"
 CACHE = OUT / "expanded_orbit_event_positions.csv"

@@ -3,7 +3,7 @@ Materialize the expanded MC-tiered candidate table into public catalogue product
 
 This is the bridge from the parent-buffer rebuild back into the paper/release
 tree. It writes a compact FITS master catalogue plus Tier A and Tier A+B subset
-FITS files.
+FITS files, without overwriting the original public products.
 """
 
 from __future__ import annotations
@@ -67,7 +67,7 @@ CORE_COLUMNS = [
 
 
 def classify_rvs_quality(df: pd.DataFrame) -> np.ndarray:
-    """Apply the Gaia DR3 RVS-quality classes used by the catalogue build."""
+    """Apply the same Gaia DR3 RVS-quality classes used by phase1b."""
     n = len(df)
     quality = np.full(n, "ok", dtype=object)
 

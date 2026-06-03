@@ -33,7 +33,7 @@
     "tier_ABC_with_finite_alpha": 113,
     "tier_ABC_APOGEE_rows": 61,
     "tier_ABC_GALAH_rows": 62,
-    "note": "APOGEE/GALAH rows come from the full expanded exact-source-id APOGEE/GALAH crossmatch."
+    "note": "APOGEE/GALAH rows come from the full expanded Phase 14W exact-source-id crossmatch."
   },
   "alpha_subsample": {
     "n": 113,

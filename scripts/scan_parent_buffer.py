@@ -1,9 +1,9 @@
 """
-parent-buffer parent-buffer scan for the Gaia DR3 slow-Vgrf catalogue.
+Phase 0 parent-buffer scan for the Gaia DR3 slow-Vgrf catalogue.
 
 This script scans the local Gaia DR3 CSV mirror and writes a broad legacy
 low-Vgrf buffer from the full Gaia 6D parent sample. The buffer is intentionally
-wider than the final 25 km/s catalogue threshold so that later checks can prove
+wider than the final 25 km/s catalogue threshold so that later phases can prove
 that the final probabilistic catalogue was not limited by the old <25 km/s
 preselection.
 

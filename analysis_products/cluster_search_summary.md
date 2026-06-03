@@ -1,4 +1,4 @@
-# Compact-group search
+# Phase 14P compact-group search
 
 Purpose: check whether the slow-Vgrf release catalogue contains an obvious
 present-day open/globular-cluster-like aggregate.

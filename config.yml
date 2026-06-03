@@ -2,7 +2,7 @@
 # This file documents the expanded, parent-complete 2026-05-10 release.
 
 release:
-  tag: v1.0.0-review
+  tag: v1.0.2-review
   manuscript: main.tex
 
 # ----- Source catalogues and local products -----
@@ -25,7 +25,7 @@ input:
   source_csv: D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv
 
   # Legacy v1/v2 preselection retained only for provenance comparisons.
-  legacy_source_csv: external/slow_stars_enriched_orbits.csv
+  legacy_source_csv: data/slow_stars_enriched_orbits.csv
   n_legacy_preselection: 2859
 
 outputs:
@@ -105,6 +105,9 @@ bar_pattern_speeds_kms_kpc:
   default: 37.5
   slow: 33.0
   fast: 41.0
+  # Full bar-pattern-speed sensitivity grid used in the manuscript (km/s/kpc),
+  # matching RELEASE_NOTES.md and tab_potential/tab_sensitivity:
+  sensitivity_grid_kms_kpc: [24.0, 28.0, 33.0, 37.5, 41.0]
 
 # ----- Distance estimator preference -----
 distance_priority:

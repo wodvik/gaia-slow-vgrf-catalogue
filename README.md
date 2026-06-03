@@ -3,9 +3,9 @@
 This is the first public review-stage release for the probabilistic Gaia DR3
 slow-Galactic-rest-frame-speed catalogue.
 
-Zenodo DOI: [10.5281/zenodo.20116135](https://doi.org/10.5281/zenodo.20116135)
+Zenodo concept DOI: [10.5281/zenodo.20116134](https://doi.org/10.5281/zenodo.20116134)
 
-Release version: `v1.0.1-review` (see `RELEASE_NOTES.md`).
+Release version: `v1.0.2-review` (see `RELEASE_NOTES.md`).
 
 ## Key Counts
 
@@ -54,7 +54,7 @@ The verification report and script are in `online_verification/`.
 ## Reproducibility
 
 `analysis_products/` contains final review-stage validation and sensitivity
-products; see `analysis_products/README.md`.
+products. The name is a pipeline provenance label; see `analysis_products/README.md`.
 
 `README-submission.md` describes which products can be reproduced from
 the release package alone and which require external catalogues or the

@@ -21,7 +21,7 @@ from astropy.table import Table
 REPO = Path(__file__).resolve().parents[1]
 MASTER = REPO / "catalogues/catalogue_expanded_master.fits"
 ORBITS = REPO / "catalogues/catalogue_expanded_orbits_tierABC.fits"
-CONTROLS = REPO / "external/control_orbits.fits"
+CONTROLS = REPO / "phase5/control_orbits.fits"
 OUT = REPO / "analysis_products"
 FIG = REPO / "figures"
 
