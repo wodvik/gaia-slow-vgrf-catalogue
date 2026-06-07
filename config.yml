@@ -7,8 +7,9 @@ release:
 
 # ----- Source catalogues and local products -----
 input:
-  # Bundle-relative placeholders for private inputs used only by full reruns.
-  # They are intentionally absent from the reviewer zip; see
+  # Bundle-relative paths for rerun inputs. The expanded candidate CSV is
+  # shipped for candidate-to-release reruns; the raw Gaia mirror and broad
+  # parent buffer are intentionally absent from the reviewer zip. See
   # README-submission.md for the inspect/reuse/full-rerun split.
   gaia_source_mirror_dir: private_inputs/gaia_dr3_source_mirror
 

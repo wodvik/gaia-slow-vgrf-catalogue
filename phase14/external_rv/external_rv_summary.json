@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-06-07T00:00:02.716010",
+  "n_tierABC": 1952,
+  "tap_url": "http://tapvizier.cds.unistra.fr/TAPVizieR/tap",
+  "coverage_note": "External RV coverage is sparse and footprint-selected; it is used as a consistency audit, not as a replacement tiering input.",
+  "surveys": [
+    {
+      "survey": "APOGEE",
+      "n_tierABC": 67,
+      "n_tierAB": 20,
+      "median_delta_rv_kms": -0.097,
+      "robust_scatter_kms": 1.102,
+      "median_abs_delta_rv_kms": 0.791,
+      "frac_abs_delta_gt5_pct": 6.0,
+      "frac_abs_delta_gt10_pct": 4.5
+    },
+    {
+      "survey": "GALAH",
+      "n_tierABC": 62,
+      "n_tierAB": 26,
+      "median_delta_rv_kms": 0.156,
+      "robust_scatter_kms": 1.724,
+      "median_abs_delta_rv_kms": 1.258,
+      "frac_abs_delta_gt5_pct": 9.7,
+      "frac_abs_delta_gt10_pct": 3.2
+    }
+  ]
+}

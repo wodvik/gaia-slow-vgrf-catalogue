@@ -39,7 +39,9 @@ BUNDLE = Path(__file__).resolve().parents[1]
 CONFIG = yaml.safe_load((BUNDLE / "config.yml").read_text())
 OUT = BUNDLE / "phase14"
 OUT.mkdir(parents=True, exist_ok=True)
-WORK = REPO / "release" / "_iterations" / "v2" / "phase3_agama" / "_hunter24_workdir"
+PRIVATE_WORK = REPO / "release" / "_iterations" / "v2" / "phase3_agama" / "_hunter24_workdir"
+POTENTIALS = BUNDLE / "potentials"
+WORK = POTENTIALS if (POTENTIALS / "MWPotentialHunter24_axi.ini").exists() else PRIVATE_WORK
 ITER_V2 = REPO / "release" / "_iterations" / "v2"
 
 OMEGA_P = -float(CONFIG["bar_pattern_speeds_kms_kpc"]["default"])

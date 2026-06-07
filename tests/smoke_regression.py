@@ -33,6 +33,11 @@ def read_table(path: Path) -> Table:
     return Table.read(path)
 
 
+def assert_exists(path: Path) -> None:
+    if not path.exists():
+        fail(f"missing required product: {path}")
+
+
 def assert_unique_source_ids(table: Table, label: str) -> None:
     values = np.asarray(table["source_id"], dtype=np.int64)
     if len(values) != len(np.unique(values)):
@@ -88,6 +93,17 @@ def main() -> int:
     if summary_path.exists():
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
         maybe_assert_count("point_vgrf_lt25", int(summary["point_estimate_vgrf_lt25"]))
+
+    for product in [
+        root / "tables" / "v15" / "tab_probability_calibration.tex",
+        root / "tables" / "v15" / "tab_external_rv.tex",
+        root / "figures" / "fig_probability_calibration.pdf",
+        root / "phase14" / "injection_recovery" / "wp7_probability_calibration_summary.json",
+        root / "phase14" / "external_rv" / "external_rv_summary.json",
+        root / "potentials" / "MWPotentialHunter24_axi.ini",
+        root / "potentials" / "MWPotentialHunter24_full.ini",
+    ]:
+        assert_exists(product)
 
     print("smoke_regression: passed count and structural checks")
     return 0

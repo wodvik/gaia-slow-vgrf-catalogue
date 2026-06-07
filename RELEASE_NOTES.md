@@ -1,6 +1,6 @@
 # Release Notes
 
-## v1.0.5-review - 2026-06-06
+## v1.0.5-review - 2026-06-07
 
 Response to two referee reports -- the external deep-review (15 numbered
 issues) and the data-bundle review (8 issues). The manuscript builds cleanly;
@@ -20,6 +20,12 @@ checksums). Primary catalogue counts are unchanged
   is 97.4% stable under maximal parallax-distance coupling.
 - Radial-velocity / unresolved-multiplicity audit (`phase14af`): Gaia DR3
   non-single-star cross-match (1.2-1.7% flagged) + per-tier RV-quality table.
+- External radial-velocity audit (`phase14al`): sparse APOGEE DR17/GALAH DR3
+  overlap shows median Gaia-minus-external offsets of -0.10 and +0.16 km/s
+  with robust scatters of 1.10 and 1.72 km/s.
+- Truth-labelled probability-score diagnostic (`phase14ak`): GeDR3mock bins
+  confirm monotonic score behaviour while explicitly avoiding an empirical
+  real-population calibration claim.
 - Uncertainty ledger of primary numbers (`phase14ag`).
 - McMillan (2017) comparison potential (`phase14ah`): reproduces the static
   Hunter+2024 orbit summary, confirming the radial/compact result is not
@@ -31,7 +37,8 @@ checksums). Primary catalogue counts are unchanged
 
 **Provenance & reproducibility**: pre-submission guard
 (`scripts/check_provenance.py`), `make validate-release`, pinned
-`requirements-lock.txt`, parent-buffer manifest, and SHA-256 release checksums.
+`requirements-lock.txt`, parent-buffer manifest, bundled AGAMA potential `.ini`
+files, and SHA-256 release checksums.
 
 **Manuscript**: catalogue-first framing tightened; orbit claims split into
 robust (high-e, compact pericentre) vs potential-sensitive (central reach,
@@ -41,8 +48,9 @@ Zhang et al. 2024 to published; added Hunt et al. 2016, Babusiaux et al.
 2023, McMillan 2017, Palicio et al. 2023; removed an unused reference).
 Exploratory robustness material (sensitivity batteries, Sgr A* approachers,
 resonances, DBSCAN, distance-covariance confusion matrix, and the Filion et
-al. external comparison) moved to an appendix; appendix tables converted to floats for clean
-typesetting.
+al. external comparison) moved to an appendix; probability calibration,
+external-RV, null-model, and compact-pericentre language made more explicitly
+diagnostic/modest; appendix tables converted to floats for clean typesetting.
 
 **Data-bundle review response** (second referee, 8 issues):
 - Chemistry columns merged into every catalogue FITS and `COLUMNS.md`

@@ -30,7 +30,9 @@ from astropy.table import Table
 BUNDLE = Path(__file__).resolve().parents[1]
 REPO = BUNDLE.parents[1]
 ORBITS = BUNDLE / "catalogues/catalogue_expanded_orbits_tierABC.fits"
-WORK = REPO / "release/_iterations/v2/phase3_agama/_hunter24_workdir"
+PRIVATE_WORK = REPO / "release/_iterations/v2/phase3_agama/_hunter24_workdir"
+POTENTIALS = BUNDLE / "potentials"
+WORK = POTENTIALS if (POTENTIALS / "MWPotentialHunter24_axi.ini").exists() else PRIVATE_WORK
 OUT = BUNDLE / "phase14"
 FIG = BUNDLE / "figures"
 CACHE = OUT / "expanded_orbit_event_positions.csv"

@@ -9,5 +9,5 @@ authors:
     affiliation: "Independent Researcher"
 repository-code: "https://github.com/wodvik/gaia-slow-vgrf-catalogue"
 version: "1.0.5-review"
-date-released: "2026-06-06"
+date-released: "2026-06-07"
 abstract: "First public review-stage software, manuscript, and derived data products for a probabilistic Gaia DR3 catalogue of stars selected by very low Galactic rest-frame speed."

@@ -45,9 +45,16 @@ steps from the same conda environment.
 - `LICENSE.md`: data and code license statement.
 - `scripts/`: review-stage pipeline scripts.
 - `catalogues/`: FITS/CSV catalogue products.
+- `potentials/`: AGAMA potential `.ini` files used by the shipped orbit
+  rerun scripts.
 - `phase14/expanded_orbit_mc/`: full orbit Monte Carlo products.
 - `phase14/injection_recovery/`: compact GeDR3mock injection-recovery
-  summaries; the public rerun script is `scripts/wp7_injection_recovery.py`.
+  summaries and probability-score diagnostics; the public rerun scripts are
+  `scripts/wp7_injection_recovery.py` and
+  `scripts/phase14ak_probability_calibration.py`.
+- `phase14/external_rv/`: APOGEE DR17 and GALAH DR3 radial-velocity
+  consistency audit products; `scripts/phase14al_external_rv_check.py`
+  rebuilds them by querying public VizieR TAP tables.
 - `phase14/README.md`: explanation of the final validation/sensitivity
   product directory and its pipeline-stage naming.
 - `RELEASE_NOTES.md`: review-stage version history and corrected barred
@@ -65,6 +72,8 @@ validation summaries. From the bundle alone, a reviewer can:
 4. Recompile the manuscript PDF from `main.tex`.
 5. Inspect the full 5,000-realisation orbit-MC output for all 1,952
    Tier A+B+C stars and the 10,000-realisation convergence subset.
+6. Inspect the truth-labelled mock score diagnostic and the sparse external
+   APOGEE/GALAH radial-velocity cross-check.
 
 ## Reuse From The Bundle Alone
 
@@ -83,7 +92,8 @@ python scripts/make_mrt_tables.py --bundle-root .
 chains three integrity checks: the primary-count smoke test, the tier-count
 provenance guard (`scripts/check_provenance.py`, which also scans the
 manuscript and tables for stale counts), and a SHA-256 verification of the
-released figures, tables, catalogues, and MRT products against
+released figures, tables, catalogues, MRT products, and bundled potential
+configuration files against
 `release_checksums.sha256` (regenerate with `make checksums`). A fully pinned
 dependency lock is provided in `requirements-lock.txt` alongside the open
 `environment.yml`, and the omitted large parent-buffer intermediate is
@@ -96,8 +106,11 @@ The smoke harness pins the final v1.0.5-review counts
 
 ## Full Rerun Boundary And Private Inputs
 
-The full raw-to-release rebuild requires external public catalogues and
-one large local intermediate product:
+The released bundle supports inspection, manuscript recompilation, checksum
+verification, MRT regeneration, and candidate-to-release reruns from the
+shipped products once AGAMA is installed. The full raw Gaia-to-release rebuild
+has a narrower boundary: it requires external public catalogues and one large
+local intermediate product:
 
 - ESA Gaia Archive / Gaia DR3 `gaia_source`
 - Bailer-Jones et al. (2021) EDR3 distance catalogue
@@ -108,10 +121,13 @@ one large local intermediate product:
 
 The parent-buffer CSV is reproducible from the local Gaia DR3 source
 mirror with the Phase 0 scanner. It is not needed to inspect or use the
-released catalogue products.
+released catalogue products. The downstream 20,829-row
+`private_inputs/expanded_candidates_mc_tiered.csv` is shipped, so orbit,
+action, threshold-table, and candidate-to-release validation scripts do not
+require a Gaia mirror.
 
-Portable placeholders for those private inputs are listed in `config.yml`
-under `input.*` and default to `private_inputs/...`. The exact production
+Portable paths for raw private inputs and shipped rerun inputs are listed in
+`config.yml` under `input.*` and default to `private_inputs/...`. The exact production
 locations are retained only under `input.production_private_inputs`:
 
 | Production path | Portable placeholder | Purpose |
@@ -169,15 +185,29 @@ These commands update the point-estimate orbit catalogue, potential
 sensitivity tables, and Sgr A* approacher refinement products used by the
 current manuscript.
 
-The GeDR3mock injection-recovery diagnostic is now shipped as:
+The bundled AGAMA potential definitions are in `potentials/`; the public orbit
+scripts prefer those files and fall back to the author's private production
+work directory only when run inside the original development tree.
+
+The GeDR3mock injection-recovery and probability-score diagnostics are shipped
+as:
 
 ```bash
 python scripts/wp7_injection_recovery.py
+python scripts/phase14ak_probability_calibration.py
 ```
 
 It can reuse cached mock products if present under
 `phase14/injection_recovery/`; otherwise it queries the public GeDR3mock TAP
 service and rebuilds the recovery table/figure.
+
+The external radial-velocity audit can be rebuilt with:
+
+```bash
+python scripts/phase14al_external_rv_check.py
+```
+
+This step queries public APOGEE DR17 and GALAH DR3 tables through VizieR TAP.
 
 ## Known Limitations
 
@@ -197,3 +227,9 @@ table is `phase14/expanded_selection_function.fits`, with summaries in
 `phase14/expanded_selection_function_summary.json`. Inverse-selection
 weighted sums are retained as contextual observability diagnostics, not
 as volume-complete primary population counts.
+
+The GeDR3mock probability-score table is a truth-labelled mock diagnostic, not
+an empirical calibration of the real Gaia DR3 population prior. The APOGEE and
+GALAH radial-velocity audit is intentionally conservative but sparse and
+footprint-selected, so it is used as a robustness cross-check rather than as a
+whole-catalogue replacement for Gaia DR3 RVS.

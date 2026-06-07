@@ -80,9 +80,12 @@ def external_rv_check(master: pd.DataFrame) -> dict:
         if not p.exists():
             continue
         x = pd.read_csv(p)
-        # discover an external RV column
+        # discover an external RV column. The Phase 14W chemistry crossmatch in
+        # older bundles omitted these columns; Phase 14AL performs a direct
+        # reviewer-facing RV query when they are absent.
         cands = [c for c in x.columns if c.lower() in
-                 ("vhelio_avg", "rv", "rv_galah", "radial_velocity", "vrad", "rv_value")]
+                 ("hrv", "vhelio_avg", "rv", "rvgalah", "rv_galah",
+                  "radial_velocity", "vrad", "rv_value")]
         if "source_id" not in x.columns or not cands:
             out[survey] = {"n_overlap": int(len(x)), "note": f"no external RV column found among {list(x.columns)[:8]}"}
             continue

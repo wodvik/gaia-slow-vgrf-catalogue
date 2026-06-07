@@ -80,6 +80,10 @@ columns, and the final v1.0.5-review primary counts.
 `phase14/` contains final review-stage validation and sensitivity
 products. The name is a pipeline provenance label; see `phase14/README.md`.
 
+`potentials/` contains the AGAMA `.ini` potential configuration files used by
+the shipped orbit scripts. Reviewers still need their own Gaia DR3 mirror only
+for a raw parent-buffer rebuild.
+
 `README-submission.md` describes which products can be reproduced from
 the release package alone and which require external catalogues or the
 large local Gaia parent-buffer scan. `environment.yml` records the

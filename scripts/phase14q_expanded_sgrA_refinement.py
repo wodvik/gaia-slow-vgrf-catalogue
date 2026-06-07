@@ -26,7 +26,7 @@ BUNDLE = Path(__file__).resolve().parents[1]
 OUT = BUNDLE / "phase14"
 MASTER = BUNDLE / "catalogues" / "catalogue_expanded_master.fits"
 ORBITS = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.fits"
-SRC = REPO / "release/data/slow_stars_expanded_candidates_vgrf50.csv"
+SRC = BUNDLE / "private_inputs" / "expanded_candidates_mc_tiered.csv"
 
 
 def log(message: str) -> None:

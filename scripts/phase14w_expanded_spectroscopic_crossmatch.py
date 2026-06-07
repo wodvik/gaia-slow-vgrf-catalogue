@@ -36,7 +36,8 @@ SURVEYS = {
         "table": '"III/286/catalog"',
         "id_col": "GaiaEDR3",
         "select_cols": """
-            "GaiaEDR3", "Teff", "e_Teff", "logg", "e_logg",
+            "GaiaEDR3", "APOGEE", "HRV", "e_HRV", "s_HRV", "Nvis",
+            "FlRV", "SNR", "Teff", "e_Teff", "logg", "e_logg",
             "[Fe/H]", "e_[Fe/H]", "[M/H]", "e_[M/H]",
             "[a/M]", "e_[a/M]",
             "[C/Fe]", "e_[C/Fe]", "[N/Fe]", "e_[N/Fe]",
@@ -51,7 +52,9 @@ SURVEYS = {
         "table": '"J/MNRAS/506/150/stars"',
         "id_col": "GaiaEDR3",
         "select_cols": """
-            "GaiaEDR3", "Teff", "e_Teff", "logg", "e_logg",
+            "GaiaEDR3", "GALAH", "RVgalah", "e_RVgalah", "redflag",
+            "snrc1iraf", "snrc2iraf", "snrc3iraf", "snrc4iraf",
+            "Teff", "e_Teff", "logg", "e_logg",
             "[Fe/H]", "e_[Fe/H]", "[alpha/Fe]", "e_[alpha/Fe]",
             "[C/Fe]", "e_[C/Fe]", "[O/Fe]", "e_[O/Fe]",
             "[Mg/Fe]", "e_[Mg/Fe]", "[Al/Fe]", "e_[Al/Fe]",

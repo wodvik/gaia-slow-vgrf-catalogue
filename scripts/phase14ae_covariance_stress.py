@@ -234,8 +234,10 @@ def _latex_table(summ: dict) -> None:
         r" independent-distance recomputation at the same realisations. Rows are the"
         r" independent-draw tier, columns the coupled-draw tier; off-diagonal entries are"
         rf" tier switches. Only {summ['tier_switches_independent_vs_copula']} of"
-        rf" {summ['n_sources_band']:,} sources switch, and no primary Tier~A+B member is"
-        r" lost (median $|\Delta P|="
+        rf" {summ['n_sources_band']:,} sources switch. Relative to the adopted"
+        rf" primary catalogue, {summ['headline_AB_adopted'] - summ['headline_AB_lost_under_copula']}"
+        rf" of {summ['headline_AB_adopted']} Tier~A+B members remain above"
+        r" $P=0.84$ under the coupled draw (median $|\Delta P|="
         rf"{summ['abs_delta_P']['median']:.4f}$, max ${summ['abs_delta_P']['max']:.4f}$)."
         r"\label{tab:covariance_stress}}",
         r"\tablehead{\colhead{indep.$\backslash$copula} & \colhead{A} & \colhead{B}"

@@ -33,6 +33,7 @@ STALE_PATH_PATTERNS = [
     "v1.0.4_review",
     r"C:\\Users\\humbl\\GAIA2026",
     "/mnt/c/Users/humbl/GAIA2026",
+    "/release/v2/phase3_agama/",
 ]
 STALE_TEXT_PATTERNS = [
     "Tier A+B (N=517)",
@@ -128,9 +129,38 @@ def main() -> int:
                 failures.append(f"stale {pat} in {f.relative_to(REPO)}: "
                                 f"...{txt[max(0, m.start()-30):m.start()+30].strip()}...")
 
+    # --- targeted scalar/caption guards for reviewer-visible drift ---
+    threshold_tables = [REPO / "release" / "tables" / "v15" / "tab_threshold.tex",
+                        BUNDLE / "tables" / "v15" / "tab_threshold.tex"]
+    for f in threshold_tables:
+        if not f.exists():
+            continue
+        txt = f.read_text(encoding="utf-8", errors="ignore")
+        if "$<25$  & 2{,}755 & 1{,}952" not in txt:
+            failures.append(f"{f.relative_to(REPO)}: <25 threshold row must carry "
+                            f"N_ABC={ABC} alongside point-count 2,755")
+
+    cov_tables = [REPO / "release" / "tables" / "v15" / "tab_covariance_stress.tex",
+                  BUNDLE / "tables" / "v15" / "tab_covariance_stress.tex"]
+    cov_sidecar = BUNDLE / "phase14" / "expanded_covariance_stress_summary.json"
+    cov = json.loads(cov_sidecar.read_text()) if cov_sidecar.exists() else {}
+    remain = cov.get("headline_AB_adopted", AB) - cov.get("headline_AB_lost_under_copula", 0)
+    for f in cov_tables:
+        if not f.exists():
+            continue
+        txt = f.read_text(encoding="utf-8", errors="ignore")
+        if "no primary Tier~A+B member is lost" in txt:
+            failures.append(f"{f.relative_to(REPO)}: covariance caption contradicts "
+                            "adopted-catalogue A+B losses")
+        expected = f"{remain} of {AB} Tier~A+B members remain above"
+        if expected not in txt:
+            failures.append(f"{f.relative_to(REPO)}: covariance caption must state "
+                            f"'{expected}'")
+
     # --- stale review-bundle paths and stale prose in distributed sidecars ---
     sidecar_files = list((BUNDLE / "phase14").rglob("*.json"))
     sidecar_files += list((BUNDLE / "phase14").rglob("*.md"))
+    sidecar_files += list((BUNDLE / "potentials").glob("*.ini"))
     sidecar_files += [BUNDLE / "README.md", BUNDLE / "README-submission.md"]
     for f in sorted(set(sidecar_files)):
         if not f.exists():

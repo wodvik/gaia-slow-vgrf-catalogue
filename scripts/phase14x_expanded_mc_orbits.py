@@ -37,7 +37,9 @@ DEFAULT_INPUT = BUNDLE / "private_inputs" / "expanded_candidates_mc_tiered.csv"
 
 CONFIG = yaml.safe_load((BUNDLE / "config.yml").read_text())
 OUT = BUNDLE / "phase14" / "expanded_orbit_mc"
-WORK = REPO / "release/_iterations/v2/phase3_agama/_hunter24_workdir"
+PRIVATE_WORK = REPO / "release/_iterations/v2/phase3_agama/_hunter24_workdir"
+POTENTIALS = BUNDLE / "potentials"
+WORK = POTENTIALS if (POTENTIALS / "MWPotentialHunter24_axi.ini").exists() else PRIVATE_WORK
 SEED = int(CONFIG["mc"]["random_seed"])
 GYR = 1.0 / 0.9778
 

@@ -50,7 +50,9 @@ def find_repo() -> Path:
 
 REPO = find_repo()
 BUNDLE = Path(__file__).resolve().parents[1]
-WORK = REPO / "release" / "_iterations" / "v2" / "phase3_agama" / "_hunter24_workdir"
+PRIVATE_WORK = REPO / "release" / "_iterations" / "v2" / "phase3_agama" / "_hunter24_workdir"
+POTENTIALS = BUNDLE / "potentials"
+WORK = POTENTIALS if (POTENTIALS / "MWPotentialHunter24_axi.ini").exists() else PRIVATE_WORK
 AXI_INI = WORK / "MWPotentialHunter24_axi.ini"
 
 ORBIT_FITS = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.fits"

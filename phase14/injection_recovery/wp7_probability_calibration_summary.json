@@ -1,0 +1,88 @@
+{
+  "input": "phase14\\injection_recovery\\wp7_recovery_per_star_s500.csv",
+  "mock_prior_note": "Controlled GeDR3mock injections are balanced across true Vgrf bins; this is a truth-labelled score diagnostic, not a population-prior calibration for the observed catalogue.",
+  "n_pipeline_input": 27852,
+  "brier_score_pipeline_input": 0.031026479391067067,
+  "tier_thresholds": {
+    "A": {
+      "n": 3471,
+      "true_slow_fraction": 0.9971189858830308,
+      "mean_probability": 0.9907738403918178
+    },
+    "A+B": {
+      "n": 4692,
+      "true_slow_fraction": 0.9867860187553282,
+      "mean_probability": 0.9681274509803921
+    },
+    "A+B+C": {
+      "n": 6352,
+      "true_slow_fraction": 0.950566750629723,
+      "mean_probability": 0.8952210327455918
+    }
+  },
+  "bins": [
+    {
+      "p_bin": "0--0.10",
+      "n": 19868,
+      "predicted_mean": 0.002182202536742501,
+      "true_slow_fraction": 0.005788202134084961,
+      "true_slow_fraction_lo": 0.005274326423772922,
+      "true_slow_fraction_hi": 0.006351824867182838,
+      "residual_true_minus_predicted": 0.00360599959734246
+    },
+    {
+      "p_bin": "0.10--0.30",
+      "n": 897,
+      "predicted_mean": 0.19227647714604237,
+      "true_slow_fraction": 0.36789297658862874,
+      "true_slow_fraction_lo": 0.3519471252714262,
+      "true_slow_fraction_hi": 0.38413305290229305,
+      "residual_true_minus_predicted": 0.17561649944258637
+    },
+    {
+      "p_bin": "0.30--0.50",
+      "n": 733,
+      "predicted_mean": 0.39896316507503404,
+      "true_slow_fraction": 0.6275579809004093,
+      "true_slow_fraction_lo": 0.609538691743113,
+      "true_slow_fraction_hi": 0.6452297006274592,
+      "residual_true_minus_predicted": 0.22859481582537522
+    },
+    {
+      "p_bin": "0.50--0.70",
+      "n": 843,
+      "predicted_mean": 0.6024009489916963,
+      "true_slow_fraction": 0.8054567022538552,
+      "true_slow_fraction_lo": 0.7914643065036348,
+      "true_slow_fraction_hi": 0.8187252669560807,
+      "residual_true_minus_predicted": 0.20305575326215897
+    },
+    {
+      "p_bin": "0.70--0.84",
+      "n": 800,
+      "predicted_mean": 0.7765075,
+      "true_slow_fraction": 0.89,
+      "true_slow_fraction_lo": 0.8784469762526637,
+      "true_slow_fraction_hi": 0.9005792409758009,
+      "residual_true_minus_predicted": 0.1134925
+    },
+    {
+      "p_bin": "0.84--0.95",
+      "n": 1200,
+      "predicted_mean": 0.9011983333333334,
+      "true_slow_fraction": 0.9558333333333333,
+      "true_slow_fraction_lo": 0.9495128509667363,
+      "true_slow_fraction_hi": 0.9613947260524145,
+      "residual_true_minus_predicted": 0.05463499999999988
+    },
+    {
+      "p_bin": "0.95--1.00",
+      "n": 3511,
+      "predicted_mean": 0.990309313585873,
+      "true_slow_fraction": 0.9971518086015381,
+      "true_slow_fraction_lo": 0.9960999114758731,
+      "true_slow_fraction_hi": 0.9979205896630793,
+      "residual_true_minus_predicted": 0.006842495015665029
+    }
+  ]
+}

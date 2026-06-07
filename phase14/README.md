@@ -14,6 +14,10 @@ For archive users, the important products are:
   Sgr A* approacher seeds.
 - `expanded_selection_function.*`: Gaia DR3 RVS selection-function values,
   per-source parent-count diagnostics, and summaries.
+- `injection_recovery/wp7_probability_calibration_*`: truth-labelled
+  GeDR3mock probability-score diagnostic products.
+- `external_rv/`: APOGEE DR17 and GALAH DR3 radial-velocity consistency
+  audit for the sparse footprint overlap with Tier A+B+C.
 - `expanded_chemistry_summary.json` and related spectroscopy files:
   chemistry cross-match/context products.
 - `cluster_search_*`: local nearest-neighbour/compact-pair diagnostics.

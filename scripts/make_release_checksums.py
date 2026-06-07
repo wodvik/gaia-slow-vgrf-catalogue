@@ -1,8 +1,8 @@
 """Generate or verify SHA-256 checksums for the released products.
 
 Referee response (deep-review Issue 10). Writes release_checksums.sha256 over
-the figures, tables, catalogues, and MRT products so the frozen release can be
-integrity-checked.
+the figures, tables, catalogues, MRT products, and bundled AGAMA potential
+configuration files so the frozen release can be integrity-checked.
 
     python scripts/make_release_checksums.py            # write checksums
     python scripts/make_release_checksums.py --verify    # verify against file
@@ -16,8 +16,8 @@ from pathlib import Path
 
 BUNDLE = Path(__file__).resolve().parents[1]
 CHECKSUMS = BUNDLE / "release_checksums.sha256"
-DIRS = ["figures", "tables/v15", "catalogues", "mrt"]
-EXTS = {".pdf", ".tex", ".fits", ".txt", ".csv", ".json"}
+DIRS = ["figures", "tables/v15", "catalogues", "mrt", "potentials"]
+EXTS = {".pdf", ".tex", ".fits", ".txt", ".csv", ".json", ".ini"}
 
 
 def sha256(p: Path) -> str:

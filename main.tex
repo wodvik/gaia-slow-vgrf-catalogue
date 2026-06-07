@@ -72,14 +72,15 @@ photogeometric distances, and Monte Carlo propagation of the Gaia
 parallax--proper-motion covariance, we identify a primary Tier~A+B
 sample of 541 stars with $P(\vgrf<25\kms)>0.84$ and a broader Tier~A+B+C
 sample of 1{,}952 stars with $P>0.50$.  Summing $1-P$ over the members,
-the probabilistic tiering implies a nominal membership purity of $94.3\%$
-for Tier~A+B and $72.7\%$ for Tier~A+B+C.  Orbit integrations in the
-static, axisymmetrized Hunter et al.\ (2024) Galactic potential map the
-broader sample onto compact, highly radial model orbits, with median
+the internal Monte Carlo scores imply a nominal expected membership purity
+of $94.3\%$ for Tier~A+B and $72.7\%$ for Tier~A+B+C.  Orbit integrations
+in the static, axisymmetrized Hunter et al.\ (2024) Galactic potential map
+the broader sample onto compact, highly radial model orbits, with median
 eccentricity 0.949, median pericentre 154\,pc, and median apocentre
-7.35\kpc.  The observed Tier~A+B+C count exceeds the expectation from a
-control-matched smooth velocity distribution by a factor of $\gtrsim7$
-(25.6 against a single Gaussian ellipsoid), and Anderson--Darling tests
+7.35\kpc.  The observed Tier~A+B+C count exceeds the tested
+control-normalised smooth velocity nulls by a factor of several
+($7.4\times$ for the conservative Gaussian-mixture null; $25.6\times$ for
+an illustrative single ellipsoid), and unweighted Anderson--Darling tests
 reject continuity with the adjacent $25$--$50$\kms band ($p<0.001$).  A controlled GeDR3mock injection-recovery exercise
 recovers $60.9\%$ of true sub-$25$\kms stars end-to-end ($87.6\%$
 conditional on entering the pipeline).  The dominant selection-function
@@ -156,8 +157,8 @@ Because this paper layers several kinds of statement, we distinguish them
 explicitly at the outset.  \emph{Direct Gaia observables}---sky position,
 parallax, proper motion, radial velocity, and the derived $\vgrf$---define
 the catalogue.  \emph{Threshold-probability outputs}---the per-star
-$P(\vgrf<25\kms)$ and the resulting tiers---are calibrated Monte Carlo
-products of those observables and their uncertainties.
+$P(\vgrf<25\kms)$ and the resulting tiers---are Monte Carlo membership
+scores computed from those observables and their uncertainties.
 \emph{Orbit-model outputs}---eccentricity, $\Rperi$, $\Rapo$, $\zmax$,
 energy, angular momentum, and actions---are deterministic functions of an
 adopted Galactic potential, and are model-dependent rather than measured.
@@ -244,6 +245,13 @@ $\sigma_d/d<0.15$.  Dynamical robustness is reported separately in
 Section~\ref{sec:robustness}, where additional orbit-derived criteria
 are applied.
 
+Operationally, ``acceptable DR3 RVS quality'' means the released
+\texttt{rv\_quality} field is \texttt{ok}: the source is not flagged as
+\texttt{poor} by either $p(\chi^2_{\rm RV})<0.01$ or
+\texttt{rv\_expected\_sig\_to\_noise}$<2$, and is not flagged as
+\texttt{marginal} by the large-amplitude/few-transit or faint
+out-of-template-temperature screens defined in the public pipeline script.
+
 Several later diagnostics necessarily use narrower subsets.  The
 $\alpha$-classified spectroscopic subset is defined only by the
 availability of APOGEE or GALAH \FeH{} and alpha-element abundances
@@ -292,9 +300,9 @@ Tier~B increment ($0.84<P\leq0.95$), Tier~C increment
 Because every star carries a membership probability, the expected number
 of contaminants in any tier follows directly as $\sum(1-P)$ over its
 members.  This gives $30.8$ expected false positives in the 541-star
-Tier~A+B sample ($94.3\%$ nominal membership purity) and $533$ in the
-1{,}952-star Tier~A+B+C sample ($72.7\%$ nominal membership purity);
-the 289-star Tier~A core has $98.7\%$ nominal membership purity.
+Tier~A+B sample ($94.3\%$ nominal expected purity) and $533$ in the
+1{,}952-star Tier~A+B+C sample ($72.7\%$ nominal expected purity);
+the 289-star Tier~A core has $98.7\%$ nominal expected purity.
 Tier~A+B is therefore the recommended high-confidence working sample
 and Tier~A+B+C the high-completeness extension.
 
@@ -309,9 +317,11 @@ threshold, and $P>0.50$ (Tier~A+B+C) is the more-likely-than-not
 boundary.  Tier~C is reported as the broader, lower-confidence catalogue
 extension rather than as part of the conservative primary sample.  These
 Gaussian-tail correspondences are interpretive labels for the operating
-thresholds, not calibrated detection levels; the threshold-membership
-probabilities themselves are calibrated empirically by the reliability
-diagram (Fig.~\ref{fig:reliability}).  Central 68\% intervals on the
+thresholds, not detection significances or empirical truth calibrations.
+We therefore describe the summed $1-P$ values as nominal expected
+contamination under the internal Monte Carlo score, and test that score
+with both a Monte Carlo self-consistency check and a truth-labelled mock
+diagnostic below.  Central 68\% intervals on the
 primary numerical claims are collected in
 Table~\ref{tab:uncertainty_ledger}.
 
@@ -353,27 +363,55 @@ given in Table~\ref{tab:covariance_stress}.}
 \label{fig:joint_distance_test}
 \end{figure}
 
-A separate reliability reconstruction repeats the 500-realisation
+A separate Monte Carlo self-consistency reconstruction repeats the 500-realisation
 baseline pass with an independent random seed, selects the
 2{,}275 sources with baseline $0.30<P<0.70$, and compares deciles of
 the baseline probability against a held-out 5{,}000-realisation
 refinement.  The decile medians lie close to the one-to-one relation:
 the median absolute decile residual is 0.0019 and the largest is 0.0040
-(Fig.~\ref{fig:reliability}).  This diagram calibrates the catalogue
-tier probabilities themselves; it is distinct from the Gaia RVS
-selection-function systematic quantified separately in
+(Fig.~\ref{fig:reliability}).  This diagram tests numerical stability of
+the Monte Carlo score; it does not by itself establish empirical
+truth-calibration of the catalogue probabilities.  It is distinct from the
+Gaia RVS selection-function systematic quantified separately in
 Section~\ref{sec:interpretation}.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig_reliability.pdf}
-\caption{Reliability of the threshold-membership probabilities in the
-transition band.  Points bin stars by the recomputed 500-realisation
+\caption{Monte Carlo self-consistency of the threshold-membership
+probabilities in the transition band.  Points bin stars by the recomputed 500-realisation
 baseline probability; the ordinate is the realised fraction in an
 independent held-out 5{,}000-realisation refinement.  Error bars are
 central 68\% Beta$(k+\tfrac{1}{2},n-k+\tfrac{1}{2})$ intervals
 \citep{Cameron2011}.}
 \label{fig:reliability}
+\end{figure}
+
+The truth-labelled GeDR3mock diagnostic provides a complementary score
+check.  Among mock stars that enter the same RVS and parallax-SNR pipeline,
+binning by predicted $P(\vgrf<25\kms)$ gives a monotonic relation between
+the score and the fraction of injected stars whose true speed is below
+25\kms{} (Table~\ref{tab:probability_calibration},
+Fig.~\ref{fig:probability_calibration}).  The pipeline-input Brier score is
+0.031; the mock Tier~A, Tier~A+B, and Tier~A+B+C score cuts have true
+sub-25 fractions of 0.997, 0.987, and 0.951, respectively.  Because the
+mock is deliberately balanced across injected velocity bins, this is a
+truth-labelled score diagnostic rather than a population-prior calibration
+for the observed Gaia catalogue.
+
+\input{tables/v15/tab_probability_calibration.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_probability_calibration.pdf}
+\caption{Truth-labelled GeDR3mock probability-score diagnostic for
+pipeline-input mock stars. Points bin injected stars by their predicted
+$P(\vgrf<25\kms)$ and compare with the fraction whose injected true
+$\vgrf$ is below 25\kms.  Numbers annotate the stars per bin.  The mock
+prior is balanced across injected velocity bins, so the figure checks
+score monotonicity and high-probability behaviour rather than the
+population-prior calibration of the observed catalogue.}
+\label{fig:probability_calibration}
 \end{figure}
 
 \subsection{Galactocentric Transformation and Supporting Orbit Model}
@@ -662,12 +700,21 @@ and $6.1\%$ have an RV-constancy $\chi^2$ $p$-value below $0.01$
 indicative of RV variability.  Because the median uncertainty is a
 non-negligible fraction of the $25$\kms{} threshold, the
 $\sigma_{\rm RV}<2$\kms{} cut (Section~\ref{sec:robustness}) and the Gold
-subset are the operative defences against RV-driven false positives; an
-external RV cross-check against APOGEE and GALAH is a natural follow-up,
-as the present release cross-match products retain only matched
-abundances.
+subset are the operative defences against RV-driven false positives.
+
+We also queried public APOGEE DR17 and GALAH DR3 radial velocities for
+the Tier~A+B+C source IDs as a sparse external consistency audit
+(Table~\ref{tab:external_rv}).  The overlap is footprint-selected rather
+than complete: 67 Tier~A+B+C stars have APOGEE RVs and 62 have GALAH RVs.
+The Gaia-minus-external median offsets are small ($-0.10$\kms{} for
+APOGEE and $+0.16$\kms{} for GALAH), with robust scatter of 1.10 and
+1.72\kms, respectively.  A minority of overlaps show
+$|\Delta RV|>5$\kms{} (6.0\% for APOGEE, 9.7\% for GALAH), so the external
+check supports the bulk RV scale but does not replace follow-up
+confirmation for individual boundary candidates.
 
 \input{tables/v15/tab_rv_quality.tex}
+\input{tables/v15/tab_external_rv.tex}
 
 In this section we restrict the robustness check to empirical observables
 and simple descriptive properties of the sample.  The corresponding
@@ -702,8 +749,8 @@ threshold probability, not by a hard point estimate alone.}
 \label{fig:pvgrf_membership}
 \end{figure}
 
-As a smooth-tail expectation check, we compare the observed slow count
-against a smooth velocity distribution fit to the matched-control library
+As a tested smooth-tail expectation check, we compare the observed slow count
+against smooth velocity distributions fit to the matched-control library
 ($|v_{\rm GC}|$ in 25--260\kms, 10{,}078 stars) and extrapolated below
 25\kms.  A single trivariate-Gaussian ellipsoid, normalised to the
 control library, predicts $N(<25\kms)=76.4$ stars---an excess factor of
@@ -712,31 +759,34 @@ control library, predicts $N(<25\kms)=76.4$ stars---an excess factor of
 null for a selection-truncated disc$+$halo velocity field, so we refit
 the same control velocities with a Gaussian mixture (five components by
 BIC) and a cross-validated kernel density (Table~\ref{tab:null_models}).
-The implied excess is null-dependent but robustly large: $7.4\times$
+The implied diagnostic excess is null-dependent but large for the tested
+nulls: $7.4\times$
 under the best-fitting mixture, $11.0\times$ under the non-parametric
 KDE, and $25.6\times$ under the single ellipsoid, each with a tight
 ($\lesssim5\%$) bootstrap interval and negligible sensitivity to the
 $2.9$\kms{} median velocity error.  We therefore treat the
-single-ellipsoid $25.6\times$ as an order-of-magnitude heuristic and read
-the mixture-based $\sim\!7\times$ as the conservative statement: the slow
-tail is overabundant relative to any smooth velocity field by at least a
-factor of several.  This is a local comparison against the observed Gaia
-DR3 matched-control velocity field, not a volume-complete population
-estimate.
+single-ellipsoid $25.6\times$ as an illustrative heuristic and read the
+mixture-based $\sim\!7\times$ as the conservative statement for the tested
+control-normalised smooth nulls.  We do not interpret these models as a
+forward Gaia-selected Milky Way distribution function, nor as proof against
+every physically smooth but substructured velocity field.  This is a local
+comparison against the observed Gaia DR3 matched-control velocity field,
+not a volume-complete population estimate.
 
 \input{tables/v15/tab_null_models.tex}
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig_ndf_expectation.pdf}
-\caption{Observed cumulative slow-tail count compared with a smooth
+\caption{Observed cumulative slow-tail count compared with an illustrative smooth
 trivariate-Gaussian velocity ellipsoid fit to the matched-control
 catalogues and normalised over 25--260\kms.  The excess below the
 adopted 25\kms{} selection threshold motivates treating the
-low-\vgrf{} catalogue as a genuine low-velocity excess in
+low-\vgrf{} catalogue as a low-velocity tail in
 the observed Gaia DR3 6D distribution, not as evidence for a physical
-discontinuity at exactly 25\kms.  This single-ellipsoid baseline gives
-the largest of the smooth-null excess factors; a BIC Gaussian mixture and
+discontinuity at exactly 25\kms{} or as a complete Milky Way forward
+model.  This single-ellipsoid baseline gives the largest of the tested
+smooth-null excess factors; a BIC Gaussian mixture and
 a cross-validated kernel density give $7.4\times$ and $11\times$
 respectively (Table~\ref{tab:null_models}).  Absolute pipeline
 normalisation is provided separately by the controlled injection-recovery
@@ -787,7 +837,12 @@ survey-priority deduplication 117 unique Tier~A+B+C stars carry the joint
 literature-region comparisons reported in Table~\ref{tab:spectroscopic}.
 This 117-star $\alpha$-classified subset is dominated by luminous giants
 in the APOGEE and GALAH footprints; it is therefore a selective but
-useful chemical window, not a chemically complete census.
+useful chemical window, not a chemically complete census.  The APOGEE
+$[\mathrm{Mg/Fe}]$ and GALAH $[\alpha/\mathrm{Fe}]$ scales are not
+homogenised onto a single abundance system in this release, so the pooled
+classification is used only as a literature-region context flag.  Survey
+counts are reported separately, and no whole-catalogue population fraction
+is inferred from the mixed-survey subset.
 
 Within this alpha-classified subset, 51 stars fall in a Splash-like
 region, 23 in a Gaia-Sausage/Enceladus-like region, 22 in an
@@ -934,7 +989,13 @@ The same Monte Carlo orbit product gives a Tier~A+B+C median $\Rperi$
 of 154\,pc and a median $\Rapo$ of 7.35\kpc.  The maximum posterior
 median $\Rapo$ in the present Tier~A+B+C integrations is 17.86\kpc.
 These values confirm that the low-speed catalogue is not
-dominated by ordinary near-circular disc kinematics.
+dominated by ordinary near-circular disc kinematics.  This compact,
+radial mapping is also physically expected for a catalogue selected at
+very low total Galactic rest-frame speed: in the adopted Galactocentric
+frame, such stars carry little angular momentum at the observed epoch.
+The robust claim is therefore the qualitative compact-pericentre,
+high-radiality tendency in the tested potentials, not that every quoted
+pericentre is an exact closest approach in the real barred inner Galaxy.
 
 These quantities should be read as outputs of the adopted model rather
 than as direct Gaia observables.  They are useful because they provide a
@@ -1020,7 +1081,7 @@ loci for the full $\Omega_p$ grid; the Tier~A+B+C distribution
 concentrates near $L_z\approx0$ rather than at any single
 pattern-speed-resonance pile-up.
 
-The full eccentricity CDFs reinforce the same point.  A two-sample
+The full eccentricity CDFs reinforce the same point.  An unweighted two-sample
 Anderson--Darling comparison \citep{ScholzStephens1987} between the
 Tier~A+B+C static-potential eccentricities and the adjacent 25--50\kms{}
 matched-control CDF gives $A^2=192.27$ with asymptotic $p<0.001$.  The
@@ -1083,7 +1144,7 @@ strongly inner-reaching orbits observed during a low-speed phase.
 
 \input{tables/v15/tab_dwell.tex}
 
-\subsection{Inner-Galaxy Reach and Selection Limits} \label{sec:reach}
+\subsection{Exploratory Inner-Galaxy Reach and Selection Limits} \label{sec:reach}
 \label{sec:long_reach}
 
 Although the catalogue shares the defining low-\vgrf{} state, the stars
@@ -1239,9 +1300,9 @@ observability, it is $60.9\%$.  Combined with the smooth-DF expectation
 in Section~\ref{sec:vgrf_membership_results} and the selection-function
 prior-dominance audit in Section~\ref{sec:interpretation}, the
 injection-recovery test forms the catalogue's completeness triad: the
-observed slow tail is overabundant relative to a smooth velocity
-ellipsoid, its effective-volume scaling is limited by sparse
-selection-function cells, and the pipeline recovers a quantified
+observed slow tail is large relative to the tested smooth
+control-normalised velocity nulls, its effective-volume scaling is limited
+by sparse selection-function cells, and the pipeline recovers a quantified
 fraction of true synthetic slow stars.
 
 \input{tables/v15/tab_recovery_summary.tex}
@@ -1382,13 +1443,13 @@ maps onto strongly radially biased model orbits with median eccentricity
 5{,}000-realisation orbit Monte Carlo.
 
 The catalogue is not a re-statement of the local velocity ellipsoid.
-Smooth velocity-distribution nulls fit to the $25$--$260\kms$ control
+Tested smooth velocity-distribution nulls fit to the $25$--$260\kms$ control
 library and extrapolated below $25\kms$ under-predict the observed slow
 count by a factor of $7$--$26$ depending on the null
-($76.4$ stars and $25.6\times$ for a single Gaussian ellipsoid;
+($76.4$ stars and an illustrative $25.6\times$ for a single Gaussian ellipsoid;
 $7.4\times$ for a BIC Gaussian mixture;
 Section~\ref{sec:vgrf_membership_results}, Table~\ref{tab:null_models}),
-and Anderson--Darling tests reject the catalogue's eccentricity
+and unweighted Anderson--Darling tests reject the catalogue's eccentricity
 distribution against both the adjacent $25$--$50\kms$ matched control and
 the smooth-DF mock at $p<0.001$.
 
@@ -1905,7 +1966,7 @@ Helmi, A.\ 2020, \araa, 58, 205
 Huchra, J.~P., \& Geller, M.~J.\ 1982, \apj, 257, 423
 
 \bibitem[Hunt et~al.(2016)]{Hunt2016}
-Hunt, J.~A.~S., Hong, J., Bovy, J., Kawata, D., \& Grand, R.~J.~J.\ 2016,
+Hunt, J.~A.~S., Bovy, J., \& Carlberg, R.~G.\ 2016,
 \apjl, 832, L25
 
 \bibitem[Katz et~al.(2023)]{Katz2023}

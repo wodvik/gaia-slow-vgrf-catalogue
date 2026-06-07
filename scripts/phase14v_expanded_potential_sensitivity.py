@@ -22,7 +22,9 @@ import pandas as pd
 REPO = Path(__file__).resolve().parents[2].parent
 BUNDLE = Path(__file__).resolve().parents[1]
 OUT = BUNDLE / "phase14"
-WORK = REPO / "release" / "_iterations" / "v2" / "phase3_agama" / "_hunter24_workdir"
+PRIVATE_WORK = REPO / "release" / "_iterations" / "v2" / "phase3_agama" / "_hunter24_workdir"
+POTENTIALS = BUNDLE / "potentials"
+WORK = POTENTIALS if (POTENTIALS / "MWPotentialHunter24_axi.ini").exists() else PRIVATE_WORK
 IN = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.csv"
 OUT.mkdir(parents=True, exist_ok=True)
 
