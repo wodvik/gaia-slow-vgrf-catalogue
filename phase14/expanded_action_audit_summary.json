@@ -1,0 +1,49 @@
+{
+  "agama_version": "1.0.157 compiled on May  3 2026",
+  "potential": "Hunter+2024 axisymmetric (MWPotentialHunter24_axi.ini)",
+  "integration": {
+    "time_Gyr": 4.0,
+    "trajsize": 1001,
+    "method": "dprkn8",
+    "accuracy": 1e-08,
+    "denominator_floor_kpc_kms": 1.0
+  },
+  "n_total": 1952,
+  "reliability_counts_all": {
+    "sampled_ok": 219,
+    "sampled_caution": 569,
+    "sampled_poor": 1164
+  },
+  "reliability_counts_tierAB": {
+    "sampled_ok": 44,
+    "sampled_caution": 102,
+    "sampled_poor": 395
+  },
+  "action_max_fracdiff": {
+    "n": 1952,
+    "median": 0.6177601105534993,
+    "p84": 0.928297576961702,
+    "max": 8.178113893799244
+  },
+  "J_R_fracdiff": {
+    "n": 1952,
+    "median": 0.08270921734744931,
+    "p84": 0.14764052812844888,
+    "max": 0.4600045253563971
+  },
+  "J_z_fracdiff": {
+    "n": 1952,
+    "median": 0.6177601105534993,
+    "p84": 0.928297576961702,
+    "max": 8.178113893799244
+  },
+  "J_phi_fracdiff": {
+    "n": 1952,
+    "median": 2.908030969279797e-08,
+    "p84": 7.676506593000713e-08,
+    "max": 6.41180971761024e-07
+  },
+  "frac_poor_all": 0.5963114754098361,
+  "frac_reliable_le0p50_all": 0.4036885245901639,
+  "note": "Convergent reference is the orbit-time-averaged interpolated ActionFinder; catalogue J_* are single-evaluation Staeckel-fudge actions at the IC."
+}

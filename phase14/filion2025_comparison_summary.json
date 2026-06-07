@@ -1,0 +1,29 @@
+{
+  "filion_reference": "Filion et al. 2025, ApJ, 989, 70",
+  "n_filion_apogee_ids": 69,
+  "n_resolved_to_unique_gaia_source_id": 69,
+  "n_gaia_parent_contract": 69,
+  "n_release_parent_pool_overlap": 3,
+  "n_release_tierA_overlap": 0,
+  "n_release_tierAB_overlap": 0,
+  "n_release_tierABC_overlap": 0,
+  "diagnostic_tier_counts": {
+    "X": 69
+  },
+  "diagnostic_rv_quality_counts": {
+    "ok": 66,
+    "poor": 3
+  },
+  "n_ruwe_gt_1p4": 1,
+  "n_rv_variable_flag": 3,
+  "n_nss_match": 2,
+  "release_parent_pool_source_ids": [
+    3685921348377044480,
+    1594059695819370624,
+    1288956935783694464
+  ],
+  "outputs": {
+    "comparison_csv": "phase14/filion2025_comparison.csv",
+    "table": "tables/v15/tab_filion2025_comparison.tex"
+  }
+}

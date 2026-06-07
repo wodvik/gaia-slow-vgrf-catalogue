@@ -1,4 +1,4 @@
-# Catalogue Column Dictionary
+﻿# Catalogue Column Dictionary
 
 This file defines the columns used in the first public review-stage FITS and
 CSV catalogue products. Gaia `source_id` values are stored as integer
@@ -8,10 +8,15 @@ identifiers and should not be converted to floating point.
 
 These columns appear in:
 
-- `catalogues/catalogue_expanded_master.fits`
-- `catalogues/catalogue_expanded_tierA.fits`
-- `catalogues/catalogue_expanded_tierAB.fits`
-- `catalogues/catalogue_expanded_tierABC.fits`
+- `catalogue_expanded_master.fits`
+- `catalogue_expanded_tierA.fits`
+- `catalogue_expanded_tierAB.fits`
+- `catalogue_expanded_tierABC.fits`
+
+The `expanded` filename token is a frozen build/provenance label for the
+parent-complete public candidate pool, not a stale separate release stream.
+Columns carrying `legacy` or `old_preselection` are retained only to audit the
+2,859-source development preselection; they are not active selection criteria.
 
 | Column | Unit | Description |
 |---|---:|---|
@@ -47,22 +52,29 @@ These columns appear in:
 | `bp_rp` | mag | Gaia DR3 BP-RP colour. |
 | `grvs_mag` | mag | Gaia DR3 RVS magnitude. |
 | `ruwe` | none | Gaia DR3 renormalised unit weight error. |
-| `legacy_v_total_grf` | km/s | Preliminary Galactic-rest-frame speed used only for legacy preselection provenance. |
+| `legacy_v_total_grf` | km/s | Preliminary Galactic-rest-frame speed retained only for development-preselection provenance; not used for current tier membership. |
 | `vgrf_zpcorr_inv` | km/s | Point-estimate Galactic-rest-frame speed using zero-point-corrected inverse-parallax distance. |
 | `vgrf_bj_or_inv` | km/s | Point-estimate Galactic-rest-frame speed using Bailer-Jones distance where available, otherwise inverse parallax. |
 | `vgrf_default` | km/s | Final adopted point-estimate Galactic-rest-frame speed. |
 | `P_vgrf_below_25` | dimensionless | Monte Carlo probability that `Vgrf < 25 km/s`; this is a probability and has no velocity unit. |
 | `mc_realisations` | none | Number of velocity-threshold Monte Carlo realisations used for this source. |
 | `tier` | none | Probability tier: A (`P>0.95`), B (`0.84<P<=0.95`), C (`0.50<P<=0.84`), D (point-estimate below 25 km/s but `P<=0.50`), or X. |
-| `source_in_old_preselection` | boolean | Whether the source was present in the preliminary 2,859-source development preselection. |
+| `source_in_old_preselection` | boolean | Provenance-only flag for whether the source was present in the preliminary 2,859-source development preselection. |
 | `parent_scan_file` | none | Gaia mirror CSV file from which the source was recovered during the parent-buffer scan. |
+| `mh_gspphot` | dex | Gaia DR3 GSP-Phot photometric metallicity [M/H]; biased toward solar for the cool, metal-poor giants that dominate this sample (Andrae et al. 2023), so it is a low-resolution contextual diagnostic only. `NaN` if unavailable. |
+| `mh_gspphot_lo`, `mh_gspphot_hi` | dex | Lower (16th) and upper (84th) percentile bounds on `mh_gspphot`. |
+| `feh_spec` | dex | Spectroscopic [Fe/H] from the best APOGEE DR17 / GALAH DR3 exact-`source_id` cross-match (APOGEE preferred when a source is in both); `NaN` if no spectroscopic match. Kept separate from `mh_gspphot` — photometric and spectroscopic metallicities are never blended. |
+| `feh_spec_err` | dex | Reported uncertainty on `feh_spec`; `NaN` if unavailable. |
+| `alpha_spec` | dex | Spectroscopic alpha-abundance proxy: [alpha/M] for APOGEE, [alpha/Fe] for GALAH (distinguish via `chem_survey`); `NaN` if unavailable. |
+| `chem_survey` | none | Spectroscopic source of `feh_spec`/`alpha_spec`: `APOGEE`, `GALAH`, or empty when there is no spectroscopic match. |
+| `chem_population` | none | Chemodynamic class from spectroscopic [Fe/H]+alpha (`Splash`, `GSE`, `Aurora`, `disk`, `unclassified`) using the `phase14u_expanded_chemistry.classify` thresholds; empty unless both `feh_spec` and `alpha_spec` are finite. The Tier A+B+C subset carrying a class is the 117-star alpha subset discussed in the manuscript. |
 
 ## Point-Estimate Orbit Catalogue
 
 These columns appear in:
 
-- `catalogues/catalogue_expanded_orbits_tierABC.fits`
-- `catalogues/catalogue_expanded_orbits_tierABC.csv`
+- `catalogue_expanded_orbits_tierABC.fits`
+- `catalogue_expanded_orbits_tierABC.csv`
 
 This product contains one row per Tier A+B+C star. Orbit quantities are
 point-estimate summaries in the adopted Hunter+2024 static potential and
@@ -76,7 +88,7 @@ not observables.
 | `P_vgrf_below_25` | dimensionless | Monte Carlo threshold-membership probability. |
 | `rv_quality` | none | Internal Gaia DR3 RVS-quality class copied from the master catalogue. |
 | `rvs_quality_ok` | boolean | True when `rv_quality == "ok"`. |
-| `source_in_old_preselection` | boolean | Whether the source was present in the preliminary 2,859-source development preselection. |
+| `source_in_old_preselection` | boolean | Provenance-only flag for whether the source was present in the preliminary 2,859-source development preselection. |
 | `vgrf_default_exact` | km/s | Final adopted point-estimate Galactic-rest-frame speed from the catalogue pipeline. |
 | `vgrf_default_orbit_ic` | km/s | Galactic-rest-frame speed recomputed from the orbit-integration initial condition. |
 | `dist_pc_final_screen` | pc | Adopted distance used for the orbit initial condition. |
@@ -107,17 +119,26 @@ not observables.
 | `barred_EJ_range_rel` | dimensionless | Relative sampled Jacobi-energy range in the rotating barred integration. |
 | `barred_Lz_kpc_kms` | kpc km/s | Mean Galactocentric angular momentum about the z-axis in the barred integration. |
 | `barred_star_idx` | none | Row index used internally by the barred orbit integration. |
-| `J_R`, `J_z`, `J_phi` | kpc km/s | AGAMA Staeckel-fudge radial, vertical, and azimuthal actions in the static potential. |
+| `J_R`, `J_z`, `J_phi` | kpc km/s | Single-evaluation AGAMA Staeckel-fudge radial, vertical, and azimuthal actions at the orbit initial condition, in the static potential. For this radial population the fudge is reliable for `J_R` and `J_phi` but degrades for `J_z`; consult `J_*_timeavg` and `action_reliability_flag` and treat actions as caveated diagnostics. |
+| `J_R_timeavg`, `J_z_timeavg`, `J_phi_timeavg` | kpc km/s | Orbit-time-averaged (convergent) actions over a 4 Gyr static integration, the reference used for the full-sample reliability audit (`phase14ai_full_action_audit.py`). Recommended over the single-evaluation `J_*` where they differ. |
 | `Omega_R`, `Omega_z`, `Omega_phi` | km/s/kpc | AGAMA radial, vertical, and azimuthal orbital frequencies in the static potential. |
 | `res_ratio_OmegaR_over_dPhi` | dimensionless | Resonance diagnostic `Omega_R/(Omega_phi - Omega_p)` evaluated relative to the default bar pattern speed. |
 | `barred_ftlyap_norm` | dimensionless | Finite-time Lyapunov indicator from the default barred Hunter/Sormani integration at `|Omega_p|=37.5 km/s/kpc`. Values are populated for the WP-5 chaos-diagnostic subset and `NaN` otherwise; values of order unity indicate strongly chaotic finite-time behaviour in Agama's convention. |
+| `action_accuracy_sampled` | boolean | True for every Tier A+B+C star: the convergent action audit (`phase14ai_full_action_audit.py`) now covers the full sample, not only the earlier 100-star WP-5 control. |
+| `action_max_fracdiff` | dimensionless | Maximum absolute fractional difference between the single-evaluation `J_*` and the orbit-time-averaged `J_*_timeavg` across `J_R`, `J_z`, and `J_phi`, with a denominator floor of 1 kpc km/s; computed for every star. The maximum is almost always set by `J_z`. |
+| `action_reliability_flag` | none | Full-sample per-star action-reliability label: `sampled_ok` (`action_max_fracdiff<=0.15`), `sampled_caution` (`<=0.50`), or `sampled_poor` (`>0.50`). Counts in Tier A+B+C: 219 / 569 / 1,164. |
+| `mh_gspphot`, `mh_gspphot_lo`, `mh_gspphot_hi` | dex | Gaia DR3 GSP-Phot photometric metallicity [M/H] and its 16th/84th-percentile bounds, copied from the master catalogue (low-resolution contextual diagnostic; `NaN` if unavailable). |
+| `feh_spec`, `feh_spec_err` | dex | Spectroscopic [Fe/H] and its uncertainty from the best APOGEE DR17 / GALAH DR3 exact-`source_id` match; `NaN` if no spectroscopic match. Never blended with `mh_gspphot`. |
+| `alpha_spec` | dex | Spectroscopic alpha-abundance proxy ([alpha/M] for APOGEE, [alpha/Fe] for GALAH; see `chem_survey`); `NaN` if unavailable. |
+| `chem_survey` | none | Spectroscopic source of `feh_spec`/`alpha_spec`: `APOGEE`, `GALAH`, or empty for no match. |
+| `chem_population` | none | Chemodynamic class from spectroscopic [Fe/H]+alpha (`Splash`/`GSE`/`Aurora`/`disk`/`unclassified`) per `phase14u_expanded_chemistry.classify`; empty unless both `feh_spec` and `alpha_spec` are finite (117 Tier A+B+C stars). |
 
 ## Orbit Monte Carlo Catalogue
 
 These columns appear in:
 
-- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
-- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
+- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
+- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
 
 | Column | Unit | Description |
 |---|---:|---|
@@ -140,7 +161,7 @@ These columns appear in:
 
 These columns appear in:
 
-- `analysis_products/expanded_selection_function.fits`
+- `phase14/expanded_selection_function.fits`
 
 | Column | Unit | Description |
 |---|---:|---|

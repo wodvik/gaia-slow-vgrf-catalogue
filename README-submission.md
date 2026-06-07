@@ -1,4 +1,4 @@
-# Submission Reproducibility Runbook
+﻿# Submission Reproducibility Runbook
 
 This runbook describes the first public review-stage release for the
 probabilistic Gaia DR3 slow-Vgrf catalogue. It is intended for referees
@@ -8,12 +8,12 @@ catalogues.
 
 ## Release Identity
 
-- Release tag: `v1.0.3-review`
+- Release tag: `v1.0.5-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
-- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.3_review.zip`
+- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.5_review.zip`
 - Zenodo concept DOI: `10.5281/zenodo.20116134`
-- Headline catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 517 stars
-- Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,835 stars
+- Primary catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 541 stars
+- Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,952 stars
 - Propagated candidate pool: 20,829 stars
 - Broad parent buffer scanned from local Gaia DR3 mirror: 5,867,654 unique source IDs
 
@@ -45,26 +45,56 @@ steps from the same conda environment.
 - `LICENSE.md`: data and code license statement.
 - `scripts/`: review-stage pipeline scripts.
 - `catalogues/`: FITS/CSV catalogue products.
-- `analysis_products/expanded_orbit_mc/`: full orbit Monte Carlo products.
-- `analysis_products/README.md`: explanation of the final validation/sensitivity
+- `phase14/expanded_orbit_mc/`: full orbit Monte Carlo products.
+- `phase14/injection_recovery/`: compact GeDR3mock injection-recovery
+  summaries; the public rerun script is `scripts/wp7_injection_recovery.py`.
+- `phase14/README.md`: explanation of the final validation/sensitivity
   product directory and its pipeline-stage naming.
 - `RELEASE_NOTES.md`: review-stage version history and corrected barred
   sensitivity values.
 
-## What Can Be Reproduced From The Bundle Alone
+## Inspect From The Bundle Alone
 
 The bundle contains the released catalogue products, manuscript source,
 figures, tables, orbit-MC summaries, chemistry cross-match products, and
 validation summaries. From the bundle alone, a reviewer can:
 
 1. Inspect and join the FITS/CSV catalogues by `source_id`.
-2. Verify the headline and broader tier counts.
+2. Verify the primary and broader tier counts.
 3. Recompute manuscript summary statistics from the released tables.
 4. Recompile the manuscript PDF from `main.tex`.
-5. Inspect the full 5,000-realisation orbit-MC output for all 1,835
+5. Inspect the full 5,000-realisation orbit-MC output for all 1,952
    Tier A+B+C stars and the 10,000-realisation convergence subset.
 
-## What Requires External Data
+## Reuse From The Bundle Alone
+
+The public FITS/CSV/MRT products are ready for downstream science without a
+Gaia Archive rescan. The following checks and product-level operations are
+repo-relative:
+
+```bash
+cd gaia_slow_vgrf_catalogue_v1.0.5_review
+make validate-release                      # full pre-submission validation
+python tests/smoke_regression.py --bundle-root .
+python scripts/make_mrt_tables.py --bundle-root .
+```
+
+`make validate-release` (equivalently `python scripts/validate_release.py`)
+chains three integrity checks: the primary-count smoke test, the tier-count
+provenance guard (`scripts/check_provenance.py`, which also scans the
+manuscript and tables for stale counts), and a SHA-256 verification of the
+released figures, tables, catalogues, and MRT products against
+`release_checksums.sha256` (regenerate with `make checksums`). A fully pinned
+dependency lock is provided in `requirements-lock.txt` alongside the open
+`environment.yml`, and the omitted large parent-buffer intermediate is
+documented with row counts, velocity partitions, and reconstruction
+instructions in `private_inputs/parent_buffer_manifest.json`.
+
+The smoke harness pins the final v1.0.5-review counts
+(`master=20,829`, `Tier A=289`, `Tier A+B=541`,
+`Tier A+B+C=1,952`, corrected point-estimate `<25 km/s=2,755`).
+
+## Full Rerun Boundary And Private Inputs
 
 The full raw-to-release rebuild requires external public catalogues and
 one large local intermediate product:
@@ -80,13 +110,17 @@ The parent-buffer CSV is reproducible from the local Gaia DR3 source
 mirror with the Phase 0 scanner. It is not needed to inspect or use the
 released catalogue products.
 
-## Production Command Ledger
+Portable placeholders for those private inputs are listed in `config.yml`
+under `input.*` and default to `private_inputs/...`. The exact production
+locations are retained only under `input.production_private_inputs`:
 
-> **Note on paths in this section.** The commands below use the public
-> repository layout (`scripts/...`, `catalogues/...`, and
-> `analysis_products/...`). Raw local inputs under `D:/GAIA/...` are not
-> redistributed and must be regenerated or remapped before rerunning the
-> full raw-to-release pipeline.
+| Production path | Portable placeholder | Purpose |
+|---|---|---|
+| `D:/GAIA/csv` (`/mnt/d/GAIA/csv` under WSL) | `private_inputs/gaia_dr3_source_mirror` | Local Gaia DR3 source mirror for the parent scan. |
+| `D:/GAIA/parent_scan/gaia_parent_buffer_vgrf200_full.csv` | `private_inputs/gaia_parent_buffer_vgrf200_full.csv` | Non-redistributed broad parent buffer. |
+| `D:/GAIA/parent_scan/expanded_candidates_mc_tiered.csv` | `private_inputs/expanded_candidates_mc_tiered.csv` | Materialized MC-tiered expanded candidate table for full reruns. |
+
+## Full-Rerun Command Ledger
 
 The parent-buffer scan was run against the local Gaia DR3 CSV
 mirror at `D:/GAIA/csv`, writing chunk-by-chunk to:
@@ -95,20 +129,18 @@ mirror at `D:/GAIA/csv`, writing chunk-by-chunk to:
 D:/GAIA/parent_scan/
 ```
 
-On another machine, remap the local paths in `config.yml` and command
-arguments before rerunning scripts. The production defaults document this
-release environment: Windows paths such as `D:/GAIA/...` correspond to
-WSL paths such as `/mnt/d/GAIA/...`, and
-the repository root should be mounted or checked out where WSL can read it.
-No released FITS/MRT catalogue requires those paths for normal use.
+On another machine, either place equivalent files under `private_inputs/` or
+pass explicit `--input-csv` / `--out-dir` arguments. No released FITS/MRT
+catalogue requires those paths for normal use.
 
 The final full orbit Monte Carlo was run from WSL with:
 
 ```bash
-cd /path/to/gaia-slow-vgrf-catalogue
+cd gaia_slow_vgrf_catalogue_v1.0.5_review
 OMP_NUM_THREADS=32 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-python3 scripts/compute_mc_orbits.py \
-  --out-dir analysis_products/expanded_orbit_mc \
+python scripts/phase14x_expanded_mc_orbits.py \
+  --input-csv private_inputs/expanded_candidates_mc_tiered.csv \
+  --out-dir phase14/expanded_orbit_mc \
   --n-samp 5000 \
   --chunk-size 25 \
   --n-convergence 10000 \
@@ -118,17 +150,18 @@ python3 scripts/compute_mc_orbits.py \
 
 The output files are:
 
-- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
-- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
-- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits_summary.json`
-- `analysis_products/expanded_orbit_mc/expanded_catalogue_mc_orbits_convergence_10000.csv`
+- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.fits`
+- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits.csv`
+- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits_summary.json`
+- `phase14/expanded_orbit_mc/expanded_catalogue_mc_orbits_convergence_10000.csv`
 
 The corrected barred-potential sensitivity products were regenerated with:
 
 ```bash
-python3 scripts/compute_catalogue_orbits.py
-python3 scripts/compute_potential_sensitivity.py
-python3 scripts/refine_expanded_sgra_candidates.py \
+python scripts/phase0g_expanded_orbits.py \
+  --input-csv private_inputs/expanded_candidates_mc_tiered.csv
+python scripts/phase14v_expanded_potential_sensitivity.py
+python scripts/phase14q_expanded_sgrA_refinement.py \
   --n-samp 5000 --chunk-size 500 --n-per-potential 5
 ```
 
@@ -136,18 +169,31 @@ These commands update the point-estimate orbit catalogue, potential
 sensitivity tables, and Sgr A* approacher refinement products used by the
 current manuscript.
 
+The GeDR3mock injection-recovery diagnostic is now shipped as:
+
+```bash
+python scripts/wp7_injection_recovery.py
+```
+
+It can reuse cached mock products if present under
+`phase14/injection_recovery/`; otherwise it queries the public GeDR3mock TAP
+service and rebuilds the recovery table/figure.
+
 ## Known Limitations
 
-The reviewer bundle is a reproducibility and inspection package, not a
-full redistribution of the Gaia DR3 source table. Some scripts retain
-local default paths documenting the exact production environment; the
-inputs and outputs are also listed explicitly in `config.yml` so they can
-be remapped on another machine.
+The reviewer bundle is a reproducibility and inspection package, not a full
+redistribution of the Gaia DR3 source table. Private input paths are documented
+explicitly in `config.yml`; public script defaults are bundle-relative where
+the required input can be supplied locally.
+
+The final Vc=229 km/s catalogue counts are adopted in this bundle. The
+version DOI remains pending until Zenodo mints the new version-specific DOI;
+the concept DOI above should be used until that release freeze is complete.
 
 The catalogue has been evaluated with GaiaUnlimited's
 Castro-Ginard et al. (2023) Gaia DR3 RVS selection function. The per-star
-table is `analysis_products/expanded_selection_function.fits`, with summaries in
-`analysis_products/expanded_selection_function_summary.csv` and
-`analysis_products/expanded_selection_function_summary.json`. Inverse-selection
+table is `phase14/expanded_selection_function.fits`, with summaries in
+`phase14/expanded_selection_function_summary.csv` and
+`phase14/expanded_selection_function_summary.json`. Inverse-selection
 weighted sums are retained as contextual observability diagnostics, not
-as volume-complete headline population counts.
+as volume-complete primary population counts.

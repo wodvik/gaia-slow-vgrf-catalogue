@@ -25,6 +25,7 @@ from astropy.table import Table
 
 
 GAIA_TAP_SYNC = "https://gea.esac.esa.int/tap-server/tap/sync"
+DEFAULT_OUT_DIR = Path(__file__).resolve().parents[1] / "online_verification"
 GAIA_COLUMNS = [
     "source_id",
     "ra",
@@ -158,10 +159,17 @@ def write_discrepancies(path: Path, discrepancies: list[Discrepancy]) -> None:
             )
 
 
+def bundle_relative(path: Path, bundle_root: Path) -> str:
+    try:
+        return path.resolve().relative_to(bundle_root.resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("catalogue", type=Path)
-    parser.add_argument("--out-dir", type=Path, default=Path("online_verification"))
+    parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument("--chunk-size", type=int, default=250)
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--retries", type=int, default=4)
@@ -194,6 +202,7 @@ def main() -> int:
     missing_path = args.out_dir / f"{stem}_missing_source_ids.csv"
     discrepancy_path = args.out_dir / f"{stem}_discrepancies.csv"
     summary_path = args.out_dir / f"{stem}_online_verification_summary.json"
+    bundle_root = args.out_dir.parent
 
     write_missing(missing_path, missing)
     write_discrepancies(discrepancy_path, discrepancies)
@@ -218,7 +227,7 @@ def main() -> int:
                 )
 
     summary = {
-        "catalogue": str(args.catalogue),
+        "catalogue": bundle_relative(args.catalogue, bundle_root),
         "gaia_archive_table": "gaiadr3.gaia_source",
         "gaia_tap_sync_endpoint": GAIA_TAP_SYNC,
         "rows_local": len(table),
@@ -229,8 +238,8 @@ def main() -> int:
         "tolerances": TOLERANCES,
         "compared_by_column": compared_by_column,
         "max_abs_delta_by_column": max_delta_by_column,
-        "missing_csv": str(missing_path),
-        "discrepancies_csv": str(discrepancy_path),
+        "missing_csv": bundle_relative(missing_path, bundle_root),
+        "discrepancies_csv": bundle_relative(discrepancy_path, bundle_root),
     }
     summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2))

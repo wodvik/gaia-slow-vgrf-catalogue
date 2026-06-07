@@ -4,35 +4,35 @@
   "n_old_preselection": 2859,
   "n_outside_old": 17970,
   "tier_counts": {
-    "A": 276,
-    "B": 241,
-    "C": 1318,
-    "D": 756,
-    "X": 18238
+    "A": 289,
+    "B": 252,
+    "C": 1411,
+    "D": 804,
+    "X": 18073
   },
   "tier_counts_old_preselection": {
-    "A": 215,
-    "B": 119,
-    "C": 299,
-    "D": 76,
-    "X": 2150
+    "A": 233,
+    "B": 134,
+    "C": 355,
+    "D": 86,
+    "X": 2051
   },
   "tier_counts_outside_old": {
-    "A": 61,
-    "B": 122,
-    "C": 1019,
-    "D": 680,
-    "X": 16088
+    "A": 56,
+    "B": 118,
+    "C": 1056,
+    "D": 718,
+    "X": 16022
   },
-  "headline_tier_A_plus_B": 517,
-  "orbit_summary_tier_A_plus_B_plus_C": 1835,
-  "point_estimate_vgrf_lt25": 2591,
-  "point_estimate_vgrf_lt25_outside_old": 1882,
+  "headline_tier_A_plus_B": 541,
+  "orbit_summary_tier_A_plus_B_plus_C": 1952,
+  "point_estimate_vgrf_lt25": 2755,
+  "point_estimate_vgrf_lt25_outside_old": 1948,
   "legacy_v_total_grf_lt25": 2859,
   "mc_realisations_counts": {
-    "500": 18081,
-    "5000": 1551,
-    "10000": 1197
+    "500": 17945,
+    "5000": 1623,
+    "10000": 1261
   },
   "rv_quality_counts": {
     "marginal": 89,
@@ -43,9 +43,9 @@
     0.0,
     1.0
   ],
-  "input_csv": "D:\\GAIA\\parent_scan\\expanded_candidates_mc_tiered.csv",
-  "master_fits": "catalogues/catalogue_expanded_master.fits",
-  "tierA_fits": "catalogues/catalogue_expanded_tierA.fits",
-  "tierAB_fits": "catalogues/catalogue_expanded_tierAB.fits",
-  "tierABC_fits": "catalogues/catalogue_expanded_tierABC.fits"
+  "input_csv": "<GAIA_ROOT>/parent_scan/wp1_o1/vc229_official/expanded_candidates_mc_tiered.csv",
+  "master_fits": "<GAIA_ROOT>\\parent_scan\\wp1_o1\\vc229_catalogues\\catalogue_expanded_master.fits",
+  "tierA_fits": "<GAIA_ROOT>\\parent_scan\\wp1_o1\\vc229_catalogues\\catalogue_expanded_tierA.fits",
+  "tierAB_fits": "<GAIA_ROOT>\\parent_scan\\wp1_o1\\vc229_catalogues\\catalogue_expanded_tierAB.fits",
+  "tierABC_fits": "<GAIA_ROOT>\\parent_scan\\wp1_o1\\vc229_catalogues\\catalogue_expanded_tierABC.fits"
 }

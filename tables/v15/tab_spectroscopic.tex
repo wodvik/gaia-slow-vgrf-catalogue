@@ -1,0 +1,32 @@
+﻿\begin{center}
+\refstepcounter{table}\label{tab:spectroscopic}
+\begin{minipage}{\columnwidth}
+\small\textbf{Table \thetable.} High-resolution spectroscopic chemistry
+available for the Tier~A+B+C catalogue. APOGEE DR17
+\citep{Abdurrauf2022} and GALAH DR3 \citep{Buder2021} provide the
+subset used for $\alpha$-based literature-region comparisons. Matches
+come from a full exact-source-id VizieR TAP cross-match against the
+20{,}829-source candidate pool. Gaia GSP-Phot metallicities are
+discussed only as a biased low-resolution contextual estimator in the
+text, not as population assignments.
+\end{minipage}
+\vspace{0.4ex}
+
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrr}
+\hline\hline
+Source & $N$ & Median [Fe/H] \\
+\hline
+APOGEE DR17, usable $\alpha$ & 67 & $-0.80$ \\
+GALAH DR3, usable $\alpha$   & 62 & $-0.83$ \\
+\quad{} unique stars after deduplication & 117 & $-0.81$ \\
+\hline
+Splash classified      &  51 & $-0.62$ \\
+GSE classified          &  23 & $-1.04$ \\
+Aurora classified       &  22 & $-1.43$ \\
+disc-like contaminant   &   2 & $-0.11$ \\
+unclassified in these regions & 19 & $-1.21$ \\
+\hline
+\end{tabular}
+\end{center}

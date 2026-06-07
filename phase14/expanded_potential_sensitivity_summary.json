@@ -1,0 +1,80 @@
+[
+  {
+    "variant": "static_halo_0p85",
+    "kind": "static",
+    "n": 1952,
+    "median_R_peri_pc": 119.35077806401365,
+    "median_R_apo_kpc": 7.366833209991455,
+    "median_ecc": 0.9625333787237599,
+    "n_R_peri_lt_100pc": 847,
+    "n_bridgers": 3,
+    "EJ_drift_p84": NaN,
+    "trajsize": 40001,
+    "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0"
+  },
+  {
+    "variant": "static_default",
+    "kind": "static",
+    "n": 1952,
+    "median_R_peri_pc": 115.51601387291747,
+    "median_R_apo_kpc": 7.3553478717803955,
+    "median_ecc": 0.9638660400702532,
+    "n_R_peri_lt_100pc": 864,
+    "n_bridgers": 3,
+    "EJ_drift_p84": NaN,
+    "trajsize": 40001,
+    "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0"
+  },
+  {
+    "variant": "static_halo_1p15",
+    "kind": "static",
+    "n": 1952,
+    "median_R_peri_pc": 111.24337706392913,
+    "median_R_apo_kpc": 7.32580041885376,
+    "median_ecc": 0.9646161854425951,
+    "n_R_peri_lt_100pc": 883,
+    "n_bridgers": 3,
+    "EJ_drift_p84": NaN,
+    "trajsize": 40001,
+    "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0"
+  },
+  {
+    "variant": "bar_omega33",
+    "kind": "barred",
+    "n": 1952,
+    "median_R_peri_pc": 14.969227789315312,
+    "median_R_apo_kpc": 8.280335903167725,
+    "median_ecc": 0.9955161302735134,
+    "n_R_peri_lt_100pc": 1601,
+    "n_bridgers": 8,
+    "EJ_drift_p84": 1.0179356812620957e-06,
+    "trajsize": 40001,
+    "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0"
+  },
+  {
+    "variant": "bar_omega37p5",
+    "kind": "barred",
+    "n": 1952,
+    "median_R_peri_pc": 14.237657358917504,
+    "median_R_apo_kpc": 8.32243299484253,
+    "median_ecc": 0.9957170108356743,
+    "n_R_peri_lt_100pc": 1629,
+    "n_bridgers": 21,
+    "EJ_drift_p84": 1.0440974909806048e-06,
+    "trajsize": 40001,
+    "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0"
+  },
+  {
+    "variant": "bar_omega41",
+    "kind": "barred",
+    "n": 1952,
+    "median_R_peri_pc": 13.247993433835228,
+    "median_R_apo_kpc": 7.971025466918945,
+    "median_ecc": 0.9960112664225744,
+    "n_R_peri_lt_100pc": 1657,
+    "n_bridgers": 31,
+    "EJ_drift_p84": 1.06416100063327e-06,
+    "trajsize": 40001,
+    "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0"
+  }
+]

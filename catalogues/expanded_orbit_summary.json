@@ -1,56 +1,63 @@
 {
-  "input_csv": "/mnt/d/GAIA/parent_scan/expanded_candidates_mc_tiered.csv",
-  "output_fits": "catalogues/catalogue_expanded_orbits_tierABC.fits",
-  "output_csv": "catalogues/catalogue_expanded_orbits_tierABC.csv",
+  "input_csv": "<GAIA_ROOT>/parent_scan/wp1_o1/vc229_official/expanded_candidates_mc_tiered.csv",
+  "output_fits": "<GAIA_ROOT>/parent_scan/wp1_o1/vc229_orbits_point/catalogue_expanded_orbits_tierABC.fits",
+  "output_csv": "<GAIA_ROOT>/parent_scan/wp1_o1/vc229_orbits_point/catalogue_expanded_orbits_tierABC.csv",
   "trajsize": 40001,
   "pericentre_method": "parabola-interpolated cylindrical R minimum at dR=0",
-  "n_integrated_tierABC": 1835,
-  "n_tierAB": 517,
-  "n_tierABC": 1835,
-  "n_old_preselection_tierABC": 633,
-  "n_outside_old_tierABC": 1202,
+  "n_integrated_tierABC": 1952,
+  "n_tierAB": 541,
+  "n_tierABC": 1952,
+  "n_old_preselection_tierABC": 722,
+  "n_outside_old_tierABC": 1230,
   "static_R_peri_kpc_tierAB": {
-    "n": 517,
-    "p16": 0.033142078759271484,
-    "p50": 0.11248094104090306,
-    "p84": 0.2283311634332944,
-    "min": 1.6475826676041027e-05,
-    "max": 0.437084108741133
+    "n": 541,
+    "p16": 0.03495619948833695,
+    "p50": 0.11250443734811946,
+    "p84": 0.2224731613374554,
+    "min": 0.0018344815324612227,
+    "max": 0.4137127325749617
   },
   "static_R_peri_kpc_tierABC": {
-    "n": 1835,
-    "p16": 0.03135122736218894,
-    "p50": 0.11232669997102825,
-    "p84": 0.25039566290790605,
-    "min": 1.6475826676041027e-05,
-    "max": 0.5714307564391621
+    "n": 1952,
+    "p16": 0.03234474042682607,
+    "p50": 0.11551599569080036,
+    "p84": 0.24620771146558101,
+    "min": 0.0005430685884465451,
+    "max": 0.5669598027650418
   },
   "barred_R_peri_kpc_tierABC": {
-    "n": 1835,
-    "p16": 0.006071460178923362,
-    "p50": 0.014087258915024126,
-    "p84": 0.09905076258150412,
-    "min": 0.0005592018485048645,
-    "max": 0.5892469022593674
+    "n": 1952,
+    "p16": 0.006091921758649939,
+    "p50": 0.014194235059895347,
+    "p84": 0.10250228925500221,
+    "min": 0.00034750872226407744,
+    "max": 0.6297148962380783
   },
   "static_ecc_tierABC": {
-    "n": 1835,
-    "p16": 0.933481427910257,
-    "p50": 0.9640237355619782,
-    "p84": 0.988749619049949,
-    "min": 0.8785958798672825,
-    "max": 0.9999913850282711
+    "n": 1952,
+    "p16": 0.9335164845116697,
+    "p50": 0.9638635259438799,
+    "p84": 0.9887775574268162,
+    "min": 0.8765795792371442,
+    "max": 0.999832997137151
   },
   "static_R_apo_kpc_tierABC": {
-    "n": 1835,
-    "p16": 3.6447548294067382,
-    "p50": 7.43455171585083,
-    "p84": 9.822474288940429,
-    "min": 1.3090022802352905,
-    "max": 17.855972290039062
+    "n": 1952,
+    "p16": 3.597725124359131,
+    "p50": 7.353044509887695,
+    "p84": 9.791805191040037,
+    "min": 1.6224417686462402,
+    "max": 17.86271858215332
   },
-  "n_static_R_peri_lt_100pc_tierABC": 824,
-  "n_barred_R_peri_lt_100pc_tierABC": 1543,
+  "n_static_R_peri_lt_100pc_tierABC": 864,
+  "n_barred_R_peri_lt_100pc_tierABC": 1635,
   "n_static_bridgers_tierABC": 3,
-  "n_barred_bridgers_tierABC": 22
+  "n_barred_bridgers_tierABC": 21,
+  "action_reliability_flag_counts": {
+    "sampled_caution": 15,
+    "sampled_ok": 1,
+    "sampled_poor": 83,
+    "unsampled_global_caveat": 1853
+  },
+  "action_accuracy_sampled_n": 99
 }

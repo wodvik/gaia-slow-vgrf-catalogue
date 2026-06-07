@@ -1,0 +1,33 @@
+﻿\begin{deluxetable*}{lcrrrrr}
+\tablecaption{Candidate Sgr~A* approachers from the Tier~A+B+C catalogue.  Candidate rows are seeded from the closest
+point-estimate static and barred integrations, then re-evaluated with
+$5{,}000$-realisation Monte Carlo orbit propagation and three-point
+quadratic interpolation of $r_{\rm sph}^2(t)$ around each sampled
+minimum.\label{tab:sgrA_candidates}}
+\tablehead{\colhead{Gaia DR3 source\_id} & \colhead{Tier} &
+\colhead{Potential} &
+\colhead{$r_{\rm sph,min}$ p16} & \colhead{p50} & \colhead{p84} &
+\colhead{$P(<10\,$pc$)$ \,/\, $P(<100\,$pc$)$} \\
+& & & \multicolumn{3}{c}{(pc)} & }
+\startdata
+132425700141447168 & C & barred & 26 & 43 & 72 & 0.023 \,/\, \textbf{0.976} \\
+5871390894093751936 & B & static & 16 & 40 & 78 & 0.072 \,/\, \textbf{0.951} \\
+4047819072313279616 & C & barred & 20 & 43 & 84 & 0.041 \,/\, \textbf{0.895} \\
+132425700141447168 & C & static & 17 & 48 & 96 & 0.069 \,/\, \textbf{0.867} \\
+4047405312345623296 & C & barred & 23 & 53 & 172 & 0.027 \,/\, \textbf{0.754} \\
+6761283447501038848 & C & barred & 27 & 70 & 193 & 0.023 \,/\, \textbf{0.643} \\
+4036336430101629568 & C & static & 18 & 110 & 337 & 0.079 \,/\, 0.475 \\
+4038063281786427520 & C & static & 31 & 117 & 312 & 0.037 \,/\, 0.463 \\
+4074796625207486080 & C & static & 83 & 147 & 361 & 0.008 \,/\, 0.252 \\
+6629652011339174912 & C & barred & 90 & 222 & 349 & 0.003 \,/\, 0.179 \\
+\enddata
+\tablecomments{No catalogue candidate satisfies
+$P(r_{\rm sph,min}<10\,{\rm pc})>0.5$.  Six candidates satisfy the
+softer $P(r_{\rm sph,min}<100\,{\rm pc})>0.5$
+criterion.  These are spherical Galactocentric closest-approach
+probabilities from the Monte Carlo propagation and are distinct from the
+point-estimate cylindrical $\Rperi<100$\,pc central-reach counts in
+Table~\ref{tab:reach}.  The closest point-estimate barred candidate is
+\texttt{6761283447501038848} with 4.3 pc.  A source may appear twice
+when it is selected independently by the static and barred seed lists.}
+\end{deluxetable*}

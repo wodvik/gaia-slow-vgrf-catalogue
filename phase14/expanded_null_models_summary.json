@@ -1,0 +1,38 @@
+{
+  "n_control": 10078,
+  "obs_tierABC_below25": 1952,
+  "median_velocity_error_kms": 2.89,
+  "gmm_n_components_bic": 5,
+  "kde_bandwidth_kms": 19.45,
+  "nulls": {
+    "gaussian": {
+      "label": "single trivariate Gaussian",
+      "n_pred": 76.4,
+      "excess": 25.6,
+      "excess_ci": [
+        25.3,
+        26.2
+      ]
+    },
+    "gmm": {
+      "label": "Gaussian mixture (k=5, BIC)",
+      "n_pred": 262.8,
+      "excess": 7.4,
+      "excess_ci": [
+        7.3,
+        7.7
+      ]
+    },
+    "kde": {
+      "label": "kernel density (CV bandwidth)",
+      "n_pred": 177.0,
+      "excess": 11.0,
+      "excess_ci": [
+        10.7,
+        11.3
+      ]
+    }
+  },
+  "gmm_excess_with_velocity_jitter": 7.4,
+  "conclusion": "Slow tail overabundant under every smooth null; the BIC mixture gives the conservative floor and the single ellipsoid (25.5x) is a heuristic."
+}

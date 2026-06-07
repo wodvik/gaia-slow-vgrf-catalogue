@@ -1,0 +1,259 @@
+{
+  "seed": 20260523,
+  "n_per_true_vgrf_bin": 10000,
+  "mc_realisations": 500,
+  "summary_by_true_vgrf_bin": [
+    {
+      "vgrf_bin": "0-25",
+      "true_N": 10000,
+      "rvs_available_N": 7001,
+      "parallax_snr_N": 9891,
+      "pipeline_input_N": 6944,
+      "recovered_N": 6086,
+      "recovery_fraction": 0.6086,
+      "pipeline_input_fraction": 0.6944,
+      "median_sf_value": 0.75,
+      "median_G": 13.7396145,
+      "median_logg": 4.3373401000000005
+    },
+    {
+      "vgrf_bin": "25-50",
+      "true_N": 10000,
+      "rvs_available_N": 7035,
+      "parallax_snr_N": 9896,
+      "pipeline_input_N": 6972,
+      "recovered_N": 282,
+      "recovery_fraction": 0.0282,
+      "pipeline_input_fraction": 0.6972,
+      "median_sf_value": 0.75,
+      "median_G": 13.7244475,
+      "median_logg": 4.324976400000001
+    },
+    {
+      "vgrf_bin": "50-100",
+      "true_N": 10000,
+      "rvs_available_N": 7090,
+      "parallax_snr_N": 9889,
+      "pipeline_input_N": 7030,
+      "recovered_N": 1,
+      "recovery_fraction": 0.0001,
+      "pipeline_input_fraction": 0.703,
+      "median_sf_value": 0.75,
+      "median_G": 13.735471,
+      "median_logg": 4.32661285
+    },
+    {
+      "vgrf_bin": "100-200",
+      "true_N": 10000,
+      "rvs_available_N": 6966,
+      "parallax_snr_N": 9879,
+      "pipeline_input_N": 6906,
+      "recovered_N": 0,
+      "recovery_fraction": 0.0,
+      "pipeline_input_fraction": 0.6906,
+      "median_sf_value": 0.75,
+      "median_G": 13.725505,
+      "median_logg": 4.3314486500000005
+    }
+  ],
+  "slow_0_25_recovery_fraction": 0.6086,
+  "slow_0_25_pipeline_input_fraction": 0.6944,
+  "rvs_selection_function_convention": "DR3RVSSelectionFunction.query(g=phot_rvs_mean_mag, c=bp_rp), preserving v1 catalogue convention",
+  "distance_stage_note": "Mock source_ids have no Bailer-Jones catalogue rows; the script supplies the high-SNR split-normal parallax posterior consumed by the existing v2 MC sampler, which is the BJ21 high-SNR limit after the parallax_over_error>5 filter.",
+  "geDR3mock_reference": "Rybizki et al. 2020, PASP, 132, 074501",
+  "heatmap": {
+    "G_edges": [
+      6.0,
+      10.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0
+    ],
+    "logd_edges": [
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5
+    ],
+    "true_counts": [
+      [
+        23,
+        83,
+        121,
+        12,
+        0,
+        0
+      ],
+      [
+        22,
+        366,
+        570,
+        199,
+        20,
+        0
+      ],
+      [
+        11,
+        245,
+        996,
+        245,
+        30,
+        0
+      ],
+      [
+        11,
+        260,
+        2010,
+        576,
+        111,
+        4
+      ],
+      [
+        3,
+        337,
+        2207,
+        1142,
+        172,
+        2
+      ],
+      [
+        0,
+        141,
+        51,
+        5,
+        18,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "recovered_counts": [
+      [
+        13,
+        42,
+        53,
+        6,
+        0,
+        0
+      ],
+      [
+        8,
+        227,
+        335,
+        78,
+        0,
+        0
+      ],
+      [
+        5,
+        147,
+        700,
+        115,
+        11,
+        0
+      ],
+      [
+        5,
+        139,
+        1364,
+        347,
+        36,
+        0
+      ],
+      [
+        0,
+        154,
+        1420,
+        752,
+        32,
+        0
+      ],
+      [
+        0,
+        69,
+        24,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "efficiency": [
+      [
+        0.5652173913043478,
+        0.5060240963855421,
+        0.4380165289256198,
+        0.5,
+        NaN,
+        NaN
+      ],
+      [
+        0.36363636363636365,
+        0.6202185792349727,
+        0.5877192982456141,
+        0.39195979899497485,
+        0.0,
+        NaN
+      ],
+      [
+        0.45454545454545453,
+        0.6,
+        0.7028112449799196,
+        0.46938775510204084,
+        0.36666666666666664,
+        NaN
+      ],
+      [
+        0.45454545454545453,
+        0.5346153846153846,
+        0.6786069651741293,
+        0.6024305555555556,
+        0.32432432432432434,
+        0.0
+      ],
+      [
+        0.0,
+        0.456973293768546,
+        0.6434073402809243,
+        0.658493870402802,
+        0.18604651162790697,
+        0.0
+      ],
+      [
+        NaN,
+        0.48936170212765956,
+        0.47058823529411764,
+        0.4,
+        0.05555555555555555,
+        NaN
+      ],
+      [
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+# Selection-function low-parent-count (n<10) audit summary.
+# The per-source parent counts are stored in expanded_selection_function.fits
+# as sf_parent_count; sf_prior_dominated_n_lt10 is true when sf_parent_count < 10.
+# GaiaUnlimited DR3-RVS cells absent from dr3-rvs-nk.h5 are encoded as
+# sf_parent_count = 0, matching the p=0.5 prior-mean fill used by
+# DR3RVSSelectionFunction.query(..., fill_nan=True).
+sample,region,N,N_valid,sum_inv_S,f_n_lt10_pct,n_lt10_count,f_sum_n_lt10_pct,sum_inv_S_n_lt10
+candidate_pool,full,20829,19999,37256.3,86.0243,17204,89.3449,33286.6
+TierA,full,289,287,457.397,81.5331,234,87.5267,400.344
+TierB,full,252,249,427.611,85.1406,212,90.036,385.004
+TierC,full,1411,1353,2520.78,86.918,1176,90.0567,2270.13
+TierAB,full,541,536,885.008,83.209,446,88.7392,785.349
+TierABC,full,1952,1889,3405.79,85.8655,1622,89.7143,3055.48
+TierA,inner_l330_30,37,37,54.3433,67.5676,25,74.6154,40.5484
+TierAB,inner_l330_30,90,89,143.146,69.6629,62,76.7854,109.915
+TierABC,inner_l330_30,774,724,1395.84,83.7017,606,86.2954,1204.55

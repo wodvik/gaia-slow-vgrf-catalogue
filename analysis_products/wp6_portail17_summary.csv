@@ -1,2 +1,0 @@
-variant,n,trajsize,pericentre_method,median_R_peri_pc,median_R_apo_kpc,median_ecc,e_gt_0p95_pct,n_R_peri_lt_100pc,n_R_peri_lt_50pc,n_R_peri_lt_10pc,n_min_rsph_lt_100pc,n_min_rsph_lt_10pc,n_bridgers,EJ_drift_p84,n_bridgers_gehrels_low_minus,n_bridgers_gehrels_high_plus
-portail17_barred,1835,40001,parabola-interpolated cylindrical R minimum at dR=0,13.94167222498256,8.415480613708496,0.9959197750939134,94.16893732970027,1571,1469,607,721,3,13,1.7388420253563985e-06,3.554,4.708

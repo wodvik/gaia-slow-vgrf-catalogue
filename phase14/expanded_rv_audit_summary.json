@@ -1,0 +1,62 @@
+{
+  "rv_variability_threshold_chisq_p": 0.01,
+  "per_tier": {
+    "A": {
+      "n": 289,
+      "median_sigma_rv": 2.19,
+      "frac_sigma_rv_gt2_pct": 54.3,
+      "median_rv_nb_transits": 20,
+      "frac_rvs_quality_ok_pct": 93.8,
+      "frac_ruwe_gt1p4_pct": 4.2,
+      "frac_rv_variable_pct": 5.9,
+      "n_nss_match": 7
+    },
+    "B": {
+      "n": 252,
+      "median_sigma_rv": 2.74,
+      "frac_sigma_rv_gt2_pct": 63.1,
+      "median_rv_nb_transits": 21,
+      "frac_rvs_quality_ok_pct": 93.3,
+      "frac_ruwe_gt1p4_pct": 6.3,
+      "frac_rv_variable_pct": 6.3,
+      "n_nss_match": 2
+    },
+    "A+B": {
+      "n": 541,
+      "median_sigma_rv": 2.37,
+      "frac_sigma_rv_gt2_pct": 58.4,
+      "median_rv_nb_transits": 20,
+      "frac_rvs_quality_ok_pct": 93.5,
+      "frac_ruwe_gt1p4_pct": 5.2,
+      "frac_rv_variable_pct": 6.1,
+      "n_nss_match": 9
+    },
+    "A+B+C": {
+      "n": 1952,
+      "median_sigma_rv": 2.54,
+      "frac_sigma_rv_gt2_pct": 59.7,
+      "median_rv_nb_transits": 18,
+      "frac_rvs_quality_ok_pct": 94.3,
+      "frac_ruwe_gt1p4_pct": 3.1,
+      "frac_rv_variable_pct": 5.4,
+      "n_nss_match": 23
+    }
+  },
+  "nss_total_matches_tierABC": 23,
+  "nss_matches_tierAB": 9,
+  "nss_solution_types": {
+    "SB1": 16,
+    "Orbital": 6,
+    "AstroSpectroSB1": 1
+  },
+  "external_rv": {
+    "APOGEE": {
+      "n_overlap": 604,
+      "note": "no external RV column found among ['source_id', 'Teff', 'e_Teff', 'logg', 'e_logg', '__Fe_H_', 'e__Fe_H_', '__M_H_']"
+    },
+    "GALAH": {
+      "n_overlap": 489,
+      "note": "no external RV column found among ['source_id', 'Teff', 'e_Teff', 'logg', 'e_logg', '__Fe_H_', 'e__Fe_H_', '__alpha_Fe_']"
+    }
+  }
+}

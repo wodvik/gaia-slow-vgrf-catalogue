@@ -1,0 +1,23 @@
+{
+  "product": "gaia_parent_buffer_vgrf200_full_dedup.csv",
+  "description": "Broad parent buffer scanned from the local Gaia DR3 source mirror under a preliminary legacy Vgrf < 200 km/s screen. Omitted from the public bundle for size (~7.6 GB).",
+  "omitted_from_bundle": true,
+  "production_path": "D:/GAIA/parent_scan/gaia_parent_buffer_vgrf200_full_dedup.csv",
+  "n_rows": 5867654,
+  "n_unique_source_id": 5867654,
+  "n_duplicate_source_id": 0,
+  "legacy_vgrf_screen_kms": {"min": 2.37, "max": 200.0},
+  "legacy_vgrf_partition_counts": {
+    "lt_25": 2859, "lt_50": 22152, "lt_75": 75227, "lt_100": 186023,
+    "lt_125": 407798, "lt_150": 901787, "lt_175": 2212805, "lt_200": 5867654
+  },
+  "old_preselection_recovery": {"n_old": 2859, "n_recovered": 2859, "n_missing": 0},
+  "source_mirror": "D:/GAIA/csv (Gaia DR3 gaia_source; /mnt/d/GAIA/csv under WSL)",
+  "reconstruction": {
+    "note": "Reproducible from the local Gaia DR3 source mirror with the Phase 0 scanner. NOT required to use the released catalogue products.",
+    "command": "python scripts/phase0_parent_buffer_scan.py --input-csv <mirror_dir> --out-dir <parent_scan_dir>",
+    "adql_equivalent": "ADQL_selection.sql"
+  },
+  "downstream": "Zero-point + Bailer-Jones-distance + Vgrf screening reduces this buffer to the 20,829-source near-threshold candidate pool (private_inputs/expanded_candidates_mc_tiered.csv, adopted Vc=229 tiering 289/541/1952), which IS shipped.",
+  "note": "A SHA-256 of the full buffer can be computed with `python scripts/make_release_checksums.py --file <path>` but is omitted here because the buffer itself is not redistributed."
+}

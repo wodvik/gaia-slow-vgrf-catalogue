@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+\centering
+\caption{DBSCAN present-day compact-group sensitivity grid for the low-\vgrf{} catalogue.  Entries give the number of compact groups found in 3D Galactocentric position space for Tier~A+B / Tier~A+B+C.\label{tab:cluster_search}}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
+\hline\hline
+$\varepsilon$ (pc) & \multicolumn{5}{c}{\texttt{min\_samples}} \\
+\cline{2-6}
+ & 3 & 4 & 5 & 7 & 10 \\
+\hline
+5  & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+10 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+15 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+25 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+50 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 & 0 / 0 \\
+\hline
+\end{tabular}
+\vspace{0.5ex}
+
+\begin{minipage}{0.95\columnwidth}
+\footnotesize
+\textit{Note.} The search uses the \citet{Ester1996} DBSCAN algorithm in present-day 3D Galactocentric position space, with $\varepsilon$ varied from 5 to 50\,pc and \texttt{min\_samples} from 3 to 10.  The paired entries are Tier~A+B / Tier~A+B+C group counts.  The closest Tier~A+B pair is 20.2\,pc, while Tier~A+B+C contains two pairs below 25\,pc but no three-member group at any grid point.  This grid follows the parameter-sensitivity guidance of \citet{Schubert2017}.
+\end{minipage}
+\end{table}

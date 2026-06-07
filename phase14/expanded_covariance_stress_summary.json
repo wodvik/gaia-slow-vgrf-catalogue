@@ -1,0 +1,47 @@
+{
+  "n_sources_band": 3342,
+  "p_floor": 0.3,
+  "n_samp": 2000,
+  "coupling": "Gaussian copula z_distance=-z_parallax (maximal anti-correlation)",
+  "abs_delta_P": {
+    "median": 0.009000000000000008,
+    "p84": 0.020499999999999963,
+    "p95": 0.028000000000000025,
+    "max": 0.05500000000000005
+  },
+  "tier_switches_independent_vs_copula": 114,
+  "confusion_matrix_indep_rows_copula_cols": {
+    "A": {
+      "A": 287,
+      "B": 7,
+      "C": 0,
+      "subC": 0
+    },
+    "B": {
+      "A": 4,
+      "B": 235,
+      "C": 8,
+      "subC": 0
+    },
+    "C": {
+      "A": 0,
+      "B": 13,
+      "C": 1355,
+      "subC": 40
+    },
+    "subC": {
+      "A": 0,
+      "B": 0,
+      "C": 42,
+      "subC": 1351
+    }
+  },
+  "headline_AB_adopted": 541,
+  "headline_AB_lost_under_copula": 14,
+  "AB_boundary_flips_indep_vs_copula": 21,
+  "crossings": {
+    "p_gt_0p95": 11,
+    "p_gt_0p84": 21,
+    "p_gt_0p50": 82
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "variant": "McMillan+2017",
+  "potential_file": "/home/humbl/.local/lib/python3.12/site-packages/agama/data/McMillan17.ini",
+  "circular_velocity_R0_kms": 233.1,
+  "n": 1952,
+  "median_R_peri_pc": 122.6,
+  "median_R_apo_kpc": 7.31,
+  "median_ecc": 0.961,
+  "frac_e_gt_0p8_pct": 100.0,
+  "n_R_peri_lt_100pc": 816,
+  "n_R_peri_lt_50pc": 424,
+  "n_R_peri_lt_10pc": 95,
+  "n_min_rsph_lt_100pc": 277,
+  "n_min_rsph_lt_10pc": 9,
+  "n_bridgers": 3,
+  "trajsize": 40001
+}

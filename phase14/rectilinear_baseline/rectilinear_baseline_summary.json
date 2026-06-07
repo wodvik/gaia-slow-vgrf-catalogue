@@ -1,0 +1,355 @@
+{
+  "phase": "15A",
+  "orbit_catalogue": "catalogues\\catalogue_expanded_orbits_tierABC.fits",
+  "input_csv": "private_inputs\\expanded_candidates_mc_tiered.csv",
+  "n_samp": 5000,
+  "chunk_size": 64,
+  "seed": 20415528,
+  "near_time_myr": 10.0,
+  "kpc_per_gyr_per_kms": 1.0227121650537077,
+  "point_estimate": {
+    "tier_ab": {
+      "n": 541,
+      "d_min_pc_p16": 4253.708840032878,
+      "d_min_pc_p50": 6687.241749373543,
+      "d_min_pc_p84": 8461.590544491388,
+      "abs_t_min_myr_p16": 75.4997739190712,
+      "abs_t_min_myr_p50": 268.34622057056833,
+      "abs_t_min_myr_p84": 530.1574930896217,
+      "past_count": 252,
+      "near_now_count": 11,
+      "future_count": 278,
+      "d_lt_100_pc": 0,
+      "past_d_lt_100_pc": 0,
+      "future_d_lt_100_pc": 0,
+      "d_lt_500_pc": 1,
+      "past_d_lt_500_pc": 0,
+      "future_d_lt_500_pc": 1,
+      "d_lt_1000_pc": 2,
+      "past_d_lt_1000_pc": 0,
+      "future_d_lt_1000_pc": 2
+    },
+    "gold_tier_ab": {
+      "n": 420,
+      "d_min_pc_p16": 4216.747195417157,
+      "d_min_pc_p50": 6638.265990736918,
+      "d_min_pc_p84": 8169.582879186468,
+      "abs_t_min_myr_p16": 75.76523462317819,
+      "abs_t_min_myr_p50": 260.2233696069503,
+      "abs_t_min_myr_p84": 509.6995814757152,
+      "past_count": 186,
+      "near_now_count": 8,
+      "future_count": 226,
+      "d_lt_100_pc": 0,
+      "past_d_lt_100_pc": 0,
+      "future_d_lt_100_pc": 0,
+      "d_lt_500_pc": 1,
+      "past_d_lt_500_pc": 0,
+      "future_d_lt_500_pc": 1,
+      "d_lt_1000_pc": 2,
+      "past_d_lt_1000_pc": 0,
+      "future_d_lt_1000_pc": 2
+    },
+    "tier_abc": {
+      "n": 1952,
+      "d_min_pc_p16": 2649.6433902560834,
+      "d_min_pc_p50": 5517.257178883981,
+      "d_min_pc_p84": 8312.699750787975,
+      "abs_t_min_myr_p16": 47.08969217802541,
+      "abs_t_min_myr_p50": 163.7840370044166,
+      "abs_t_min_myr_p84": 353.2643400043396,
+      "past_count": 888,
+      "near_now_count": 69,
+      "future_count": 995,
+      "d_lt_100_pc": 0,
+      "past_d_lt_100_pc": 0,
+      "future_d_lt_100_pc": 0,
+      "d_lt_500_pc": 12,
+      "past_d_lt_500_pc": 6,
+      "future_d_lt_500_pc": 6,
+      "d_lt_1000_pc": 37,
+      "past_d_lt_1000_pc": 17,
+      "future_d_lt_1000_pc": 20
+    }
+  },
+  "mc_counts": {
+    "tier_ab": {
+      "past_p16_p50_p84": [
+        248.0,
+        254.0,
+        260.0
+      ],
+      "near_now_p16_p50_p84": [
+        10.0,
+        13.0,
+        17.0
+      ],
+      "future_p16_p50_p84": [
+        268.0,
+        274.0,
+        280.0
+      ],
+      "d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "past_d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "future_d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "d_lt_500_pc_p16_p50_p84": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "past_d_lt_500_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "future_d_lt_500_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "d_lt_1000_pc_p16_p50_p84": [
+        2.0,
+        3.0,
+        5.0
+      ],
+      "past_d_lt_1000_pc_p16_p50_p84": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "future_d_lt_1000_pc_p16_p50_p84": [
+        1.0,
+        2.0,
+        4.0
+      ]
+    },
+    "gold_tier_ab": {
+      "past_p16_p50_p84": [
+        185.0,
+        190.0,
+        195.0
+      ],
+      "near_now_p16_p50_p84": [
+        7.0,
+        10.0,
+        13.0
+      ],
+      "future_p16_p50_p84": [
+        214.0,
+        220.0,
+        225.0
+      ],
+      "d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "past_d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "future_d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "d_lt_500_pc_p16_p50_p84": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "past_d_lt_500_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "future_d_lt_500_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "d_lt_1000_pc_p16_p50_p84": [
+        1.0,
+        3.0,
+        4.0
+      ],
+      "past_d_lt_1000_pc_p16_p50_p84": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "future_d_lt_1000_pc_p16_p50_p84": [
+        1.0,
+        2.0,
+        3.0
+      ]
+    },
+    "tier_abc": {
+      "past_p16_p50_p84": [
+        863.0,
+        876.0,
+        889.0
+      ],
+      "near_now_p16_p50_p84": [
+        97.0,
+        106.0,
+        115.0
+      ],
+      "future_p16_p50_p84": [
+        957.0,
+        970.0,
+        983.0
+      ],
+      "d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "past_d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "future_d_lt_100_pc_p16_p50_p84": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "d_lt_500_pc_p16_p50_p84": [
+        4.0,
+        6.0,
+        9.0
+      ],
+      "past_d_lt_500_pc_p16_p50_p84": [
+        1.0,
+        3.0,
+        4.0
+      ],
+      "future_d_lt_500_pc_p16_p50_p84": [
+        2.0,
+        3.0,
+        5.0
+      ],
+      "d_lt_1000_pc_p16_p50_p84": [
+        22.0,
+        26.0,
+        31.0
+      ],
+      "past_d_lt_1000_pc_p16_p50_p84": [
+        9.0,
+        12.0,
+        15.0
+      ],
+      "future_d_lt_1000_pc_p16_p50_p84": [
+        11.0,
+        15.0,
+        19.0
+      ]
+    }
+  },
+  "top_tier_ab_point_estimate": [
+    {
+      "source_id": 5071663482388678912,
+      "tier": "A",
+      "rect_d_min_pc": 447.0616228832456,
+      "rect_t_min_myr": 515.0259543926766,
+      "vgrf_default_exact": 16.557355794218388
+    },
+    {
+      "source_id": 1424779091765210496,
+      "tier": "B",
+      "rect_d_min_pc": 969.2829161894315,
+      "rect_t_min_myr": 604.7855339370279,
+      "vgrf_default_exact": 14.637671589653172
+    },
+    {
+      "source_id": 1538299509804109568,
+      "tier": "B",
+      "rect_d_min_pc": 1039.8712473709436,
+      "rect_t_min_myr": 559.4217249023476,
+      "vgrf_default_exact": 16.14978360115896
+    },
+    {
+      "source_id": 5499247057459764608,
+      "tier": "A",
+      "rect_d_min_pc": 1291.3946269630069,
+      "rect_t_min_myr": 956.9254169549289,
+      "vgrf_default_exact": 10.288099842567757
+    },
+    {
+      "source_id": 6146424240134520448,
+      "tier": "A",
+      "rect_d_min_pc": 1317.8436093690475,
+      "rect_t_min_myr": 595.6947159778819,
+      "vgrf_default_exact": 12.615963438738866
+    },
+    {
+      "source_id": 6104183069278959616,
+      "tier": "A",
+      "rect_d_min_pc": 1362.6583063612456,
+      "rect_t_min_myr": 564.7673108863704,
+      "vgrf_default_exact": 13.08963717322182
+    },
+    {
+      "source_id": 6732733352447290496,
+      "tier": "B",
+      "rect_d_min_pc": 1448.6931916121061,
+      "rect_t_min_myr": -231.39385925612333,
+      "vgrf_default_exact": 15.707203063298929
+    },
+    {
+      "source_id": 4065262966083493248,
+      "tier": "B",
+      "rect_d_min_pc": 1474.937674675862,
+      "rect_t_min_myr": 1779.8709614121856,
+      "vgrf_default_exact": 2.605975861241212
+    },
+    {
+      "source_id": 2226839495284849536,
+      "tier": "B",
+      "rect_d_min_pc": 1478.4109669840072,
+      "rect_t_min_myr": -386.2408279653642,
+      "vgrf_default_exact": 22.16342383067348
+    },
+    {
+      "source_id": 1388416077571124096,
+      "tier": "A",
+      "rect_d_min_pc": 1609.2076945519862,
+      "rect_t_min_myr": 396.8877514721486,
+      "vgrf_default_exact": 19.449589905702865
+    },
+    {
+      "source_id": 4452364176521571840,
+      "tier": "A",
+      "rect_d_min_pc": 1617.256025366152,
+      "rect_t_min_myr": 433.1090807778786,
+      "vgrf_default_exact": 15.41040820340654
+    },
+    {
+      "source_id": 6290321729203054720,
+      "tier": "B",
+      "rect_d_min_pc": 1638.6350448147925,
+      "rect_t_min_myr": 396.07103565298877,
+      "vgrf_default_exact": 14.914928839149727
+    }
+  ],
+  "outputs": {
+    "summary_json": "phase14\\rectilinear_baseline\\rectilinear_baseline_summary.json",
+    "per_star_csv": "phase14\\rectilinear_baseline\\rectilinear_baseline_tierAB_per_star.csv",
+    "table_tex": "tables\\v15\\tab_rectilinear_baseline.tex"
+  },
+  "note": "Rectilinear no-force baseline; not an orbit model."
+}

@@ -1,7 +1,0 @@
-variant,kind,n,median_R_peri_pc,median_R_apo_kpc,median_ecc,n_R_peri_lt_100pc,n_bridgers,EJ_drift_p84,trajsize,pericentre_method
-static_halo_0p85,static,1835,116.09214877407915,7.444993495941162,0.9624115611813935,797,3,,40001,parabola-interpolated cylindrical R minimum at dR=0
-static_default,static,1835,112.32669997102825,7.43455171585083,0.9640266901811887,826,3,,40001,parabola-interpolated cylindrical R minimum at dR=0
-static_halo_1p15,static,1835,108.6524264026285,7.440351486206055,0.9651424096611454,850,3,,40001,parabola-interpolated cylindrical R minimum at dR=0
-bar_omega33,barred,1835,14.737467736568028,8.365264892578125,0.995591010028423,1503,9,9.941252868292797e-07,40001,parabola-interpolated cylindrical R minimum at dR=0
-bar_omega37p5,barred,1835,13.87494163061086,8.382659912109375,0.9957486145985135,1544,22,1.0414354568074297e-06,40001,parabola-interpolated cylindrical R minimum at dR=0
-bar_omega41,barred,1835,13.378788106904311,8.026527404785156,0.9961547902424815,1575,24,1.0833337020743074e-06,40001,parabola-interpolated cylindrical R minimum at dR=0

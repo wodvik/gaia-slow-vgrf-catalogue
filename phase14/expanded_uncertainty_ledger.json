@@ -1,0 +1,68 @@
+{
+  "n_bootstrap": 4000,
+  "rows": [
+    {
+      "quantity": "Median eccentricity (Tier A+B+C, point)",
+      "value": "0.964",
+      "lo": "0.963",
+      "hi": "0.965",
+      "method": "bootstrap"
+    },
+    {
+      "quantity": "Median $R_{\\rm peri}$ (pc, point)",
+      "value": "115.5",
+      "lo": "112",
+      "hi": "119",
+      "method": "bootstrap"
+    },
+    {
+      "quantity": "Median $R_{\\rm apo}$ (kpc, point)",
+      "value": "7.35",
+      "lo": "7.27",
+      "hi": "7.47",
+      "method": "bootstrap"
+    },
+    {
+      "quantity": "Control 25--50 median $R_{\\rm peri}$ (pc)",
+      "value": "132.6",
+      "lo": "128",
+      "hi": "135",
+      "method": "weighted bootstrap"
+    },
+    {
+      "quantity": "Excess factor (BIC mixture)",
+      "value": "7.4",
+      "lo": "7.3",
+      "hi": "7.7",
+      "method": "bootstrap"
+    },
+    {
+      "quantity": "Excess factor (single ellipsoid)",
+      "value": "25.6",
+      "lo": "25.3",
+      "hi": "26.2",
+      "method": "bootstrap"
+    },
+    {
+      "quantity": "Pipeline recovery, conditional (\\%)",
+      "value": "87.6",
+      "lo": "87.2",
+      "hi": "88.0",
+      "method": "Wilson"
+    },
+    {
+      "quantity": "Pipeline recovery, end-to-end (\\%)",
+      "value": "60.9",
+      "lo": "60.4",
+      "hi": "61.3",
+      "method": "Wilson"
+    },
+    {
+      "quantity": "25--50 leakage fraction (\\%)",
+      "value": "2.82",
+      "lo": "2.7",
+      "hi": "3.0",
+      "method": "Wilson"
+    }
+  ]
+}

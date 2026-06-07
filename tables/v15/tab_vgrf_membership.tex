@@ -1,0 +1,29 @@
+\begin{deluxetable*}{lr}
+\tablecaption{Monte Carlo threshold-membership probabilities for the
+$\vgrf<25\,$\kms{} cut. Astrometric realisations use the Gaia DR3
+parallax--proper-motion covariance, with sky position held fixed, plus
+an independent radial-velocity error,
+with distance drawn from the asymmetric Bailer-Jones+2021 photogeometric
+posterior. The candidate pool contains 20{,}829 Gaia DR3
+sources; after the final correction and distance convention, 2{,}755 have
+corrected point-estimate $\vgrf<25\,\kms$.  ``Sources newly admitted
+beyond the legacy preselection'' is the count of Tier~A+B+C members
+that do not appear in the pre-v15 slow-velocity preselection list
+maintained during catalogue development; they are the additions
+enabled by the zero-point-corrected, propagated, probability-tiered
+pipeline reported here.
+\label{tab:vgrf_membership}}
+\tablehead{\colhead{Diagnostic} & \colhead{Value}}
+\startdata
+Candidate pool propagated through MC                                & 20{,}829 \\
+Corrected point-estimate $\vgrf<25\,\kms$                           & 2{,}755 \\
+$P(\vgrf<25\,\kms)>0.95$ \,(Tier~A)                                 & 289 \\
+$0.84<P(\vgrf<25\,\kms)\leq0.95$ \,(Tier~B increment)               & 252 \\
+$P(\vgrf<25\,\kms)>0.84$ \,(Tier~A+B; primary)                      & 541 \\
+$0.50<P(\vgrf<25\,\kms)\leq0.84$ \,(Tier~C increment)               & 1{,}411 \\
+$P(\vgrf<25\,\kms)>0.50$ \,(Tier~A+B+C)                             & 1{,}952 \\
+Tier~D (point-estimate $<25\,\kms$, $P\leq 0.50$)                   & 804  \\
+Median $P(\vgrf<25\,\kms)$ for Tier~A+B+C                          & 0.70 \\
+Sources newly admitted beyond the legacy preselection (Tier~A+B+C)  & 1{,}230 \\
+\enddata
+\end{deluxetable*}

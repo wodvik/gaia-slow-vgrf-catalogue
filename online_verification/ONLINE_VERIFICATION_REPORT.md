@@ -1,4 +1,4 @@
-# Gaia DR3 Online Verification Report
+﻿# Gaia DR3 Online Verification Report
 
 This audit checked the catalogue products against the public ESA
 Gaia Archive TAP service, querying `gaiadr3.gaia_source` by `source_id`.
@@ -26,8 +26,8 @@ Tolerances:
 
 | Catalogue | Local rows | Unique local source IDs | Gaia Archive rows recovered | Missing IDs | Discrepancies |
 |---|---:|---:|---:|---:|---:|
-| `catalogue_expanded_tierAB.fits` | 517 | 517 | 517 | 0 | 0 |
-| `catalogue_expanded_tierABC.fits` | 1,835 | 1,835 | 1,835 | 0 | 0 |
+| `catalogue_expanded_tierAB.fits` | 541 | 541 | 541 | 0 | 0 |
+| `catalogue_expanded_tierABC.fits` | 1,952 | 1,952 | 1,952 | 0 | 0 |
 | `catalogue_expanded_master.fits` | 20,829 | 20,829 | 20,829 | 0 | 0 |
 
 Maximum absolute deltas in the full master audit:

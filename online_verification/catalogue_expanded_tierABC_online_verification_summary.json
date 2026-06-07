@@ -2,9 +2,9 @@
   "catalogue": "catalogues/catalogue_expanded_tierABC.fits",
   "gaia_archive_table": "gaiadr3.gaia_source",
   "gaia_tap_sync_endpoint": "https://gea.esac.esa.int/tap-server/tap/sync",
-  "rows_local": 1835,
-  "unique_source_ids_local": 1835,
-  "rows_recovered_online": 1835,
+  "rows_local": 1952,
+  "unique_source_ids_local": 1952,
+  "rows_recovered_online": 1952,
   "missing_source_ids": 0,
   "discrepancies": 0,
   "tolerances": {
@@ -17,13 +17,13 @@
     "phot_g_mean_mag": 1e-06
   },
   "compared_by_column": {
-    "ra": 1835,
-    "dec": 1835,
-    "parallax": 1835,
-    "pmra": 1835,
-    "pmdec": 1835,
-    "radial_velocity": 1835,
-    "phot_g_mean_mag": 1835
+    "ra": 1952,
+    "dec": 1952,
+    "parallax": 1952,
+    "pmra": 1952,
+    "pmdec": 1952,
+    "radial_velocity": 1952,
+    "phot_g_mean_mag": 1952
   },
   "max_abs_delta_by_column": {
     "ra": 1.1368683772161603e-13,

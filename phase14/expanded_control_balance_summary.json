@@ -1,0 +1,146 @@
+{
+  "n_slow_tierABC": 1952,
+  "slow_median_Rperi_pc": 115.516,
+  "bands": {
+    "vgrf_25_50": {
+      "label": "25--50",
+      "n_control": 1955,
+      "ess_raw": 1955.0,
+      "median_Rperi_pc_raw": 143.13711971044538,
+      "median_ecc_raw": 0.920590103512542,
+      "max_abs_smd_raw": 0.6694641284406267,
+      "ess_kernel": 1543.5989306821598,
+      "median_Rperi_pc_kernel": 132.64886938938872,
+      "median_ecc_kernel": 0.9209440984560269,
+      "max_abs_smd_kernel": 0.8085906361452266,
+      "ess_ipw": 152.45837384575393,
+      "median_Rperi_pc_ipw": 305.9021077540074,
+      "median_ecc_ipw": 0.9150288574624521,
+      "max_abs_smd_ipw": 0.8052918929717485,
+      "ess_ebal": 387.4714020705021,
+      "median_Rperi_pc_ebal": 206.0907968437512,
+      "median_ecc_ebal": 0.9214902999611387,
+      "max_abs_smd_ebal": 3.173416550853066e-13
+    },
+    "vgrf_50_100": {
+      "label": "50--100",
+      "n_control": 2586,
+      "ess_raw": 2586.0,
+      "median_Rperi_pc_raw": 460.18630266189575,
+      "median_ecc_raw": 0.7952214951808037,
+      "max_abs_smd_raw": 0.4449284264360218,
+      "ess_kernel": 1943.7713445549764,
+      "median_Rperi_pc_kernel": 408.17365829665346,
+      "median_ecc_kernel": 0.7913480197550042,
+      "max_abs_smd_kernel": 0.6856119908494265,
+      "ess_ipw": 673.9395980172283,
+      "median_Rperi_pc_ipw": 722.1451078967863,
+      "median_ecc_ipw": 0.7934210008225477,
+      "max_abs_smd_ipw": 0.3664355393268196,
+      "ess_ebal": 990.4084162897146,
+      "median_Rperi_pc_ebal": 592.0281865013623,
+      "median_ecc_ebal": 0.7962779405516841,
+      "max_abs_smd_ebal": 8.537649992685042e-12
+    },
+    "vgrf_100_200": {
+      "label": "100--200",
+      "n_control": 2788,
+      "ess_raw": 2788.0,
+      "median_Rperi_pc_raw": 1756.9425106048584,
+      "median_ecc_raw": 0.43440720850007114,
+      "max_abs_smd_raw": 0.3608918300615642,
+      "ess_kernel": 2016.2445849083479,
+      "median_Rperi_pc_kernel": 1362.1351166323093,
+      "median_ecc_kernel": 0.46201013657520607,
+      "max_abs_smd_kernel": 0.6432874641720508,
+      "ess_ipw": 737.5864906266812,
+      "median_Rperi_pc_ipw": 3347.2289261698193,
+      "median_ecc_ipw": 0.3621087071008557,
+      "max_abs_smd_ipw": 0.5051232771004586,
+      "ess_ebal": 1438.0089360964093,
+      "median_Rperi_pc_ebal": 2675.8166017198937,
+      "median_ecc_ebal": 0.3901198084249613,
+      "max_abs_smd_ebal": 3.0335481517730203e-12
+    },
+    "vgrf_200_260": {
+      "label": "200--260",
+      "n_control": 2749,
+      "ess_raw": 2749.0,
+      "median_Rperi_pc_raw": 2822.5235939025874,
+      "median_ecc_raw": 0.2879484670384719,
+      "max_abs_smd_raw": 0.36924133880635135,
+      "ess_kernel": 1973.4315649127109,
+      "median_Rperi_pc_kernel": 2246.17484446673,
+      "median_ecc_kernel": 0.3247869531482182,
+      "max_abs_smd_kernel": 0.6174939562511998,
+      "ess_ipw": 874.895559465092,
+      "median_Rperi_pc_ipw": 5535.948668380186,
+      "median_ecc_ipw": 0.1953829436882446,
+      "max_abs_smd_ipw": 0.39915026869763237,
+      "ess_ebal": 1474.162937940693,
+      "median_Rperi_pc_ebal": 3974.2174291915953,
+      "median_ecc_ebal": 0.23714260790674438,
+      "max_abs_smd_ebal": 1.813830907624815e-15
+    }
+  },
+  "rperi_sequence_raw_pc": [
+    115.5,
+    143.1,
+    460.2,
+    1756.9,
+    2822.5
+  ],
+  "rperi_monotonic_increasing_raw": true,
+  "ecc_sequence_raw": [
+    0.921,
+    0.795,
+    0.434,
+    0.288
+  ],
+  "ecc_monotonic_decreasing_raw": true,
+  "rperi_sequence_kernel_pc": [
+    115.5,
+    132.6,
+    408.2,
+    1362.1,
+    2246.2
+  ],
+  "rperi_monotonic_increasing_kernel": true,
+  "ecc_sequence_kernel": [
+    0.921,
+    0.791,
+    0.462,
+    0.325
+  ],
+  "ecc_monotonic_decreasing_kernel": true,
+  "rperi_sequence_ipw_pc": [
+    115.5,
+    305.9,
+    722.1,
+    3347.2,
+    5535.9
+  ],
+  "rperi_monotonic_increasing_ipw": true,
+  "ecc_sequence_ipw": [
+    0.915,
+    0.793,
+    0.362,
+    0.195
+  ],
+  "ecc_monotonic_decreasing_ipw": true,
+  "rperi_sequence_ebal_pc": [
+    115.5,
+    206.1,
+    592.0,
+    2675.8,
+    3974.2
+  ],
+  "rperi_monotonic_increasing_ebal": true,
+  "ecc_sequence_ebal": [
+    0.921,
+    0.796,
+    0.39,
+    0.237
+  ],
+  "ecc_monotonic_decreasing_ebal": true
+}

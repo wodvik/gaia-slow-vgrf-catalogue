@@ -1,0 +1,45 @@
+\begin{center}
+\refstepcounter{table}\label{tab:selection_function}
+\begin{minipage}{\columnwidth}
+\small\textbf{Table \thetable.} Gaia DR3 RVS selection-function
+diagnostics for the catalogue.  The catalogue is selected from the
+observed Gaia DR3 6D/RVS subset and is therefore not a volume-complete
+Milky Way census.  $N_{\rm valid}$ is the number of sources for which
+the GaiaUnlimited DR3-RVS implementation
+\citep{CastroGinard2023} returned a finite selection-function weight at the source's $(G, BP{-}RP, l, b)$ cell;
+the $N-N_{\rm valid}$ deficit is dominated by cells with zero parent
+count.  $f_{n<10}$ is the fraction of $N_{\rm valid}$ sources whose
+underlying GaiaUnlimited cell carries a parent count below 10 (the
+regime in which the Beta$(k{+}1,\,n{-}k{+}1)$ posterior remains
+competitive with its Beta$(1,1)$ prior: posterior standard error
+$\gtrsim 0.16$ for $n<10$); $f_{\sum,n<10}$ is the share of
+$\sum 1/S_{\rm RVS}$ contributed by those prior-dominated cells.  The
+lower block restricts each tier to the inner-Galaxy quadrant
+$l \in [330\degr,\,30\degr]$ where the catalogue concentrates
+(Section~\ref{sec:sky}).  Inverse-selection weighted sums are reported
+only as contextual observability diagnostics and are not used as
+primary population counts.
+\end{minipage}
+\vspace{0.4ex}
+
+\footnotesize
+\setlength{\tabcolsep}{1pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\hline\hline
+Sample & $N$ & $N_{\rm val}$ & $\Sigma 1/S$ & $\tilde S$ & $f_{<10}$ & $f_{\Sigma,<10}$ \\
+\hline
+\multicolumn{7}{l}{\textit{Full sample}} \\
+Candidate pool          & 20{,}829 & 19{,}999 & 37{,}256.3 & 0.50 & --      & --      \\
+Tier A                  & 289      & 287      & 457.4      & 0.67 & 81.5\%  & 87.5\%  \\
+Tier B                  & 252      & 249      & 427.6      & 0.50 & 85.1\%  & 90.0\%  \\
+Tier C                  & 1{,}411  & 1{,}353  & 2{,}520.8  & 0.50 & 86.9\%  & 90.1\%  \\
+Tier A+B                & 541      & 536      & 885.0      & 0.67 & 83.2\%  & 88.7\%  \\
+Tier A+B+C              & 1{,}952  & 1{,}889  & 3{,}405.8  & 0.50 & 85.9\%  & 89.7\%  \\
+\hline
+\multicolumn{7}{l}{\textit{Inner-Galaxy quadrant, $l\in[330\degr,\,30\degr]$}} \\
+Tier A (inner)          & 37       & 37       & 54.3       & 0.67 & 67.6\%  & 74.6\%  \\
+Tier A+B (inner)        & 90       & 89       & 143.1      & 0.67 & 69.7\%  & 76.8\%  \\
+Tier A+B+C (inner)      & 774      & 724      & 1{,}395.8  & 0.50 & 83.7\%  & 86.3\%  \\
+\hline
+\end{tabular}
+\end{center}
