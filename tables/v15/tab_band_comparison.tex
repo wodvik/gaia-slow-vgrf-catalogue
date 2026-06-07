@@ -3,7 +3,10 @@
 \begin{minipage}{\columnwidth}
 \small\textbf{Table \thetable.} Matched-control comparison across
 $\vgrf$ velocity bands. Each band is integrated in the Hunter+2024
-axisymmetric potential. Control rows use entropy-balanced weights that
+axisymmetric potential. The $\Rperi$ and $e$ columns are deterministic
+point-estimate orbit summaries; the Monte Carlo posterior-median
+eccentricity summary is given separately in Table~\ref{tab:orbit_summary}.
+Control rows use entropy-balanced weights that
 match the slow catalogue's observability covariate means
 (Table~\ref{tab:control_balance}); the final column gives the older
 product-kernel pericentre median only as a sensitivity readout.
@@ -26,6 +29,8 @@ slow A+B+C             & 1{,}952 & ---   & 116 & 0.964 & --- \\
 \par\smallskip
 \footnotesize Control-row labels are $\vgrf$ bands in \kms; $\Rperi$ is
 in pc and $e$ is dimensionless. The slow row uses the parent-complete
-Tier~A+B+C catalogue. Entropy-balanced effective sample sizes are rounded
-to the nearest star.
+Tier~A+B+C catalogue and the point-estimate orbit product, so its
+$e=0.964$ should not be interchanged with the MC posterior-median
+$e=0.949$ in Table~\ref{tab:orbit_summary}. Entropy-balanced effective
+sample sizes are rounded to the nearest star.
 \end{center}

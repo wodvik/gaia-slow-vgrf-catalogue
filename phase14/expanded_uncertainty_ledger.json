@@ -30,6 +30,20 @@
       "method": "weighted bootstrap"
     },
     {
+      "quantity": "Nominal purity (Tier A+B, \\%)",
+      "value": "94",
+      "lo": "93",
+      "hi": "95",
+      "method": "score Bernoulli SE"
+    },
+    {
+      "quantity": "Nominal purity (Tier A+B+C, \\%)",
+      "value": "73",
+      "lo": "72",
+      "hi": "74",
+      "method": "score Bernoulli SE"
+    },
+    {
       "quantity": "Excess factor (BIC mixture)",
       "value": "7.4",
       "lo": "7.3",

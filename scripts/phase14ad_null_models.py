@@ -158,8 +158,9 @@ def main() -> int:
                     "excess": round(ex_k, 1), "excess_ci": [round(c, 1) for c in ci["kde"]]},
         },
         "gmm_excess_with_velocity_jitter": round(ex_gmm_j, 1),
-        "conclusion": "Slow tail overabundant under every smooth null; the BIC mixture "
-                      "gives the conservative floor and the single ellipsoid (25.5x) is a heuristic.",
+        "conclusion": "Slow tail overabundant under every tested observed-control smooth null; "
+                      "the BIC mixture gives the conservative floor and the single ellipsoid "
+                      "(25.5x) is a heuristic, not a Gaia-selected intrinsic-DF prediction.",
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "expanded_null_models_summary.json").write_text(json.dumps(summ, indent=2))
@@ -177,12 +178,12 @@ def _latex_table(summ: dict) -> None:
         r"\begin{deluxetable}{lccc}",
         r"\tablecaption{Implied slow-tail excess factor for the Tier~A+B+C catalogue"
         r" ($N=1{,}952$ below $25\kms$) under three tested smooth velocity-distribution nulls"
-        r" fitted to the matched-control library ($|v_{\rm GC}|$ in $25$--$260\kms$,"
+        r" fitted to the observed matched-control library ($|v_{\rm GC}|$ in $25$--$260\kms$,"
         rf" $N={summ['n_control']:,}$). Intervals are 16th--84th percentile bootstrap"
         r" ranges over the control library. The diagnostic excess is large under every"
-        r" tested null, but its magnitude is null-dependent: the single ellipsoid is an"
+        r" tested observed-control null, but its magnitude is null-dependent: the single ellipsoid is an"
         r" illustrative heuristic and the BIC mixture gives the conservative tested"
-        r" value.\label{tab:null_models}}",
+        r" value. These rows are not a forward Gaia-selected intrinsic-DF prediction.\label{tab:null_models}}",
         r"\tablehead{\colhead{smooth null} & \colhead{$N_{\rm pred}(<25)$}"
         r" & \colhead{excess} & \colhead{16--84\% range}}",
         r"\startdata",

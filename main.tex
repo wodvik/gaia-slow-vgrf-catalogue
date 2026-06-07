@@ -73,12 +73,12 @@ parallax--proper-motion covariance, we identify a primary Tier~A+B
 sample of 541 stars with $P(\vgrf<25\kms)>0.84$ and a broader Tier~A+B+C
 sample of 1{,}952 stars with $P>0.50$.  Summing $1-P$ over the members,
 the internal Monte Carlo scores imply a nominal expected membership purity
-of $94.3\%$ for Tier~A+B and $72.7\%$ for Tier~A+B+C.  Orbit integrations
+of $94\%\pm1\%$ for Tier~A+B and $73\%\pm1\%$ for Tier~A+B+C.  Orbit integrations
 in the static, axisymmetrized Hunter et al.\ (2024) Galactic potential map
 the broader sample onto compact, highly radial model orbits, with median
 eccentricity 0.949, median pericentre 154\,pc, and median apocentre
-7.35\kpc.  The observed Tier~A+B+C count exceeds the tested
-control-normalised smooth velocity nulls by a factor of several
+7.35\kpc.  In an observed-control extrapolation, the Tier~A+B+C count
+exceeds the tested control-normalised smooth velocity nulls by a factor of several
 ($7.4\times$ for the conservative Gaussian-mixture null; $25.6\times$ for
 an illustrative single ellipsoid), and unweighted Anderson--Darling tests
 reject continuity with the adjacent $25$--$50$\kms band ($p<0.001$).  A controlled GeDR3mock injection-recovery exercise
@@ -165,7 +165,12 @@ adopted Galactic potential, and are model-dependent rather than measured.
 \emph{Exploratory sensitivity products}---barred-potential central
 reaches, long-apocentre inner-reach and Sgr~A* counts, resonance overlays, and chaos
 diagnostics---probe robustness and are labelled as such throughout.  The
-conclusions rest most heavily on the first two layers.
+conclusions rest most heavily on the first two layers.  When both
+point-estimate and Monte Carlo orbit products are quoted, the sampling
+scheme is labelled explicitly; for eccentricity in particular, the
+deterministic point-estimate integration is systematically higher than the
+per-star Monte Carlo posterior medians because $e$ is bounded above by
+unity.
 
 % =============================================================================
 \section{Sample Definition and Methods} \label{sec:methods}
@@ -291,7 +296,9 @@ The Monte Carlo scheme uses 500 baseline realisations per source,
 refines stars in the transition band $0.30<P<0.70$ to 5,000
 realisations, and assigns 10,000 realisations to stars whose
 point-estimate $\vgrf$ lies within 2\kms{} of the threshold.  A separate
-100-star convergence check compares 500 and 5,000 realisations.  We use
+100-star convergence check compares 500 and 5,000 realisations.  In this
+release, 1{,}623 stars receive the 5,000-realisation refinement and
+1{,}261 receive the 10,000-realisation near-threshold refinement.  We use
 the resulting $P(\vgrf<25\kms)$ values to define Tier~A ($P>0.95$),
 Tier~B increment ($0.84<P\leq0.95$), Tier~C increment
 ($0.50<P\leq0.84$), and Tier~D (corrected point estimate below
@@ -299,10 +306,14 @@ Tier~B increment ($0.84<P\leq0.95$), Tier~C increment
 
 Because every star carries a membership probability, the expected number
 of contaminants in any tier follows directly as $\sum(1-P)$ over its
-members.  This gives $30.8$ expected false positives in the 541-star
-Tier~A+B sample ($94.3\%$ nominal expected purity) and $533$ in the
-1{,}952-star Tier~A+B+C sample ($72.7\%$ nominal expected purity);
-the 289-star Tier~A core has $98.7\%$ nominal expected purity.
+members.  This gives $30.8\pm5.3$ expected false positives in the
+541-star Tier~A+B sample, or $94\%\pm1\%$ nominal expected purity, and
+$533\pm18$ in the 1{,}952-star Tier~A+B+C sample, or $73\%\pm1\%$
+nominal expected purity; the 289-star Tier~A core has $99\%\pm1\%$
+nominal expected purity.  These uncertainties are the Bernoulli standard
+errors implied by the internal per-star probabilities, while the finite
+Monte Carlo sampling error on the summed purity is smaller than 0.05
+percentage points for both the Tier~A+B and Tier~A+B+C samples.
 Tier~A+B is therefore the recommended high-confidence working sample
 and Tier~A+B+C the high-completeness extension.
 
@@ -348,6 +359,19 @@ this worst-case coupling: of the 541 Tier~A+B members, 527 ($97.4\%$)
 remain above $P=0.84$, with 14 falling just below.  The largest shifts
 occur for near-threshold sources, which the probabilistic tiering already
 flags (Fig.~\ref{fig:joint_distance_test}).
+
+As a column-level audit of distance-prior sensitivity, we also report the
+Gaia parallax signal-to-noise distribution for the tiered catalogue.  In
+the primary Tier~A+B sample, 66 of 541 stars (12.2\%) lie in the lower-SNR
+$5<\varpi/\sigma_\varpi\leq10$ interval and 475 (87.8\%) have
+$\varpi/\sigma_\varpi>10$; none have a BJ 68\% fractional distance
+half-width above 0.15.  In the broader Tier~A+B+C extension, where the
+lower-confidence Tier~C dominates, 876 of 1{,}952 stars (44.9\%) lie in
+the $5$--$10$ interval, 1{,}076 (55.1\%) exceed 10, and 10 (0.5\%) have
+BJ fractional distance half-width above 0.15.  Thus the potentially
+prior-sensitive distance regime is concentrated in the completeness
+extension, not in the primary catalogue; the copula test above is our
+stress bound on how this approximation affects threshold membership.
 
 \begin{figure}[!htbp]
 \centering
@@ -749,7 +773,8 @@ threshold probability, not by a hard point estimate alone.}
 \label{fig:pvgrf_membership}
 \end{figure}
 
-As a tested smooth-tail expectation check, we compare the observed slow count
+As a tested observed-control smooth-tail expectation check, we compare
+the observed slow count
 against smooth velocity distributions fit to the matched-control library
 ($|v_{\rm GC}|$ in 25--260\kms, 10{,}078 stars) and extrapolated below
 25\kms.  A single trivariate-Gaussian ellipsoid, normalised to the
@@ -769,9 +794,11 @@ single-ellipsoid $25.6\times$ as an illustrative heuristic and read the
 mixture-based $\sim\!7\times$ as the conservative statement for the tested
 control-normalised smooth nulls.  We do not interpret these models as a
 forward Gaia-selected Milky Way distribution function, nor as proof against
-every physically smooth but substructured velocity field.  This is a local
-comparison against the observed Gaia DR3 matched-control velocity field,
-not a volume-complete population estimate.
+every physically smooth but substructured velocity field; the GeDR3mock
+exercise below is a balanced injection-recovery test, not a
+population-prior forward model.  This is a local comparison against the
+observed Gaia DR3 matched-control velocity field, not a volume-complete
+population estimate.
 
 \input{tables/v15/tab_null_models.tex}
 
@@ -1442,10 +1469,11 @@ maps onto strongly radially biased model orbits with median eccentricity
 0.949, median $\Rperi=154$\,pc, and median $\Rapo=7.35$\kpc{} from the
 5{,}000-realisation orbit Monte Carlo.
 
-The catalogue is not a re-statement of the local velocity ellipsoid.
-Tested smooth velocity-distribution nulls fit to the $25$--$260\kms$ control
-library and extrapolated below $25\kms$ under-predict the observed slow
-count by a factor of $7$--$26$ depending on the null
+The catalogue is not a re-statement of the local velocity ellipsoid.  As
+an observed-control diagnostic, tested smooth velocity-distribution nulls
+fit to the $25$--$260\kms$ control library and extrapolated below
+$25\kms$ under-predict the observed slow count by a factor of $7$--$26$
+depending on the null
 ($76.4$ stars and an illustrative $25.6\times$ for a single Gaussian ellipsoid;
 $7.4\times$ for a BIC Gaussian mixture;
 Section~\ref{sec:vgrf_membership_results}, Table~\ref{tab:null_models}),
@@ -1454,8 +1482,8 @@ distribution against both the adjacent $25$--$50\kms$ matched control and
 the smooth-DF mock at $p<0.001$.
 
 The barred-potential sensitivity sweep produces 7--31 long-apocentre
-inner-reach candidates across
-the pattern-speed grid $\Omega_p\in\{24,28,33,37.5,41\}\kms\kpc^{-1}$,
+inner-reach candidates across pattern speeds
+$\Omega_p=24$, 28, 33, 37.5, and $41\kms\kpc^{-1}$,
 while the static default produces three.  An independent M2M bar
 \citep{Portail2017} integrated at $\Omega_p=37.5\kms\kpc^{-1}$ yields
 15 such candidates and the same compact, high-eccentricity barred-orbit

@@ -23,6 +23,7 @@ from astropy.table import Table
 BUNDLE = Path(__file__).resolve().parents[1]
 REPO = BUNDLE.parents[1]
 ORBITS = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.fits"
+MASTER = BUNDLE / "catalogues" / "catalogue_expanded_master.fits"
 CONTROLS = REPO / "release" / "_iterations" / "v2" / "phase5" / "control_orbits.fits"
 WEIGHTS = BUNDLE / "phase14" / "expanded_control_weights.csv"
 NULLS = BUNDLE / "phase14" / "expanded_null_models_summary.json"
@@ -83,6 +84,10 @@ def main() -> int:
 
     nulls = json.loads(NULLS.read_text())["nulls"]
 
+    master = Table.read(MASTER).to_pandas()
+    tier = master["tier"].str.decode("utf-8").str.strip() if master["tier"].dtype == object and isinstance(master["tier"].iloc[0], bytes) else master["tier"].astype(str).str.strip()
+    prob = master["P_vgrf_below_25"].to_numpy(float)
+
     rows = []
 
     def add(name, value, lo, hi, method):
@@ -102,6 +107,17 @@ def main() -> int:
     add(r"Median $R_{\rm apo}$ (kpc, point)", f"{np.nanmedian(rapo):.2f}", f"{ra_lo:.2f}", f"{ra_hi:.2f}", "bootstrap")
     c_lo, c_hi = boot_median_ci(c25_rp, rng, weights=c25_w)
     add(r"Control 25--50 median $R_{\rm peri}$ (pc)", f"{wmed(c25_rp, c25_w):.1f}", f"{c_lo:.0f}", f"{c_hi:.0f}", "weighted bootstrap")
+
+    def add_purity(name, mask):
+        p = prob[mask]
+        purity = float(np.mean(p))
+        se = float(np.sqrt(np.sum(p * (1.0 - p))) / len(p))
+        lo = max(0.0, purity - se)
+        hi = min(1.0, purity + se)
+        add(name, f"{100*purity:.0f}", f"{100*lo:.0f}", f"{100*hi:.0f}", "score Bernoulli SE")
+
+    add_purity(r"Nominal purity (Tier A+B, \%)", tier.isin(["A", "B"]).to_numpy())
+    add_purity(r"Nominal purity (Tier A+B+C, \%)", tier.isin(["A", "B", "C"]).to_numpy())
 
     add(r"Excess factor (BIC mixture)", f"{nulls['gmm']['excess']:.1f}",
         f"{nulls['gmm']['excess_ci'][0]:.1f}", f"{nulls['gmm']['excess_ci'][1]:.1f}", "bootstrap")
@@ -130,9 +146,10 @@ def _latex(rows) -> None:
         r"\begin{deluxetable*}{lccl}",
         r"\tablecaption{Uncertainty ledger for the primary numerical claims. Intervals are"
         r" central 68\% ranges: bootstrap resampling of the catalogue for the medians and"
-        r" excess factors, and Wilson score intervals for the binomial pipeline fractions."
-        r" The probability tiers themselves carry the Jeffreys/Poisson intervals quoted in"
-        r" the text.\label{tab:uncertainty_ledger}}",
+        r" excess factors, Wilson score intervals for the binomial pipeline fractions,"
+        r" and score-implied Bernoulli standard errors for nominal purity. Rows labelled"
+        r" ``point'' use deterministic point-estimate orbit products; the"
+        r" uncertainty-propagated eccentricity summary is Table~\ref{tab:orbit_summary}.\label{tab:uncertainty_ledger}}",
         r"\tablehead{\colhead{quantity} & \colhead{value} & \colhead{68\% interval}"
         r" & \colhead{method}}",
         r"\startdata",
