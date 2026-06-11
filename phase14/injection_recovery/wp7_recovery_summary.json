@@ -9,8 +9,8 @@
       "rvs_available_N": 7001,
       "parallax_snr_N": 9891,
       "pipeline_input_N": 6944,
-      "recovered_N": 6086,
-      "recovery_fraction": 0.6086,
+      "recovered_N": 6038,
+      "recovery_fraction": 0.6038,
       "pipeline_input_fraction": 0.6944,
       "median_sf_value": 0.75,
       "median_G": 13.7396145,
@@ -22,8 +22,8 @@
       "rvs_available_N": 7035,
       "parallax_snr_N": 9896,
       "pipeline_input_N": 6972,
-      "recovered_N": 282,
-      "recovery_fraction": 0.0282,
+      "recovered_N": 313,
+      "recovery_fraction": 0.0313,
       "pipeline_input_fraction": 0.6972,
       "median_sf_value": 0.75,
       "median_G": 13.7244475,
@@ -56,7 +56,7 @@
       "median_logg": 4.3314486500000005
     }
   ],
-  "slow_0_25_recovery_fraction": 0.6086,
+  "slow_0_25_recovery_fraction": 0.6038,
   "slow_0_25_pipeline_input_fraction": 0.6944,
   "rvs_selection_function_convention": "DR3RVSSelectionFunction.query(g=phot_rvs_mean_mag, c=bp_rp), preserving v1 catalogue convention",
   "distance_stage_note": "Mock source_ids have no Bailer-Jones catalogue rows; the script supplies the high-SNR split-normal parallax posterior consumed by the existing v2 MC sampler, which is the BJ21 high-SNR limit after the parallax_over_error>5 filter.",
@@ -142,8 +142,8 @@
     "recovered_counts": [
       [
         13,
-        42,
-        53,
+        43,
+        55,
         6,
         0,
         0
@@ -151,41 +151,41 @@
       [
         8,
         227,
-        335,
-        78,
+        328,
+        72,
         0,
         0
       ],
       [
-        5,
+        4,
         147,
-        700,
-        115,
-        11,
+        697,
+        110,
+        10,
         0
       ],
       [
         5,
-        139,
-        1364,
-        347,
+        138,
+        1358,
+        342,
         36,
         0
       ],
       [
         0,
-        154,
-        1420,
-        752,
+        153,
+        1408,
+        753,
         32,
         0
       ],
       [
         0,
-        69,
+        67,
         24,
         2,
-        1,
+        0,
         0
       ],
       [
@@ -200,8 +200,8 @@
     "efficiency": [
       [
         0.5652173913043478,
-        0.5060240963855421,
-        0.4380165289256198,
+        0.5180722891566265,
+        0.45454545454545453,
         0.5,
         NaN,
         NaN
@@ -209,41 +209,41 @@
       [
         0.36363636363636365,
         0.6202185792349727,
-        0.5877192982456141,
-        0.39195979899497485,
+        0.5754385964912281,
+        0.36180904522613067,
         0.0,
         NaN
       ],
       [
-        0.45454545454545453,
+        0.36363636363636365,
         0.6,
-        0.7028112449799196,
-        0.46938775510204084,
-        0.36666666666666664,
+        0.6997991967871486,
+        0.4489795918367347,
+        0.3333333333333333,
         NaN
       ],
       [
         0.45454545454545453,
-        0.5346153846153846,
-        0.6786069651741293,
-        0.6024305555555556,
+        0.5307692307692308,
+        0.6756218905472637,
+        0.59375,
         0.32432432432432434,
         0.0
       ],
       [
         0.0,
-        0.456973293768546,
-        0.6434073402809243,
-        0.658493870402802,
+        0.4540059347181009,
+        0.6379700951517897,
+        0.659369527145359,
         0.18604651162790697,
         0.0
       ],
       [
         NaN,
-        0.48936170212765956,
+        0.475177304964539,
         0.47058823529411764,
         0.4,
-        0.05555555555555555,
+        0.0,
         NaN
       ],
       [

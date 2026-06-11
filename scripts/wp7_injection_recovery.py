@@ -37,10 +37,14 @@ BUNDLE = Path(__file__).resolve().parents[1]
 REPO = BUNDLE.parents[1]
 OUT_REVIEW = BUNDLE / "phase14" / "injection_recovery"
 PHASE15 = OUT_REVIEW
-RELEASE_TABLE = BUNDLE / "tables/v15/tab_recovery_summary.tex"
-RELEASE_FIG = BUNDLE / "figures/fig_recovery_heatmap.pdf"
-BUNDLE_TABLE = RELEASE_TABLE
-BUNDLE_FIG = RELEASE_FIG
+RELEASE_TABLES = [
+    BUNDLE / "tables/v15/tab_recovery_summary.tex",
+    REPO / "release" / "tables/v15/tab_recovery_summary.tex",
+]
+RELEASE_FIGS = [
+    BUNDLE / "figures/fig_recovery_heatmap.pdf",
+    REPO / "release" / "figures/fig_recovery_heatmap.pdf",
+]
 PHASE0E = BUNDLE / "scripts/phase0e_expanded_mc_tiering.py"
 
 VGRF_DECADES = [(0.0, 25.0), (25.0, 50.0), (50.0, 100.0), (100.0, 200.0)]
@@ -68,6 +72,15 @@ def rel(path: Path) -> str:
         return str(path).replace("\\", "/")
 
 
+def clean_label(s: pd.Series) -> pd.Series:
+    return (
+        s.astype(str)
+        .str.replace("b'", "", regex=False)
+        .str.replace("'", "", regex=False)
+        .str.strip()
+    )
+
+
 def load_phase0e_module():
     spec = importlib.util.spec_from_file_location("phase0e_expanded_mc_tiering", PHASE0E)
     if spec is None or spec.loader is None:
@@ -92,10 +105,8 @@ def galcen_frame() -> Galactocentric:
 def ensure_dirs() -> None:
     OUT_REVIEW.mkdir(parents=True, exist_ok=True)
     PHASE15.mkdir(parents=True, exist_ok=True)
-    RELEASE_TABLE.parent.mkdir(parents=True, exist_ok=True)
-    RELEASE_FIG.parent.mkdir(parents=True, exist_ok=True)
-    BUNDLE_TABLE.parent.mkdir(parents=True, exist_ok=True)
-    BUNDLE_FIG.parent.mkdir(parents=True, exist_ok=True)
+    for path in RELEASE_TABLES + RELEASE_FIGS:
+        path.parent.mkdir(parents=True, exist_ok=True)
 
 
 def fetch_gedr3mock_seed(target_rows: int, force: bool) -> pd.DataFrame:
@@ -565,9 +576,10 @@ def write_latex_table(summary: pd.DataFrame) -> None:
             "",
         ]
     )
-    RELEASE_TABLE.write_text("\n".join(lines), encoding="utf-8")
-    shutil.copy2(RELEASE_TABLE, BUNDLE_TABLE)
-    log(f"wrote {rel(RELEASE_TABLE)} and bundle mirror")
+    text = "\n".join(lines)
+    for path in RELEASE_TABLES:
+        path.write_text(text, encoding="utf-8")
+    log("wrote " + ", ".join(rel(path) for path in RELEASE_TABLES))
 
 
 def make_heatmap(df: pd.DataFrame) -> dict[str, Any]:
@@ -615,10 +627,10 @@ def make_heatmap(df: pd.DataFrame) -> dict[str, Any]:
     ax.set_xlim(g_edges[0], g_edges[-1])
     ax.set_ylim(d_edges[0], d_edges[-1])
     fig.tight_layout()
-    fig.savefig(RELEASE_FIG)
+    for path in RELEASE_FIGS:
+        fig.savefig(path)
     plt.close(fig)
-    shutil.copy2(RELEASE_FIG, BUNDLE_FIG)
-    log(f"wrote {rel(RELEASE_FIG)} and bundle mirror")
+    log("wrote " + ", ".join(rel(path) for path in RELEASE_FIGS))
 
     heat_rows = []
     for i in range(len(g_edges) - 1):
@@ -645,6 +657,10 @@ def make_heatmap(df: pd.DataFrame) -> dict[str, Any]:
 
 
 def write_outputs(df: pd.DataFrame) -> dict[str, Any]:
+    df = df.copy()
+    df["vgrf_bin"] = clean_label(df["vgrf_bin"])
+    df["tier"] = clean_label(df["tier"])
+    df["recovered_slow"] = df["tier"].isin(["A", "B", "C"])
     summary = summarize_by_decade(df)
     binned = binned_slow_recovery(df)
     summary.to_csv(OUT_REVIEW / "wp7_recovery_summary.csv", index=False)
@@ -667,7 +683,9 @@ def write_outputs(df: pd.DataFrame) -> dict[str, Any]:
     }
     summary_json = OUT_REVIEW / "wp7_recovery_summary.json"
     summary_json.write_text(json.dumps(payload, indent=2, allow_nan=True), encoding="utf-8")
-    shutil.copy2(summary_json, PHASE15 / "wp7_recovery_summary.json")
+    phase15_json = PHASE15 / "wp7_recovery_summary.json"
+    if summary_json.resolve() != phase15_json.resolve():
+        shutil.copy2(summary_json, phase15_json)
     log(f"wrote summary {rel(summary_json)}")
     return payload
 

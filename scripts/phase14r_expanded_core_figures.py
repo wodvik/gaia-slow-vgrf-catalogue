@@ -53,19 +53,38 @@ def save(fig: plt.Figure, name: str) -> None:
     print(f"wrote {FIG / name}")
 
 
-def tier_marker_legend(ax: plt.Axes, df: pd.DataFrame, loc: str = "upper right") -> None:
+def tier_marker_legend(
+    ax: plt.Axes,
+    df: pd.DataFrame,
+    loc: str = "upper right",
+    *,
+    bbox_to_anchor: tuple[float, float] | None = None,
+    ncol: int = 1,
+    short_labels: bool = False,
+) -> None:
     handles = []
     for tier in ("C", "B", "A"):
         st = TIER_STYLE[tier]
+        label = tier if short_labels else st["label"]
         handles.append(Line2D(
             [0], [0],
             marker=st["marker"], linestyle="None",
             markersize=max(4.0, np.sqrt(st["size"]) * 1.15),
             markerfacecolor="0.25", markeredgecolor="black",
             markeredgewidth=0.45, color="black",
-            label=f"{st['label']} (N={int((df['tier'] == tier).sum()):,})",
+            label=f"{label} (N={int((df['tier'] == tier).sum()):,})",
         ))
-    ax.legend(handles=handles, loc=loc, fontsize=6, frameon=True)
+    ax.legend(
+        handles=handles,
+        loc=loc,
+        bbox_to_anchor=bbox_to_anchor,
+        ncol=ncol,
+        fontsize=5.6 if ncol > 1 else 6,
+        frameon=True,
+        borderaxespad=0.2,
+        handletextpad=0.45,
+        columnspacing=0.9,
+    )
 
 
 def plot_pvgrf(master: pd.DataFrame) -> None:
@@ -191,7 +210,14 @@ def plot_elz(orbits: pd.DataFrame) -> None:
     ax.axvline(0, color="black", lw=0.7, alpha=0.7)
     ax.set_xlabel(r"$L_z$ (kpc km s$^{-1}$)")
     ax.set_ylabel(ylabel)
-    tier_marker_legend(ax, orbits, loc="best")
+    tier_marker_legend(
+        ax,
+        orbits,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.015),
+        ncol=3,
+        short_labels=True,
+    )
     cb = fig.colorbar(sc, ax=ax, pad=0.02)
     cb.set_label("Eccentricity")
     fig.tight_layout()

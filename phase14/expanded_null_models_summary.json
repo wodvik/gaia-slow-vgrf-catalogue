@@ -34,5 +34,5 @@
     }
   },
   "gmm_excess_with_velocity_jitter": 7.4,
-  "conclusion": "Slow tail overabundant under every tested observed-control smooth null; the BIC mixture gives the conservative floor and the single ellipsoid (25.5x) is a heuristic, not a Gaia-selected intrinsic-DF prediction."
+  "conclusion": "Observed slow count is above every tested observed-control smooth-continuation extrapolation; the BIC mixture gives the conservative tested value and the single ellipsoid (25.5x) is a heuristic, not a Gaia-selected intrinsic-DF prediction."
 }

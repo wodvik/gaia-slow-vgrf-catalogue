@@ -5,16 +5,17 @@
 \end{minipage}
 \vspace{0.4ex}
 
-\footnotesize
-\setlength{\tabcolsep}{1pt}
-\begin{tabular}{@{}lrrrrrr@{}}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrr}
 \hline\hline
-True $\vgrf$ bin & $N_{\rm true}$ & $N_{\rm RVS}$ & $N_{\varpi}$ & $N_{\rm input}$ & $N_{\rm rec}$ & $N_{\rm rec}/N_{\rm true}$ \\
+True $V_{\rm grf}$ bin & $N_{\rm true}$ & $N_{\rm RVS}$ & $N_{\varpi}$ & $N_{\rm input}$ & $N_{\rm rec}/N_{\rm true}$ \\
 \hline
-0--25 & 10,000 & 7,001 & 9,891 & 6,944 & 6,086 & 0.609 \\
-25--50 & 10,000 & 7,035 & 9,896 & 6,972 & 282 & 0.028 \\
-50--100 & 10,000 & 7,090 & 9,889 & 7,030 & 1 & 0.0001 \\
-100--200 & 10,000 & 6,966 & 9,879 & 6,906 & 0 & 0.000 \\
+0-25\kms & 10,000 & 7,001 & 9,891 & 6,944 & 6,038/10,000 (0.604) \\
+25-50\kms & 10,000 & 7,035 & 9,896 & 6,972 & 313/10,000 (0.031) \\
+50-100\kms & 10,000 & 7,090 & 9,889 & 7,030 & 1/10,000 (0.0001) \\
+100-200\kms & 10,000 & 6,966 & 9,879 & 6,906 & 0/10,000 (0.000) \\
 \hline
-\end{tabular}
+\end{tabular}}
 \end{center}

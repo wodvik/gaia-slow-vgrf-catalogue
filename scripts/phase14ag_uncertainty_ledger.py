@@ -33,9 +33,9 @@ TAB_DIRS = [REPO / "release" / "tables" / "v15", BUNDLE / "tables" / "v15"]
 B = 4000
 SEED = 20260605
 # Injection-recovery counts from the GeDR3mock test (Sec. 4.7 / tab_recovery_summary).
-REC_SLOW_NUM, REC_SLOW_DEN = 6086, 6944          # conditional recovery 87.6%
-REC_E2E_NUM, REC_E2E_DEN = 6086, 10000           # end-to-end 60.9%
-LEAK_NUM, LEAK_DEN = 282, 10000                  # 25-50 leakage 2.82%
+REC_SLOW_NUM, REC_SLOW_DEN = 6038, 6944          # conditional recovery 87.0%
+REC_E2E_NUM, REC_E2E_DEN = 6038, 10000           # end-to-end 60.4%
+LEAK_NUM, LEAK_DEN = 313, 10000                  # 25-50 leakage 3.13%
 
 
 def boot_median_ci(x, rng, weights=None):
@@ -116,18 +116,18 @@ def main() -> int:
         hi = min(1.0, purity + se)
         add(name, f"{100*purity:.0f}", f"{100*lo:.0f}", f"{100*hi:.0f}", "score Bernoulli SE")
 
-    add_purity(r"Nominal purity (Tier A+B, \%)", tier.isin(["A", "B"]).to_numpy())
-    add_purity(r"Nominal purity (Tier A+B+C, \%)", tier.isin(["A", "B", "C"]).to_numpy())
+    add_purity(r"Score-implied purity (Tier A+B, \%)", tier.isin(["A", "B"]).to_numpy())
+    add_purity(r"Score-implied purity (Tier A+B+C, \%)", tier.isin(["A", "B", "C"]).to_numpy())
 
-    add(r"Excess factor (BIC mixture)", f"{nulls['gmm']['excess']:.1f}",
+    add(r"Observed-control ratio (BIC mixture)", f"{nulls['gmm']['excess']:.1f}",
         f"{nulls['gmm']['excess_ci'][0]:.1f}", f"{nulls['gmm']['excess_ci'][1]:.1f}", "bootstrap")
-    add(r"Excess factor (single ellipsoid)", f"{nulls['gaussian']['excess']:.1f}",
+    add(r"Observed-control ratio (single ellipsoid)", f"{nulls['gaussian']['excess']:.1f}",
         f"{nulls['gaussian']['excess_ci'][0]:.1f}", f"{nulls['gaussian']['excess_ci'][1]:.1f}", "bootstrap")
 
     for name, k, n, val in [
-        (r"Pipeline recovery, conditional (\%)", REC_SLOW_NUM, REC_SLOW_DEN, "87.6"),
-        (r"Pipeline recovery, end-to-end (\%)", REC_E2E_NUM, REC_E2E_DEN, "60.9"),
-        (r"25--50 leakage fraction (\%)", LEAK_NUM, LEAK_DEN, "2.82"),
+        (r"Pipeline recovery, conditional (\%)", REC_SLOW_NUM, REC_SLOW_DEN, "87.0"),
+        (r"Pipeline recovery, end-to-end (\%)", REC_E2E_NUM, REC_E2E_DEN, "60.4"),
+        (r"25--50 leakage fraction (\%)", LEAK_NUM, LEAK_DEN, "3.13"),
     ]:
         lo, hi = wilson(k, n)
         add(name, val, f"{lo*100:.1f}", f"{hi*100:.1f}", "Wilson")
@@ -146,8 +146,8 @@ def _latex(rows) -> None:
         r"\begin{deluxetable*}{lccl}",
         r"\tablecaption{Uncertainty ledger for the primary numerical claims. Intervals are"
         r" central 68\% ranges: bootstrap resampling of the catalogue for the medians and"
-        r" excess factors, Wilson score intervals for the binomial pipeline fractions,"
-        r" and score-implied Bernoulli standard errors for nominal purity. Rows labelled"
+        r" observed-control ratios, Wilson score intervals for the binomial pipeline fractions,"
+        r" and score-implied Bernoulli standard errors for the purity rows. Rows labelled"
         r" ``point'' use deterministic point-estimate orbit products; the"
         r" uncertainty-propagated eccentricity summary is Table~\ref{tab:orbit_summary}.\label{tab:uncertainty_ledger}}",
         r"\tablehead{\colhead{quantity} & \colhead{value} & \colhead{68\% interval}"
