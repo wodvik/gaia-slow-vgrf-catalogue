@@ -68,6 +68,8 @@ Columns carrying `legacy` or `old_preselection` are retained only to audit the
 | `alpha_spec` | dex | Spectroscopic alpha-abundance proxy: [alpha/M] for APOGEE, [alpha/Fe] for GALAH (distinguish via `chem_survey`); `NaN` if unavailable. |
 | `chem_survey` | none | Spectroscopic source of `feh_spec`/`alpha_spec`: `APOGEE`, `GALAH`, or empty when there is no spectroscopic match. |
 | `chem_population` | none | Chemodynamic class from spectroscopic [Fe/H]+alpha (`Splash`, `GSE`, `Aurora`, `disk`, `unclassified`) using the `phase14u_expanded_chemistry.classify` thresholds; empty unless both `feh_spec` and `alpha_spec` are finite. The Tier A+B+C subset carrying a class is the 117-star alpha subset discussed in the manuscript. |
+| `nss_two_body` | boolean | True when the `source_id` has at least one entry in the Gaia DR3 `gaiadr3.nss_two_body_orbit` non-single-star catalogue (exact `source_id` cross-match). Counts: 9/541 Tier A+B, 23/1,952 Tier A+B+C, 139/20,829 master. |
+| `nss_solution_type` | none | Gaia DR3 NSS two-body solution type for matched sources (`SB1`, `Orbital`, or `AstroSpectroSB1`); empty when `nss_two_body` is false. Tier A+B+C breakdown: SB1=16, Orbital=6, AstroSpectroSB1=1. |
 
 ## Point-Estimate Orbit Catalogue
 
@@ -132,6 +134,8 @@ not observables.
 | `alpha_spec` | dex | Spectroscopic alpha-abundance proxy ([alpha/M] for APOGEE, [alpha/Fe] for GALAH; see `chem_survey`); `NaN` if unavailable. |
 | `chem_survey` | none | Spectroscopic source of `feh_spec`/`alpha_spec`: `APOGEE`, `GALAH`, or empty for no match. |
 | `chem_population` | none | Chemodynamic class from spectroscopic [Fe/H]+alpha (`Splash`/`GSE`/`Aurora`/`disk`/`unclassified`) per `phase14u_expanded_chemistry.classify`; empty unless both `feh_spec` and `alpha_spec` are finite (117 Tier A+B+C stars). |
+| `nss_two_body` | boolean | Gaia DR3 `gaiadr3.nss_two_body_orbit` non-single-star flag, copied from the master catalogue (23 Tier A+B+C sources). |
+| `nss_solution_type` | none | Gaia DR3 NSS solution type (`SB1`/`Orbital`/`AstroSpectroSB1`) for matched sources; empty otherwise. |
 
 ## Orbit Monte Carlo Catalogue
 

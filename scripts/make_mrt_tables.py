@@ -59,6 +59,8 @@ TIER_COLUMNS = [
     ("alpha_spec", None, "Spectroscopic alpha proxy in dex ([a/M] APOGEE, [a/Fe] GALAH; blank if none)"),
     ("chem_survey", None, "Spectroscopic source of feh_spec/alpha_spec (APOGEE/GALAH; blank if none)"),
     ("chem_population", None, "Chemodynamic class from [Fe/H]+alpha (Splash/GSE/Aurora/disk/unclassified; blank if none)"),
+    ("nss_two_body", None, "Gaia DR3 nss_two_body_orbit non-single-star flag (True/False)"),
+    ("nss_solution_type", None, "Gaia DR3 NSS solution type (SB1/Orbital/AstroSpectroSB1; blank if not matched)"),
 ]
 
 ORBIT_COLUMNS = [
@@ -83,6 +85,8 @@ ORBIT_COLUMNS = [
     ("alpha_spec", None, "Spectroscopic alpha proxy in dex (blank if none)"),
     ("chem_survey", None, "Spectroscopic source (APOGEE/GALAH; blank if none)"),
     ("chem_population", None, "Chemodynamic class (Splash/GSE/Aurora/disk/unclassified; blank if none)"),
+    ("nss_two_body", None, "Gaia DR3 nss_two_body_orbit non-single-star flag (True/False)"),
+    ("nss_solution_type", None, "Gaia DR3 NSS solution type (SB1/Orbital/AstroSpectroSB1; blank if not matched)"),
 ]
 
 

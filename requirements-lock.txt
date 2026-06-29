@@ -35,9 +35,6 @@ lxml==6.1.1
 markdown-it-py==4.0.0
 matplotlib==3.10.8
 mdurl==0.1.2
-# Editable install with no version control (megahub==0.1.0)
--e c:\users\humbl\megahub
--e git+https://github.com/wodvik/arc@cf7832903f4c50c0d50b071a80d3b2f46e948c5b#egg=megastructure_arc
 more-itertools==11.0.2
 numpy==2.4.4
 openai==2.2.0
@@ -79,3 +76,16 @@ urllib3==2.5.0
 wcwidth==0.2.14
 webencodings==0.5.1
 zipp==3.23.1
+
+# ---------------------------------------------------------------------------
+# Scientific dependencies installed via conda-forge or source compilation
+# (see environment.yml); a pip freeze of the conda environment does not
+# capture conda or compiled packages, so they are listed here for
+# completeness rather than as pip-resolvable pins:
+#   agama>=1.0     orbit integration / actions (may require source build)
+#   gaiaunlimited  Gaia DR3 RVS selection function
+#   healpy         (conda-forge)
+#   hdbscan        (conda-forge)
+#   dustmaps       (pip)
+#   diptest        (pip)
+# ---------------------------------------------------------------------------

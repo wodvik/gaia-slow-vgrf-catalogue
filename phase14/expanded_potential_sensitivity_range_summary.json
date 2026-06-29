@@ -1,0 +1,60 @@
+{
+  "bar_angle_sweep": {
+    "variants": [
+      "bar_omega37p5_ang20",
+      "bar_omega37p5_ang25",
+      "bar_omega37p5_ang30",
+      "bar_omega37p5_ang35"
+    ],
+    "median_R_peri_pc": [
+      13.0161621667987,
+      14.384464827005784
+    ],
+    "median_R_apo_kpc": [
+      8.244517803192139,
+      8.391831874847412
+    ],
+    "median_ecc": [
+      0.9957236835095862,
+      0.9960460043769699
+    ],
+    "frac_ecc_gt_0p95": [
+      92.3155737704918,
+      95.23565573770492
+    ],
+    "n_bridgers": [
+      18,
+      28
+    ]
+  },
+  "halo_flattening_sweep": {
+    "variants": [
+      "static_halo_qz0p80",
+      "static_halo_qz0p85",
+      "static_halo_qz0p90",
+      "static_halo_qz0p95",
+      "static_halo_qz1p00",
+      "static_halo_qz1p05"
+    ],
+    "median_R_peri_pc": [
+      114.27992544558197,
+      118.13721450810864
+    ],
+    "median_R_apo_kpc": [
+      7.343714237213135,
+      7.366850137710571
+    ],
+    "median_ecc": [
+      0.9626882383086603,
+      0.964188118968125
+    ],
+    "frac_ecc_gt_0p95": [
+      65.21516393442623,
+      66.95696721311475
+    ],
+    "n_bridgers": [
+      3,
+      3
+    ]
+  }
+}

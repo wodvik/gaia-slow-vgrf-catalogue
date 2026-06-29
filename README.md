@@ -5,7 +5,7 @@ slow-Galactic-rest-frame-speed catalogue.
 
 Zenodo concept DOI: [10.5281/zenodo.20116134](https://doi.org/10.5281/zenodo.20116134)
 
-Release version: `v1.0.5-review` (see `RELEASE_NOTES.md`).
+Release version: `v1.0.6-review` (see `RELEASE_NOTES.md`).
 
 ## Key Counts
 
@@ -73,7 +73,7 @@ python tests/smoke_regression.py --bundle-root .
 ```
 
 The harness checks product presence, source-ID uniqueness, release-schema
-columns, and the final v1.0.5-review primary counts.
+columns, and the final v1.0.6-review primary counts.
 
 ## Reproducibility
 

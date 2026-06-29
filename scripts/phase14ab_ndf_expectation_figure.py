@@ -3,7 +3,7 @@
 The numerical smooth-DF expectation, N(<25 km/s)=76.5, is the adopted
 manuscript diagnostic.  This script redraws the shipped figure from the
 current Tier A+B+C catalogue and matched-control orbit product so the
-figure annotation cannot drift from the v1.0.5 catalogue counts.
+figure annotation cannot drift from the v1.0.6 catalogue counts.
 """
 from __future__ import annotations
 

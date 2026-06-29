@@ -16,7 +16,7 @@ along the trajectory, and time-average to obtain a convergent action estimate
 
 Run from WSL (Agama installed):
     cd /mnt/c/Users/humbl/GAIA2026
-    python3 release/gaia_slow_vgrf_catalogue_v1.0.5_review/scripts/phase14ai_full_action_audit.py
+    python3 release/gaia_slow_vgrf_catalogue_v1.0.6_review/scripts/phase14ai_full_action_audit.py
 
 Updates ``catalogues/catalogue_expanded_orbits_tierABC.fits`` (+ .csv) and writes
 ``phase14/expanded_action_audit_per_star.csv`` and

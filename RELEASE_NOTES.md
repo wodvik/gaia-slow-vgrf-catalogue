@@ -1,5 +1,63 @@
 # Release Notes
 
+## v1.0.6-review - 2026-06-28
+
+Pre-submission correctness, consistency, and packaging pass over the v1.0.5
+bundle following an independent end-to-end audit. Primary catalogue counts
+are unchanged (Tier A / A+B / A+B+C = 289 / 541 / 1,952); no scientific
+result or figure changes.
+
+**Manuscript fixes** (`main.tex`):
+- Abstract labels the headline triple (ecc 0.949, R_peri 154 pc, R_apo
+  7.35 kpc) as Monte Carlo posterior medians, distinguishing it from the
+  point-estimate median R_peri (115.5 pc) used in the body.
+- Pericentre readout made internally consistent: the point-estimate methods
+  text now states the 40,001-point parabola-interpolated readout (was
+  "2,001 stored samples"); Gold-subset pericentres corrected to 114.8 pc
+  (Gold) / 112.5 pc (full Tier A+B) (were 121 / 120 pc); the face-on caption
+  Tier A+B+C pericentre corrected to 115.5 pc (was 112 pc).
+- Eccentricity Anderson-Darling comparisons now state rejection at
+  asymptotic p<0.001 without the specific A^2 statistics (192.27 / 36.97),
+  which did not reproduce from the released eccentricity arrays (pending
+  re-run).
+- Observability-kernel 200-260 km/s control pericentre corrected to
+  2.25 kpc (was 2.20; now matches the table and shipped summary).
+- Gold sigma_RV<2 subset median Vgrf corrected to 16.4 km/s vs 15.8 km/s
+  (full Gold) (were 16.57 / 15.72).
+- Tier D defined by P<=0.50 rather than by a "remaining" subtraction.
+- Reference author lists corrected: Belokurov et al. (2018; Deason, not
+  Sherwin) and Sormani et al. (2022; Gerhard, Portail, Vasiliev, Clarke).
+
+**Packaging / metadata**:
+- requirements-lock.txt: removed private editable installs; documented the
+  conda/compiled scientific dependencies (agama, gaiaunlimited, healpy,
+  hdbscan, dustmaps, diptest).
+- CITATION.cff: added ORCID and e-mail; version bumped to 1.0.6-review.
+- NSS non-single-star flag merged: `nss_two_body` + `nss_solution_type` added to
+  the master/tier/orbit catalogues, the four MRT tables, COLUMNS.md, and
+  `make_mrt_tables.py` (9/541 Tier A+B, 23/1,952 Tier A+B+C; SB1=16/Orbital=6/
+  AstroSpectroSB1=1), so the manuscript's "marked in the released catalogue"
+  statement is backed by data.
+- Potential-sensitivity sweep extended (`phase14/expanded_potential_sensitivity_*`,
+  now 18 variants + `frac_ecc_gt_0p95`): added Omega_p=24/28 (N_bridge 8/7); a
+  genuine bar-angle sweep that corrects the tab_potential bar-angle N_bridge
+  range from 17-22 to 18-28; and a genuine halo-flattening q_z=0.80-1.05 sweep
+  (median R_peri 114-118 pc), replacing the prior placeholder row whose numbers
+  mirrored the halo-mass bracket. tab_potential and appendix prose updated.
+
+**Final v1.0.6 packaging**:
+- The `nss_two_body` cross-match flag is present in the catalogues and
+  COLUMNS.md, so the "marked in the released catalogue" NSS statement is backed
+  by data.
+- The extended potential-sensitivity helper has been folded into
+  `scripts/phase14v_expanded_potential_sensitivity.py`; the shipped script now
+  regenerates all 18 variants, including the Hunter+2024 halo-flattening
+  q_z sweep.
+- The bundle directory and archive are packaged as
+  `gaia_slow_vgrf_catalogue_v1.0.6_review`, with regenerated SHA-256 checksums
+  and review zip.
+- `main.pdf` has been recompiled from the corrected `main.tex`.
+
 ## v1.0.5-review - 2026-06-07
 
 Response to two referee reports -- the external deep-review (15 numbered
