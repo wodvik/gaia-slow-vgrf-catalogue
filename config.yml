@@ -2,7 +2,7 @@
 # This file documents the expanded, parent-complete 2026-05-10 release.
 
 release:
-  tag: v1.0.6-review
+  tag: v1.0.8-review
   manuscript: main.tex
 
 # ----- Source catalogues and local products -----

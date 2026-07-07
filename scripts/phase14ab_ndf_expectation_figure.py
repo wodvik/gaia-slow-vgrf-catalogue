@@ -1,6 +1,6 @@
 """Regenerate the smooth-DF expectation diagnostic figure.
 
-The numerical smooth-DF expectation, N(<25 km/s)=76.5, is the adopted
+The numerical smooth-DF expectation, N(<25 km/s)=76.4, is the adopted
 manuscript diagnostic.  This script redraws the shipped figure from the
 current Tier A+B+C catalogue and matched-control orbit product so the
 figure annotation cannot drift from the v1.0.6 catalogue counts.
@@ -102,7 +102,7 @@ def main() -> int:
     ax.legend(loc="upper left", fontsize=8, frameon=False)
     ax.text(
         0.98, 0.07,
-        rf"$N_{{\rm exp}}(<25)=76.5$" + "\n" + rf"$N_{{\rm TierABC}}={n_slow:,}$",
+        rf"$N_{{\rm exp}}(<25)={N_EXP_25}$" + "\n" + rf"$N_{{\rm TierABC}}={n_slow:,}$",
         transform=ax.transAxes,
         ha="right",
         va="bottom",

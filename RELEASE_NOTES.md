@@ -1,5 +1,108 @@
 # Release Notes
 
+## v1.0.8-review - 2026-07-06
+
+Manuscript-typesetting fix release, cut on the day the paper was
+submitted to The Astronomical Journal (manuscript AAS78818). No data,
+catalogue, script, or numerical changes of any kind.
+
+- The aastex631 `acknowledgments` environment mis-measures its height
+  when the `linenumbers` class option is active, overprinting the
+  `\facilities`/`\software` block onto the GALAH acknowledgement
+  paragraph. The environment is replaced with a plain
+  `\section*{Acknowledgments}`; pages 26-27 verified clean by render.
+- The `linenumbers` class option (required by AAS at submission) is now
+  enabled in the shipped manuscript source; the compiled manuscript is
+  37 pages.
+- The bundled `main.pdf` and descriptive manuscript copy now match the
+  PDF submitted to the journal.
+
+## v1.0.7-review - 2026-07-04
+
+Pre-submission touch-up pass following a second independent numerical
+audit of the v1.0.6 bundle (14 check groups recomputed from the shipped
+products; all headline and load-bearing numbers reproduced, including the
+previously pending Anderson-Darling p<0.001 re-run, which confirms at
+A^2 = 531 from the released eccentricity arrays). Primary catalogue
+counts are unchanged (Tier A / A+B / A+B+C = 289 / 541 / 1,952); no
+science, figure, or catalogue-file changes.
+
+**Manuscript fixes** (`main.tex`, `tables/`):
+- 8-Gyr convergence check: stale sample-median deltas replaced with the
+  values recomputed from `phase14/wp5_8gyr_convergence_per_star.csv`
+  (+5.5 pc R_peri, +0.017 kpc R_apo, +0.039 kpc z_max; were +1.6 pc /
+  +0.010 / +0.060).
+- Bar-induced chaos: "one of three reach candidates" corrected to "none
+  of the three" (shipped lambda*T_orb = 0.63 / 0.49 / 0.00, none
+  order-unity; `wp5_chaos_per_star.csv` and `barred_ftlyap_norm` agree).
+- tab_gold_dynamical: Tier A+B median z_max 3.92 -> 3.93 (recomputed
+  3.9345).
+- tab_potential: barred e>0.95 cells Omega_p=24: 93.7 -> 93.9 (93.85)
+  and Omega_p=28: 93.0 -> 92.7 (92.67), matching
+  `expanded_potential_sensitivity_summary.csv`.
+- Anderson-Darling vs single-ellipsoid mock: sentence now discloses that
+  the mock eccentricity realisations are not archived in the release
+  bundle (the control-band comparison is fully re-runnable).
+- NSS wording: "predominantly SB1" scoped to the full Tier A+B+C
+  extension (Tier A+B alone splits 4 SB1 / 4 Orbital /
+  1 AstroSpectroSB1).
+
+**Packaging / metadata**:
+- COLUMNS.md: new "Matched-Control Reweighting Products" section pointing
+  reproducers to `phase14/expanded_control_weights.csv`
+  (`expanded_kw_weight`) as the operative kernel weight -- the legacy
+  `kw_weight` column inside `control_orbits.fits` does not reproduce the
+  manuscript's kernel-weighted medians.
+- Version bumped to 1.0.7-review (CITATION.cff, config.yml, READMEs);
+  checksums and review zip regenerated; `main.pdf` recompiled.
+
+**Presentation pass** (same day, from a fresh-eyes referee read; no
+science or catalogue-file changes):
+- Every figure and table is now called out in the text (8 figures and 8
+  tables previously had no in-text reference); the one-row Bailer-Jones
+  overlap table is folded into a sentence (table count 33 -> 32).
+- The accidental full-width prose block in the inner-reach discussion
+  (\onecolumngrid around five paragraphs) is restored to two-column
+  typesetting; `tab_reach` converted to a regular single-column float.
+- Mandatory survey acknowledgements added (Gaia/ESA DPAC, SDSS-IV/APOGEE
+  DR17, GALAH DR3 incl. AAT program list), plus `\facilities`,
+  `\software`, `\correspondingauthor`, and `\shorttitle`/`\shortauthors`
+  running heads; the aastex631 acknowledgments line-number quirk is
+  suppressed with `\nolinenumbers`.
+- Gehrels (1986) added to the bibliography (cited three times but
+  missing); the reference list is now a single alphabetized sequence
+  (93 entries); Wright & Binney (2026) entry de-cluttered.
+- Conclusions wording: "calibrated probabilistic sample" ->
+  "probability-scored sample", consistent with the Section 2.3
+  calibration disclaimer.
+- `fig_ndf_expectation` regenerated: in-plot annotation now reads
+  N_exp(<25)=76.4 (was a stale 76.5 disagreeing with text and table);
+  the shipped `phase14ab` script now renders its `N_EXP_25` constant.
+- `fig_chaos_vs_rperi` regenerated from the shipped
+  `wp5_chaos_per_star.csv`: the stale in-plot "Table 15" legend is
+  replaced by table-number-free labels and the internal "WP-5" tag is
+  dropped from the title.
+- Assorted wording fixes: circular sparsity sentence tightened;
+  "low-speed ball" -> "low-speed region"; dangling Section-4.5 forward
+  pointers now target Appendix A (Table solar_variants) with a new
+  Solar-parameter summary paragraph; Gold dynamical pericentre row
+  converted from kpc to pc.
+- The compiled manuscript is now 38 pages (survey acknowledgements add
+  roughly one page).
+
+**Smooth-DF eccentricity mock shipped** (same day): the second
+Anderson-Darling comparison (Tier A+B+C eccentricities vs the
+single-ellipsoid smooth-continuation mock) is now fully re-runnable from
+bundle products. `phase14/control_orbits.fits` gains the Cartesian
+velocity columns `vx_kms`/`vy_kms`/`vz_kms`; the new
+`scripts/phase14am_smooth_df_ecc_mock.py` regenerates the mock
+realisation (`phase14/smooth_df_eccentricity_mock.csv`, seed 20260523)
+and writes `phase14/smooth_df_ecc_mock_summary.json` with both AD
+statistics (slow vs 25-50 control: A^2 = 531.1; slow vs mock:
+A^2 = 300.2; both asymptotic p < 0.001, matching the manuscript). The
+manuscript parenthetical now points to the shipped realisation instead
+of disclosing its absence.
+
 ## v1.0.6-review - 2026-06-28
 
 Pre-submission correctness, consistency, and packaging pass over the v1.0.5

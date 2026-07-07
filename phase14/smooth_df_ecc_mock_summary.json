@@ -1,0 +1,22 @@
+{
+  "seed": 20260523,
+  "n_draws": 2000000,
+  "recipe": "single trivariate-Gaussian ellipsoid fit to the 25-260 km/s matched-control velocities; |v|<25 km/s draws assigned eccentricities by inverse-distance-weighted sampling over the 15 nearest control orbits in standardised velocity space",
+  "mock_ecc_median": 0.9325625964709165,
+  "slow_ecc_median": 0.9638635259438799,
+  "ad_slow_vs_control_25_50": {
+    "A2": 531.0990172594531,
+    "asymptotic_p_capped": 0.001,
+    "p_lt_0p001": true,
+    "n_a": 1952,
+    "n_b": 1955
+  },
+  "ad_slow_vs_smooth_df_mock": {
+    "A2": 300.1848594560835,
+    "asymptotic_p_capped": 0.001,
+    "p_lt_0p001": true,
+    "n_a": 1952,
+    "n_b": 1952
+  },
+  "note": "scipy anderson_ksamp caps the asymptotic significance level at 0.001; p_lt_0p001=true means rejection at asymptotic p<0.001 as quoted in the manuscript"
+}

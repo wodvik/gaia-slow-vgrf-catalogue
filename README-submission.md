@@ -8,9 +8,9 @@ catalogues.
 
 ## Release Identity
 
-- Release tag: `v1.0.6-review`
+- Release tag: `v1.0.8-review`
 - Manuscript: `main.tex`, compiled to `main.pdf`
-- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.6_review.zip`
+- Reviewer bundle: `gaia_slow_vgrf_catalogue_v1.0.8_review.zip`
 - Zenodo concept DOI: `10.5281/zenodo.20116134`
 - Primary catalogue: Tier A+B, `P(Vgrf < 25 km/s) > 0.84`, 541 stars
 - Broader orbit-summary catalogue: Tier A+B+C, `P > 0.50`, 1,952 stars
@@ -82,7 +82,7 @@ Gaia Archive rescan. The following checks and product-level operations are
 repo-relative:
 
 ```bash
-cd gaia_slow_vgrf_catalogue_v1.0.6_review
+cd gaia_slow_vgrf_catalogue_v1.0.8_review
 make validate-release                      # full pre-submission validation
 python tests/smoke_regression.py --bundle-root .
 python scripts/make_mrt_tables.py --bundle-root .
@@ -102,7 +102,7 @@ parent-buffer intermediate is
 documented with row counts, velocity partitions, and reconstruction
 instructions in `private_inputs/parent_buffer_manifest.json`.
 
-The smoke harness pins the final v1.0.6-review counts
+The smoke harness pins the final v1.0.8-review counts
 (`master=20,829`, `Tier A=289`, `Tier A+B=541`,
 `Tier A+B+C=1,952`, corrected point-estimate `<25 km/s=2,755`).
 
@@ -154,7 +154,7 @@ catalogue requires those paths for normal use.
 The final full orbit Monte Carlo was run from WSL with:
 
 ```bash
-cd gaia_slow_vgrf_catalogue_v1.0.6_review
+cd gaia_slow_vgrf_catalogue_v1.0.8_review
 OMP_NUM_THREADS=32 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \
 python scripts/phase14x_expanded_mc_orbits.py \
   --input-csv private_inputs/expanded_candidates_mc_tiered.csv \

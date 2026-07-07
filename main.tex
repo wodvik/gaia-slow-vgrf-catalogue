@@ -2,7 +2,7 @@
 % A Gaia DR3 Catalogue of Stars with Very Low Galactic Rest-Frame Speeds
 % Rodney Humble -- AASTeX v6.31 for ApJ
 % =============================================================================
-\documentclass[twocolumn,twocolappendix]{aastex631}
+\documentclass[twocolumn,twocolappendix,linenumbers]{aastex631}
 
 % ---------------- packages ---------------------------------------------------
 \usepackage{amsmath,amssymb}
@@ -53,10 +53,14 @@
 \newcommand{\MgFe}{\ensuremath{[\mathrm{Mg}/\mathrm{Fe}]}}
 
 % =============================================================================
+\shorttitle{A Gaia DR3 Catalogue of Very Low Rest-Frame Speeds}
+\shortauthors{Humble}
+
 \begin{document}
 
 \title{A Probabilistic Gaia DR3 Catalogue of Stars with Very Low Galactic Rest-Frame Speeds}
 
+\correspondingauthor{Rodney Humble}
 \author[0009-0009-2623-9232]{Rodney Humble}
 \affiliation{Independent Researcher, San Diego, CA, USA}
 \email{rod.humble@gmail.com}
@@ -69,8 +73,8 @@ A star observed at very low Galactic rest-frame speed is caught near an
 orbital turning point with little angular momentum, so in any centrally
 concentrated potential it must fall back toward the inner Galaxy; the
 low-\vgrf{} state is therefore a kinematic selection with a largely
-predictable orbital corollary.  We use this state to build a probabilistic
-Gaia DR3 catalogue.  Monte Carlo propagation of the Gaia
+predictable orbital corollary.  We build a probabilistic Gaia DR3
+catalogue of stars consistent with this condition.  Monte Carlo propagation of the Gaia
 parallax--proper-motion covariance, with Lindegren et al.\ (2021) parallax
 zero-points and Bailer-Jones et al.\ (2021) photogeometric distances, yields
 per-star membership probabilities for $\vgrf<25\kms$: a primary Tier~A+B
@@ -142,12 +146,13 @@ interpret the observed slow state, but they do not define the catalogue.
 This framing is important because a very low instantaneous rest-frame
 speed is essentially a turning-point condition:
 the star must carry near-zero angular momentum and be caught close to an
-orbital turning point.  More than one kind of orbit can satisfy it.  The
-star may lie near the apocentre of a radial accretion orbit, as in the
-apocentre-pile-up interpretation of radial halo debris \citep{Deason2018};
-or it may be caught at the outer turning point of a compact,
-low-angular-momentum orbit that plunges into the inner Galaxy and reaches
-apocentre near its observed Galactocentric radius.  For stars observed
+orbital turning point.  More than one dynamical history can satisfy it.
+At one extreme, the star may lie near the apocentre of a radial
+accretion orbit, as in the apocentre-pile-up interpretation of radial
+halo debris \citep{Deason2018}; at the other, it may be caught at the
+outer turning point of a compact, low-angular-momentum orbit that
+plunges into the inner Galaxy and reaches apocentre near its observed
+Galactocentric radius.  For stars observed
 near the Sun this is the familiar solar-radius apocentre picture, but the
 same turning-point logic applies throughout the catalogue's observed
 Galactocentric range.  These cases share the turning-point kinematics but
@@ -242,7 +247,9 @@ maps each tier and derived sample to the results it anchors. The
 orbit-derived medians and population distributions are computed on the
 broader Tier~A+B+C sample ($N=1{,}952$). Selection-function and
 chemistry diagnostics are reported only as population-scale context,
-never as a redefinition of the primary catalogue.
+never as a redefinition of the primary catalogue.  The leading rows of
+the released machine-readable primary catalogue are shown in
+Table~\ref{tab:headline_catalogue_sample}.
 
 \input{tables/v15/tab_sample_usage.tex}
 
@@ -276,7 +283,8 @@ comparisons, not for whole-catalogue population fractions.  The
 selection-function inverse-weighted sums are likewise reported only as
 observability context, because many slow stars occupy sparse
 colour--magnitude cells where the Gaia DR3 RVS selection-function tool
-returns its prior mean.
+returns its prior mean.  Table~\ref{tab:rv_quality_sensitivity} reports
+how the primary counts respond to these conservative RVS-quality cuts.
 
 \input{tables/v15/tab_rv_quality_sensitivity.tex}
 
@@ -300,8 +308,8 @@ propagation for the full RVS sample \citep{Zhang2025}.
 
 Tier-fraction percentages reported below carry Beta$(k+\tfrac{1}{2},
 n-k+\tfrac{1}{2})$ Jeffreys 68\% intervals \citep{Cameron2011};
-integer-count diagnostics (e.g., long-apocentre inner-reach counts) carry Gehrels-style
-Poisson 1$\sigma$ bands.
+integer-count diagnostics (e.g., long-apocentre inner-reach counts) carry
+\citet{Gehrels1986} Poisson 1$\sigma$ bands.
 
 The Monte Carlo scheme uses 500 baseline realisations per source,
 refines stars in the transition band $0.30<P<0.70$ to 5,000
@@ -471,7 +479,8 @@ AstropyCollaboration2022} and the resulting Cartesian
 Galactocentric phase-space vectors are passed to \texttt{agama}.  Three
 additional Solar-parameter variants from the recent literature
 \citep{GravityCollab2022,Schonrich2012,ReidBrunthaler2020} are used as
-a sensitivity bracket in Section~\ref{sec:robustness}.
+a sensitivity bracket in Appendix~\ref{app:sensitivity}
+(Table~\ref{tab:solar_variants}).
 
 We apply the per-star \citet{Lindegren2021} Gaia parallax zero-point
 correction and use the \citet{BailerJones2021} photogeometric distance
@@ -499,8 +508,8 @@ radial periods for the compact inner-reaching orbits ($T_r \lesssim
 100$\,Myr at $\Rperi \sim 100$\,pc) while keeping the orbit products
 descriptive rather than evolutionary.  A static-potential re-integration
 of a random 100-star Tier~A subset to 8\,Gyr changes the sample medians
-by only $+1.6$\,pc in $\Rperi$, $+0.010$\,kpc in $\Rapo$, and
-$+0.060$\,kpc in $\zmax$ relative to the 4\,Gyr products.  This
+by only $+5.5$\,pc in $\Rperi$, $+0.017$\,kpc in $\Rapo$, and
+$+0.039$\,kpc in $\zmax$ relative to the 4\,Gyr products.  This
 longer-time experiment is a convergence check only; the released orbit
 statistics use the full Tier~A+B+C integrations.  A rigidly
 rotating barred Hunter/Sormani variant
@@ -591,11 +600,9 @@ pool at these velocities is intrinsically small: within the Gaia DR3 6D
 parent sample after the basic quality requirements used for control
 construction (valid radial velocity and parallax signal-to-noise $> 5$),
 there are only 4,763 stars in this range, compared with 39,853 at
-50--100\kms and over 1.4 million at 100--200\kms.  The extreme sparsity
-of the low-velocity tail---7,622 stars below 50\kms out of roughly 6.8
-million stars in that quality-filtered 6D parent sample, or
-0.11\%---shows that this low-velocity tail is sparse within the observed
-Gaia DR3 6D catalogue.
+50--100\kms and over 1.4 million at 100--200\kms.  Overall, the low-velocity tail is extremely sparse within the observed
+Gaia DR3 6D catalogue: 7,622 stars below 50\kms out of roughly 6.8
+million stars in that quality-filtered 6D parent sample, or 0.11\%.
 All controls were orbit-enriched using the same static Hunter+2024
 potential and integration settings as the slow-star sample.
 
@@ -738,7 +745,8 @@ this screen.  Cross-matching by \texttt{source\_id} against
 \texttt{gaiadr3.nss\_two\_body\_orbit} flags 9 of the 541 Tier~A+B
 sources ($1.7\%$) and 23 of the 1{,}952 Tier~A+B+C sources ($1.2\%$) as
 resolved binaries---predominantly single-lined spectroscopic (SB1)
-solutions---which are marked in the released catalogue.  Beyond these
+solutions in the full Tier~A+B+C extension---which are marked in the
+released catalogue.  Beyond these
 catalogued binaries, the RV-specific quality indicators bound the residual
 contamination (Table~\ref{tab:rv_quality}): the median DR3 RV uncertainty
 is $2.4$\kms{} for Tier~A+B, $58\%$ of primary-catalogue sources exceed $2$\kms,
@@ -779,7 +787,11 @@ star.  Monte Carlo propagation gives 289 stars in Tier~A
 1{,}952 stars cumulatively in Tier~A+B+C ($P>0.50$).  The 804
 corrected point-estimate members with $P\leq0.50$ form Tier~D.  The paper therefore
 uses Tier~A+B as the primary catalogue and Tier~A+B+C for broader
-population-level orbit summaries.
+population-level orbit summaries.  Table~\ref{tab:vgrf_membership}
+summarises the tier definitions and counts, and
+Fig.~\ref{fig:pvgrf_membership} shows the membership probability as a
+function of the corrected point-estimate \vgrf{} across the propagated
+pool.
 
 \input{tables/v15/tab_vgrf_membership.tex}
 
@@ -801,7 +813,7 @@ matched-control library ($|v_{\rm GC}|$ in 25--260\kms, 10{,}078 stars)
 and extrapolated below 25\kms.  This is not a standard Galactic
 distribution-function prediction: the models are fit to the observed Gaia
 control velocities, normalised over the control-speed interval, and then
-extrapolated into the low-speed ball.  A single trivariate-Gaussian
+extrapolated into the low-speed region ($|v_{\rm GC}|<25\kms$).  A single trivariate-Gaussian
 ellipsoid predicts $N(<25\kms)=76.4$ stars, giving an observed/predicted
 ratio of 25.6 for the 1{,}952 observed Tier~A+B+C stars
 (Fig.~\ref{fig:ndf_expectation}).  A single Gaussian is, however, a weak
@@ -856,7 +868,7 @@ estimates with documented systematics
 \citep{Andrae2023, RecioBlanco2023}: in particular, GSP-Phot tends to
 overestimate metallicity for cool, metal-poor giants by 0.2--0.5\,dex,
 which biases the present sample toward solar values.  In the catalogue, GSP-Phot metallicities are finite for 1{,}279 Tier~A+B+C stars
-and have a median $\MH=-0.24$.  The spectroscopic alpha-subset discussed
+and have a median $\MH=-0.24$ (Fig.~\ref{fig:metallicity}).  The spectroscopic alpha-subset discussed
 below is more metal-poor, with median $\FeH=-0.81$.  This offset is not
 interpreted as a population difference: it reflects both the known
 GSP-Phot metallicity systematics and the strongly non-random targeting of
@@ -923,6 +935,11 @@ are not treated as whole-catalogue population assignments.}
 \label{fig:alpha_fe}
 \end{figure}
 
+Fig.~\ref{fig:alpha_fe} shows the $\alpha$--\FeH{} plane for this
+subset, and Table~\ref{tab:population_decomp} lists the corresponding
+literature-region decomposition; both are contextual diagnostics rather
+than whole-catalogue population assignments.
+
 \input{tables/v15/tab_spectroscopic.tex}
 
 \input{tables/v15/tab_population_decomp.tex}
@@ -930,7 +947,8 @@ are not treated as whole-catalogue population assignments.}
 \subsection{Sky Distribution, Observer Geometry, and Selection}
 \label{sec:sky}
 
-The sample is not isotropically distributed on the sky.  In Galactic
+The sample is not isotropically distributed on the sky
+(Fig.~\ref{fig:sky}).  In Galactic
 coordinates, $39.7\pm 1.1\%$ of the Tier~A+B+C stars lie toward the
 Galactic-centre direction ($l \in [330\degr, 30\degr]$), while only
 $6.2^{+0.6}_{-0.5}\%$ lie toward the anti-centre direction
@@ -1091,6 +1109,10 @@ Table~\ref{tab:reach}, not on this panel.}
 \label{fig:rperi_rapo}
 \end{figure}
 
+Fig.~\ref{fig:toomre} places the sample in the Toomre diagram: the
+catalogue concentrates at low azimuthal velocity, far from the disc
+locus, as the low-\vgrf{} selection requires.
+
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig08_toomre_diagram.pdf}
@@ -1148,11 +1170,17 @@ Tier~A+B+C static-potential eccentricities and the adjacent 25--50\kms{}
 matched-control CDF rejects the hypothesis of a common eccentricity
 distribution at asymptotic $p<0.001$.  The same test against the
 single-ellipsoid smooth-continuation mock associated with
-Fig.~\ref{fig:ndf_expectation} likewise rejects at asymptotic $p<0.001$.  Thus the near-unity eccentricity concentration is
+Fig.~\ref{fig:ndf_expectation} likewise rejects at asymptotic $p<0.001$
+(the mock eccentricity realisation and the script that regenerates it
+from the released control library are included in the data bundle).  Thus the near-unity eccentricity concentration is
 not reproduced by either the adjacent observed control band or that
 control-normalised smooth velocity ellipsoid.  The monotonic eccentricity
 decline across the four control bands is likewise recovered under the
-covariate-balanced control weights.
+covariate-balanced control weights.  Fig.~\ref{fig:e_vs_vgrf} shows the
+weighted per-band median eccentricities (with the full per-band
+distributions in Fig.~\ref{fig:e_by_band}), and
+Fig.~\ref{fig:rperi_rapo_bands} the corresponding per-band pericentre
+medians.
 
 \input{tables/v15/tab_band_comparison.tex}
 
@@ -1196,7 +1224,8 @@ medians are reported in Table~\ref{tab:band_comparison}.}
 \label{sec:dwell}
 
 A dwell-time calculation in the adopted static Hunter+2024 potential
-helps quantify what the low-\vgrf{} selection captures.  Tier~A stars
+helps quantify what the low-\vgrf{} selection captures
+(Table~\ref{tab:dwell}).  Tier~A stars
 spend a median 28.3\% of their integrated orbital time inside
 $R<2$\kpc, while Tier~C stars spend 19.7\% there.  Conversely, the
 median time fraction in the solar annulus ($7<R<9$\kpc) rises from
@@ -1244,9 +1273,6 @@ Sgr~A*-passing population. The closest-approach probabilities and
 cumulative curves are reported in Appendix~\ref{app:sgrA}
 (Table~\ref{tab:sgrA_candidates}, Fig.~\ref{fig:sgrA_cdfs}).
 
-\onecolumngrid
-\medskip
-
 The closest-approach calculation follows the same general philosophy as
 Gaia DR3 stellar-encounter work, where orbit integration and uncertainty
 propagation are used to identify robust close-passage candidates rather
@@ -1254,10 +1280,7 @@ than to treat nominal closest approaches as definitive
 \citep{BailerJones2022}.
 
 As an external source-id check, none of the 541 Tier~A+B stars overlaps
-the 61 Gaia DR3 close-encounter entries in \citet{BailerJones2022};
-Table~\ref{tab:bj22_overlap} reports the null cross-match explicitly.
-
-\input{tables/v15/tab_bj22_overlap.tex}
+the 61 Gaia DR3 close-encounter entries in \citet{BailerJones2022}.
 
 We also checked the closest published low-azimuthal-velocity comparison
 sample, the 69 slow- and retrograde APOGEE/Gaia stars of
@@ -1285,8 +1308,6 @@ potential-dependent, rather than as a robust population count or a
 merger-debris census.
 
 \input{tables/v15/tab_reach.tex}
-
-\twocolumngrid
 
 \subsection{\label{sec:robustness}Robustness and Sensitivity}
 
@@ -1336,8 +1357,8 @@ the vertical line marks $L_z=0$.}
 \label{fig:elz}
 \end{figure*}
 
-The same $L_z$ axis also locates the catalogue relative to the bar
-resonances.  In $L_z$--$J_R$ St\"ackel-fudge action space the Tier~A points
+The same $L_z$ axis (Fig.~\ref{fig:elz}) also locates the catalogue
+relative to the bar resonances.  In $L_z$--$J_R$ St\"ackel-fudge action space the Tier~A points
 concentrate near $L_z\approx0$ at large $J_R$, away from any single
 corotation or outer-Lindblad pile-up, consistent with the matched-control
 OLR-fraction check in Section~\ref{sec:band_comparison}.  Because the
@@ -1456,10 +1477,8 @@ to smooth velocity-field continuations of the controls
 The point-estimate orbit integration provides the current
 characterisation for the main dynamical claim.  All 1{,}952 Tier~A+B+C
 stars have $e>0.8$ in the default static potential, and $66.7\pm 1.1\%$
-have $e>0.95$ under point-estimate integration (cf.\ the
-$48.2\pm 1.1\%$ Monte Carlo posterior-median fraction in
-Section~\ref{sec:eccentricity}; the two numbers describe the same
-sample under different propagation choices).  The strongly radial
+have $e>0.95$ under point-estimate integration (cf.\ the Monte Carlo
+posterior-median fraction in Section~\ref{sec:eccentricity}).  The strongly radial
 character of the sample is therefore clear in the adopted model, while
 posterior orbit uncertainties and potential-variant tests remain
 sensitivity products rather than catalogue-definition steps.
@@ -1545,7 +1564,7 @@ low Galactic rest-frame speeds: a primary Tier~A+B catalogue of 541 stars
 ($P(\vgrf<25\kms)>0.84$), a high-confidence Tier~A core of 289 ($P>0.95$),
 and a high-completeness Tier~A+B+C extension of 1{,}952 ($P>0.50$).  Each
 source carries a Monte Carlo membership probability, so the catalogue is a
-calibrated probabilistic sample rather than a hard-threshold list.
+probability-scored sample rather than a hard-threshold list.
 
 In the axisymmetrized Hunter+2024 potential the sample is strongly radial
 and compact-pericentre (Monte Carlo posterior-median eccentricity 0.949,
@@ -1594,9 +1613,53 @@ sample, retire the prior-dominated colour--magnitude cells that set the
 selection-function systematic, and enlarge the accessible low-speed
 catalogue.
 
-\begin{acknowledgments}
-The author acknowledges the use of public data from Gaia DR3 and from
-the spectroscopic resources cited in this paper.
+\section*{Acknowledgments}
+This work has made use of data from the European Space Agency (ESA)
+mission {\it Gaia} (\url{https://www.cosmos.esa.int/gaia}), processed by
+the {\it Gaia} Data Processing and Analysis Consortium (DPAC,
+\url{https://www.cosmos.esa.int/web/gaia/dpac/consortium}).  Funding for
+the DPAC has been provided by national institutions, in particular the
+institutions participating in the {\it Gaia} Multilateral Agreement.
+
+Funding for the Sloan Digital Sky Survey IV has been provided by the
+Alfred P.\ Sloan Foundation, the U.S.\ Department of Energy Office of
+Science, and the Participating Institutions.  SDSS-IV acknowledges
+support and resources from the Center for High Performance Computing at
+the University of Utah.  The SDSS website is www.sdss4.org.  SDSS-IV is
+managed by the Astrophysical Research Consortium for the Participating
+Institutions of the SDSS Collaboration including the Brazilian
+Participation Group, the Carnegie Institution for Science, Carnegie
+Mellon University, Center for Astrophysics $|$ Harvard \& Smithsonian,
+the Chilean Participation Group, the French Participation Group,
+Instituto de Astrof\'isica de Canarias, The Johns Hopkins University,
+Kavli Institute for the Physics and Mathematics of the Universe (IPMU)
+/ University of Tokyo, the Korean Participation Group, Lawrence
+Berkeley National Laboratory, Leibniz Institut f\"ur Astrophysik
+Potsdam (AIP), Max-Planck-Institut f\"ur Astronomie (MPIA Heidelberg),
+Max-Planck-Institut f\"ur Astrophysik (MPA Garching),
+Max-Planck-Institut f\"ur Extraterrestrische Physik (MPE), National
+Astronomical Observatories of China, New Mexico State University, New
+York University, University of Notre Dame, Observat\'ario Nacional /
+MCTI, The Ohio State University, Pennsylvania State University,
+Shanghai Astronomical Observatory, United Kingdom Participation Group,
+Universidad Nacional Aut\'onoma de M\'exico, University of Arizona,
+University of Colorado Boulder, University of Oxford, University of
+Portsmouth, University of Utah, University of Virginia, University of
+Washington, University of Wisconsin, Vanderbilt University, and Yale
+University.
+
+This work made use of the Third Data Release of the GALAH Survey
+\citep{Buder2021}.  The GALAH Survey is based on data acquired through
+the Australian Astronomical Observatory, under programs: A/2013B/13
+(The GALAH pilot survey); A/2014A/25, A/2015A/19, A2017A/18 (The GALAH
+survey phase 1); A2018A/18 (Open clusters with HERMES); A2019A/1
+(Hierarchical star formation in Ori OB1); A2019A/15 (The GALAH survey
+phase 2); A/2015B/19, A/2016A/22, A/2016B/10, A/2017B/16, A/2018B/15
+(The HERMES-TESS program); and A/2015A/3, A/2015B/1, A/2015B/19,
+A/2016A/22, A/2016B/12, A/2017A/14 (The HERMES K2-follow-up program).
+We acknowledge the traditional owners of the land on which the AAT
+stands, the Gamilaraay people, and pay our respects to elders past and
+present.
 
 \paragraph{AI Assistance Disclosure.}
 AI language-model tools were used during preparation of this manuscript
@@ -1614,7 +1677,14 @@ release-stage pipeline and re-executed by the author.  All numerical
 results, validation steps, methodological decisions, interpretations,
 references, and final prose were reviewed and verified by the author,
 who takes sole responsibility for the scientific content.
-\end{acknowledgments}
+
+
+\facilities{Gaia, Sloan (APOGEE), AAT (HERMES/GALAH)}
+
+\software{astropy
+\citep{AstropyCollaboration2013,AstropyCollaboration2018,AstropyCollaboration2022},
+agama \citep{Vasiliev2019}, GaiaUnlimited \citep{CastroGinard2023},
+numpy, scipy, matplotlib, healpy, hdbscan, dustmaps}
 
 \availabilitynote{Data Availability}
 The observational source catalogues used in this work are publicly
@@ -1661,7 +1731,7 @@ applies the observational Gold cut before comparing point-estimate orbit
 summaries.  The Gold cut barely changes the orbit distribution: median
 $\Rperi$ is 114.8\,pc in the Gold subset versus 112.5\,pc in the full
 Tier~A+B catalogue, and all Gold stars have finite action solutions in
-the adopted static potential.  The subset is intended for individual-star
+the adopted static potential (Table~\ref{tab:gold_dynamical}).  The subset is intended for individual-star
 follow-up rather than for redefining the full catalogue.
 
 \input{tables/v15/tab_gold_dynamical.tex}
@@ -1681,7 +1751,7 @@ near-threshold candidates.  The baseline pass used 500 realisations per
 source, with 5{,}000-realisation refinement in the transition region and
 10{,}000-realisation refinement near the hard 25\kms point-estimate
 boundary.  The resulting tier labels, rather than a single point
-estimate, define the catalogue.
+estimate, define the catalogue (Table~\ref{tab:mc}).
 
 \input{tables/v15/tab_mc.tex}
 
@@ -1717,7 +1787,7 @@ Agama's normalized finite-time Lyapunov indicator $\lambda T_{\rm orb}$ at
 $\Omega_p=37.5\kms\kpc^{-1}$ for the three static-potential inner-reach
 candidates, the ten Sgr~A* approacher seeds
 (Table~\ref{tab:sgrA_candidates}), and a random 100-star Tier~A control
-sample.  Bar-induced chaos is present but bounded: one of three reach
+sample.  Bar-induced chaos is present but bounded: none of the three reach
 candidates, one of ten seeds, and four of 100 controls reach the
 order-unity strongly-chaotic regime, and the closest-approach seeds are not
 separated from the controls by the chaos indicator
@@ -1738,7 +1808,7 @@ As a second-potential check, re-integrating the catalogue in the
 made-to-measure \citet{Portail2017} bar---an independent disc and flattened
 Einasto dark halo, constructed via the \citet{Sormani2022} recipe at
 $\Omega_p=37.5\kms\kpc^{-1}$ and a $25^\circ$ bar angle---gives
-$N_{\rm reach}=15^{+5.0}_{-3.8}$ (Gehrels 68\%) and the same
+$N_{\rm reach}=15^{+5.0}_{-3.8}$ (\citealt{Gehrels1986} 68\%) and the same
 high-eccentricity character, overlapping the barred Hunter+2024 value
 $21^{+5.7}_{-4.5}$ within Gehrels~$1\sigma$ (Table~\ref{tab:reach}).  The
 inner-reach result is therefore robust to swapping the disc/halo background
@@ -1759,6 +1829,13 @@ high ($0.968$ vs.\ $0.971$ for the full Gold sample), the median
 \vgrf{} is similar ($16.4$\kms{} vs.\ $15.8$\kms), and 100\% retain
 $e > 0.8$.  The high-eccentricity claim survives this additional quality
 cut.
+
+\paragraph{Solar-parameter sensitivity.}
+Table~\ref{tab:solar_variants} brackets the Solar-parameter dependence:
+across the literature range of $R_0$, $V_c$, and the LSR motion, tier
+counts on the legacy preselection subsample vary by $\sim50\%$, while
+the ensemble orbital geometry is stable to $\sim12\%$ in $\Rperi$ and
+$\sim1\%$ in $\Rapo$ and eccentricity.
 
 \input{tables/v15/tab_potential.tex}
 
@@ -1928,9 +2005,8 @@ Astropy Collaboration, Price-Whelan, A.~M., Sip\H{o}cz, B.~M., et~al.\
 Astropy Collaboration, Price-Whelan, A.~M., Lim, P.~L., et~al.\
 2022, \apj, 935, 167
 
-\bibitem[Bailer-Jones et~al.(2021)]{BailerJones2021}
-Bailer-Jones, C.~A.~L., Rybizki, J., Fouesneau, M., Demleitner,
-M., \& Andrae, R.\ 2021, \aj, 161, 147
+\bibitem[Babusiaux et~al.(2023)]{Babusiaux2023}
+Babusiaux, C., et~al.\ 2023, \aap, 674, A32
 
 \bibitem[Bailer-Jones(2022)]{BailerJones2022}
 Bailer-Jones, C.~A.~L.\ 2022, \apjl, 935, L9
@@ -1938,13 +2014,27 @@ Bailer-Jones, C.~A.~L.\ 2022, \apjl, 935, L9
 \bibitem[Bailer-Jones(2023)]{BailerJones2023}
 Bailer-Jones, C.~A.~L.\ 2023, \aj, 166, 269
 
+\bibitem[Bailer-Jones et~al.(2021)]{BailerJones2021}
+Bailer-Jones, C.~A.~L., Rybizki, J., Fouesneau, M., Demleitner,
+M., \& Andrae, R.\ 2021, \aj, 161, 147
+
+\bibitem[Belokurov \& Kravtsov(2022)]{BelokurovKravtsov2022}
+Belokurov, V., \& Kravtsov, A.\ 2022, \mnras, 514, 689
+
 \bibitem[Belokurov et~al.(2018)]{Belokurov2018}
 Belokurov, V., Erkal, D., Evans, N.~W., Koposov, S.~E., \& Deason,
 A.~J.\ 2018, \mnras, 478, 611
 
+\bibitem[Belokurov et~al.(2020)]{Belokurov2020}
+Belokurov, V., Sanders, J.~L., Fattahi, A., et~al.\ 2020, \mnras,
+494, 3880
+
 \bibitem[Belokurov et~al.(2023)]{Belokurov2023}
 Belokurov, V., Vasiliev, E., Deason, A.~J., et~al.\ 2023, \mnras,
 518, 6200
+
+\bibitem[Binney(2012)]{Binney2012}
+Binney, J.\ 2012, \mnras, 426, 1324
 
 \bibitem[Binney \& Merrifield(1998)]{BinneyMerrifield1998}
 Binney, J., \& Merrifield, M.\ 1998, Galactic Astronomy
@@ -1957,23 +2047,41 @@ Binney, J., \& Tremaine, S.\ 2008, Galactic Dynamics, 2nd ed.
 \bibitem[Bland-Hawthorn \& Gerhard(2016)]{BlandHawthorn2016}
 Bland-Hawthorn, J., \& Gerhard, O.\ 2016, \araa, 54, 529
 
+\bibitem[Borsato et~al.(2020)]{Borsato2020}
+Borsato, N.~W., Martell, S.~L., \& Simpson, J.~D.\ 2020, \mnras,
+492, 1370
+
+\bibitem[Buder et~al.(2021)]{Buder2021}
+Buder, S., Sharma, S., Kos, J., et~al.\ 2021, \mnras, 506, 150
+
+\bibitem[Cameron(2011)]{Cameron2011}
+Cameron, E.\ 2011, \pasa, 28, 128
+
 \bibitem[Cantat-Gaudin et~al.(2023)]{CantatGaudin2023}
 Cantat-Gaudin, T., Fouesneau, M., Rix, H.-W., et~al.\ 2023, \aap,
 669, A55
-
-\bibitem[Castro-Ginard et~al.(2023)]{CastroGinard2023}
-Castro-Ginard, A., et~al.\ 2023, \aap, 677, A37
 
 \bibitem[Carballo-Bello et~al.(2025)]{CarballoBello2025}
 Carballo-Bello, J.~A., Ramos, P., Corral-Santana, J.~M., et~al.\
 2025, \aap, 700, A172
 
-\bibitem[Deason et~al.(2018)]{Deason2018}
-Deason, A.~J., Belokurov, V., Koposov, S.~E., \& Lancaster, L.\
-2018, \apjl, 862, L1
+\bibitem[Castro-Ginard et~al.(2023)]{CastroGinard2023}
+Castro-Ginard, A., et~al.\ 2023, \aap, 677, A37
+
+\bibitem[Cautun et~al.(2020)]{Cautun2020}
+Cautun, M., Ben\'{\i}tez-Llambay, A., Deason, A.~J., et~al.\ 2020,
+\mnras, 494, 4291
+
+\bibitem[Clarke et~al.(2019)]{Clarke2019}
+Clarke, J.~P., Wegg, C., Gerhard, O., Smith, L.~C., Lucas, P.~W., \&
+Wylie, S.~M.\ 2019, \mnras, 489, 3519
 
 \bibitem[Deason \& Belokurov(2024)]{Deason2024}
 Deason, A.~J., \& Belokurov, V.\ 2024, New Astron.\ Rev., 99, 101706
+
+\bibitem[Deason et~al.(2018)]{Deason2018}
+Deason, A.~J., Belokurov, V., Koposov, S.~E., \& Lancaster, L.\
+2018, \apjl, 862, L1
 
 \bibitem[Dillamore et~al.(2023)]{Dillamore2023}
 Dillamore, A.~M., Belokurov, V., Evans, N.~W., \& Davies, E.~Y.\
@@ -1982,6 +2090,9 @@ Dillamore, A.~M., Belokurov, V., Evans, N.~W., \& Davies, E.~Y.\
 \bibitem[Dillamore et~al.(2024)]{Dillamore2024}
 Dillamore, A.~M., Belokurov, V., \& Evans, N.~W.\ 2024, \mnras,
 532, 4389
+
+\bibitem[Dodd et~al.(2023)]{Dodd2023}
+Dodd, E., Callingham, T.~M., Helmi, A., et~al.\ 2023, \aap, 670, L2
 
 \bibitem[Eilers et~al.(2019)]{Eilers2019}
 Eilers, A.-C., Hogg, D.~W., Rix, H.-W., \& Ness, M.~K.\ 2019, \apj,
@@ -1992,12 +2103,33 @@ Ester, M., Kriegel, H.-P., Sander, J., \& Xu, X.\ 1996, in
 Proceedings of the Second International Conference on Knowledge
 Discovery and Data Mining, 226
 
+\bibitem[Evans et~al.(2019)]{Evans2019SHM}
+Evans, N.~W., O'Hare, C.~A.~J., \& McCabe, C.\ 2019,
+Phys. Rev. D, 99, 023012
+
+\bibitem[Everall \& Boubert(2022)]{EverallBoubert2022}
+Everall, A., \& Boubert, D.\ 2022, \mnras, 509, 6205
+
+\bibitem[Filion et~al.(2025)]{Filion2025}
+Filion, C., Petersen, M.~S., Horta, D., Daniel, K.~J., Lucey, M.,
+\& Price-Whelan, A.~M.\ 2025, \apj, 989, 70
+
 \bibitem[Gaia Collaboration et~al.(2023)]{Vallenari2023}
 Gaia Collaboration, Vallenari, A., et~al.\ 2023, \aap, 674, A1
+
+\bibitem[Gehrels(1986)]{Gehrels1986}
+Gehrels, N.\ 1986, \apj, 303, 336
+
+\bibitem[GRAVITY Collaboration(2022)]{GravityCollab2022}
+GRAVITY Collaboration, Abuter, R., Aimar, N., et~al.\ 2022, \aap,
+657, L12
 
 \bibitem[GRAVITY Collaboration et~al.(2019)]{GravityCollab2019}
 GRAVITY Collaboration, Abuter, R., Amorim, A., et~al.\ 2019, \aap,
 625, L10
+
+\bibitem[Hainmueller(2012)]{Hainmueller2012}
+Hainmueller, J.\ 2012, Political Analysis, 20, 25
 
 \bibitem[Hattori \& Yoshii(2010)]{HattoriYoshii2010}
 Hattori, K., \& Yoshii, Y.\ 2010, \mnras, 408, 2137
@@ -2005,12 +2137,26 @@ Hattori, K., \& Yoshii, Y.\ 2010, \mnras, 408, 2137
 \bibitem[Hattori \& Yoshii(2011)]{HattoriYoshii2011}
 Hattori, K., \& Yoshii, Y.\ 2011, \mnras, 418, 2481
 
+\bibitem[Helmi(2020)]{Helmi2020}
+Helmi, A.\ 2020, \araa, 58, 205
+
+\bibitem[Helmi \& de~Zeeuw(2000)]{HelmiDeZeeuw2000}
+Helmi, A., \& de~Zeeuw, P.~T.\ 2000, \mnras, 319, 657
+
 \bibitem[Helmi et~al.(2018)]{Helmi2018}
 Helmi, A., Babusiaux, C., Koppelman, H.~H., et~al.\ 2018, \nat, 563,
 85
 
-\bibitem[Helmi(2020)]{Helmi2020}
-Helmi, A.\ 2020, \araa, 58, 205
+\bibitem[Herzog-Arbeitman et~al.(2018a)]{HerzogArbeitman2018PRL}
+Herzog-Arbeitman, J., Lisanti, M., Madau, P., \& Necib, L.\ 2018a,
+Phys. Rev. Lett., 120, 041102
+
+\bibitem[Herzog-Arbeitman et~al.(2018b)]{HerzogArbeitman2018JCAP}
+Herzog-Arbeitman, J., Lisanti, M., \& Necib, L.\ 2018b, JCAP, 04, 052
+
+\bibitem[Horta Darrington et~al.(2025)]{Horta2025}
+Horta Darrington, D., Petersen, M.~S., \& Pe\~narrubia, J.\ 2025,
+\mnras, 538, 998
 
 \bibitem[Hunt et~al.(2016)]{Hunt2016}
 Hunt, J.~A.~S., Bovy, J., \& Carlberg, R.~G.\ 2016,
@@ -2020,194 +2166,45 @@ Hunt, J.~A.~S., Bovy, J., \& Carlberg, R.~G.\ 2016,
 Hunt, J.~A.~S., Price-Whelan, A.~M., Johnston, K.~V., et~al.\ 2024,
 \mnras, 527, 11393
 
-\bibitem[Katz et~al.(2023)]{Katz2023}
-Katz, D., et~al.\ 2023, \aap, 674, A5
-
-\bibitem[Lee et~al.(2023)]{Lee2023}
-Lee, A., Lee, Y.~S., Kim, Y.~K., et~al.\ 2023, \apj, 945, 56
-
-\bibitem[Marchetti et~al.(2022)]{Marchetti2022}
-Marchetti, T., Evans, F.~A., \& Rossi, E.~M.\ 2022, \mnras, 515, 767
-
-\bibitem[Naidu et~al.(2020)]{Naidu2020}
-Naidu, R.~P., Conroy, C., Bonaca, A., et~al.\ 2020, \apj, 901, 48
-
-\bibitem[Queiroz et~al.(2023)]{Queiroz2023}
-Queiroz, A.~B.~A., Anders, F., Chiappini, C., et~al.\ 2023, \aap,
-673, A155
-
-\bibitem[Recio-Blanco et~al.(2023)]{RecioBlanco2023}
-Recio-Blanco, A., de Laverny, P., Palicio, P.~A., et~al.\ 2023,
-\aap, 674, A29
-
-\bibitem[Rix et~al.(2022)]{Rix2022}
-Rix, H.-W., Chandra, V., Andrae, R., et~al.\ 2022, \apj, 941, 45
-
-\bibitem[Rybizki et~al.(2020)]{Rybizki2020}
-Rybizki, J., Demleitner, M., Bailer-Jones, C.~A.~L., et~al.\ 2020,
-\pasp, 132, 074501
-
-\bibitem[Scholz \& Stephens(1987)]{ScholzStephens1987}
-Scholz, F.~W., \& Stephens, M.~A.\ 1987, Journal of the American
-Statistical Association, 82, 918
-
-\bibitem[Schubert et~al.(2017)]{Schubert2017}
-Schubert, E., Sander, J., Ester, M., Kriegel, H.-P., \& Xu, X.\ 2017,
-ACM Transactions on Database Systems, 42, 19
-
-\bibitem[Sch\"onrich et~al.(2010)]{Schonrich2010}
-Sch\"onrich, R., Binney, J., \& Dehnen, W.\ 2010, \mnras, 403, 1829
-
-\bibitem[Sharpe et~al.(2024)]{Sharpe2024}
-Sharpe, K., Naidu, R.~P., \& Conroy, C.\ 2024, \apj, 963, 162
-
-\bibitem[Viswanathan et~al.(2023)]{Viswanathan2023}
-Viswanathan, A., Starkenburg, E., Koppelman, H.~H., et~al.\ 2023,
-\mnras, 521, 2087
-
-\bibitem[Zhang et~al.(2023)]{Zhang2023}
-Zhang, X., Green, G.~M., \& Rix, H.-W.\ 2023, \mnras, 524, 1855
-
-\bibitem[Zhang et~al.(2025)]{Zhang2025}
-Zhang, L., Feng, F., Rui, Y., Xiao, G.-Y., \& Wang, W.\ 2025,
-Research in Astronomy and Astrophysics, 25, 055010
-
-\bibitem[Binney(2012)]{Binney2012}
-Binney, J.\ 2012, \mnras, 426, 1324
-
-\bibitem[Buder et~al.(2021)]{Buder2021}
-Buder, S., Sharma, S., Kos, J., et~al.\ 2021, \mnras, 506, 150
-
 \bibitem[Hunter et~al.(2024)]{Hunter2024}
 Hunter, G.~H., Sormani, M.~C., Beckmann, J.~P., et~al.\ 2024,
 \aap, 692, A216
 
-\bibitem[Lindegren et~al.(2021)]{Lindegren2021}
-Lindegren, L., Bastian, U., Biermann, M., et~al.\ 2021, \aap, 649, A4
+\bibitem[Katz et~al.(2023)]{Katz2023}
+Katz, D., et~al.\ 2023, \aap, 674, A5
 
-\bibitem[Li et~al.(2021)]{Li2021}
-Li, H., Hammer, F., Babusiaux, C., et~al.\ 2021, \apj, 916, 8
-
-\bibitem[Pace et~al.(2022)]{Pace2022}
-Pace, A.~B., Erkal, D., \& Li, T.~S.\ 2022, \apj, 940, 136
-
-\bibitem[Sanders \& Binney(2016)]{Sanders2016}
-Sanders, J.~L., \& Binney, J.\ 2016, \mnras, 457, 2107
-
-\bibitem[Vasiliev(2019)]{Vasiliev2019}
-Vasiliev, E.\ 2019, \mnras, 482, 1525
-
-\bibitem[Belokurov et~al.(2020)]{Belokurov2020}
-Belokurov, V., Sanders, J.~L., Fattahi, A., et~al.\ 2020, \mnras,
-494, 3880
-
-\bibitem[Belokurov \& Kravtsov(2022)]{BelokurovKravtsov2022}
-Belokurov, V., \& Kravtsov, A.\ 2022, \mnras, 514, 689
-
-\bibitem[Cautun et~al.(2020)]{Cautun2020}
-Cautun, M., Ben\'{\i}tez-Llambay, A., Deason, A.~J., et~al.\ 2020,
-\mnras, 494, 4291
-
-\bibitem[GRAVITY Collaboration(2022)]{GravityCollab2022}
-GRAVITY Collaboration, Abuter, R., Aimar, N., et~al.\ 2022, \aap,
-657, L12
-
-\bibitem[Reid \& Brunthaler(2020)]{ReidBrunthaler2020}
-Reid, M.~J., \& Brunthaler, A.\ 2020, \apj, 892, 39
-
-\bibitem[Sch\"onrich(2012)]{Schonrich2012}
-Sch\"onrich, R.\ 2012, \mnras, 427, 274
-
-\bibitem[Wang et~al.(2020)]{Wang2020}
-Wang, W., Han, J., Cautun, M., Li, Z., \& Ishigaki, M.~N.\ 2020,
-Science China Phys.\ Mech.\ Astron., 63, 109801
-
-\bibitem[Cameron(2011)]{Cameron2011}
-Cameron, E.\ 2011, \pasa, 28, 128
-
-\bibitem[Hainmueller(2012)]{Hainmueller2012}
-Hainmueller, J.\ 2012, Political Analysis, 20, 25
-
-\bibitem[Clarke et~al.(2019)]{Clarke2019}
-Clarke, J.~P., Wegg, C., Gerhard, O., Smith, L.~C., Lucas, P.~W., \&
-Wylie, S.~M.\ 2019, \mnras, 489, 3519
-
-\bibitem[Everall \& Boubert(2022)]{EverallBoubert2022}
-Everall, A., \& Boubert, D.\ 2022, \mnras, 509, 6205
-
-\bibitem[Filion et~al.(2025)]{Filion2025}
-Filion, C., Petersen, M.~S., Horta, D., Daniel, K.~J., Lucey, M.,
-\& Price-Whelan, A.~M.\ 2025, \apj, 989, 70
-
-\bibitem[Horta Darrington et~al.(2025)]{Horta2025}
-Horta Darrington, D., Petersen, M.~S., \& Pe\~narrubia, J.\ 2025,
-\mnras, 538, 998
-
-\bibitem[Luri et~al.(2018)]{Luri2018}
-Luri, X., Brown, A.~G.~A., Sarro, L.~M., et~al.\ 2018, \aap, 616, A9
-
-\bibitem[Portail et~al.(2017)]{Portail2017}
-Portail, M., Gerhard, O., Wegg, C., \& Ness, M.\ 2017, \mnras, 465, 1621
-
-\bibitem[Sormani et~al.(2022)]{Sormani2022}
-Sormani, M.~C., Gerhard, O., Portail, M., Vasiliev, E., \& Clarke,
-J.\ 2022, \mnras, 514, L1
-
-\bibitem[Woudenberg \& Helmi(2025)]{WoudenbergHelmi2025}
-Woudenberg, H.~C., \& Helmi, A.\ 2025, \aap, 700, A240
-
-\bibitem[Wright \& Binney(2026)]{WrightBinney2026}
-Wright, T.~J., \& Binney, J.\ 2026, \mnras, 549, stag839,
-\doi{10.1093/mnras/stag839}
-
-\bibitem[Zhang et~al.(2024)]{Zhang2024LPV}
-Zhang, H., Belokurov, V., Evans, N.~W., Kane, S.~G., \& Sanders, J.~L.\
-2024, \mnras, 533, 3395
-
-\bibitem[Babusiaux et~al.(2023)]{Babusiaux2023}
-Babusiaux, C., et~al.\ 2023, \aap, 674, A32
-
-\bibitem[McMillan(2017)]{McMillan2017}
-McMillan, P.~J.\ 2017, \mnras, 465, 76
-
-\bibitem[Palicio et~al.(2023)]{Palicio2023}
-Palicio, P.~A., Recio-Blanco, A., Poggio, E., et~al.\ 2023, \aap, 670, L7
-
-\bibitem[Borsato et~al.(2020)]{Borsato2020}
-Borsato, N.~W., Martell, S.~L., \& Simpson, J.~D.\ 2020, \mnras,
-492, 1370
-
-\bibitem[Dodd et~al.(2023)]{Dodd2023}
-Dodd, E., Callingham, T.~M., Helmi, A., et~al.\ 2023, \aap, 670, L2
-
-\bibitem[Evans et~al.(2019)]{Evans2019SHM}
-Evans, N.~W., O'Hare, C.~A.~J., \& McCabe, C.\ 2019,
-Phys. Rev. D, 99, 023012
-
-\bibitem[Helmi \& de~Zeeuw(2000)]{HelmiDeZeeuw2000}
-Helmi, A., \& de~Zeeuw, P.~T.\ 2000, \mnras, 319, 657
-
-\bibitem[Herzog-Arbeitman et~al.(2018a)]{HerzogArbeitman2018PRL}
-Herzog-Arbeitman, J., Lisanti, M., Madau, P., \& Necib, L.\ 2018a,
-Phys. Rev. Lett., 120, 041102
-
-\bibitem[Herzog-Arbeitman et~al.(2018b)]{HerzogArbeitman2018JCAP}
-Herzog-Arbeitman, J., Lisanti, M., \& Necib, L.\ 2018b, JCAP, 04, 052
+\bibitem[Koppelman \& Helmi(2021)]{KoppelmanHelmi2021}
+Koppelman, H.~H., \& Helmi, A.\ 2021, \aap, 649, A136
 
 \bibitem[Koppelman et~al.(2019)]{Koppelman2019}
 Koppelman, H.~H., Helmi, A., Massari, D., Price-Whelan, A.~M., \&
 Starkenburg, T.~K.\ 2019, \aap, 631, L9
 
-\bibitem[Koppelman \& Helmi(2021)]{KoppelmanHelmi2021}
-Koppelman, H.~H., \& Helmi, A.\ 2021, \aap, 649, A136
-
 \bibitem[Lee et~al.(2014)]{Lee2014GF}
 Lee, S.~K., Lisanti, M., Peter, A.~H.~G., \& Safdi, B.~R.\ 2014,
 Phys. Rev. Lett., 112, 011301
 
+\bibitem[Lee et~al.(2023)]{Lee2023}
+Lee, A., Lee, Y.~S., Kim, Y.~K., et~al.\ 2023, \apj, 945, 56
+
+\bibitem[Li et~al.(2021)]{Li2021}
+Li, H., Hammer, F., Babusiaux, C., et~al.\ 2021, \apj, 916, 8
+
+\bibitem[Lindegren et~al.(2021)]{Lindegren2021}
+Lindegren, L., Bastian, U., Biermann, M., et~al.\ 2021, \aap, 649, A4
+
 \bibitem[L\"ovdal et~al.(2022)]{Lovdal2022}
 L\"ovdal, S.~S., Ruiz-Lara, T., Koppelman, H.~H., Matsuno, T., Dodd,
 E., \& Helmi, A.\ 2022, \aap, 665, A57
+
+\bibitem[Luri et~al.(2018)]{Luri2018}
+Luri, X., Brown, A.~G.~A., Sarro, L.~M., et~al.\ 2018, \aap, 616, A9
+
+\bibitem[Marchetti et~al.(2022)]{Marchetti2022}
+Marchetti, T., Evans, F.~A., \& Rossi, E.~M.\ 2022, \mnras, 515, 767
+
+\bibitem[McMillan(2017)]{McMillan2017}
+McMillan, P.~J.\ 2017, \mnras, 465, 76
 
 \bibitem[Myeong et~al.(2018a)]{Myeong2018Streams}
 Myeong, G.~C., Evans, N.~W., Belokurov, V., Amorisco, N.~C., \&
@@ -2217,6 +2214,9 @@ Koposov, S.~E.\ 2018a, \mnras, 475, 1537
 Myeong, G.~C., Evans, N.~W., Belokurov, V., Sanders, J.~L., \&
 Koposov, S.~E.\ 2018b, \mnras, 478, 5449
 
+\bibitem[Naidu et~al.(2020)]{Naidu2020}
+Naidu, R.~P., Conroy, C., Bonaca, A., et~al.\ 2020, \apj, 901, 48
+
 \bibitem[Necib et~al.(2019a)]{Necib2019Disequilibrium}
 Necib, L., Lisanti, M., \& Belokurov, V.\ 2019a, \apj, 874, 3
 
@@ -2224,16 +2224,95 @@ Necib, L., Lisanti, M., \& Belokurov, V.\ 2019a, \apj, 874, 3
 Necib, L., Lisanti, M., Garrison-Kimmel, S., et~al.\ 2019b,
 \apj, 883, 27
 
+\bibitem[Pace et~al.(2022)]{Pace2022}
+Pace, A.~B., Erkal, D., \& Li, T.~S.\ 2022, \apj, 940, 136
+
+\bibitem[Palicio et~al.(2023)]{Palicio2023}
+Palicio, P.~A., Recio-Blanco, A., Poggio, E., et~al.\ 2023, \aap, 670, L7
+
 \bibitem[Piffl et~al.(2014)]{Piffl2014}
 Piffl, T., Scannapieco, C., Binney, J., et~al.\ 2014, \aap, 562, A91
+
+\bibitem[Portail et~al.(2017)]{Portail2017}
+Portail, M., Gerhard, O., Wegg, C., \& Ness, M.\ 2017, \mnras, 465, 1621
+
+\bibitem[Queiroz et~al.(2023)]{Queiroz2023}
+Queiroz, A.~B.~A., Anders, F., Chiappini, C., et~al.\ 2023, \aap,
+673, A155
+
+\bibitem[Recio-Blanco et~al.(2023)]{RecioBlanco2023}
+Recio-Blanco, A., de Laverny, P., Palicio, P.~A., et~al.\ 2023,
+\aap, 674, A29
+
+\bibitem[Reid \& Brunthaler(2020)]{ReidBrunthaler2020}
+Reid, M.~J., \& Brunthaler, A.\ 2020, \apj, 892, 39
+
+\bibitem[Rix et~al.(2022)]{Rix2022}
+Rix, H.-W., Chandra, V., Andrae, R., et~al.\ 2022, \apj, 941, 45
 
 \bibitem[Ruiz-Lara et~al.(2022)]{RuizLara2022}
 Ruiz-Lara, T., Matsuno, T., L\"ovdal, S.~S., Helmi, A., Dodd, E., \&
 Koppelman, H.~H.\ 2022, \aap, 665, A58
 
+\bibitem[Rybizki et~al.(2020)]{Rybizki2020}
+Rybizki, J., Demleitner, M., Bailer-Jones, C.~A.~L., et~al.\ 2020,
+\pasp, 132, 074501
+
+\bibitem[Sanders \& Binney(2016)]{Sanders2016}
+Sanders, J.~L., \& Binney, J.\ 2016, \mnras, 457, 2107
+
+\bibitem[Scholz \& Stephens(1987)]{ScholzStephens1987}
+Scholz, F.~W., \& Stephens, M.~A.\ 1987, Journal of the American
+Statistical Association, 82, 918
+
+\bibitem[Sch\"onrich(2012)]{Schonrich2012}
+Sch\"onrich, R.\ 2012, \mnras, 427, 274
+
+\bibitem[Sch\"onrich et~al.(2010)]{Schonrich2010}
+Sch\"onrich, R., Binney, J., \& Dehnen, W.\ 2010, \mnras, 403, 1829
+
+\bibitem[Schubert et~al.(2017)]{Schubert2017}
+Schubert, E., Sander, J., Ester, M., Kriegel, H.-P., \& Xu, X.\ 2017,
+ACM Transactions on Database Systems, 42, 19
+
+\bibitem[Sharpe et~al.(2024)]{Sharpe2024}
+Sharpe, K., Naidu, R.~P., \& Conroy, C.\ 2024, \apj, 963, 162
+
 \bibitem[Smith et~al.(2007)]{Smith2007}
 Smith, M.~C., Ruchti, G.~R., Helmi, A., et~al.\ 2007, \mnras,
 379, 755
+
+\bibitem[Sormani et~al.(2022)]{Sormani2022}
+Sormani, M.~C., Gerhard, O., Portail, M., Vasiliev, E., \& Clarke,
+J.\ 2022, \mnras, 514, L1
+
+\bibitem[Vasiliev(2019)]{Vasiliev2019}
+Vasiliev, E.\ 2019, \mnras, 482, 1525
+
+\bibitem[Viswanathan et~al.(2023)]{Viswanathan2023}
+Viswanathan, A., Starkenburg, E., Koppelman, H.~H., et~al.\ 2023,
+\mnras, 521, 2087
+
+\bibitem[Wang et~al.(2020)]{Wang2020}
+Wang, W., Han, J., Cautun, M., Li, Z., \& Ishigaki, M.~N.\ 2020,
+Science China Phys.\ Mech.\ Astron., 63, 109801
+
+\bibitem[Woudenberg \& Helmi(2025)]{WoudenbergHelmi2025}
+Woudenberg, H.~C., \& Helmi, A.\ 2025, \aap, 700, A240
+
+\bibitem[Wright \& Binney(2026)]{WrightBinney2026}
+Wright, T.~J., \& Binney, J.\ 2026, \mnras, 549, stag839
+
+\bibitem[Zhang et~al.(2023)]{Zhang2023}
+Zhang, X., Green, G.~M., \& Rix, H.-W.\ 2023, \mnras, 524, 1855
+
+\bibitem[Zhang et~al.(2024)]{Zhang2024LPV}
+Zhang, H., Belokurov, V., Evans, N.~W., Kane, S.~G., \& Sanders, J.~L.\
+2024, \mnras, 533, 3395
+
+\bibitem[Zhang et~al.(2025)]{Zhang2025}
+Zhang, L., Feng, F., Rui, Y., Xiao, G.-Y., \& Wang, W.\ 2025,
+Research in Astronomy and Astrophysics, 25, 055010
 
 \end{thebibliography}
 

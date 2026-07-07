@@ -181,3 +181,35 @@ These columns appear in:
 | `sf_prior_dominated_n_lt10` | boolean | True when `sf_parent_count < 10`; this is the per-source flag used to reproduce the low-parent-count fractions in Table `tab_selection_function`. |
 | `sf_invalid` | boolean | True when GaiaUnlimited returned a non-finite selection-function value for the source. |
 | `P_vgrf_below_25` | dimensionless | Monte Carlo probability that `Vgrf < 25 km/s`, copied from the master catalogue. |
+
+## Matched-Control Reweighting Products
+
+These products back the kernel-weighted matched-control comparisons
+(Section on matched-control covariate balance; e.g. the 2.25 kpc
+kernel-weighted 200-260 km/s control pericentre):
+
+- `phase14/control_orbits.fits` -- orbit summaries for the matched-control
+  band stars. Note: the `kw_weight` column stored inside this FITS is a
+  legacy per-run weight and does **not** reproduce the kernel-weighted
+  control medians quoted in the manuscript (applying it returns the
+  unweighted medians).
+- `phase14/expanded_control_weights.csv` -- the operative covariate-kernel
+  weights (`expanded_kw_weight` column) used for every kernel-weighted
+  control statistic in the manuscript. Join to `control_orbits.fits` on
+  `source_id` and weight by `expanded_kw_weight` to reproduce the quoted
+  medians.
+
+## Smooth-DF Eccentricity Mock
+
+- `phase14/control_orbits.fits` additionally carries the Cartesian
+  Galactocentric velocity components `vx_kms`, `vy_kms`, `vz_kms` used to
+  fit the single trivariate-Gaussian control ellipsoid.
+- `phase14/smooth_df_eccentricity_mock.csv` -- the single-ellipsoid
+  smooth-continuation mock eccentricity realisation (N=1,952, seed
+  20260523) behind the manuscript's second Anderson-Darling comparison;
+  regenerated end-to-end from bundle products by
+  `scripts/phase14am_smooth_df_ecc_mock.py`.
+- `phase14/smooth_df_ecc_mock_summary.json` -- Anderson-Darling A^2
+  statistics and capped asymptotic p-values for both manuscript AD
+  comparisons (slow vs 25-50 km/s control: A^2 = 531.1; slow vs
+  smooth-DF mock: A^2 = 300.2; both p < 0.001).
