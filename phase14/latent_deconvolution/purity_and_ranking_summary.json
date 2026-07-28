@@ -1,0 +1,74 @@
+{
+  "smoothing_sigma_bins": 1.5,
+  "n_stars": 20826,
+  "purity_on_released_tiers": {
+    "A": {
+      "n_members": 289,
+      "score_implied_purity_forward": 0.9863771626297577,
+      "score_implied_purity_population_prior": 0.9346352702417243,
+      "expected_true_slow_forward": 285.063,
+      "expected_true_slow_population_prior": 270.10959309985833
+    },
+    "A+B": {
+      "n_members": 548,
+      "score_implied_purity_forward": 0.9414386861313869,
+      "score_implied_purity_population_prior": 0.7915891625459374,
+      "expected_true_slow_forward": 515.9084,
+      "expected_true_slow_population_prior": 433.79086107517367
+    },
+    "A+B+C": {
+      "n_members": 1951,
+      "score_implied_purity_forward": 0.7265053562275755,
+      "score_implied_purity_population_prior": 0.42392825503600684,
+      "expected_true_slow_forward": 1417.4119499999997,
+      "expected_true_slow_population_prior": 827.0840255752494
+    }
+  },
+  "rank_preservation": {
+    "spearman_all": 0.9974325806524337,
+    "kendall_tau_all": 0.9627532619155516,
+    "n_relevant": 5737,
+    "spearman_relevant": 0.9203407096248403,
+    "monotone_violations_frac": 0.03724673808444845
+  },
+  "retiering_same_thresholds": {
+    "A": {
+      "n_old": 289,
+      "n_new": 173,
+      "n_retained": 173,
+      "n_dropped": 116,
+      "n_added": 0,
+      "new_purity": 0.9901408769635284
+    },
+    "A+B": {
+      "n_old": 548,
+      "n_new": 276,
+      "n_retained": 276,
+      "n_dropped": 272,
+      "n_added": 0,
+      "new_purity": 0.9538437956642927
+    },
+    "A+B+C": {
+      "n_old": 1951,
+      "n_new": 621,
+      "n_retained": 621,
+      "n_dropped": 1330,
+      "n_added": 0,
+      "new_purity": 0.7855945467581705
+    }
+  },
+  "forward_threshold_matching_corrected_size": {
+    "A": {
+      "n": 173,
+      "equivalent_forward_threshold": 0.987
+    },
+    "A+B": {
+      "n": 276,
+      "equivalent_forward_threshold": 0.9565
+    },
+    "A+B+C": {
+      "n": 621,
+      "equivalent_forward_threshold": 0.813
+    }
+  }
+}

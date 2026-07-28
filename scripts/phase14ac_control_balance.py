@@ -8,7 +8,7 @@ product-of-1D-kernel weights do NOT achieve covariate balance: the standardized
 mean differences (SMDs) of the matched marginals are not reduced (and can grow)
 once joint covariate correlations are accounted for.
 
-This script therefore evaluates the monotonic median-pericentre trend under an
+This script therefore evaluates the monotonic median-cylindrical-pericentre trend under an
 ENSEMBLE of weighting schemes that span very different assumptions:
 
   raw      : no weighting
@@ -17,7 +17,7 @@ ENSEMBLE of weighting schemes that span very different assumptions:
   ebal     : entropy balancing -- weights that match all covariate means
              exactly (|SMD| ~ 1e-12) at maximum entropy (Hainmueller 2012)
 
-The scientific claim -- median pericentre increases monotonically with Vgrf,
+The scientific claim -- median cylindrical pericentre increases monotonically with Vgrf,
 with the slow sample at the compact end -- is robust to ALL four schemes. The
 entropy-balanced member is the principled weighted-inference layer: it achieves
 exact covariate balance with a reported effective sample size, and the trend
@@ -303,7 +303,7 @@ def _latex_table(bal: pd.DataFrame, summ: dict) -> None:
         r" SMDs (Fig.~\ref{fig:control_balance}), whereas entropy balancing matches every"
         r" covariate mean to $|\mathrm{SMD}|\lesssim10^{-3}$. The footer gives the"
         r" entropy-balanced effective sample size $N_{\rm eff}$ and weighted median"
-        r" pericentre, which preserves its monotonic increase with $\vgrf$.\label{tab:control_balance}}",
+        r" cylindrical pericentre, which preserves its monotonic increase with $\vgrf$.\label{tab:control_balance}}",
         r"\tablehead{\colhead{} & \multicolumn{2}{c}{25--50} & \multicolumn{2}{c}{50--100}"
         r" & \multicolumn{2}{c}{100--200} & \multicolumn{2}{c}{200--260} \\"
         r" \colhead{covariate} & \colhead{before} & \colhead{ebal.} & \colhead{before} & \colhead{ebal.}"

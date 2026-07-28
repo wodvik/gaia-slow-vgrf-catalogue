@@ -1,33 +1,38 @@
 \begin{center}
 \refstepcounter{table}\label{tab:population_decomp}
 \begin{minipage}{\columnwidth}
-\small\textbf{Table \thetable.} Subset-qualified chemodynamic context for
-the Tier~A+B+C catalogue. Only stars with both [Fe/H] and [$\alpha$/Fe]
-from APOGEE or GALAH ($n=117$) are placed in literature comparison
-regions following \citet{Belokurov2020}, \citet{Helmi2018}, and
-\citet{BelokurovKravtsov2022}. The remaining $1{,}952-117=1{,}835$ stars
-are not assigned to a population in this catalogue paper.  Fraction errors are
-Beta$(k+\tfrac{1}{2}, n-k+\tfrac{1}{2})$ Jeffreys 68\% intervals on the
-117-star subset \citep{Cameron2011}; with $n=117$ they are large,
-which is itself an argument against extrapolating to the full
-catalogue.
+\small\textbf{Table \thetable.} Probability-weighted chemodynamic
+context.  Spectroscopic abundances are rare in this catalogue, so the
+chemical discussion uses the full $\alpha$-classified sample---every
+star with both [Fe/H] and an $\alpha$ proxy from APOGEE or GALAH
+($n=117$)---rather than only those above the adopted velocity
+threshold.  Regions follow \citet{Belokurov2020}, \citet{Helmi2018},
+and \citet{BelokurovKravtsov2022}.  $\Sigma P_{\rm pop}$ is the summed
+population-prior membership probability, i.e.\ the effective number of
+genuinely slow stars each region contributes; $N(P>0.5)$ is the count
+surviving the adopted threshold.  The three columns give consistent
+proportions, so the mixed chemical character of the sample does not
+depend on where the velocity threshold is placed.  Fractions are raw
+$N$ shares with Beta$(k+\tfrac{1}{2}, n-k+\tfrac{1}{2})$ Jeffreys
+68\% intervals \citep{Cameron2011}; they are wide, which is itself an
+argument against extrapolating to the full catalogue.  Per-star
+probabilities ship with the catalogue so these regions can be recut.
 \end{minipage}
 \vspace{0.4ex}
 
 \small
 \setlength{\tabcolsep}{0pt}
-\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrr@{}}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrrr@{}}
 \hline\hline
-Population & $N$ & Fraction & [Fe/H] \\
+Population & $N$ & $\Sigma P_{\rm pop}$ & $N(P>0.5)$ & Fraction & [Fe/H] \\
 \hline
-Splash                              & 51      & $43.6^{+4.6}_{-4.5}\%$ & $-0.62$ \\
-GSE                                 & 23      & $19.7^{+3.9}_{-3.4}\%$ & $-1.04$ \\
-Aurora                              & 22      & $18.8^{+3.8}_{-3.3}\%$ & $-1.43$ \\
-Disc-like                           &  2      & $1.7^{+1.6}_{-0.8}\%$  & $-0.11$ \\
-Unclassified                        & 19      & $16.2^{+3.7}_{-3.1}\%$ & $-1.21$ \\
+Splash               &  51 &  26.1 &  22 & $43.6^{+4.6}_{-4.5}\%$ & $-0.62$ \\
+GSE                  &  23 &  10.5 &   9 & $19.7^{+3.9}_{-3.4}\%$ & $-1.04$ \\
+Aurora               &  22 &  11.4 &  10 & $18.8^{+3.8}_{-3.3}\%$ & $-1.43$ \\
+Disc-like            &   2 &   1.4 &   1 & $1.7^{+1.6}_{-0.8}\%$ & $-0.11$ \\
+Unclassified         &  19 &   9.0 &   6 & $16.2^{+3.7}_{-3.1}\%$ & $-1.21$ \\
 \hline
-$\alpha$-classified subtotal       & 117     & 100.0\%                &  ---    \\
-not $\alpha$-classified             & 1{,}835 & ---                    & ---     \\
+$\alpha$-classified & 117 & 58.5 & 48 & 100.0\% & --- \\
 \hline
 \end{tabular*}
 \end{center}

@@ -1,0 +1,25 @@
+{
+  "n_stars": 20829,
+  "grid_max_kms": 120.0,
+  "grid_step_kms": 1.0,
+  "mc_schedule": {
+    "base_realisations": 2000,
+    "refine_realisations": 20000,
+    "refine_lo": 5.0,
+    "random_seed": 20260727
+  },
+  "n_refined": 3174,
+  "median_vgrf_sigma_kms": 8.508780724867263,
+  "vgrf_sigma_percentiles": {
+    "5": 1.6836264268930279,
+    "16": 3.4555944081263945,
+    "50": 8.508780724867263,
+    "84": 15.73502148352464,
+    "95": 21.084161755899956
+  },
+  "mean_mass_inside_grid": 0.9983800206442941,
+  "min_mass_inside_grid": 0.577,
+  "p_below_25_sum": 2556.42665,
+  "p_below_25_vs_phase0e_max_abs_diff": 0.08299999999999996,
+  "elapsed_seconds": 58.1
+}

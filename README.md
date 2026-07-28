@@ -5,15 +5,23 @@ slow-Galactic-rest-frame-speed catalogue.
 
 Zenodo concept DOI: [10.5281/zenodo.20116134](https://doi.org/10.5281/zenodo.20116134)
 
-Release version: `v1.0.8-review` (see `RELEASE_NOTES.md`).
+Release version: `v1.2.0-review` (see `RELEASE_NOTES.md`).
 
 ## Key Counts
 
+Tiers are defined on the population-prior-corrected membership probability
+(see `RELEASE_NOTES.md`); the uncorrected forward-score counts are given for
+reference and are also released.
+
 - Propagated candidate pool: 20,829 stars
-- Tier A (`P(Vgrf < 25 km/s) > 0.95`): 289 stars
-- Tier A+B primary catalogue (`P > 0.84`): 541 stars
-- Tier A+B+C orbit-summary catalogue (`P > 0.50`): 1,952 stars
+- Tier A (`P(Vgrf < 25 km/s) > 0.95`): 173 stars (forward score: 289)
+- Tier A+B primary catalogue (`P > 0.84`): 276 stars (forward score: 541)
+- Tier A+B+C orbit-summary catalogue (`P > 0.50`): 621 stars (forward score: 1,952)
 - Corrected point-estimate `Vgrf < 25 km/s`: 2,755 stars
+- Tier purities on the adopted definition: 99.0% / 95.4% / 78.6%
+
+The population-prior tiers are strict nested subsets of the forward-score
+tiers: no star enters a tier it was not already in.
 
 ## Primary Catalogue Products
 
@@ -59,6 +67,10 @@ the ESA Gaia Archive `gaiadr3.gaia_source` table by `source_id`.
 
 - Tier A+B: 541/541 recovered, 0 discrepancies
 - Tier A+B+C: 1,952/1,952 recovered, 0 discrepancies
+
+(The archive check was run against the forward-score tiers; the adopted
+population-prior tiers are nested subsets of these, so every adopted member is
+covered by it.)
 - Master catalogue: 20,829/20,829 recovered, 0 discrepancies
 
 The verification report and script are in `online_verification/`.
@@ -73,7 +85,7 @@ python tests/smoke_regression.py --bundle-root .
 ```
 
 The harness checks product presence, source-ID uniqueness, release-schema
-columns, and the final v1.0.8-review primary counts.
+columns, and the v1.2.0-review primary counts.
 
 ## Reproducibility
 

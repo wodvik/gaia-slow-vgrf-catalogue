@@ -18,6 +18,18 @@ REPO = BUNDLE.parents[1]
 MASTER = BUNDLE / "catalogues" / "catalogue_expanded_master.fits"
 ORBITS = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.fits"
 ENERGY = BUNDLE / "phase14" / "expanded_static_energy.csv"
+
+# --- population-prior retier switch (Phase 16F) -------------------------------
+# With GAIA_RETIER=1 these scripts read the retiered catalogue products, whose
+# `tier` column is defined on the population-prior probability rather than the
+# forward Monte Carlo score. Default behaviour is unchanged.
+import os as _os
+_RETIER = _os.environ.get("GAIA_RETIER", "").lower() in ("1", "true", "yes")
+if _RETIER:
+    MASTER = BUNDLE / "catalogues" / "catalogue_retier_master.fits"
+    ORBITS = BUNDLE / "catalogues" / "catalogue_retier_orbits_tierABC.fits"
+# -----------------------------------------------------------------------------
+
 FIG = BUNDLE / "figures"
 OUT = BUNDLE / "phase14"
 

@@ -1,5 +1,139 @@
 # Release Notes
 
+## v1.2.0-review - 2026-07-27
+
+**Catalogue redefinition.** Tier membership is now defined on a
+population-prior-corrected probability rather than the forward Monte Carlo
+score. Adopted counts change from Tier A / A+B / A+B+C = 289 / 541 / 1,952 to
+**173 / 276 / 621**. Both probabilities and both tier labels ship, so either
+definition is reproducible from the released files.
+
+### Why the tiers changed
+
+The forward score answers "what fraction of this star's error realisations
+fall below 25 km/s". It carries no information about the parent population.
+Because the candidate pool rises steeply with `Vgrf` (188 sources below
+10 km/s against 7,635 between 40 and 50), far more stars are available to
+scatter *down* into the slow window than up out of it - the classical
+Eddington bias. Scored correctly, the previously released Tier A+B and
+Tier A+B+C samples have purities of 80% and 42%, not the 94% and 73% implied
+by the forward scores. Those purity figures were wrong, which is what
+motivated the redefinition rather than a change of presentation.
+
+The correction is **perfectly nested**: no star enters any tier it was not
+already in (Spearman 0.997, Kendall 0.963), so the ranking of the catalogue is
+unchanged and only the thresholds move. Equivalently, the forward cuts of
+0.95 / 0.84 / 0.50 correspond to population-prior cuts of 0.987 / 0.957 /
+0.813. On the new definition the tier purities are 99.0% / 95.4% / 78.6%.
+
+### New analysis
+
+- Latent `Vgrf`-distribution reconstruction by iterative deconvolution
+  (Richardson 1972; Lucy 1974; equivalently EM, Dempster et al. 1977) with
+  smoothed-EM regularisation (Silverman et al. 1990), following the recent
+  application of this approach by Banik et al. (2026) to the oldest-star age
+  extremum. Expected `N(Vgrf<25)` falls from 2,556 to 1,234 (+110/-146).
+  Scripts `phase16b`-`phase16e`.
+- The reconstructed latent distribution passes smoothly through the 25 km/s
+  boundary (curvature of `ln P` below 0.02 per bin across 20-30 km/s against a
+  maximum of 0.08 elsewhere), confirming the catalogue is a tail selection
+  rather than a distinct population.
+- Quality-cut orthogonality audit (`phase16a`): pass rate of each cut as a
+  function of `Vgrf` across the full 20,829-source pool, demonstrating the cuts
+  are not circular. New table `tab_cut_orthogonality`.
+- New quality cut `ipd_frac_multi_peak <= 1`, targeting marginally resolved
+  companions between the RUWE and non-single-star regimes.
+
+### Removed
+
+- The observed/predicted "excess" ratios (25.6x / 7.4x / 11.0x), together with
+  `tab_null_models` and `fig_ndf_expectation`. The ratio had no defensible
+  parent normalisation: the matched-control library is band-balanced by
+  construction, so its sampling rate relative to the Gaia 6D catalogue varies
+  by more than two orders of magnitude across velocity bands, and the
+  prediction was anchored to 10,078 control stars while the numerator counted
+  observed slow stars from the complete parent scan. The matched-control
+  comparison is retained as a distributional (shape) test, where no
+  normalisation is required. Both files remain in the bundle but are no longer
+  cited by the manuscript.
+
+### Regenerated
+
+- 11 figures on the new tiers; `tab_selection_function`,
+  `tab_covariance_stress`; all four MRT tables (173 / 276 / 621 / 621 rows).
+- Selection-function diagnostics re-aggregated from the shipped per-source
+  table (no GaiaUnlimited re-query needed, the retier being nested):
+  Tier A+B `f_n<10` = 81.3%, `f_sum,n<10` = 87.5%.
+- Covariance stress restated: **276 of 276** Tier A+B members remain above
+  P = 0.84 under maximal copula coupling (median |dP| = 0.0010), stronger than
+  the forward-era 527 of 541 because the new thresholds sit further from the
+  boundary.
+- Orbit summaries re-aggregated over the nested subsets; no orbit was
+  re-integrated. Monte Carlo posterior medians: eccentricity 0.965 (was
+  0.949), `R_peri` 153 pc (was 154), `R_apo` 8.24 kpc (was 7.35).
+
+### Fixed
+
+- `phase16f` initially subset the orbit table's rows without relabelling its
+  `tier` column, leaving forward labels inside the retiered row set. Totals
+  were correct but per-tier splits, legends and marker styles were not. Caught
+  by inspecting a rendered figure; an assertion now guards it.
+- Population-prior probabilities are clipped to [0, 1]; the EM normalisation
+  had left 22 values an epsilon above unity.
+- `phase14t` wrote absolute local paths into a released JSON; now
+  bundle-relative.
+- `check_provenance` validated only one tier definition; it now checks both and
+  asserts the retier is a strict nested subset of the forward tiers.
+
+### Reporting
+
+- Chemistry is reported on both samples: the 51-star population-prior subset
+  and the 125-star forward-defined subset. Literature-region proportions are
+  stable across the size change (Splash/GSE/Aurora/disc/unclassified =
+  22/9/10/1/6 against 51/23/22/2/19).
+
+## v1.1.0-review - 2026-07-17 (draft)
+
+Manuscript-clarification revision begun from the complete
+v1.0.9-review bundle.  This entry will be expanded as the revision
+proceeds.
+
+- Figure 6 now states explicitly that a plotted pericentre is the
+  minimum Galactocentric-radius point on a continuous trajectory, not a
+  physical reversal of the star's velocity at the Galactic centre.
+- The manuscript now defines the orbit integrations as fully
+  three-dimensional while distinguishing the cylindrical turning-point
+  summaries $R_{\rm peri}=\min\sqrt{x^2+y^2}$ and
+  $R_{\rm apo}=\max\sqrt{x^2+y^2}$ from the spherical Galactic-centre
+  closest approach $r_{\rm sph,min}=\min\sqrt{x^2+y^2+z^2}$.
+- The abstract, introductory interpretation, orbit methods, primary
+  results, figure and table captions, limitations, conclusions, and
+  Sgr A* appendix now use this terminology consistently.  Small
+  $R_{\rm peri}$ is described as Galactic spin-axis reach rather than,
+  by itself, a close passage to Sgr A*.
+- The Sgr A* candidate calculation and all numerical values are
+  unchanged: its seeds and Monte Carlo probabilities already use the
+  three-dimensional spherical closest approach.  Auto-generated table
+  sources were updated so future regeneration preserves the clarified
+  terminology.
+
+## v1.0.9-review - 2026-07-11
+
+Manuscript-format release. No data, catalogue, script, or numerical
+changes of any kind; primary counts are unchanged (Tier A / A+B /
+A+B+C = 289 / 541 / 1,952).
+
+- The bundled manuscript source is now typeset with the Astronomy &
+  Astrophysics document class (`aa.cls` v9.4) instead of `aastex631`.
+  `main.tex` compiles standalone within this bundle (30 pages, 0
+  errors) and uses the A&A structured abstract
+  (Context/Aims/Methods/Results/Conclusions).
+- Release metadata is now journal-agnostic: the release description no
+  longer names a target journal or a manuscript tracking number.
+  Historical entries below are retained verbatim.
+- `aastex631.cls` removed from the bundle; `aa.cls`, `lineno.sty`, and
+  `linenoaa.sty` added.
+
 ## v1.0.8-review - 2026-07-06
 
 Manuscript-typesetting fix release, cut on the day the paper was

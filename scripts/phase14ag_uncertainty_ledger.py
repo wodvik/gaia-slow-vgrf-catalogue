@@ -148,8 +148,9 @@ def _latex(rows) -> None:
         r" central 68\% ranges: bootstrap resampling of the catalogue for the medians and"
         r" observed-control ratios, Wilson score intervals for the binomial pipeline fractions,"
         r" and score-implied Bernoulli standard errors for the purity rows. Rows labelled"
-        r" ``point'' use deterministic point-estimate orbit products; the"
-        r" uncertainty-propagated eccentricity summary is Table~\ref{tab:orbit_summary}.\label{tab:uncertainty_ledger}}",
+        r" ``point'' use deterministic point-estimate orbit products; $R_{\rm peri}$ and"
+        r" $R_{\rm apo}$ are cylindrical. The uncertainty-propagated eccentricity summary"
+        r" is Table~\ref{tab:orbit_summary}.\label{tab:uncertainty_ledger}}",
         r"\tablehead{\colhead{quantity} & \colhead{value} & \colhead{68\% interval}"
         r" & \colhead{method}}",
         r"\startdata",

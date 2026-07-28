@@ -1,0 +1,24 @@
+\begin{table*}
+\caption{Observational quality cuts are orthogonal to the \vgrf{}
+  selection axis.  ``Pass-rate spread'' is the largest difference in
+  pass rate between any two \vgrf{} bins spanning $0$--$50\kms$ across
+  the full 20{,}829-source candidate pool; a small spread means the cut
+  is effectively blind to \vgrf{} and therefore cannot manufacture the
+  slow sample.  Survival columns give the fraction of each tier retained.}
+\label{tab:cut_orthogonality}
+\centering
+\begin{tabular}{lccc}
+\hline\hline
+Cut & Pass-rate spread & \multicolumn{2}{c}{Survival} \\
+ & ($0$--$50\kms$) & Tier A+B & Tier A+B+C \\
+\hline
+RUWE $<1.4$ & 0.009 & 262/276 (94.9\%) & 589/621 (94.8\%) \\
+\texttt{ipd\_frac\_multi\_peak} $\leq 1$ & 0.011 & 265/276 (96.0\%) & 595/621 (95.8\%) \\
+RVS quality ok & 0.019 & 256/276 (92.8\%) & 578/621 (93.1\%) \\
+$\varpi/\sigma_\varpi>10$ & 0.053 & 257/276 (93.1\%) & 552/621 (88.9\%) \\
+$\sigma_d/d<0.15$ & 0.031 & 276/276 (100.0\%) & 621/621 (100.0\%) \\
+\hline
+All cuts jointly & --- & 220/276 (79.7\%) & 472/621 (76.0\%) \\
+\hline
+\end{tabular}
+\end{table*}

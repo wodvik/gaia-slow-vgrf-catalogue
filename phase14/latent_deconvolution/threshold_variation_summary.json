@@ -1,0 +1,32 @@
+{
+  "smoothing_sigma_bins": 1.5,
+  "thresholds": {
+    "15.0": {
+      "point_estimate_below": 588,
+      "tier_ABC": 46,
+      "n_with_orbits": 46,
+      "median_ecc": 0.9833401493503302,
+      "frac_e_gt_0p95": 97.82608695652173,
+      "err_lo": 3.316402603314245,
+      "err_hi": 1.2606068481980515
+    },
+    "20.0": {
+      "point_estimate_below": 1420,
+      "tier_ABC": 199,
+      "n_with_orbits": 199,
+      "median_ecc": 0.976483190648067,
+      "frac_e_gt_0p95": 85.42713567839196,
+      "err_lo": 2.661534693786578,
+      "err_hi": 2.309055459263135
+    },
+    "25.0": {
+      "point_estimate_below": 2755,
+      "tier_ABC": 621,
+      "n_with_orbits": 621,
+      "median_ecc": 0.9697236900030404,
+      "frac_e_gt_0p95": 74.8792270531401,
+      "err_lo": 1.7694145247520368,
+      "err_hi": 1.6899522385269847
+    }
+  }
+}

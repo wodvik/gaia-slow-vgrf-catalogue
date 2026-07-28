@@ -1,0 +1,34 @@
+{
+  "n_total": 621,
+  "n_with_frequencies": 621,
+  "sweep_deg_percentiles": {
+    "5": 80.24342090961589,
+    "16": 155.06302508741598,
+    "50": 194.6516577284394,
+    "84": 202.2244822641915,
+    "95": 204.81979069532287
+  },
+  "n_above_300deg": 0,
+  "n_below_200deg": 475,
+  "frac_below_200deg": 0.7648953301127214,
+  "reference_values_deg": {
+    "kepler_closed_ellipse": 360,
+    "flat_rotation_curve": 254,
+    "harmonic_core": 180
+  },
+  "by_tier": {
+    "A": {
+      "n": 173,
+      "median_sweep_deg": 196.51593597224965
+    },
+    "B": {
+      "n": 103,
+      "median_sweep_deg": 194.85160676147834
+    },
+    "C": {
+      "n": 345,
+      "median_sweep_deg": 194.13516161899716
+    }
+  },
+  "caveat": "Staeckel-fudge frequencies; the conclusion rests on the distribution lying far from the 360 deg closed-ellipse value, not on individual per-star values."
+}

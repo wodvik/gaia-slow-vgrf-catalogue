@@ -1,7 +1,7 @@
 {
   "n_master": 20829,
-  "n_tier_ab": 541,
-  "n_tier_abc": 1952,
+  "n_tier_ab": 276,
+  "n_tier_abc": 621,
   "figures": [
     "fig_phase14_pvgrf_vs_vgrf.pdf",
     "fig05_sky_aitoff.pdf",

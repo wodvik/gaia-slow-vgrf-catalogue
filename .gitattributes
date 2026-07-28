@@ -1,9 +1,18 @@
-* text=auto eol=lf
+# This repository IS a frozen release bundle: every product is covered by
+# release_checksums.sha256. Line-ending normalisation would silently change the
+# bytes of the text products (.tex, .txt, .json, .csv, .ini, .sql, .cff, .md)
+# and make the shipped manifest fail on a fresh clone -- which is exactly what
+# happened to v1.0.8, where 16 of its 22 checksum mismatches came from LF
+# normalisation alone.
+#
+# Preserve bytes for everything. Do not reintroduce `text=auto` here.
+* -text
 
+# Belt and braces for the obvious binaries.
 *.fits binary
-*.pdf binary
-*.png binary
-*.jpg binary
+*.npz  binary
+*.pdf  binary
+*.png  binary
+*.jpg  binary
 *.jpeg binary
-*.zip binary
-
+*.zip  binary

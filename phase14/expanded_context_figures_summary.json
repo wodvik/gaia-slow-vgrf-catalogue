@@ -1,14 +1,14 @@
 {
-  "n": 1952,
+  "n": 621,
   "tier_counts": {
-    "A": 289,
-    "B": 252,
-    "C": 1411
+    "A": 173,
+    "B": 103,
+    "C": 345
   },
-  "median_R_peri_pc": 116.05959385633466,
-  "max_R_peri_pc": 567.1835541725159,
-  "median_R_apo_kpc": 7.353044271469116,
-  "median_abs_zmax_kpc": 3.3049631118774414,
+  "median_R_peri_pc": 131.7844092845916,
+  "max_R_peri_pc": 502.32046842575073,
+  "median_R_apo_kpc": 8.251681327819824,
+  "median_abs_zmax_kpc": 3.9427008628845215,
   "figures": [
     "figures/fig01_edge_on_Rgc_Zgc.pdf",
     "figures/fig02_face_on_Xgc_Ygc.pdf"

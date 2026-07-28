@@ -50,9 +50,13 @@ TIER_COLUMNS = [
     ("rv_quality", None, "Internal Gaia DR3 RVS-quality class (ok/marginal/poor)"),
     ("rvs_quality_ok", None, "True when rv_quality is ok"),
     ("vgrf_default", "km/s", "Adopted Galactic rest-frame speed"),
-    ("P_vgrf_below_25", None, "Monte Carlo probability that Vgrf < 25 km/s"),
+    ("P_vgrf_below_25_popprior", None,
+     "Adopted probability that Vgrf < 25 km/s, after the population-prior correction; defines tier"),
+    ("P_vgrf_below_25_forward", None,
+     "Forward Monte Carlo probability that Vgrf < 25 km/s, before the population-prior correction"),
     ("mc_realisations", None, "Number of Monte Carlo realisations for the threshold probability"),
-    ("tier", None, "Velocity-threshold membership tier (A/B/C)"),
+    ("tier", None, "Adopted membership tier from P_vgrf_below_25_popprior (A/B/C)"),
+    ("tier_forward", None, "Membership tier from P_vgrf_below_25_forward (A/B/C/D/X)"),
     ("mh_gspphot", None, "Gaia GSP-Phot photometric metallicity [M/H] in dex (contextual; blank if none)"),
     ("feh_spec", None, "Spectroscopic [Fe/H] in dex from APOGEE DR17/GALAH DR3 (blank if no match)"),
     ("feh_spec_err", None, "Uncertainty on feh_spec in dex (blank if none)"),
@@ -65,8 +69,9 @@ TIER_COLUMNS = [
 
 ORBIT_COLUMNS = [
     ("source_id", None, "Gaia DR3 source identifier"),
-    ("tier", None, "Velocity-threshold membership tier (A/B/C)"),
-    ("P_vgrf_below_25", None, "Monte Carlo probability that Vgrf < 25 km/s"),
+    ("tier", None, "Adopted membership tier after the population-prior correction (A/B/C)"),
+    ("tier_forward", None, "Membership tier from the uncorrected forward score (A/B/C)"),
+    ("P_vgrf_below_25", None, "Forward Monte Carlo probability that Vgrf < 25 km/s"),
     ("static_R_peri_kpc", "kpc", "Pericentre radius in the static Hunter+2024 potential"),
     ("static_R_apo_kpc", "kpc", "Apocentre radius in the static potential"),
     ("static_z_max_kpc", "kpc", "Maximum absolute height in the static potential"),
@@ -159,6 +164,9 @@ def write_sample_tex(path: Path, table: Table) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bundle-root", type=Path, default=BUNDLE)
+    parser.add_argument("--forward", action="store_true",
+                        help="build from the uncorrected forward-score tiers "
+                             "instead of the adopted population-prior ones")
     args = parser.parse_args()
     bundle = args.bundle_root
     out = bundle / "mrt"
@@ -166,26 +174,32 @@ def main() -> int:
     table_out = bundle / "tables" / "v15"
     table_out.mkdir(parents=True, exist_ok=True)
     cat = bundle / "catalogues"
+    # The population-prior tiers are the adopted catalogue (Phase 16F); the
+    # forward-score products remain available behind --forward.
+    stem = "catalogue_expanded" if args.forward else "catalogue_retier"
+    tierdef = ("forward Monte Carlo score" if args.forward
+               else "population-prior corrected score")
 
     jobs = [
-        ("catalogue_expanded_tierA.fits", "catalogue_tierA_mrt.txt",
+        (f"{stem}_tierA.fits", "catalogue_tierA_mrt.txt",
          "Gaia DR3 slow-Vgrf catalogue, Tier A",
          "Tier A (P(Vgrf<25 km/s)>0.95) kinematics and chemistry", TIER_COLUMNS),
-        ("catalogue_expanded_tierAB.fits", "catalogue_tierAB_mrt.txt",
+        (f"{stem}_tierAB.fits", "catalogue_tierAB_mrt.txt",
          "Gaia DR3 slow-Vgrf catalogue, Tier A+B (primary)",
          "Tier A+B (P>0.84) primary kinematics and chemistry", TIER_COLUMNS),
-        ("catalogue_expanded_tierABC.fits", "catalogue_tierABC_mrt.txt",
+        (f"{stem}_tierABC.fits", "catalogue_tierABC_mrt.txt",
          "Gaia DR3 slow-Vgrf catalogue, Tier A+B+C",
          "Tier A+B+C (P>0.50) kinematics and chemistry", TIER_COLUMNS),
-        ("catalogue_expanded_orbits_tierABC.fits", "catalogue_orbits_tierABC_mrt.txt",
+        (f"{stem}_orbits_tierABC.fits", "catalogue_orbits_tierABC_mrt.txt",
          "Gaia DR3 slow-Vgrf catalogue, Tier A+B+C orbit summaries and actions",
          "Tier A+B+C point-estimate orbit summaries, actions, and chemistry", ORBIT_COLUMNS),
     ]
     for fits_name, out_name, title, desc, spec in jobs:
+        desc = f"{desc}. Tier membership uses the {tierdef}"
         n = write_mrt(cat / fits_name, out / out_name, title, desc, spec)
         print(f"wrote mrt/{out_name}  ({n} rows, {len(spec)} columns)")
 
-    tier_ab = Table.read(cat / "catalogue_expanded_tierAB.fits")
+    tier_ab = Table.read(cat / f"{stem}_tierAB.fits")
     write_sample_tex(out / "tab_headline_catalogue_sample.tex", tier_ab)
     write_sample_tex(table_out / "tab_headline_catalogue_sample.tex", tier_ab)
     print("wrote tab_headline_catalogue_sample.tex (mrt/ and tables/v15/)")

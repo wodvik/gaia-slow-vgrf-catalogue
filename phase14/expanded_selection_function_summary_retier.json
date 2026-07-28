@@ -1,0 +1,88 @@
+{
+  "source_table": "expanded_selection_function.fits",
+  "tier_definition": "population-prior (Phase 16F)",
+  "low_parent_count_threshold": 10,
+  "samples": {
+    "Candidate pool": {
+      "N": 20829,
+      "N_valid": 19999,
+      "sum_inv_S": 37256.25682388359,
+      "median_S": 0.5,
+      "f_n_lt10_pct": 86.02430121506076,
+      "n_lt10_count": 17204,
+      "f_sum_n_lt10_pct": 89.34491936857395
+    },
+    "Tier A": {
+      "N": 173,
+      "N_valid": 172,
+      "sum_inv_S": 273.4813141633705,
+      "median_S": 0.6666666666666666,
+      "f_n_lt10_pct": 84.30232558139535,
+      "n_lt10_count": 145,
+      "f_sum_n_lt10_pct": 89.58883750732909
+    },
+    "Tier B": {
+      "N": 103,
+      "N_valid": 101,
+      "sum_inv_S": 163.6935647266745,
+      "median_S": 0.6,
+      "f_n_lt10_pct": 76.23762376237623,
+      "n_lt10_count": 77,
+      "f_sum_n_lt10_pct": 83.93223453596043
+    },
+    "Tier C": {
+      "N": 345,
+      "N_valid": 343,
+      "sum_inv_S": 584.6939443132021,
+      "median_S": 0.5,
+      "f_n_lt10_pct": 84.54810495626822,
+      "n_lt10_count": 290,
+      "f_sum_n_lt10_pct": 90.00862846598785
+    },
+    "Tier A+B": {
+      "N": 276,
+      "N_valid": 273,
+      "sum_inv_S": 437.17487889004497,
+      "median_S": 0.6666666666666666,
+      "f_n_lt10_pct": 81.31868131868131,
+      "n_lt10_count": 222,
+      "f_sum_n_lt10_pct": 87.47080751672728
+    },
+    "Tier A+B+C": {
+      "N": 621,
+      "N_valid": 616,
+      "sum_inv_S": 1021.8688232032472,
+      "median_S": 0.6666666666666666,
+      "f_n_lt10_pct": 83.11688311688312,
+      "n_lt10_count": 512,
+      "f_sum_n_lt10_pct": 88.92290049293963
+    },
+    "Tier A (inner)": {
+      "N": 17,
+      "N_valid": 17,
+      "sum_inv_S": 22.079027788978077,
+      "median_S": 0.8999999999999999,
+      "f_n_lt10_pct": 52.94117647058823,
+      "n_lt10_count": 9,
+      "f_sum_n_lt10_pct": 60.74140238097793
+    },
+    "Tier A+B (inner)": {
+      "N": 32,
+      "N_valid": 31,
+      "sum_inv_S": 43.45329472806914,
+      "median_S": 0.8333333333333334,
+      "f_n_lt10_pct": 54.83870967741935,
+      "n_lt10_count": 17,
+      "f_sum_n_lt10_pct": 63.54204274704952
+    },
+    "Tier A+B+C (inner)": {
+      "N": 88,
+      "N_valid": 87,
+      "sum_inv_S": 138.64631400420365,
+      "median_S": 0.6666666666666666,
+      "f_n_lt10_pct": 67.816091954023,
+      "n_lt10_count": 59,
+      "f_sum_n_lt10_pct": 76.26806230106565
+    }
+  }
+}

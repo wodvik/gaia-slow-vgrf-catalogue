@@ -23,6 +23,13 @@ BUNDLE = Path(__file__).resolve().parents[1]
 INPUT = BUNDLE / "private_inputs" / "expanded_candidates_mc_tiered.csv"
 ORBIT_CATALOGUE = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.fits"
 TIER_AB_CATALOGUE = BUNDLE / "catalogues" / "catalogue_expanded_tierAB.fits"
+
+# --- population-prior retier switch (Phase 16F) ---
+import os as _os
+if _os.environ.get("GAIA_RETIER", "").lower() in ("1", "true", "yes"):
+    ORBIT_CATALOGUE = BUNDLE / "catalogues" / "catalogue_retier_orbits_tierABC.fits"
+    TIER_AB_CATALOGUE = BUNDLE / "catalogues" / "catalogue_retier_tierAB.fits"
+
 CONFIG = yaml.safe_load((BUNDLE / "config.yml").read_text(encoding="utf-8-sig"))
 OUT = BUNDLE / "phase14" / "radial_phase"
 SUMMARY_JSON = OUT / "radial_phase_mc_summary.json"
@@ -34,6 +41,15 @@ DEFAULT_N_SAMP = 5000
 DEFAULT_CHUNK_SIZE = 64
 SEED = int(CONFIG["mc"]["random_seed"]) + 140_025
 T0 = time.time()
+
+
+def _rel(p) -> str:
+    """Bundle-relative path, so released sidecars carry no absolute local path."""
+    from pathlib import Path as _P
+    try:
+        return _P(p).resolve().relative_to(BUNDLE.resolve()).as_posix()
+    except ValueError:
+        return _P(p).name
 
 
 def log(message: str) -> None:
@@ -163,6 +179,14 @@ def load_expanded() -> pd.DataFrame:
     df = pd.read_csv(INPUT, usecols=cols)
     df["tier"] = df["tier"].astype(str).str.strip()
     df["source_id"] = df["source_id"].astype("int64")
+    # The candidate CSV carries the FORWARD tier. Under GAIA_RETIER the Monte
+    # Carlo half of this table must use the same population-prior sample as the
+    # point-estimate half, or the two columns describe different star sets.
+    if _os.environ.get("GAIA_RETIER", "").lower() in ("1", "true", "yes"):
+        _rt = Table.read(BUNDLE / "catalogues" / "catalogue_retier_master.fits")
+        _map = dict(zip(np.asarray(_rt["source_id"]).astype("int64").tolist(),
+                        np.asarray(_rt["tier"]).astype(str).tolist()))
+        df["tier"] = [_map.get(int(s), "X") for s in df["source_id"].to_numpy()]
     df = df[df["tier"].isin(TIERS)].copy()
     return df.sort_values("source_id").reset_index(drop=True)
 
@@ -343,8 +367,8 @@ def run(n_samp: int, chunk_size: int) -> dict:
     mc = {key: summarise_mc(value) for key, value in mc_raw.items()}
     summary = {
         "phase": "14Y",
-        "input_csv": str(INPUT),
-        "orbit_catalogue": str(ORBIT_CATALOGUE),
+        "input_csv": _rel(INPUT),
+        "orbit_catalogue": _rel(ORBIT_CATALOGUE),
         "near_zero_kms": NEAR_ZERO_KMS,
         "n_samp": int(n_samp),
         "chunk_size": int(chunk_size),
@@ -352,8 +376,8 @@ def run(n_samp: int, chunk_size: int) -> dict:
         "point_estimate": point,
         "mc": mc,
         "outputs": {
-            "summary_json": str(SUMMARY_JSON),
-            "table_tex": str(TABLE_TEX),
+            "summary_json": _rel(SUMMARY_JSON),
+            "table_tex": _rel(TABLE_TEX),
         },
         "note": "Present-day spherical Galactocentric radial velocity; no orbit integration.",
     }

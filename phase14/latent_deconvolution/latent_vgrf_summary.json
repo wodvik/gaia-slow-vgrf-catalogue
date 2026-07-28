@@ -1,0 +1,78 @@
+{
+  "method": "EM population-prior reconstruction (Banik et al. 2026, Sec. 4.1)",
+  "nominal_vmax_kms": 60.0,
+  "vgrf_cut_kms": 25.0,
+  "n_stars_pool": 20829,
+  "forward_sum_of_probabilities": 2556.42665,
+  "forward_tier_counts": {
+    "A": 289,
+    "A+B": 548,
+    "A+B+C": 1951
+  },
+  "latent_count_below_25": 1197.917977967133,
+  "latent_count_below_25_ci68": [
+    1088.34017281714,
+    1308.2249258324905
+  ],
+  "latent_tier_counts": {
+    "A": 168,
+    "A+B": 267,
+    "A+B+C": 625
+  },
+  "latent_tier_counts_ci68": {
+    "A": [
+      157,
+      183
+    ],
+    "A+B": [
+      244,
+      295
+    ],
+    "A+B+C": [
+      576,
+      683
+    ]
+  },
+  "median_leaked_mass_nominal": 0.03399999556131661,
+  "n_em_iterations": 2000,
+  "n_bootstrap": 200,
+  "vmax_variants": {
+    "40.0": {
+      "latent_count_below_25": 1186.3163674351565,
+      "tier_counts": {
+        "A": 172,
+        "A+B": 275,
+        "A+B+C": 628
+      },
+      "median_leaked_mass": 0.4889999945880845
+    },
+    "50.0": {
+      "latent_count_below_25": 1197.9137979309874,
+      "tier_counts": {
+        "A": 168,
+        "A+B": 267,
+        "A+B+C": 624
+      },
+      "median_leaked_mass": 0.16799999566865154
+    },
+    "60.0": {
+      "latent_count_below_25": 1197.917977967133,
+      "tier_counts": {
+        "A": 168,
+        "A+B": 267,
+        "A+B+C": 625
+      },
+      "median_leaked_mass": 0.03399999556131661
+    },
+    "80.0": {
+      "latent_count_below_25": 1197.9107840171416,
+      "tier_counts": {
+        "A": 168,
+        "A+B": 267,
+        "A+B+C": 625
+      },
+      "median_leaked_mass": 0.0004999987431801856
+    }
+  },
+  "completeness_caveat": "Candidate pool complete only below ~50 km/s; latent bins above that are under-populated, so the reported correction is conservative."
+}

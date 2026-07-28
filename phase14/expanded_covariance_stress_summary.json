@@ -36,12 +36,25 @@
       "subC": 1351
     }
   },
-  "headline_AB_adopted": 541,
-  "headline_AB_lost_under_copula": 14,
+  "headline_AB_adopted": 276,
+  "headline_AB_lost_under_copula": 0,
   "AB_boundary_flips_indep_vs_copula": 21,
   "crossings": {
     "p_gt_0p95": 11,
     "p_gt_0p84": 21,
     "p_gt_0p50": 82
+  },
+  "headline_AB_retained_under_copula": 276,
+  "headline_tier_definition": "population-prior (Phase 16F)",
+  "headline_AB_abs_delta_P": {
+    "median": 0.001,
+    "p95": 0.009124999999999973,
+    "max": 0.023
+  },
+  "headline_AB_forward_reference": {
+    "n": 541,
+    "retained": 527,
+    "lost": 14,
+    "note": "pre-retier headline, retained for provenance"
   }
 }

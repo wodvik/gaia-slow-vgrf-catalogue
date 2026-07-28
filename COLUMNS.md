@@ -8,10 +8,37 @@ identifiers and should not be converted to floating point.
 
 These columns appear in:
 
-- `catalogue_expanded_master.fits`
-- `catalogue_expanded_tierA.fits`
-- `catalogue_expanded_tierAB.fits`
-- `catalogue_expanded_tierABC.fits`
+- `catalogue_retier_master.fits`   **(adopted catalogue)**
+- `catalogue_retier_tierA.fits`    **(adopted)**
+- `catalogue_retier_tierAB.fits`   **(adopted, primary)**
+- `catalogue_retier_tierABC.fits`  **(adopted)**
+- `catalogue_expanded_master.fits`   (forward-score tiering, superseded)
+- `catalogue_expanded_tierA.fits`    (forward-score tiering, superseded)
+- `catalogue_expanded_tierAB.fits`   (forward-score tiering, superseded)
+- `catalogue_expanded_tierABC.fits`  (forward-score tiering, superseded)
+
+### Two membership probabilities
+
+The catalogue carries **two** threshold-membership probabilities, and which one
+defines the tiers changed in v1.2.0.
+
+`P_vgrf_below_25_forward` is the *forward* Monte Carlo score: for one star, the
+fraction of realisations of its own measurement errors falling below 25 km/s.
+It knows nothing about the parent population.
+
+`P_vgrf_below_25_popprior` is that score after the population-prior
+(Eddington-bias) correction of the manuscript's latent-distribution
+reconstruction. Because the candidate pool rises steeply with `Vgrf`, far more
+stars are available to scatter *down* into the slow window than up out of it,
+and the forward score is correspondingly optimistic. **This is the adopted
+score and it defines `tier`.**
+
+The two are close to monotonically related (Spearman 0.997), so the correction
+moves the thresholds without reordering the catalogue: the population-prior
+tiers are strict *nested subsets* of the forward tiers, and no star enters a
+tier it was not already in. Adopted counts are A/A+B/A+B+C = 173/276/621
+against the forward 289/541/1,952. Both scores and both tier labels ship, so
+either definition is reproducible from the released files.
 
 The `expanded` filename token is a frozen build/provenance label for the
 parent-complete public candidate pool, not a stale separate release stream.
@@ -56,9 +83,12 @@ Columns carrying `legacy` or `old_preselection` are retained only to audit the
 | `vgrf_zpcorr_inv` | km/s | Point-estimate Galactic-rest-frame speed using zero-point-corrected inverse-parallax distance. |
 | `vgrf_bj_or_inv` | km/s | Point-estimate Galactic-rest-frame speed using Bailer-Jones distance where available, otherwise inverse parallax. |
 | `vgrf_default` | km/s | Final adopted point-estimate Galactic-rest-frame speed. |
-| `P_vgrf_below_25` | dimensionless | Monte Carlo probability that `Vgrf < 25 km/s`; this is a probability and has no velocity unit. |
+| `P_vgrf_below_25_popprior` | dimensionless | **Adopted.** Threshold-membership probability after the population-prior correction; defines `tier`. A probability, so no velocity unit. Clipped to [0, 1]. |
+| `P_vgrf_below_25_forward` | dimensionless | Forward Monte Carlo probability that `Vgrf < 25 km/s`, before the population-prior correction. Superseded for tier assignment; retained for continuity with releases up to v1.1.0. |
+| `P_vgrf_below_25` | dimensionless | Legacy alias of `P_vgrf_below_25_forward`, kept so pre-v1.2.0 code continues to load. Prefer the explicit names. |
 | `mc_realisations` | none | Number of velocity-threshold Monte Carlo realisations used for this source. |
-| `tier` | none | Probability tier: A (`P>0.95`), B (`0.84<P<=0.95`), C (`0.50<P<=0.84`), D (point-estimate below 25 km/s but `P<=0.50`), or X. |
+| `tier` | none | **Adopted** probability tier from `P_vgrf_below_25_popprior`: A (`P>0.95`), B (`0.84<P<=0.95`), C (`0.50<P<=0.84`), D (point-estimate below 25 km/s but `P<=0.50`), or X. |
+| `tier_forward` | none | Tier from `P_vgrf_below_25_forward` on the same thresholds; the tier definition used up to v1.1.0. |
 | `source_in_old_preselection` | boolean | Provenance-only flag for whether the source was present in the preliminary 2,859-source development preselection. |
 | `parent_scan_file` | none | Gaia mirror CSV file from which the source was recovered during the parent-buffer scan. |
 | `mh_gspphot` | dex | Gaia DR3 GSP-Phot photometric metallicity [M/H]; biased toward solar for the cool, metal-poor giants that dominate this sample (Andrae et al. 2023), so it is a low-resolution contextual diagnostic only. `NaN` if unavailable. |
@@ -75,7 +105,8 @@ Columns carrying `legacy` or `old_preselection` are retained only to audit the
 
 These columns appear in:
 
-- `catalogue_expanded_orbits_tierABC.fits`
+- `catalogue_retier_orbits_tierABC.fits` **(adopted)**
+- `catalogue_expanded_orbits_tierABC.fits` (forward-score tiering, superseded)
 - `catalogue_expanded_orbits_tierABC.csv`
 
 This product contains one row per Tier A+B+C star. Orbit quantities are
@@ -86,8 +117,9 @@ not observables.
 | Column | Unit | Description |
 |---|---:|---|
 | `source_id` | none | Gaia DR3 source identifier. |
-| `tier` | none | Probability tier copied from the master catalogue. |
-| `P_vgrf_below_25` | dimensionless | Monte Carlo threshold-membership probability. |
+| `tier` | none | Adopted population-prior tier copied from the master catalogue. |
+| `tier_forward` | none | Forward-score tier copied from the master catalogue (retiered file only). |
+| `P_vgrf_below_25` | dimensionless | Forward Monte Carlo threshold-membership probability. |
 | `rv_quality` | none | Internal Gaia DR3 RVS-quality class copied from the master catalogue. |
 | `rvs_quality_ok` | boolean | True when `rv_quality == "ok"`. |
 | `source_in_old_preselection` | boolean | Provenance-only flag for whether the source was present in the preliminary 2,859-source development preselection. |

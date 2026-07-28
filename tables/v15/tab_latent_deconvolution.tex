@@ -1,0 +1,29 @@
+\begin{table}
+\caption{Effect of folding the population prior into the threshold-membership
+  probabilities.  ``Forward'' counts use the released per-star Monte Carlo
+  scores $P(\vgrf<25\kms)$, which carry no information about the parent
+  population.  ``Population-prior'' counts come from the latent-distribution
+  reconstruction of Sec.~\ref{sec:latent}, which corrects for the fact that
+  far more stars are available to scatter down into the slow window than up
+  out of it.  Nominal values use a smoothing kernel of $1.5$ bins;
+  uncertainties are $68\%$ intervals from $200$ bootstrap resamplings over
+  stars.  Varying the kernel over $0$--$3$ bins moves the tier counts to
+  $168$--$174$, $267$--$277$, and $619$--$630$, and the expected count to
+  $1{,}198$--$1{,}365$; that spread is a systematic rather than a statistical
+  one and is comparable to the bootstrap width.  Forward tier counts are the
+  released values; the reconstruction re-runs the Monte Carlo and reproduces
+  them to within its sampling noise (289/548/1{,}951).}
+\label{tab:latent_deconvolution}
+\centering
+\begin{tabular}{lcc}
+\hline\hline
+Sample & Forward & Population-prior \\
+\hline
+Tier A     &     289 & $173^{+15}_{-16}$ \\
+Tier A+B   &     541 & $276^{+19}_{-32}$ \\
+Tier A+B+C & 1{,}952 & $621^{+58}_{-45}$ \\
+\hline
+Expected $N(\vgrf<25\kms)$ & 2{,}556 & $1{,}234^{+110}_{-146}$ \\
+\hline
+\end{tabular}
+\end{table}

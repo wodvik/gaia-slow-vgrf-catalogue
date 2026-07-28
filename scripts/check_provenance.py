@@ -26,7 +26,15 @@ from astropy.table import Table
 
 BUNDLE = Path(__file__).resolve().parents[1]
 REPO = BUNDLE.parents[1]
-ADOPTED = (289, 541, 1952)          # expected (A, A+B, A+B+C); also derived live
+# Adopted (A, A+B, A+B+C). Since Phase 16F the catalogue is tiered on the
+# POPULATION-PRIOR probability; the forward-score counts are still released as a
+# secondary column and are checked separately so that products derived from
+# either definition can be validated.
+ADOPTED = (173, 276, 621)
+ADOPTED_FORWARD = (289, 541, 1952)
+# Per-tier splits for the two definitions: (A, B_inclusive, C_inclusive).
+ADOPTED_SPLIT = (173, 103, 345)
+ADOPTED_SPLIT_FORWARD = (289, 252, 1411)
 STALE_TEX = ["1{,}835", "1{,}318"]  # LaTeX-formatted stale totals
 STALE_BARE = [r"\b1835\b", r"\b1318\b"]
 STALE_PATH_PATTERNS = [
@@ -78,14 +86,34 @@ def main() -> int:
     failures: list[str] = []
     warnings: list[str] = []
 
-    A = n_rows(BUNDLE / "catalogues" / "catalogue_expanded_tierA.fits")
-    AB = n_rows(BUNDLE / "catalogues" / "catalogue_expanded_tierAB.fits")
-    ABC = n_rows(BUNDLE / "catalogues" / "catalogue_expanded_tierABC.fits")
+    # Population-prior tiers are authoritative (Phase 16F).
+    A = n_rows(BUNDLE / "catalogues" / "catalogue_retier_tierA.fits")
+    AB = n_rows(BUNDLE / "catalogues" / "catalogue_retier_tierAB.fits")
+    ABC = n_rows(BUNDLE / "catalogues" / "catalogue_retier_tierABC.fits")
     B_inc, C_inc = AB - A, ABC - AB
-    print(f"Authoritative catalogue counts: A={A} B_inc={B_inc} C_inc={C_inc} "
-          f"A+B={AB} A+B+C={ABC}")
+    print(f"Authoritative catalogue counts (population-prior): "
+          f"A={A} B_inc={B_inc} C_inc={C_inc} A+B={AB} A+B+C={ABC}")
     if (A, AB, ABC) != ADOPTED:
         failures.append(f"catalogue row counts {(A, AB, ABC)} != adopted {ADOPTED}")
+    if (A, B_inc, C_inc) != ADOPTED_SPLIT:
+        failures.append(f"tier split {(A, B_inc, C_inc)} != adopted {ADOPTED_SPLIT}")
+
+    # The forward-score products still ship and must keep their own counts.
+    fA = n_rows(BUNDLE / "catalogues" / "catalogue_expanded_tierA.fits")
+    fAB = n_rows(BUNDLE / "catalogues" / "catalogue_expanded_tierAB.fits")
+    fABC = n_rows(BUNDLE / "catalogues" / "catalogue_expanded_tierABC.fits")
+    print(f"Forward-score catalogue counts: A={fA} A+B={fAB} A+B+C={fABC}")
+    if (fA, fAB, fABC) != ADOPTED_FORWARD:
+        failures.append(f"forward row counts {(fA, fAB, fABC)} != {ADOPTED_FORWARD}")
+
+    # The retier must be a strict nested subset of the forward tiers.
+    ids_new = {int(s) for s in
+               Table.read(BUNDLE / "catalogues" / "catalogue_retier_tierABC.fits")["source_id"]}
+    ids_old = {int(s) for s in
+               Table.read(BUNDLE / "catalogues" / "catalogue_expanded_tierABC.fits")["source_id"]}
+    if not ids_new <= ids_old:
+        failures.append(f"retier is not nested: {len(ids_new - ids_old)} members "
+                        "absent from the forward Tier A+B+C")
 
     # --- sidecar JSON consistency ---
     sidecar = BUNDLE / "phase14" / "expanded_context_figures_summary.json"
@@ -100,10 +128,13 @@ def main() -> int:
     # --- adopted candidate pool tiering ---
     cand = BUNDLE / "private_inputs" / "expanded_candidates_mc_tiered.csv"
     if cand.exists():
+        # This CSV carries the FORWARD Monte Carlo tiering; the population-prior
+        # relabelling lives in the retier catalogue products, so it is checked
+        # against the forward split.
         t = pd.read_csv(cand, usecols=["tier"]).tier.value_counts().to_dict()
-        if (t.get("A"), t.get("B"), t.get("C")) != (A, B_inc, C_inc):
+        if (t.get("A"), t.get("B"), t.get("C")) != ADOPTED_SPLIT_FORWARD:
             failures.append(f"bundle candidate pool tiers (A={t.get('A')},B={t.get('B')},"
-                            f"C={t.get('C')}) != ({A},{B_inc},{C_inc})")
+                            f"C={t.get('C')}) != {ADOPTED_SPLIT_FORWARD}")
 
     # --- stale tokens in manuscript + tables (both trees) ---
     tex_files = [REPO / "release" / "main.tex", BUNDLE / "main.tex"]
@@ -136,7 +167,10 @@ def main() -> int:
         if not f.exists():
             continue
         txt = f.read_text(encoding="utf-8", errors="ignore")
-        if "$<25$  & 2{,}755 & 1{,}952" not in txt:
+        # Match on the cells rather than exact column padding, and check against
+        # the live adopted count so this cannot go stale again.
+        row = re.search(r"\$<25\$\s*&\s*2\{,\}755\s*&\s*([\d{},]+)\s*&", txt)
+        if row is None or row.group(1).replace("{,}", "").replace(",", "") != str(ABC):
             failures.append(f"{f.relative_to(REPO)}: <25 threshold row must carry "
                             f"N_ABC={ABC} alongside point-count 2,755")
 

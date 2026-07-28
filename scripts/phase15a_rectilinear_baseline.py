@@ -25,6 +25,12 @@ import phase14y_radial_phase_mc as phase14y
 
 BUNDLE = Path(__file__).resolve().parents[1]
 ORBIT_CATALOGUE = BUNDLE / "catalogues" / "catalogue_expanded_orbits_tierABC.fits"
+
+# --- population-prior retier switch (Phase 16F) ---
+import os as _os
+if _os.environ.get("GAIA_RETIER", "").lower() in ("1", "true", "yes"):
+    ORBIT_CATALOGUE = BUNDLE / "catalogues" / "catalogue_retier_orbits_tierABC.fits"
+
 OUT = BUNDLE / "phase14" / "rectilinear_baseline"
 SUMMARY_JSON = OUT / "rectilinear_baseline_summary.json"
 PER_STAR_CSV = OUT / "rectilinear_baseline_tierAB_per_star.csv"
@@ -37,6 +43,15 @@ NEAR_TIME_MYR = 10.0
 DIST_THRESHOLDS_PC = (100, 500, 1000)
 SEED = phase14y.SEED + 15_001
 T0 = time.time()
+
+
+def _rel(p) -> str:
+    """Bundle-relative path, so released sidecars carry no absolute local path."""
+    from pathlib import Path as _P
+    try:
+        return _P(p).resolve().relative_to(BUNDLE.resolve()).as_posix()
+    except ValueError:
+        return _P(p).name
 
 
 def log(message: str) -> None:
@@ -281,8 +296,8 @@ def run(n_samp: int, chunk_size: int) -> dict:
 
     summary = {
         "phase": "15A",
-        "orbit_catalogue": str(ORBIT_CATALOGUE),
-        "input_csv": str(phase14y.INPUT),
+        "orbit_catalogue": _rel(ORBIT_CATALOGUE),
+        "input_csv": _rel(phase14y.INPUT),
         "n_samp": int(n_samp),
         "chunk_size": int(chunk_size),
         "seed": int(SEED),
@@ -292,9 +307,9 @@ def run(n_samp: int, chunk_size: int) -> dict:
         "mc_counts": mc_counts,
         "top_tier_ab_point_estimate": top_rows,
         "outputs": {
-            "summary_json": str(SUMMARY_JSON),
-            "per_star_csv": str(PER_STAR_CSV),
-            "table_tex": str(TABLE_TEX),
+            "summary_json": _rel(SUMMARY_JSON),
+            "per_star_csv": _rel(PER_STAR_CSV),
+            "table_tex": _rel(TABLE_TEX),
         },
         "note": "Rectilinear no-force baseline; not an orbit model.",
     }

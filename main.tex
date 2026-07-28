@@ -1,8 +1,8 @@
-﻿% =============================================================================
+% =============================================================================
 % A Gaia DR3 Catalogue of Stars with Very Low Galactic Rest-Frame Speeds
 % Rodney Humble -- AASTeX v6.31 for ApJ
 % =============================================================================
-\documentclass[twocolumn,twocolappendix,linenumbers]{aastex631}
+\documentclass{aa}  % A&A: use \documentclass[referee]{aa} for the line-numbered referee PDF
 
 % ---------------- packages ---------------------------------------------------
 \usepackage{amsmath,amssymb}
@@ -11,6 +11,39 @@
 \usepackage{booktabs}
 \usepackage{xspace}
 \usepackage{needspace}
+\usepackage{txfonts}
+\usepackage[breaklinks,colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\providecommand{\doi}{}
+\renewcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+\newcommand{\onecolumngrid}{}
+\newcommand{\twocolumngrid}{}
+
+% ---------------- AASTeX deluxetable compatibility shim ---------------------
+% The machine-generated tables use the AASTeX deluxetable environment; this
+% shim renders them as standard table/tabular floats so the table files can
+% remain identical to the released (Zenodo) versions.
+\makeatletter
+\newcommand{\colhead}[1]{#1}
+\newcommand{\dt@comments}{}
+\newenvironment{deluxetable}[1]{%
+  \begin{table}[!htbp]\centering\small
+  \def\dt@cols{#1}%
+  \def\tablecaption##1{\caption[]{##1}}%
+  \def\tablehead##1{\def\dt@head{##1}}%
+  \def\startdata{\expandafter\tabular\expandafter{\dt@cols}\hline\hline\dt@head\\ \hline}%
+  \def\enddata{\hline\endtabular}%
+  \def\tablecomments##1{\par\smallskip\begin{minipage}{0.95\columnwidth}\footnotesize\textbf{Notes.} ##1\end{minipage}}%
+}{\end{table}}
+\newenvironment{deluxetable*}[1]{%
+  \begin{table*}[!htbp]\centering\small
+  \def\dt@cols{#1}%
+  \def\tablecaption##1{\caption[]{##1}}%
+  \def\tablehead##1{\def\dt@head{##1}}%
+  \def\startdata{\expandafter\tabular\expandafter{\dt@cols}\hline\hline\dt@head\\ \hline}%
+  \def\enddata{\hline\endtabular}%
+  \def\tablecomments##1{\par\smallskip\begin{minipage}{0.95\textwidth}\footnotesize\textbf{Notes.} ##1\end{minipage}}%
+}{\end{table*}}
+\makeatother
 % Tight inter-entry spacing in the bibliography so the references list
 % closes cleanly on a single column-pair rather than spilling a couple
 % of stragglers onto a near-empty extra page.
@@ -53,123 +86,171 @@
 \newcommand{\MgFe}{\ensuremath{[\mathrm{Mg}/\mathrm{Fe}]}}
 
 % =============================================================================
-\shorttitle{A Gaia DR3 Catalogue of Very Low Rest-Frame Speeds}
-\shortauthors{Humble}
-
 \begin{document}
 
 \title{A Probabilistic Gaia DR3 Catalogue of Stars with Very Low Galactic Rest-Frame Speeds}
+\titlerunning{A Gaia DR3 Catalogue of Very Low Rest-Frame Speeds}
+\authorrunning{R. Humble}
 
-\correspondingauthor{Rodney Humble}
-\author[0009-0009-2623-9232]{Rodney Humble}
-\affiliation{Independent Researcher, San Diego, CA, USA}
-\email{rod.humble@gmail.com}
+\author{Rodney Humble\inst{1}}
+\institute{Independent Researcher, San Diego, CA, USA\\
+  \email{rod.humble@gmail.com}}
 
-% =============================================================================
-% ABSTRACT
-% =============================================================================
-\begin{abstract}
-A star observed at very low Galactic rest-frame speed is caught near an
-orbital turning point with little angular momentum, so in any centrally
-concentrated potential it must fall back toward the inner Galaxy; the
-low-\vgrf{} state is therefore a kinematic selection with a largely
-predictable orbital corollary.  We build a probabilistic Gaia DR3
-catalogue of stars consistent with this condition.  Monte Carlo propagation of the Gaia
-parallax--proper-motion covariance, with Lindegren et al.\ (2021) parallax
-zero-points and Bailer-Jones et al.\ (2021) photogeometric distances, yields
-per-star membership probabilities for $\vgrf<25\kms$: a primary Tier~A+B
-sample of 541 stars ($P>0.84$, score-implied purity $94\%$) and a broader
-Tier~A+B+C sample of 1{,}952 ($P>0.50$, $73\%$).  Orbits in the
-axisymmetrized Hunter et al.\ (2024) potential are correspondingly radial
-and compact-pericentre (Monte Carlo posterior-median eccentricity 0.949,
-pericentre 154\,pc, and apocentre 7.35\kpc).  Against observability-matched Gaia
-control samples at higher \vgrf{}, the slow sample is distinctly more
-eccentric and compact-pericentre; we use this matched comparison as a null
-check that the slow state is not a generic property of Gaia 6D stars, not as
-a calibrated speed--eccentricity relation.  We release the tiered catalogue, the per-star Monte Carlo and
-orbit products, and subset-qualified chemistry; completeness is set by the
-sparse Gaia RVS selection function, not by the velocity cut.
-\end{abstract}
+\date{Received XXX; accepted YYY}
 
-\keywords{Milky Way Galaxy (1054) --- Milky Way dynamics (1051) ---
-  Galaxy structure (622) --- Stellar kinematics (1608) --- Astrometry
-  (80) --- Sky surveys (1464) --- Catalogs (205)}
+\abstract
+% context
+{A star observed at very low Galactic rest-frame speed is caught close to
+an orbital turning point, and its specific angular momentum is bounded
+above by the product of its Galactocentric radius and its observed speed.
+In a static, centrally concentrated potential its apocentre therefore lies
+at or just beyond its present radius, making the low-\vgrf{} state a
+kinematic selection with a largely predictable orbital corollary.  Gaia-era
+catalogues selected at the opposite, high-speed extreme are numerous,
+whereas the slow tail has not previously been surveyed systematically on
+total rest-frame speed.}
+% aims
+{We aim to construct and publicly release a probabilistic Gaia DR3
+catalogue of stars consistent with the low-\vgrf{} condition and to
+separate the model-robust from the model-sensitive components of its
+orbital characterisation.}
+% methods
+{Monte Carlo propagation of the full Gaia parallax--proper-motion
+covariance, with Lindegren et al.\ (2021) parallax zero-points and
+Bailer-Jones et al.\ (2021) photogeometric distances, yields per-star
+membership probabilities for $\vgrf<25\kms$.  Orbits are integrated in
+the axisymmetrized Hunter et al.\ (2024) potential and stress-tested
+against barred, halo-mass, second-potential, and Solar-parameter
+variants; observability-matched Gaia control samples at higher \vgrf{}
+provide an empirical null.}
+% results
+{Membership probabilities are computed both as forward Monte Carlo scores
+and, because the parent population rises steeply with \vgrf{}, after
+reconstructing the latent \vgrf{} distribution; the latter correction
+lowers the score-implied purity of a forward-defined $P>0.50$ sample from
+$73\%$ to $42\%$, and we therefore define the catalogue on the
+population-prior probability.  It comprises a primary Tier~A+B sample of
+276 stars ($P>0.84$, purity $95\%$) within a broader Tier~A+B+C sample of
+621 ($P>0.50$, $79\%$); these are strict nested subsets of the 541 and
+1{,}952 stars selected by the forward scores, which are also released.
+The sample is strongly radial, with compact cylindrical pericentres
+(Monte Carlo posterior-median eccentricity 0.965, median $\Rperi=153$\,pc
+and $\Rapo=8.24$\kpc), distinctly more so than the
+matched controls.  The matched comparison is used as a null check that
+the slow state is not a generic property of Gaia 6D stars, not as a
+calibrated speed--eccentricity relation.}
+% conclusions
+{We release the tiered catalogue, the per-star Monte Carlo and orbit
+products, and subset-qualified chemistry; completeness is set by the
+sparse Gaia RVS selection function, not by the velocity cut.}
+
+\keywords{catalogs -- astrometry -- stars: kinematics and dynamics --
+  Galaxy: kinematics and dynamics -- Galaxy: structure --
+  methods: statistical}
+
+\maketitle
+
 
 % =============================================================================
 \section{Introduction} \label{sec:intro}
 % =============================================================================
 
-Gaia DR3 provides full six-dimensional phase-space information for tens
-of millions of stars through its astrometry and radial velocities
-\citep{Vallenari2023,Katz2023}.  This makes it possible to search the
-observed Milky Way phase-space distribution for rare kinematic states,
-not only for previously defined stellar populations or merger debris.
-Here we focus on one such state: stars observed with unusually low
-instantaneous Galactic rest-frame speed.
-The broader Galactic-structure and Gaia-era archaeology context is
-reviewed by \citet{BinneyMerrifield1998},
-\citet{BlandHawthorn2016}, \citet{Helmi2020}, and
-\citet{Deason2024}.
-This complements Gaia-era catalogues selected at the opposite kinematic
-extreme, including Gaia DR3 hypervelocity-star searches
-\citep{Marchetti2022,CarballoBello2025}, and halo catalogues selected
-from high tangential velocity or reduced proper motion
-\citep{Viswanathan2023}.  The high-speed tail has also been used to
-constrain the Galactic escape speed and the Milky Way potential
-\citep{Smith2007,Piffl2014,KoppelmanHelmi2021}; the present catalogue
-addresses the opposite, low-speed extreme.  The closest published Gaia-era catalogue
-selected by low Galactocentric azimuthal velocity is \citet{Filion2025},
-which identifies $\sim 70$ slow- and retrograde stars with thin-disc-like
-abundances.  That work focuses on chemodynamic outliers within a
-disc-like chemistry box and is therefore complementary to the
-chemistry-agnostic, low-instantaneous-speed catalogue presented here.
+Gaia DR3 delivers full six-dimensional phase-space coordinates for tens
+of millions of stars by combining its astrometry with radial velocities
+from the RVS instrument \citep{Vallenari2023,Katz2023}.  Most Gaia-era
+Galactic archaeology uses that information the same way: identify a
+population---a disc component, a halo substructure, a stream of accreted
+debris---and then characterise its kinematics
+\citep[see][for reviews]{BinneyMerrifield1998,BlandHawthorn2016,
+Helmi2020,Deason2024}.  The same data support a complementary approach:
+select directly on a rare kinematic state, and ask afterwards what kinds
+of star occupy it.  This paper takes that approach for one such state,
+stars observed with unusually low instantaneous speed in the Galactic
+rest frame (\vgrf).
 
-The slow tail is also relevant to empirical stellar-tracer approaches to
-the local dark-matter velocity distribution, where metal-poor and accreted
-populations are used to trace the low-speed part of the particle
-distribution and to revise the Standard Halo Model
+Selection at a kinematic extreme is already well established at the fast
+end.  Gaia DR3 has been searched for hypervelocity and high-velocity
+candidates \citep{Marchetti2022,CarballoBello2025} and for halo samples
+defined by high tangential velocity or reduced proper motion
+\citep{Viswanathan2023}, and the fast tail has long been used to
+constrain the Galactic escape speed and the mass of the Milky Way
+\citep{Smith2007,Piffl2014,KoppelmanHelmi2021}.  The slow end has
+attracted much less systematic attention.  The closest Gaia-era
+counterpart to the present work is \citet{Filion2025}, who identify
+$\sim 70$ stars with low or retrograde Galactocentric azimuthal velocity
+and thin-disc-like abundances.  That selection is made on a single
+velocity component within a chemical box; ours is made on the full
+rest-frame speed and applies no chemical condition, so the two samples
+are complementary rather than competing---we compare them directly in
+Appendix~\ref{app:filion}.  We are not aware of an existing Gaia-era
+catalogue selected on total rest-frame speed at this extreme, and
+assembling one is the purpose of this paper.
+
+A related motivation comes from empirical stellar-tracer approaches to
+the local dark-matter velocity distribution, which use metal-poor and
+accreted populations as observable proxies for the accreted dark matter
 \citep{HerzogArbeitman2018PRL,HerzogArbeitman2018JCAP,
-Necib2019Disequilibrium,Necib2019Fire,Evans2019SHM}; this regime is of
-particular interest because solar gravitational focusing most strongly
-affects slow dark matter \citep{Lee2014GF}.  We do not infer a dark-matter
-speed distribution here---the catalogue instead provides a Gaia-RVS census
-of the slow stellar tail against which such tracer assumptions can be
-checked.
+Necib2019Disequilibrium,Necib2019Fire,Evans2019SHM}; the low-speed part
+of that distribution is of particular interest because solar
+gravitational focusing acts most strongly on slow particles
+\citep{Lee2014GF}.  We make no dark-matter inference here, and our
+selection function is set by Gaia RVS rather than by any halo-tracer
+criterion, so the catalogue is context for that literature rather than a
+constraint on it.
 
-The sample is defined by present-day kinematics, not by inferred origin.
-We construct a probabilistic low-\vgrf{} Gaia DR3 catalogue, quantify the
-stability of the velocity-threshold membership under measurement
-uncertainties, and report model-dependent orbit diagnostics in an
-adopted Milky Way potential.  The orbit integrations are used to
-interpret the observed slow state, but they do not define the catalogue.
+The low-speed state is worth isolating because it carries a dynamical
+implication that a single epoch of data can support.  A star observed
+almost at rest with respect to the Galactic centre is, at that instant,
+close to a turning point of its orbit: in a static, centrally
+concentrated potential its apocentric radius lies at or just beyond its
+present Galactocentric radius.  Its specific angular momentum is
+likewise bounded above by the product of its Galactocentric radius and
+its observed speed, which for a star near the solar radius moving at
+$<25\kms$ is under $11\%$ of the circular-orbit value at the same
+radius.  Both statements follow from the observed velocity vector alone
+and are insensitive to the choice of potential.
 
-This framing is important because a very low instantaneous rest-frame
-speed is essentially a turning-point condition:
-the star must carry near-zero angular momentum and be caught close to an
-orbital turning point.  More than one dynamical history can satisfy it.
-At one extreme, the star may lie near the apocentre of a radial
-accretion orbit, as in the apocentre-pile-up interpretation of radial
-halo debris \citep{Deason2018}; at the other, it may be caught at the
-outer turning point of a compact, low-angular-momentum orbit that
-plunges into the inner Galaxy and reaches apocentre near its observed
-Galactocentric radius.  For stars observed
-near the Sun this is the familiar solar-radius apocentre picture, but the
-same turning-point logic applies throughout the catalogue's observed
-Galactocentric range.  These cases share the turning-point kinematics but
-differ sharply in inner-Galaxy reach---the distinction the orbit modelling
-below sets out to quantify.  We therefore compare the
-low-\vgrf{} catalogue with matched Gaia DR3 control samples across
-higher velocity bands and treat external spectroscopic matches as
-context for the subset with available chemistry, not as a whole-catalogue
-population assignment.
+What the low speed does \emph{not} fix is the depth of the inner turning
+point.  Because cylindrical pericentre is controlled by the small
+residual angular momentum, orbits consistent with the same low speed
+span orders of magnitude in cylindrical pericentric distance---from the
+kiloparsec-scale pericentres typical of radial accretion debris in the
+apocentre-pile-up picture \citep{Deason2018} to very small cylindrical
+pericentres for the lowest angular momenta.  A small cylindrical
+pericentre by itself establishes only proximity to the Galactic spin
+axis; a parsec-scale passage near Sgr~A* additionally requires small
+$|z|$, and is assessed separately below using the three-dimensional
+closest approach.  In either case the star crosses the inner Galaxy
+quickly and spends most of each radial period near apocentre; what
+distinguishes the configurations is how closely the orbit approaches the
+Galactic centre.  Quantifying that closest approach star by star, from
+the full velocity vector and its uncertainties, is what the orbit
+modelling below sets out to do.
 
-Section~\ref{sec:methods} describes the sample definition, uncertainty
-propagation, controls, and adopted orbit model.
-Section~\ref{sec:empirical} presents the empirical catalogue properties
-and chemical cross-matches.  Section~\ref{sec:orbits} gives the
-model-dependent dynamical results.
-Section~\ref{sec:interpretation} discusses the interpretation and its
-limits, and Section~\ref{sec:conclusions} summarises the conclusions.
+It is worth being explicit about the geometry this implies, because a
+small pericentre is easy to picture as a comet-like turning point at
+which the star reverses and retraces its path.  That is not what these
+orbits do.  For a closed Kepler ellipse the azimuth swept between
+successive apocentres is $360\degr$, so the star does return along its
+inbound track; for a harmonic, constant-density core it is $180\degr$,
+so successive apocentres lie on opposite sides of the centre.  In the
+adopted potential the catalogue sits close to the latter: the median
+azimuth swept per radial period is $195\degr$ (16th--84th percentile
+$155\degr$--$202\degr$), and no catalogue member exceeds $300\degr$
+(Section~\ref{sec:orbits}).  These stars therefore transit the inner
+Galaxy and emerge on the far side, rather than reaching inward and
+turning back.
+
+The sample is therefore defined by present-day kinematics, not by
+inferred origin.  We construct a probabilistic low-\vgrf{} Gaia DR3
+catalogue, quantify how stable velocity-threshold membership is under
+measurement uncertainties, and report model-dependent orbit diagnostics
+in an adopted Milky Way potential.  The orbit integrations interpret the
+observed slow state; they do not define the catalogue.  We compare the
+low-\vgrf{} sample against matched Gaia DR3 control samples drawn from
+higher velocity bands, and we treat external spectroscopic matches as
+context for the subset with available chemistry rather than as a
+population assignment for the catalogue as a whole.
 
 Because this paper layers several kinds of statement, we distinguish them
 explicitly at the outset.  \emph{Direct Gaia observables}---sky position,
@@ -185,7 +266,20 @@ reaches, long-apocentre inner-reach and Sgr~A* counts, resonance overlays, and c
 diagnostics---probe robustness and are labelled as such throughout.  The
 conclusions rest most heavily on the first two layers.  When both
 point-estimate and Monte Carlo orbit products are quoted, the sampling
-scheme is labelled explicitly.
+scheme is labelled explicitly.  The orbit-model layer also has a time
+horizon: the direction of a star's next excursion follows from its
+measured velocity, but an integration carried far enough forward or
+backward describes the adopted potential rather than the star.  We set
+that horizon quantitatively in Section~\ref{sec:interpretation} and
+confine per-star trajectory statements to within it.
+
+Section~\ref{sec:methods} describes the sample definition, uncertainty
+propagation, controls, and adopted orbit model.
+Section~\ref{sec:empirical} presents the empirical catalogue properties
+and chemical cross-matches.  Section~\ref{sec:orbits} gives the
+model-dependent dynamical results.
+Section~\ref{sec:interpretation} discusses the interpretation and its
+limits, and Section~\ref{sec:conclusions} summarises the conclusions.
 
 % =============================================================================
 \section{Sample Definition and Methods} \label{sec:methods}
@@ -228,11 +322,16 @@ IDs.  After the final parallax zero-point, photogeometric-distance, and
 Solar-frame conventions are applied, 2{,}755 sources have corrected
 point-estimate $\vgrf<25$\kms{} within the 20{,}829-source
 near-threshold candidate pool.  Monte Carlo propagation of the
-observables then defines the catalogue tiers used throughout the paper:
-Tier~A ($P>0.95$, 289 stars), Tier~A+B ($P>0.84$, 541 stars), and
-Tier~A+B+C ($P>0.50$, 1{,}952 stars).  The remaining 804 corrected
-point-estimate sources below 25\kms{} have $P\leq0.50$ and are retained
-as Tier~D rather than as part of the primary catalogue.
+observables, followed by the population-prior correction of
+Section~\ref{sec:latent}, then defines the catalogue tiers used
+throughout the paper: Tier~A ($P>0.95$, 173 stars), Tier~A+B ($P>0.84$,
+276 stars), and Tier~A+B+C ($P>0.50$, 621 stars).  The remaining
+2{,}134 corrected point-estimate sources below 25\kms{} have $P\leq0.50$
+and are retained as Tier~D rather than as part of the primary catalogue.
+For continuity with the deposited catalogue we also release the
+uncorrected forward scores, which select 289, 541, and 1{,}952 stars at
+the same three thresholds; the population-prior tiers are strict nested
+subsets of these.
 
 This is not a volume-complete sample and it is not intended as a complete
 inventory of all such stars in the Milky Way.  It is a Gaia DR3 6D
@@ -243,9 +342,9 @@ with explicit threshold-membership probabilities.
 
 To keep the role of each count unambiguous, Table~\ref{tab:sample_usage}
 maps each tier and derived sample to the results it anchors. The
-\textbf{primary catalogue} for the paper is Tier~A+B ($N=541$);
+\textbf{primary catalogue} for the paper is Tier~A+B ($N=276$);
 orbit-derived medians and population distributions are computed on the
-broader Tier~A+B+C sample ($N=1{,}952$). Selection-function and
+broader Tier~A+B+C sample ($N=621$). Selection-function and
 chemistry diagnostics are reported only as population-scale context,
 never as a redefinition of the primary catalogue.  The leading rows of
 the released machine-readable primary catalogue are shown in
@@ -323,19 +422,31 @@ Tier~B increment ($0.84<P\leq0.95$), Tier~C increment
 ($0.50<P\leq0.84$), and Tier~D (corrected point estimate below
 25\kms{} but $P\leq0.50$).
 
-Because every star carries a membership probability, the nominal
-score-implied number of contaminants in any tier follows directly as
-$\sum(1-P)$ over its members.  This gives $30.8\pm5.3$ score-implied
-false positives in the 541-star Tier~A+B sample, or $94\%\pm1\%$
-nominal score-implied purity, and $533\pm18$ in the 1{,}952-star
-Tier~A+B+C sample, or $73\%\pm1\%$ nominal score-implied purity; the
-289-star Tier~A core has $99\%\pm1\%$ nominal score-implied purity.  These
-uncertainties are the Bernoulli standard
-errors implied by the internal per-star probabilities, while the finite
-Monte Carlo sampling error on the summed purity is smaller than 0.05
-percentage points for both the Tier~A+B and Tier~A+B+C samples.
-Tier~A+B is therefore the recommended high-confidence working sample
-and Tier~A+B+C the high-completeness extension.
+Because every star carries a membership probability, the score-implied
+number of contaminants in any tier follows directly as $\sum(1-P)$ over
+its members.  Which probability is used matters a great deal, and we
+therefore state both.  Under the \emph{forward} Monte Carlo scores the
+tiers would appear very clean: $94\%$ purity for a 541-star Tier~A+B and
+$73\%$ for a 1{,}952-star Tier~A+B+C.  Those figures are biased high,
+because the forward score takes no account of how many stars are
+available at each true speed to scatter into the window; evaluated under
+the population prior of Section~\ref{sec:latent}, the same two samples
+have purities of only $80\%$ and $42\%$.  We therefore define the tiers
+on the population-prior probability throughout.  On that definition the
+purities are $99.0\%$ for the 173-star Tier~A core, $95.4\%$ for the
+276-star Tier~A+B primary catalogue, and $78.6\%$ for the 621-star
+Tier~A+B+C extension, corresponding to $12.7$, $12.7$, and $133$
+score-implied false positives respectively.  Tier~A+B remains the
+recommended high-confidence working sample and Tier~A+B+C the
+high-completeness extension.
+
+The retiering does not reorder the catalogue.  No star enters any tier
+that was not already in the corresponding forward-defined tier: the
+population-prior tiers are strict nested subsets, with rank correlations
+between the two scores of $\rho_{\rm S}=0.997$ and $\tau_{\rm K}=0.963$.
+The correction moves the thresholds rather than the ranking, and the
+released products carry both scores so that either definition can be
+reproduced.
 
 The Tier~A+B boundary is used for the primary catalogue because $P>0.84$
 corresponds approximately to a one-sided one-sigma probability threshold:
@@ -380,19 +491,22 @@ so that $\Delta P$ isolates the coupling.  The median $|\Delta P|$ is
 0.055.  Across the band, 114 of 3{,}342 sources change tier label; the
 full tier-label confusion matrix is given in
 Table~\ref{tab:covariance_stress}.  The primary catalogue is robust to
-this worst-case coupling: of the 541 Tier~A+B members, 527 ($97.4\%$)
-remain above $P=0.84$, with 14 falling just below.  The largest shifts
+this worst-case coupling: all 276 Tier~A+B members remain above
+$P=0.84$ under both the independent and the copula-coupled treatment,
+with a median $|\Delta P|$ of $0.001$ and a maximum of $0.023$ across
+that sample---the population-prior thresholds sit far enough from the
+boundary that distance-prior coupling cannot move them.  The largest shifts
 occur for near-threshold sources, which the probabilistic tiering already
 flags (Fig.~\ref{fig:joint_distance_test}).
 
 As a column-level audit of distance-prior sensitivity, we also report the
 Gaia parallax signal-to-noise distribution for the tiered catalogue.  In
-the primary Tier~A+B sample, 66 of 541 stars (12.2\%) lie in the lower-SNR
-$5<\varpi/\sigma_\varpi\leq10$ interval and 475 (87.8\%) have
+the primary Tier~A+B sample, 19 of 276 stars (6.9\%) lie in the lower-SNR
+$5<\varpi/\sigma_\varpi\leq10$ interval and 257 (93.1\%) have
 $\varpi/\sigma_\varpi>10$; none have a BJ 68\% fractional distance
 half-width above 0.15.  In the broader Tier~A+B+C extension, where the
-lower-confidence Tier~C dominates, 876 of 1{,}952 stars (44.9\%) lie in
-the $5$--$10$ interval, 1{,}076 (55.1\%) exceed 10, and 10 (0.5\%) have
+lower-confidence Tier~C dominates, 69 of 621 stars (11.1\%) lie in
+the $5$--$10$ interval, 552 (88.9\%) exceed 10, and none have
 BJ fractional distance half-width above 0.15.  Thus the potentially
 prior-sensitive distance regime is concentrated in the completeness
 extension, not in the primary catalogue; the copula test above is our
@@ -499,8 +613,16 @@ axisymmetrized form as the catalogue default because it keeps orbital
 quantities such as $E$, $L_z$, and St\"ackel-fudge actions well-defined.
 Orbit integration and action estimates use \texttt{agama}
 \citep{Vasiliev2019}; actions are computed with the St\"ackel-fudge
-formalism \citep{Binney2012,Sanders2016}.  Point-estimate integrations
-span 4\,Gyr, and pericentres, apocentres, and maximum heights are read
+ formalism \citep{Binney2012,Sanders2016}.  The orbit integrations are
+ fully three-dimensional, evolving $(x,y,z,v_x,v_y,v_z)$.  Throughout,
+ $R(t)=\sqrt{x(t)^2+y(t)^2}$ and the reported $\Rperi=\min_t R(t)$ and
+ $\Rapo=\max_t R(t)$ are cylindrical radial turning points.  Thus
+ $\Rperi$ measures closest approach to the Galactic spin axis, not
+ necessarily to Sgr~A* as a point.  Proximity to the Galactic centre is
+ assessed separately using the spherical closest approach
+ $r_{\rm sph,min}=\min_t\sqrt{x(t)^2+y(t)^2+z(t)^2}$.
+ Point-estimate integrations span 4\,Gyr, and cylindrical pericentres,
+ apocentres, and maximum heights are read
 from a 40{,}001-point, parabola-interpolated trajectory sampling; the
 5{,}000-realisation orbit Monte Carlo uses the same 4\,Gyr interval with
 1{,}001 stored samples per realisation.  This interval samples many
@@ -524,8 +646,9 @@ $5\times10^{-7}$, confirming integration fidelity.
 In this manuscript, orbit-derived quantities such as eccentricity,
 $\Rperi$, $\Rapo$, $\zmax$, energy, angular momentum, and actions are
 presented as outputs of the adopted model.  They are informative, but
-they remain model-dependent, especially for stars whose inferred
-pericentres approach the central few tens of parsecs.
+ they remain model-dependent, especially for stars whose inferred
+ cylindrical pericentres lie within a few tens of parsecs of the Galactic
+ spin axis.
 Pericentres, apocentres, and maximum heights are measured directly from
 the integrated trajectories, not inferred from St\"ackel-fudge actions.
 The reported single-evaluation actions are accompanied by a full-sample
@@ -535,7 +658,7 @@ action $J_\phi\equiv L_z$ is recovered exactly and $J_R$ to a median
 $8\%$, but St\"ackel-fudge accuracy degrades for the vertical action
 $J_z$ of these plunging orbits \citep{WrightBinney2026}: its median
 fractional difference is $62\%$ over Tier~A+B+C ($85\%$ in Tier~A), and
-$1{,}164$ of the $1{,}952$ stars are flagged \texttt{sampled\_poor}.
+$463$ of the $621$ stars are flagged \texttt{sampled\_poor}.
 The catalogue therefore ships orbit-time-averaged actions and a per-star
 action-reliability flag alongside the single-evaluation values, and we
 treat $J_z$-dependent statements as qualitative.  This caveat is
@@ -645,9 +768,9 @@ fall below $20$ and $30$\kms{} respectively---so the $25$\kms{} boundary
 (about $10\%$ of the $229$\kms{} circular speed) is a convenience cut on a
 continuous slow tail, which is why membership is reported as probabilistic
 tiers rather than a hard threshold.  The primary
-Tier~A+B catalogue contains 541 stars with
+Tier~A+B catalogue contains 276 stars with
 $P(\vgrf<25\kms)>0.84$, while the broader Tier~A+B+C catalogue contains
-1{,}952 stars with $P>0.50$.  Unless otherwise stated, descriptive
+621 stars with $P>0.50$.  Unless otherwise stated, descriptive
 orbit-derived medians below are reported for Tier~A+B+C and
 high-confidence observational-quality follow-up quantities for Tier~A+B.
 
@@ -655,15 +778,15 @@ high-confidence observational-quality follow-up quantities for Tier~A+B.
 \centering
 \includegraphics[width=\textwidth]{figures/fig01_edge_on_Rgc_Zgc.pdf}
 \caption{Edge-on orbital context for the Tier~A+B+C slow catalogue
-($N=1{,}952$) in $R_{\mathrm{GC}}$ vs.\ $Z_{\mathrm{GC}}$.  Current
-positions are observed coordinates, while the modelled pericentre and
+($N=621$) in $R_{\mathrm{GC}}$ vs.\ $Z_{\mathrm{GC}}$.  Current
+ positions are observed coordinates, while the modelled cylindrical-pericentre and
 modelled maximum-$|Z_{\mathrm{GC}}|$ panels are model-derived locations in the
 adopted static Hunter+2024 potential.  This broader
 Tier~A+B+C sample is used for orbit-context visualisation; the Tier~A+B
 primary catalogue is distinguished from the Tier~C extension by marker
-shape.  The panels show current positions, modelled pericentre positions,
+ shape.  The panels show current positions, modelled cylindrical-pericentre positions,
 and modelled maximum-$|Z_{\mathrm{GC}}|$ points.  Current positions are colour-coded by $\vgrf$;
-modelled pericentre and maximum-$|Z_{\mathrm{GC}}|$ positions are colour-coded by
+ modelled cylindrical-pericentre and maximum-$|Z_{\mathrm{GC}}|$ positions are colour-coded by
 eccentricity, with the pericentre panel inset expanding the inner
 kiloparsec.  The right panel shows the vertical envelope of the adopted
 model trajectories; apocentre radii are reported separately in
@@ -675,7 +798,7 @@ $R_{\mathrm{GC}}=0$. Because $R_{\mathrm{GC}}$ is cylindrical radius,
 these panels show distance from the Galactic spin axis rather than
 signed $X_{\mathrm{GC}}$ position.  The current-position panel therefore
 folds signed side-of-centre information into positive radius; the
-pericentre panel and inset likewise show central reach, not the signed
+ pericentre panel and inset likewise show cylindrical spin-axis reach, not the signed
 side of the Galactic centre on which each passage occurs.  The signed
 current-position and projected-pericentre geometry is retained in the
 face-on view of Fig.~\ref{fig:face_on}.}
@@ -685,21 +808,25 @@ face-on view of Fig.~\ref{fig:face_on}.}
 \begin{figure*}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig02_face_on_Xgc_Ygc.pdf}
-\caption{Face-on view of the Tier~A+B+C slow catalogue ($N=1{,}952$) in
+\caption{Face-on view of the Tier~A+B+C slow catalogue ($N=621$) in
 the displayed $-X_{\mathrm{GC}}$ vs.\ $Y_{\mathrm{GC}}$ plane, so that
 the Galactic centre is at left and the Sun lies to the right.  As in
 Fig.~\ref{fig:edge_on}, the broader Tier~A+B+C orbit-summary sample is
 shown, with marker shape separating the Tier~A+B primary catalogue from
 the Tier~C extension. \emph{Left:} current Galactocentric positions,
 colour-coded by $\vgrf$; the catalogue is observed in a Sun-centred local
-volume. \emph{Right:} modelled, projected pericentre passage positions in
+ volume. \emph{Right:} modelled, projected cylindrical-pericentre passage positions in
 the static Hunter+2024 potential, colour-coded by orbital eccentricity
 and shown on the same spatial scale as the left panel. Marker shape
 encodes tier (circle/triangle/square = A/B/C). The shared scale makes the
-inner-Galaxy reach of the catalogue directly visible: all point-estimate pericentres
+ cylindrical inner-Galaxy reach of the catalogue directly visible: all
+ point-estimate cylindrical pericentres
 fall inside $R_{\mathrm{GC}}<1$\,kpc in this fine trajectory sampling,
-with a median Tier~A+B+C pericentre of 115.5\,pc in the 40{,}001-point
-interpolated readout.}
+ with a median Tier~A+B+C cylindrical pericentre of 115.5\,pc in the
+ 40{,}001-point interpolated readout.  Pericentre is a turning point only in
+Galactocentric radius, not a physical ``bounce'': the velocity vector does
+not instantaneously reverse, and highly radial trajectories generally
+traverse the inner Galaxy towards apocentre on the far side.}
 \label{fig:face_on}
 \end{figure*}
 
@@ -724,29 +851,69 @@ not selection-function corrected significance tests.
 
 The Gold observational-quality subset starts from the Tier~A+B primary catalogue
 and then applies only observational quality cuts.  The catalogue
-Gold subset contains 420 stars after requiring RUWE $<1.4$, acceptable
+Gold subset contains 226 stars after requiring RUWE $<1.4$, acceptable
 RVS quality, parallax signal-to-noise $>10$, and $\sigma_d/d<0.15$.
 This gives a compact follow-up list whose definition does not depend on
 the orbit model.
+
+Because these cuts are applied to a sample that is itself selected at a
+kinematic extreme, it is worth establishing explicitly that they are not
+circular.  Two properties make that case, following the argument set out
+for age-extremum samples by \citet{Banik2026}.  First, every cut is
+defined on an axis distinct from \vgrf{}: astrometric goodness of fit,
+image-parameter multiplicity, RVS template quality, parallax
+signal-to-noise, and fractional distance precision are all properties of
+the observation rather than of the velocity used to select the sample.
+Second, and more directly testable, the pass rate of each cut is
+essentially flat in \vgrf{} across the full 20{,}829-source candidate
+pool (Table~\ref{tab:cut_orthogonality}).  For RUWE, image-parameter
+multiplicity, RVS quality, and fractional distance error, the largest
+difference in pass rate between any two \vgrf{} bins spanning
+$0$--$50\kms$ is $0.009$, $0.011$, $0.019$, and $0.031$ respectively;
+a cut that is this nearly blind to \vgrf{} cannot preferentially
+manufacture slow stars.  The one partial exception is the parallax
+signal-to-noise requirement $\varpi/\sigma_\varpi>10$, which shows a
+larger spread ($0.053$) and, when applied alone, removes the largest
+share of the catalogue, retaining $88.9\%$ of Tier~A+B+C.  A poorly
+measured parallax is one route to a spuriously low speed, so a cut that
+is mildly \vgrf{}-dependent in this direction is expected, and we report
+it rather than treat it as neutral.  In every case the cuts only ever
+remove candidates, so no cut can inflate the catalogue; and the median
+\vgrf{} of the survivors moves by at most $0.06\kms$ under any single
+cut, and by $-0.05\kms$ when all are applied together.
 
 Unresolved binaries and problematic single-epoch radial velocities can
 perturb Gaia RVS velocities on scales comparable to the 25\kms{}
 threshold.  We therefore treat RUWE and RVS-quality screens as catalogue
 diagnostics rather than proof of single-star centre-of-mass velocities.
-In the catalogue products, 28/541 Tier~A+B stars
-($5.2^{+1.0}_{-0.9}\%$) and 60/1{,}952 Tier~A+B+C stars
-($3.1\pm 0.4\%$) have RUWE $>1.4$ (Jeffreys 68\% intervals throughout);
+In the catalogue products, 14/276 Tier~A+B stars
+($5.1^{+1.5}_{-1.2}\%$) and 32/621 Tier~A+B+C stars
+($5.2^{+1.0}_{-0.8}\%$) have RUWE $>1.4$ (Jeffreys 68\% intervals throughout);
 the Gold subset removes these systems, and the poor-RVS exclusion test
 in Section~\ref{sec:robustness} shows that the compact radial-orbit
 summary is unchanged after removing flagged RVS solutions.
 
 A direct check against the Gaia DR3 non-single-star catalogue sharpens
 this screen.  Cross-matching by \texttt{source\_id} against
-\texttt{gaiadr3.nss\_two\_body\_orbit} flags 9 of the 541 Tier~A+B
-sources ($1.7\%$) and 23 of the 1{,}952 Tier~A+B+C sources ($1.2\%$) as
+\texttt{gaiadr3.nss\_two\_body\_orbit} flags 5 of the 276 Tier~A+B
+sources ($1.8\%$) and 13 of the 621 Tier~A+B+C sources ($2.1\%$) as
 resolved binaries---predominantly single-lined spectroscopic (SB1)
 solutions in the full Tier~A+B+C extension---which are marked in the
-released catalogue.  Beyond these
+released catalogue.  RUWE and the non-single-star tables are most
+sensitive to unresolved and to fully resolved companions respectively,
+which leaves the marginally resolved regime between them.  We therefore
+also apply the Gaia image-parameter cut
+\texttt{ipd\_frac\_multi\_peak}$\,\leq 1$, which limits the percentage of
+focal-plane transits in which a source is split into multiple peaks
+\citep[][adopt a threshold of 2]{Banik2026,Pace2022}.  This retains
+$265/276$ ($96.0\%$) of Tier~A+B and $595/621$ ($95.8\%$) of
+Tier~A+B+C, and it is largely independent of the RUWE screen, which
+removes a comparable but different $5.1\%$ of Tier~A+B.  Applying all
+observational cuts jointly, including this one, leaves $220$ Tier~A+B
+stars---six fewer than the $226$-star Gold subset defined without
+it---and $472$ Tier~A+B+C stars, with the median \vgrf{} moving by
+$-0.08$ and $-0.05\kms$ respectively, so the surviving sample is if
+anything marginally slower rather than faster.  Beyond these
 catalogued binaries, the RV-specific quality indicators bound the residual
 contamination (Table~\ref{tab:rv_quality}): the median DR3 RV uncertainty
 is $2.4$\kms{} for Tier~A+B, $58\%$ of primary-catalogue sources exceed $2$\kms,
@@ -767,6 +934,7 @@ $|\Delta RV|>5$\kms{} (6.0\% for APOGEE, 9.7\% for GALAH), so the external
 check supports the bulk RV scale but does not replace follow-up
 confirmation for individual boundary candidates.
 
+\input{tables/v15/tab_cut_orthogonality.tex}
 \input{tables/v15/tab_rv_quality.tex}
 \input{tables/v15/tab_external_rv.tex}
 
@@ -782,9 +950,9 @@ separately in Section~\ref{sec:robustness}.
 
 The corrected point-estimate catalogue contains 2{,}755 stars below
 $\vgrf=25$\kms, but the threshold itself is not equally secure for every
-star.  Monte Carlo propagation gives 289 stars in Tier~A
-($P>0.95$), 541 stars cumulatively in Tier~A+B ($P>0.84$), and
-1{,}952 stars cumulatively in Tier~A+B+C ($P>0.50$).  The 804
+star.  After the population-prior correction this gives 173 stars in Tier~A
+($P>0.95$), 276 stars cumulatively in Tier~A+B ($P>0.84$), and
+621 stars cumulatively in Tier~A+B+C ($P>0.50$).  The 2{,}134
 corrected point-estimate members with $P\leq0.50$ form Tier~D.  The paper therefore
 uses Tier~A+B as the primary catalogue and Tier~A+B+C for broader
 population-level orbit summaries.  Table~\ref{tab:vgrf_membership}
@@ -807,53 +975,147 @@ threshold probability, not by a hard point estimate alone.}
 \label{fig:pvgrf_membership}
 \end{figure}
 
-As an empirical observed-control smooth-continuation check, we compare
-the observed slow count against smooth velocity distributions fit to the
-matched-control library ($|v_{\rm GC}|$ in 25--260\kms, 10{,}078 stars)
-and extrapolated below 25\kms.  This is not a standard Galactic
-distribution-function prediction: the models are fit to the observed Gaia
-control velocities, normalised over the control-speed interval, and then
-extrapolated into the low-speed region ($|v_{\rm GC}|<25\kms$).  A single trivariate-Gaussian
-ellipsoid predicts $N(<25\kms)=76.4$ stars, giving an observed/predicted
-ratio of 25.6 for the 1{,}952 observed Tier~A+B+C stars
-(Fig.~\ref{fig:ndf_expectation}).  A single Gaussian is, however, a weak
-null for a selection-truncated disc$+$halo velocity field, so we refit
-the same control velocities with a Gaussian mixture (five components by
-BIC) and a cross-validated kernel density (Table~\ref{tab:null_models}).
-The observed/predicted ratio is null-dependent: $7.4\times$ under the
-best-fitting mixture, $11.0\times$ under the non-parametric KDE, and
-$25.6\times$ under the single ellipsoid, each with a tight ($\lesssim5\%$)
-bootstrap interval and negligible sensitivity to the $2.9$\kms{} median
-velocity error.  We therefore treat the single-ellipsoid $25.6\times$ as
-an illustrative heuristic and read the mixture-based $\sim\!7\times$ as
-the conservative statement for this tested observed-control
-smooth-continuation diagnostic.  We do not interpret these models as a
-forward Gaia-selected Milky Way distribution function, nor as proof
-against every physically smooth but substructured velocity field; the
-GeDR3mock exercise below is a balanced injection-recovery test, not a
-population-prior forward model.  This is a local comparison against the
-observed Gaia DR3 matched-control velocity field, not a volume-complete
-population estimate.
+A natural question is whether the low-\vgrf{} population is more numerous
+than a smooth continuation of the Gaia DR3 velocity field would imply.
+We do not attempt to answer it with a count, and it is worth being
+explicit about why.  Any such ratio requires a parent normalisation, and
+the matched-control library cannot supply one: it is constructed with
+comparable numbers of stars in each velocity band, so its sampling rate
+relative to the Gaia 6D catalogue varies by more than two orders of
+magnitude between the slowest and fastest bands, and its pooled velocity
+distribution is a property of that construction rather than of the
+Galaxy.  Normalising a predicted count to the control library while
+counting observed slow stars from the complete parent scan compares two
+different populations.  More fundamentally, Gaia RVS is magnitude
+limited, so this catalogue consists of giants and bright nearby dwarfs
+and contains essentially none of the M dwarfs that dominate the stellar
+census; no absolute density statement is available to us at any level of
+effort.
 
-\input{tables/v15/tab_null_models.tex}
+The latent reconstruction of Section~\ref{sec:latent} answers the
+well-posed part of the question directly, and without a normalisation.
+Reconstructed from the complete near-threshold pool using each star's own
+uncertainties, the latent \vgrf{} distribution rises smoothly and
+monotonically through the selection boundary: the curvature of $\ln P$
+stays below $0.02$ per bin across $20$--$30\kms$, against a maximum of
+$0.08$ elsewhere in the reconstructed range.  The $25\kms$ threshold
+leaves no imprint on the recovered distribution.  The low-\vgrf{}
+catalogue is therefore a tail selection from a smooth velocity
+distribution, not a physically distinct population separated by a
+discontinuity, and we make no claim of a number excess.  The
+matched-control comparison is retained in
+Section~\ref{sec:band_comparison} as a distributional check on orbital
+properties, where no parent normalisation is required.
+
+\subsection{The Population Prior Halves the Expected Slow Count}
+\label{sec:latent}
+
+The tier probabilities defined above are \emph{forward} scores: for each
+star, the fraction of Monte Carlo realisations of its own measurement
+errors that fall below $25\kms$.  They carry no information about the
+parent population.  That omission matters here, because the candidate
+pool rises steeply with \vgrf{}---188 sources below $10\kms$ against
+$7{,}635$ between $40$ and $50\kms$---so far more stars are available to
+scatter down into the slow window than up out of it.  This is the
+classical Eddington bias \citep{Eddington1913}, and the forward scores do
+not correct for it.
+The injection-recovery calibration of
+Section~\ref{sec:injection_recovery} does not close the gap either,
+because its mock uses a balanced injected velocity prior by construction.
+
+We therefore reconstruct the latent \vgrf{} distribution of the candidate
+pool directly.  Writing $L_{ij}$ for the Monte Carlo likelihood of star
+$i$ in latent bin $j$, and $P_j$ for the latent distribution, we iterate
+\begin{equation}
+w_{ij} = \frac{P_j L_{ij}}{\sum_k P_k L_{ik}}, \qquad
+P_j = \frac{1}{N}\sum_i w_{ij},
+\label{eq:em}
+\end{equation}
+to convergence.  This is the iterative rectification of an observed
+distribution introduced by \citet{Richardson1972} and \citet{Lucy1974},
+equivalently expectation--maximisation
+\citep{Dempster1977}; in the Gaia era the same
+deconvolution problem is more often approached parametrically, as in the
+extreme-deconvolution formalism of \citet{Bovy2011}.  We adopt the
+non-parametric binned form because the quantity of interest is the shape
+of the distribution near a threshold rather than a mixture description of
+it.  Our implementation follows the recent application of this approach by
+\citet{Banik2026} to the analogous problem of the oldest-star age
+extremum, which is where we encountered it in this context.  The converged
+$w_{ij}$ are per-star posteriors with the population prior folded in, so
+$\sum_{v_j<25} w_{ij}$ is a revised membership probability
+for star $i$.  The likelihood grids come from re-running the
+Section~\ref{sec:vgrf_mc} forward model at $1\kms$ resolution, which
+reproduces the released per-star probabilities to within Monte Carlo
+noise (summed $P$ of $2{,}556.4$ against $2{,}555.9$).  The median
+per-star \vgrf{} uncertainty is $8.5\kms$, with a $5$--$95$ percentile
+range of $1.7$--$21.1\kms$.
+
+Unregularised \eqref{eq:em} is a maximum-likelihood deconvolution and
+develops the bin-to-bin oscillations characteristic of that algorithm at
+high iteration count, exactly as \citet{Banik2026} report for their
+unsmoothed variant.  We therefore apply a Gaussian smoothing kernel to
+$P_j$ after each iteration, the smoothed-EM regularisation of
+\citet{Silverman1990}, and scan its width.  The oscillations are confined to the $35$--$50\kms$ region;
+below $25\kms$ the reconstructions for kernel widths of $0$, $0.75$,
+$1.5$, and $3$ bins are indistinguishable, and the recovered count is
+stable from roughly the tenth iteration onwards
+(Fig.~\ref{fig:latent_regularised}).
+
+The result is a substantial downward revision, summarised in
+Table~\ref{tab:latent_deconvolution}.  The expected number of pool
+members with true $\vgrf<25\kms$ falls from the naive sum of forward
+probabilities, $2{,}556$, to $1{,}234^{+110}_{-146}$, and the revised
+tier counts fall from $289$, $541$, and $1{,}952$ to approximately $173$,
+$276$, and $621$.  Two features make this robust.  The reconstruction is
+insensitive to the latent-grid ceiling, giving $1{,}186$ to $1{,}198$
+expected slow stars for ceilings of $40$ to $80\kms$; and the full spread
+across smoothing kernels, $1{,}198$ to $1{,}365$, is comparable to the
+bootstrap uncertainty.
+
+Three qualifications belong with this number.  First, the correction is
+conservative: the candidate pool was screened at a preliminary
+$\vgrf<50\kms$ and is complete only below that, so latent bins above the
+screen are under-populated relative to the real Galaxy and down-scatter
+from genuinely fast stars is under-represented.  The true contamination
+can only be larger than reported here.  Second, we treat the Monte Carlo
+posterior of each star as its likelihood, which is exact under a flat
+prior in \vgrf{} and approximate given the \citet{BailerJones2021}
+distance prior; the same approximation is made by \citet{Banik2026}.
+Third, and most importantly for the released products, the correction is
+close to monotonic in the forward score, so the \emph{ranking} of the
+catalogue is preserved even though its absolute calibration shifts.  No
+star enters a population-prior tier that was not already in the
+corresponding forward tier, and the two scores have rank correlations of
+$\rho_{\rm S}=0.997$ and $\tau_{\rm K}=0.963$.  Retiering therefore moves
+the thresholds without reordering the catalogue, which is why we adopt
+the population-prior scores as the tier definition
+(Section~\ref{sec:vgrf_membership_results}) rather than carrying the
+correction only as a caveat: the forward thresholds of $0.95$, $0.84$,
+and $0.50$ correspond to population-prior thresholds of $0.987$, $0.957$,
+and $0.813$, so the released tiers were simply cut too loosely.  Both
+scores ship with the catalogue, so either definition can be reproduced.
+Because the tiers are nested, every orbit product quoted below was
+already computed for every retained star; the retiering re-aggregates
+those products over a subset and integrates no new orbits.
+
+\input{tables/v15/tab_latent_deconvolution.tex}
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig_ndf_expectation.pdf}
-\caption{Observed cumulative slow-tail count compared with an illustrative smooth
-trivariate-Gaussian velocity ellipsoid fit to the matched-control
-catalogues and normalised over 25--260\kms.  The observed/predicted ratio below the
-adopted 25\kms{} selection threshold motivates treating the
-low-\vgrf{} catalogue as a low-velocity tail in
-the observed Gaia DR3 6D distribution, not as evidence for a physical
-discontinuity at exactly 25\kms{} or as a complete Milky Way forward
-model.  This single-ellipsoid baseline gives the largest of the tested
-smooth-continuation observed/predicted ratios; a BIC Gaussian mixture and
-a cross-validated kernel density give $7.4\times$ and $11\times$
-respectively (Table~\ref{tab:null_models}).  Absolute pipeline
-normalisation is provided separately by the controlled injection-recovery
-test of Section~\ref{sec:injection_recovery}.}
-\label{fig:ndf_expectation}
+\includegraphics[width=\columnwidth]{figures/latent_vgrf_regularised.png}
+\caption{Latent \vgrf{} reconstruction from Eq.~\eqref{eq:em}.  \emph{Left:}
+the recovered latent distribution for Gaussian smoothing kernels of $0$,
+$0.75$, $1.5$, and $3$ bins.  The unsmoothed solution oscillates between
+adjacent bins over $35$--$50\kms$, the familiar noise amplification of
+maximum-likelihood deconvolution, but all four agree closely below the
+$25\kms$ threshold (dashed line), which is the region that sets the
+reported counts.  The sharp fall above $50\kms$ is the candidate pool's
+screening edge, not a feature of the Galaxy.  \emph{Right:} the recovered
+$N(\vgrf<25\kms)$ against iteration number.  The count converges by
+roughly the tenth iteration and is then flat for every smoothing choice,
+so the revision is not an artefact of the iteration cap.}
+\label{fig:latent_regularised}
 \end{figure}
 
 \subsection{Chemistry Does Not Define the Sample} \label{sec:chemistry}
@@ -892,12 +1154,33 @@ We cross-matched the full 20{,}829-source candidate pool against
 APOGEE DR17 \citep{Abdurrauf2022} and GALAH DR3 \citep{Buder2021} using
 exact Gaia source identifiers rather than positional matching.  The query
 returns 604 APOGEE matches and 489 GALAH matches across the candidate
-pool.  Within the Tier~A+B+C sample, 67 stars have usable APOGEE
-$\alpha$-element abundances, 62 have usable GALAH abundances, and after
-survey-priority deduplication 117 unique Tier~A+B+C stars carry the joint
-\FeH{} + $\alpha$-element abundance combination required for the
-literature-region comparisons reported in Table~\ref{tab:spectroscopic}.
-This 117-star $\alpha$-classified subset is dominated by luminous giants
+pool.  Spectroscopic abundances are rare here: 66 stars have usable
+APOGEE $\alpha$-element abundances and 59 have usable GALAH abundances,
+and after survey-priority deduplication 117 stars carry the joint
+\FeH{}~$+$~$\alpha$ combination required for the literature-region
+comparisons.  Restricting that set to the stars above the adopted velocity
+threshold would leave only 48.
+
+We do not impose that restriction.  The velocity threshold is not a
+chemical criterion, and a star does not stop being chemically informative
+because its rest-frame speed is more likely $30\kms$ than $22\kms$.  We
+therefore report the chemistry on the full 117-star $\alpha$-classified
+sample and quantify the membership difference per region rather than
+cutting on it (Table~\ref{tab:population_decomp}): alongside the raw count
+we give $\Sigma P_{\rm pop}$, the summed population-prior probability,
+which is the effective number of genuinely slow stars each region
+contributes, and the count surviving the $P>0.5$ threshold.  The summed
+probability over the whole $\alpha$-classified sample is $58.5$.
+
+The three treatments give consistent proportions---Splash $43.6\%$,
+$44.6\%$, $45.8\%$; Gaia-Sausage/Enceladus $19.7\%$, $17.9\%$, $18.8\%$;
+Aurora $18.8\%$, $19.5\%$, $20.8\%$ by raw count, by summed probability,
+and after thresholding respectively---so the mixed chemical character of
+the slow sample does not depend on where the velocity threshold is
+placed.  That robustness, rather than any individual fraction, is the
+result we draw from this subset.  Per-star population-prior probabilities
+ship with the catalogue, so these regions can be recut at any threshold.
+This $\alpha$-classified subset is dominated by luminous giants
 in the APOGEE and GALAH footprints; it is therefore a selective but
 useful chemical window, not a chemically complete census.  The APOGEE
 $[\mathrm{Mg/Fe}]$ and GALAH $[\alpha/\mathrm{Fe}]$ scales are not
@@ -906,11 +1189,13 @@ classification is used only as a literature-region context flag.  Survey
 counts are reported separately, and no whole-catalogue population fraction
 is inferred from the mixed-survey subset.
 
-Within this alpha-classified subset, 51 stars fall in a Splash-like
-region, 23 in a Gaia-Sausage/Enceladus-like region, 22 in an
+Within the 117-star $\alpha$-classified sample, 51 stars fall in a
+Splash-like region, 23 in a Gaia-Sausage/Enceladus-like region, 22 in an
 Aurora-like region, 2 in a disc-like contaminant region, and 19 are not
-assigned to these literature regions.  These fractions are reported only
-within the 117-star alpha-classified subset.
+assigned to these literature regions.  Weighting each star by its
+population-prior probability gives $26.1$, $10.5$, $11.4$, $1.4$, and
+$9.0$ respectively; thresholding at $P>0.5$ gives 22, 9, 10, 1, and 6.
+These counts are reported only within the $\alpha$-classified sample.
 They are not used as whole-catalogue population fractions, because the
 remaining Tier~A+B+C stars lack the high-resolution abundance
 information required for that assignment in the current release products.
@@ -983,12 +1268,12 @@ selection-function weight map for the expanded candidate pool, queried
 in the same $(G_{RVS},\,BP{-}RP,\,l,\,b)$ convention as the pipeline.
 Cell colour is the per-pixel mean
 $\log_{10}\langle 1/S_{\rm RVS}\rangle$; red points mark the
-Tier~A+B primary catalogue ($N=541$).  White hatching flags pixels
+Tier~A+B primary catalogue ($N=276$).  White hatching flags pixels
 in which $\geq 50\%$ of catalogue stars sit in GaiaUnlimited cells
 with parent count $n<10$, the regime where the Beta$(k{+}1,\,n{-}k{+}1)$
 posterior is prior-dominated.  The Tier~A+B locus overlaps the
 hatched region substantially, consistent with the
-$f_{n<10}=83.2\%$ of stars and $88.7\%$ of $\sum 1/S_{\rm RVS}$
+$f_{n<10}=81.3\%$ of stars and $87.5\%$ of $\sum 1/S_{\rm RVS}$
 reported in Table~\ref{tab:selection_function}.}
 \label{fig:sf_map}
 \end{figure}
@@ -997,7 +1282,7 @@ reported in Table~\ref{tab:selection_function}.}
 \centering
 \includegraphics[width=\textwidth]{figures/fig05_sky_aitoff.pdf}
 \caption{Aitoff projection of the Tier~A+B+C slow catalogue
-($N=1{,}952$) in Galactic coordinates ($l=0$ centred, $l$ increasing to
+($N=621$) in Galactic coordinates ($l=0$ centred, $l$ increasing to
 the left), colour-coded by $\vgrf$. Marker shape encodes tier
 (circle/triangle/square = A/B/C). The catalogue concentrates strongly
 toward the inner Galaxy.}
@@ -1018,12 +1303,12 @@ properties vary with orbital scale, and assess robustness to measurement
 uncertainty and potential choice.
 
 Table~\ref{tab:orbit_statistic_ledger} identifies the sampling scheme
-behind the repeated pericentre and central-reach statistics used below.
+ behind the repeated cylindrical-pericentre and spin-axis-reach statistics used below.
 For the catalogue, the primary orbit summary uses
 5{,}000-realisation orbit Monte Carlo propagation for every Tier~A+B+C
 star in the adopted static Hunter+2024 potential.  The
 velocity-stratified control comparison, halo-mass variants, barred
-potential variants, and central-reach counts are retained as explicitly
+ potential variants, and cylindrical spin-axis-reach counts are retained as explicitly
 labelled point-estimate diagnostics.
 
 \input{tables/v15/tab_orbit_statistic_ledger.tex}
@@ -1034,9 +1319,9 @@ labelled point-estimate diagnostics.
 
 Within the adopted static Hunter+2024 potential, the orbit-derived
 picture is strongly radial.  For the Tier~A+B+C catalogue
-($N=1{,}952$), the median of the per-star posterior-median
-eccentricities is 0.949.  All 1{,}952 stars have $e>0.8$, $48.2\pm 1.1\%$
-have a posterior-median $e>0.95$, and $0.7^{+0.2}_{-0.2}\%$ have a
+($N=621$), the median of the per-star posterior-median
+eccentricities is 0.965.  All 621 stars have $e>0.8$, $72.6\pm 1.8\%$
+have a posterior-median $e>0.95$, and $1.9^{+0.6}_{-0.5}\%$ have a
 posterior-median $e>0.99$ from the 5{,}000-realisation Monte Carlo orbit
 product (Table~\ref{tab:orbit_summary}; Jeffreys 68\% intervals).
 
@@ -1053,8 +1338,8 @@ numbers describe the same catalogue; we report the posterior-median
 fraction as the primary value because it propagates the observational
 uncertainties explicitly.
 
-The same Monte Carlo orbit product gives a Tier~A+B+C median $\Rperi$
-of 154\,pc and a median $\Rapo$ of 7.35\kpc.  The maximum posterior
+ The same Monte Carlo orbit product gives a Tier~A+B+C median cylindrical
+ $\Rperi$ of 154\,pc and a median cylindrical $\Rapo$ of 7.35\kpc.  The maximum posterior
 median $\Rapo$ in the present Tier~A+B+C integrations is 17.86\kpc.
 These values confirm that the low-speed catalogue is not
 dominated by ordinary near-circular disc kinematics.  This compact,
@@ -1062,12 +1347,32 @@ radial mapping is also physically expected for a catalogue selected at
 very low total Galactic rest-frame speed: in the adopted Galactocentric
 frame, such stars carry little angular momentum at the observed epoch.
 The qualitative compact-pericentre, high-radiality tendency is therefore
-robust across the tested potentials; the precise per-star pericentres are
+ robust across the tested potentials; the precise per-star cylindrical pericentres are
 not, because the real inner Galaxy is barred and non-axisymmetric.
+
+The same integrations settle what the orbits do at closest approach, which
+a small pericentre alone does not determine.  The azimuth swept between
+successive apocentres is $2\pi\,\Omega_\phi/\Omega_R$: it is $360\degr$
+for a closed Kepler ellipse, in which the star returns along its inbound
+track, and $180\degr$ for a harmonic, constant-density core, in which
+successive apocentres lie on opposite sides of the centre.  For the
+Tier~A+B+C catalogue the median is $195\degr$, with a $16$th--$84$th
+percentile range of $155\degr$--$202\degr$, and no member exceeds
+$300\degr$; the median is the same to within $3\degr$ in each individual
+tier.  These are therefore transiting rather than reversing orbits: the
+star crosses the inner Galaxy and emerges on the far side, and its
+pericentre is a rapid passage rather than a turning point at which the
+motion is undone.  The proximity of the median to the harmonic value is
+consistent with orbits that spend their perigalactic phase inside the
+region where the rotation curve is still rising.  The frequencies are
+St\"ackel-fudge outputs and inherit the accuracy caveats of
+Appendix~\ref{app:sensitivity}, so we read the distribution as a whole
+rather than individual per-star values; the conclusion rests on its
+distance from $360\degr$, which is far larger than the fudge error.
 
 These quantities should be read as outputs of the adopted model rather
 than as direct Gaia observables.  They are useful because they provide a
-coherent dynamical interpretation of the slow state.  Pericentre
+ coherent dynamical interpretation of the slow state.  Cylindrical pericentre
 estimates below roughly 200\pc should be treated as indicative, because
 the real inner Galaxy is barred and non-axisymmetric on those scales; the
 barred Hunter/Sormani variant in Section~\ref{sec:robustness} brackets
@@ -1076,22 +1381,23 @@ pericentres are often more stable than orbit type or apocentre under
 large-scale potential changes \citep{Li2021,Pace2022}, but those
 satellite-scale results are not used here as a quantitative error model
 for sub-kpc inner-Galaxy reaches.  They instead motivate the emphasis on
-population distributions, matched-control trends, and threshold counts
-rather than exact per-star closest approaches.
+ population distributions, matched-control trends, and threshold counts
+ rather than exact per-star cylindrical turning points or three-dimensional
+ closest approaches.
 
 Crucially, the orbital \emph{shape} is robust to the choice of
 axisymmetric potential.  Re-integrating the catalogue in the
 independently calibrated, Gaia-DR3-external \citet{McMillan2017} potential
 gives a near-identical point-estimate summary---median eccentricity
-0.961, median $\Rperi=123$\,pc, median $\Rapo=7.31$\kpc, all 1{,}952
+0.968, median $\Rperi=138$\,pc, median $\Rapo=8.24$\kpc, all 621
 stars with $e>0.8$,
 and three static long-apocentre inner-reach candidates---so the radial, compact-pericentre character is
 not an artefact of the non-Gaia-DR3-calibrated Hunter+2024 model
-(Appendix~\ref{app:sensitivity}).  What \emph{is} potential-sensitive is
-the precise central reach and the barred long-apocentre inner-reach count,
+ (Appendix~\ref{app:sensitivity}).  What \emph{is} potential-sensitive is
+ the precise cylindrical spin-axis reach and the barred long-apocentre inner-reach count,
 which vary by a factor of several between the static and barred families
 (\S\ref{sec:reach}; Appendix~\ref{app:sensitivity}).  We therefore treat
-the high-eccentricity, compact-pericentre summary as robust and the exact
+ the high-eccentricity, small-$\Rperi$ summary as robust and the exact
 inner-Galaxy reach as model-dependent.
 
 \input{tables/v15/tab_orbit_summary.tex}
@@ -1099,10 +1405,10 @@ inner-Galaxy reach as model-dependent.
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig07_rperi_rapo.pdf}
-\caption{Pericentre vs.\ apocentre for the Tier~A+B+C slow catalogue
-($N=1{,}952$), colour-coded by eccentricity, in the static Hunter+2024
+\caption{Cylindrical pericentre vs.\ cylindrical apocentre for the Tier~A+B+C slow catalogue
+($N=621$), colour-coded by eccentricity, in the static Hunter+2024
 potential. Axis ranges are set to where the adopted-model point-estimate
-integrations place the data: all 1{,}952 stars have $\Rperi<1$\kpc{} and
+integrations place the data: all 621 stars have $\Rperi<1$\kpc{} and
 nearly all have $\Rapo<18$\kpc.  The long-apocentre inner-reach
 sensitivity test (\S\ref{sec:long_reach}) is reported in the text and in
 Table~\ref{tab:reach}, not on this panel.}
@@ -1118,7 +1424,7 @@ locus, as the low-\vgrf{} selection requires.
 \includegraphics[width=\columnwidth]{figures/fig08_toomre_diagram.pdf}
 \caption{Toomre diagram ($V_\phi$ vs.\
 $\sqrt{V_R^2 + V_z^2}$) for the Tier~A+B+C slow catalogue
-($N=1{,}952$), colour-coded by $\vgrf$. The sample is concentrated at low
+($N=621$), colour-coded by $\vgrf$. The sample is concentrated at low
 azimuthal velocity, far from the disc locus.}
 \label{fig:toomre}
 \end{figure}
@@ -1168,13 +1474,16 @@ The full eccentricity CDFs reinforce the same point.  An unweighted two-sample
 Anderson--Darling comparison \citep{ScholzStephens1987} between the
 Tier~A+B+C static-potential eccentricities and the adjacent 25--50\kms{}
 matched-control CDF rejects the hypothesis of a common eccentricity
-distribution at asymptotic $p<0.001$.  The same test against the
-single-ellipsoid smooth-continuation mock associated with
-Fig.~\ref{fig:ndf_expectation} likewise rejects at asymptotic $p<0.001$
-(the mock eccentricity realisation and the script that regenerates it
+distribution at asymptotic $p<0.001$.  The same test against an
+eccentricity realisation drawn from a single trivariate-Gaussian velocity
+ellipsoid fitted to the control library likewise rejects at asymptotic
+$p<0.001$ (the mock realisation and the script that regenerates it
 from the released control library are included in the data bundle).  Thus the near-unity eccentricity concentration is
 not reproduced by either the adjacent observed control band or that
-control-normalised smooth velocity ellipsoid.  The monotonic eccentricity
+smooth velocity ellipsoid.  Both are statements about the \emph{shape} of
+the eccentricity distribution and require no parent normalisation, which
+is why they survive the considerations of
+Section~\ref{sec:vgrf_membership_results}.  The monotonic eccentricity
 decline across the four control bands is likewise recovered under the
 covariate-balanced control weights.  Fig.~\ref{fig:e_vs_vgrf} shows the
 weighted per-band median eccentricities (with the full per-band
@@ -1188,7 +1497,7 @@ medians.
 \centering
 \includegraphics[width=\columnwidth]{figures/fig09_eccentricity_vs_vgrf.pdf}
 \caption{Median eccentricity as a function of Galactic rest-frame
-velocity for the Tier~A+B+C slow catalogue ($N=1{,}952$) and the four
+velocity for the Tier~A+B+C slow catalogue ($N=621$) and the four
 observability-matched control bands. Points show the band median
 eccentricities after the control bands are weighted against the slow
 catalogue; the full per-band eccentricity distributions are shown in
@@ -1202,7 +1511,7 @@ matches the band-by-band medians in Table~\ref{tab:band_comparison}.}
 \centering
 \includegraphics[width=\columnwidth]{figures/fig10_eccentricity_by_band.pdf}
 \caption{Eccentricity histograms for each of the five GRF velocity
-bands, stacked vertically. The slow Tier~A+B+C band ($N=1{,}952$) shows
+bands, stacked vertically. The slow Tier~A+B+C band ($N=621$) shows
 the extreme near-unity peak; the eccentricity distribution broadens
 monotonically through the four control bands toward 200--260\kms.}
 \label{fig:e_by_band}
@@ -1211,8 +1520,8 @@ monotonically through the four control bands toward 200--260\kms.}
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig12_rperi_rapo_by_band.pdf}
-\caption{Median pericentre as a function of Galactic rest-frame velocity
-for the slow Tier~A+B+C catalogue ($N=1{,}952$) and the four
+\caption{Median cylindrical pericentre as a function of Galactic rest-frame velocity
+for the slow Tier~A+B+C catalogue ($N=621$) and the four
 observability-matched control bands. The slow band sits at the
 small-$\Rperi$ extreme of the matched controls; per-band pericentre
 medians are reported in Table~\ref{tab:band_comparison}.}
@@ -1231,8 +1540,8 @@ $R<2$\kpc, while Tier~C stars spend 19.7\% there.  Conversely, the
 median time fraction in the solar annulus ($7<R<9$\kpc) rises from
 11.6\% in Tier~A to 16.2\% in Tier~C.  The high-confidence slow stars
 are therefore not merely objects lingering in a solar-radius comparison
-shell; they are strongly inner-reaching orbits observed during a
-low-speed phase.
+shell; they are on strongly radial orbits that cross the inner Galaxy,
+observed during a low-speed phase.
 
 \input{tables/v15/tab_dwell.tex}
 
@@ -1241,25 +1550,25 @@ low-speed phase.
 
 Although the catalogue shares the defining low-\vgrf{} state, the stars
 span a range of model-derived orbital scales.  The Tier~A+B+C catalogue
-has a median static-potential pericentre of 154\,pc in the orbit
-Monte Carlo posterior medians, and all 1{,}952 posterior-median
-pericentres remain inside 1\,kpc.  In the dedicated point-estimate
-central-reach diagnostic, $\Rperi$ is the cylindrical in-plane
+ has a median static-potential cylindrical pericentre of 153\,pc in the orbit
+Monte Carlo posterior medians, and all 621 posterior-median
+ cylindrical pericentres remain inside 1\,kpc.  In the dedicated point-estimate
+ cylindrical-reach diagnostic, $\Rperi$ is the cylindrical in-plane
 pericentre, $\min\sqrt{x^2+y^2}$, i.e. closest approach to the Galactic
 spin axis rather than to Sgr~A* as a point.  With this definition,
-864 stars have static $\Rperi<100$\,pc and all 1{,}952 have static
+241 stars ($38.8\%$) have static $\Rperi<100$\,pc and all 621 have static
 $\Rperi<1$\kpc.  This fact is visible in the
-right panel of Fig.~\ref{fig:face_on}: every star's model pericentre
-passage falls within the inner kpc of the Galaxy, despite the catalogue
+ right panel of Fig.~\ref{fig:face_on}: every star's model cylindrical
+ pericentre falls within the inner kpc in $R$, despite the catalogue
 being observed across the Gaia DR3 heliocentric survey volume shown in
 the left panel.  In the barred
 sensitivity integration the corresponding cylindrical point-estimate
 count is 1{,}635 stars with $\Rperi<100$\,pc; those barred quantities
 are used as sensitivity diagnostics rather than as the default catalogue
-values.  The conservative inner-reach statement is therefore stronger
+ values.  The conservative cylindrical inner-reach statement is therefore stronger
 than the exact 100-pc scale: in the adopted static point-estimate model,
 the full catalogue lies well inside common bar/bulge apertures
-($R<3.5$--$5$\kpc), while the parsec-scale medians and counts remain
+ ($R<3.5$--$5$\kpc), while the parsec-scale cylindrical medians and counts remain
 model diagnostics.
 
 \needspace{8\baselineskip}
@@ -1279,7 +1588,7 @@ propagation are used to identify robust close-passage candidates rather
 than to treat nominal closest approaches as definitive
 \citep{BailerJones2022}.
 
-As an external source-id check, none of the 541 Tier~A+B stars overlaps
+As an external source-id check, none of the 276 Tier~A+B stars overlaps
 the 61 Gaia DR3 close-encounter entries in \citet{BailerJones2022}.
 
 We also checked the closest published low-azimuthal-velocity comparison
@@ -1350,7 +1659,7 @@ for follow-up clustering work.
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.72\textwidth]{figures/fig15_e_lz.pdf}
-\caption{Tier~A+B+C slow catalogue ($N=1{,}952$) in $E$--$L_z$ space,
+\caption{Tier~A+B+C slow catalogue ($N=621$) in $E$--$L_z$ space,
 colour-coded by orbital eccentricity in the static Hunter+2024
 potential. Marker shape encodes tier (circle/triangle/square = A/B/C);
 the vertical line marks $L_z=0$.}
@@ -1396,15 +1705,15 @@ adjacent $25$--$50$\kms{} decade leak into the slow catalogue and the
 higher-velocity leakage is negligible.  Conditional on entering the
 Monte Carlo after the RVS and parallax-SNR filters, the slow-bin
 recovery is $6{,}038/6{,}944=87.0\%$; end-to-end, including Gaia/RVS
-observability, it is $60.4\%$.  Combined with the observed-control
-smooth-continuation check in Section~\ref{sec:vgrf_membership_results}
-and the selection-function
+observability, it is $60.4\%$.  Combined with the latent-distribution
+reconstruction of Section~\ref{sec:latent} and the selection-function
 prior-dominance audit in Section~\ref{sec:interpretation}, the
 injection-recovery test forms the catalogue's completeness triad: the
-observed slow tail is large relative to empirical smooth-continuation
-extrapolations from the Gaia control velocities, its effective-volume scaling is limited
-by sparse selection-function cells, and the pipeline recovers a quantified
-fraction of true synthetic slow stars.
+latent \vgrf{} distribution passes smoothly through the selection
+boundary, so the catalogue is a tail selection rather than a distinct
+population; its effective-volume scaling is limited by sparse
+selection-function cells; and the pipeline recovers a quantified fraction
+of true synthetic slow stars.
 
 \input{tables/v15/tab_recovery_summary.tex}
 
@@ -1427,7 +1736,7 @@ and Tier~A+B+C recovery in the fixed 500-realisation diagnostic pass.}
 
 Empirically, Gaia DR3 contains a
 tiered catalogue of stars observed at very low Galactic rest-frame speed:
-541 stars at Tier~A+B confidence and 1{,}952 stars at Tier~A+B+C confidence.
+276 stars at Tier~A+B confidence and 621 stars at Tier~A+B+C confidence.
 The exact $\vgrf=25$\kms{} boundary is less secure for individual
 near-threshold sources, so the catalogue is explicitly probabilistic
 rather than a single hard-cut list.
@@ -1450,8 +1759,8 @@ low-speed phase.  This is related to the same orbital-turning-point
 mechanism discussed in the accretion-debris literature, but the present
 catalogue does not identify the selected stars with GS/E or any other
 progenitor.  We emphasise that this strong radial bias is in part a
-kinematic corollary of the selection itself.  In the standard spherical
-limit, the pericentre and apocentre are the two turning-point roots of
+ kinematic corollary of the selection itself.  In the standard spherical
+ limit, spherical-radius pericentre and apocentre are the two turning-point roots of
 the radial energy equation, and eccentricity is set by those roots for
 given energy and angular momentum \citep{BinneyTremaine2008,
 HattoriYoshii2010,HattoriYoshii2011}.  At fixed observed position, a
@@ -1464,24 +1773,53 @@ potential, the trajectory must move back toward smaller radii until it
 reaches its inner turning point.  This generalizes the observability
 geometry noted by \citet{Hunt2024} in the context of disc radial phase
 spirals, where a fixed local volume preferentially catches low-$L_z$
-stars close to apocentre.  High eccentricity and compact model
-pericentres are therefore largely expected from the cut, wherever within
+ stars close to apocentre.  High eccentricity and compact model
+ cylindrical pericentres are therefore largely expected from the cut, wherever within
 the catalogue's observed Galactocentric range the slow state is measured.
-The model-dependent question is the exact parsec-scale inner turning
-point, not the direction of the inference.  The radial bias itself is
+ The model-dependent questions are the exact parsec-scale cylindrical
+ spin-axis reach and, more stringently, the three-dimensional Galactic-centre
+ closest approach, not the direction of the radiality inference.  The radial bias itself is
 thus largely a property of the selection; what the catalogue contributes is
 the slow sample, its spatial and orbital structure, and its count relative
 to smooth velocity-field continuations of the controls
 (\S\ref{sec:vgrf_membership_results}).
 
 The point-estimate orbit integration provides the current
-characterisation for the main dynamical claim.  All 1{,}952 Tier~A+B+C
-stars have $e>0.8$ in the default static potential, and $66.7\pm 1.1\%$
+characterisation for the main dynamical claim.  All 621 Tier~A+B+C
+stars have $e>0.8$ in the default static potential, and $74.9\pm 1.7\%$
 have $e>0.95$ under point-estimate integration (cf.\ the Monte Carlo
 posterior-median fraction in Section~\ref{sec:eccentricity}).  The strongly radial
 character of the sample is therefore clear in the adopted model, while
 posterior orbit uncertainties and potential-variant tests remain
 sensitivity products rather than catalogue-definition steps.
+
+It is worth stating explicitly for how long these integrations carry
+information about a real star, because an orbit integrated for several
+gigayears increasingly describes the adopted potential rather than the
+object.  The predictive content is front-loaded.  A star's present
+position and velocity are measured, so the direction of its next
+excursion is an observable rather than a model output: a star observed at
+$\vgrf<25\kms$ near an outer turning point is falling inward next,
+whichever centrally concentrated potential is assumed, and the radial
+phase reported in Table~\ref{tab:radial_phase} uses the adopted
+Galactocentric frame but no orbit integration and no potential at all.
+What the potential supplies is the
+depth and timing of that first approach.  Beyond it the information
+decays quickly.  The median radial period of the catalogue is $91$\,Myr
+(16th--84th percentile $80$--$109$\,Myr), and in the default barred
+potential Agama's normalised finite-time Lyapunov indicator has a median
+of $0.45$ over the sampled chaos subset (96 stars;
+Appendix~\ref{app:sensitivity}), so neighbouring trajectories separate by
+a factor $e$ in roughly two radial periods---of order $200$\,Myr, or
+about two pericentric passages.  We therefore treat the first inward
+excursion as the interval over which a per-star trajectory is
+meaningfully constrained, and read everything beyond it, including the
+orbital history implied by integrating backwards, as a statistical
+property of the ensemble in the adopted potential rather than as the
+past of any individual star.  This is a limitation of the data as much as
+of the method: a genuinely predictive long-baseline integration would
+require a time-dependent Milky Way model, including the bar's history and
+the response of the disc, which present observations do not constrain.
 
 A present-day clustering null test (a DBSCAN sensitivity grid over
 $\varepsilon=\{5,10,15,25,50\}$\,pc and
@@ -1549,7 +1887,7 @@ SF systematic for the catalogue.
 
 The principal open questions are interpretive rather than catalogue-level.
 Spectroscopic coverage is incomplete.
-Very small inferred pericentres and long-apocentre inner-reach counts are model-sensitive.
+ Very small inferred cylindrical pericentres and long-apocentre inner-reach counts are model-sensitive.
 The sample is not volume-complete, and local halo samples cannot in
 general be extrapolated to the global halo without strong modelling
 assumptions \citep{Sharpe2024}.  These limitations set the boundary of
@@ -1560,14 +1898,17 @@ the present paper's claims.
 % =============================================================================
 
 We present a tiered, probabilistic Gaia DR3 catalogue of stars with very
-low Galactic rest-frame speeds: a primary Tier~A+B catalogue of 541 stars
-($P(\vgrf<25\kms)>0.84$), a high-confidence Tier~A core of 289 ($P>0.95$),
-and a high-completeness Tier~A+B+C extension of 1{,}952 ($P>0.50$).  Each
+low Galactic rest-frame speeds: a primary Tier~A+B catalogue of 276 stars
+($P(\vgrf<25\kms)>0.84$), a high-confidence Tier~A core of 173 ($P>0.95$),
+and a high-completeness Tier~A+B+C extension of 621 ($P>0.50$).  Membership
+probabilities are corrected for the population prior; the uncorrected
+forward scores select 289, 541, and 1{,}952 stars at the same thresholds
+and are also released.  Each
 source carries a Monte Carlo membership probability, so the catalogue is a
 probability-scored sample rather than a hard-threshold list.
 
-In the axisymmetrized Hunter+2024 potential the sample is strongly radial
-and compact-pericentre (Monte Carlo posterior-median eccentricity 0.949,
+ In the axisymmetrized Hunter+2024 potential the sample is strongly radial
+ with compact cylindrical pericentres (Monte Carlo posterior-median eccentricity 0.949,
 $\Rperi=154$\,pc, $\Rapo=7.35$\kpc).  This radial character is largely a
 corollary of the selection---a near-zero instantaneous speed picks out
 stars near an orbital turning point---and is robust across the halo-mass,
@@ -1575,7 +1916,7 @@ barred, and second-potential (McMillan+2017, Portail+2017) tests of
 Appendix~\ref{app:sensitivity}.  The matched-control comparison is a null
 check, not a calibrated relation: against observability-matched samples at
 higher $\vgrf$ the slow catalogue is distinctly more eccentric and
-compact-pericentre, and the across-band gradient runs in the expected
+ compact in cylindrical pericentre, and the across-band gradient runs in the expected
 kinematic sense, but the controls are a deliberately broad,
 selection-function-limited comparison over four coarse velocity bands.  We
 therefore conclude that the slow state is not a generic property of matched
@@ -1583,7 +1924,7 @@ therefore conclude that the slow state is not a generic property of matched
 law---that would require a substantially larger, selection-corrected
 control sample.
 
-The exact inner-Galaxy reach is model-dependent and we treat it as such.
+ The exact cylindrical inner-Galaxy reach is model-dependent and we treat it as such.
 The long-apocentre inner-reach count rises from three in the static
 potential to 7--31 across the barred pattern-speed grid
 ($\Omega_p=24$, 28, 33, 37.5, $41\kms\kpc^{-1}$), with an independent
@@ -1594,6 +1935,21 @@ only by Monte Carlo posterior probability, none secure below 10\,pc
 and $L_z$ but not $J_z$ for these plunging orbits, so the catalogue ships
 orbit-time-averaged actions and a per-star reliability flag alongside the
 single-evaluation values.
+
+The orbit products are also bounded in time, and we would rather state
+this than leave it implied.  What the data fix is the next excursion:
+a star observed at $\vgrf<25\kms$ is near an outer turning point and is
+falling inward next, and that follows from its measured velocity rather
+than from any potential.  What the model supplies is how deep and how
+soon.  With a median radial period of $91$\,Myr and a barred finite-time
+Lyapunov indicator implying $e$-folding trajectory separation in roughly
+two radial periods, per-star integrations stop being predictive after of
+order $200$\,Myr---about two pericentric passages.  Statements beyond
+that horizon, in either time direction, should be read as ensemble
+properties in the adopted potential and not as the history or future of
+an individual star.  Closing that gap needs a time-dependent Galaxy
+model, including the bar's history and the disc's response, which the
+present data do not constrain.
 
 Completeness, not membership, is the dominant limitation: most of the
 catalogue occupies sparse, prior-dominated Gaia~RVS selection-function
@@ -1679,12 +2035,14 @@ references, and final prose were reviewed and verified by the author,
 who takes sole responsibility for the scientific content.
 
 
-\facilities{Gaia, Sloan (APOGEE), AAT (HERMES/GALAH)}
+\availabilitynote{Facilities}
+Gaia, Sloan (APOGEE), AAT (HERMES/GALAH).
 
-\software{astropy
+\availabilitynote{Software}
+astropy
 \citep{AstropyCollaboration2013,AstropyCollaboration2018,AstropyCollaboration2022},
 agama \citep{Vasiliev2019}, GaiaUnlimited \citep{CastroGinard2023},
-numpy, scipy, matplotlib, healpy, hdbscan, dustmaps}
+numpy, scipy, matplotlib, healpy, hdbscan, dustmaps.
 
 \availabilitynote{Data Availability}
 The observational source catalogues used in this work are publicly
@@ -1758,11 +2116,11 @@ estimate, define the catalogue (Table~\ref{tab:mc}).
 \paragraph{Halo-mass sensitivity on the full Tier~A+B+C catalogue.}
 A full-sample halo-mass sensitivity study was repeated for the Tier~A+B+C catalogue, bracketing recent Milky Way mass estimates
 \citep[e.g.][]{Cautun2020,Wang2020}.  Varying the halo mass by $\pm15\%$ changes the
-median point-estimate pericentre from 116\,pc in the matched 40{,}001-point
+ median point-estimate cylindrical pericentre from 116\,pc in the matched 40{,}001-point
 default integration to 119\,pc and 111\,pc, respectively, and leaves the
 long-apocentre inner-reach count unchanged at three.  The high-eccentricity result is
 therefore driven primarily by the observed phase-space configuration:
-all 1{,}952 Tier~A+B+C stars have $e>0.8$ in the default static
+all 621 Tier~A+B+C stars have $e>0.8$ in the default static
 potential.
 
 \paragraph{Bar-perturbation sensitivity.}
@@ -1776,7 +2134,7 @@ low-\vgrf{} radiality intact but raises the long-apocentre inner-reach
 count from three (static) to 21 (barred default), spanning 7--31 across the
 grid, with the bar-angle and halo-flattening ranges given in
 Tables~\ref{tab:potential} and~\ref{tab:sensitivity}.  The barred
-\emph{median} pericentre is itself sampling-sensitive (20\,pc to 14\,pc
+ \emph{median} cylindrical pericentre is itself sampling-sensitive (20\,pc to 14\,pc
 over 20{,}001--40{,}001 trajectory points), so we rely on threshold counts
 rather than barred medians for inner-reach comparisons and retain the
 barred integrations as systematic tests rather than catalogue values.
@@ -1845,7 +2203,9 @@ $\sim1\%$ in $\Rapo$ and eccentricity.
 
 \section{Inner-Galaxy Close Approaches} \label{app:sgrA}
 
-The most extreme central-passage claims require additional caution.  In
+ The most extreme central-passage claims require additional caution.  The
+ orbit integrations are fully three-dimensional; only the separately
+ reported $\Rperi$ summary is cylindrical.  In
 the point-estimate products, the closest static and barred
 trajectories reach within 3.1 and 4.3\,pc of the Galactic centre,
 respectively.  Dedicated 5,000-realisation Monte Carlo propagation of
@@ -1856,7 +2216,7 @@ spherical Galactocentric closest approach,
 $r_{\rm sph}=\sqrt{x^2+y^2+z^2}$, and are Monte Carlo posterior
 probability counts, not the point-estimate cylindrical $\Rperi$ counts
 above.  Since $r_{\rm sph}\ge \sqrt{x^2+y^2}$, the Sgr~A* set is a
-stricter subset of the in-plane central-reach set.  We therefore
+ stricter subset of the cylindrical spin-axis-reach set.  We therefore
 describe these as candidate inner-Galaxy approachers, not as a confirmed
 population of Sgr~A*-passing stars.  A three-point quadratic
 interpolation of $r_{\rm sph}^2(t)$ around each sampled trajectory
@@ -1976,9 +2336,7 @@ azimuthal rotation with disc-like chemistry, whereas the present
 catalogue selects low total \vgrf{} independent of chemistry and applies
 the same probability and quality gates to every source.
 
-\onecolumngrid
 \input{tables/v15/tab_filion2025_comparison.tex}
-\twocolumngrid
 
 % Keep deferred appendix floats out of the bibliography.
 \clearpage
@@ -2018,6 +2376,10 @@ Bailer-Jones, C.~A.~L.\ 2023, \aj, 166, 269
 Bailer-Jones, C.~A.~L., Rybizki, J., Fouesneau, M., Demleitner,
 M., \& Andrae, R.\ 2021, \aj, 161, 147
 
+\bibitem[Banik et~al.(2026)]{Banik2026}
+Banik, I., Kaluarachchige, T.~K., Cookson, S., \& Desmond, H.\ 2026,
+\mnras, submitted, arXiv:2607.00764
+
 \bibitem[Belokurov \& Kravtsov(2022)]{BelokurovKravtsov2022}
 Belokurov, V., \& Kravtsov, A.\ 2022, \mnras, 514, 689
 
@@ -2050,6 +2412,10 @@ Bland-Hawthorn, J., \& Gerhard, O.\ 2016, \araa, 54, 529
 \bibitem[Borsato et~al.(2020)]{Borsato2020}
 Borsato, N.~W., Martell, S.~L., \& Simpson, J.~D.\ 2020, \mnras,
 492, 1370
+
+\bibitem[Bovy et~al.(2011)]{Bovy2011}
+Bovy, J., Hogg, D.~W., \& Roweis, S.~T.\ 2011, Annals of Applied
+Statistics, 5, 1657
 
 \bibitem[Buder et~al.(2021)]{Buder2021}
 Buder, S., Sharma, S., Kos, J., et~al.\ 2021, \mnras, 506, 150
@@ -2087,12 +2453,19 @@ Deason, A.~J., Belokurov, V., Koposov, S.~E., \& Lancaster, L.\
 Dillamore, A.~M., Belokurov, V., Evans, N.~W., \& Davies, E.~Y.\
 2023, \mnras, 524, 3596
 
+\bibitem[Dempster et~al.(1977)]{Dempster1977}
+Dempster, A.~P., Laird, N.~M., \& Rubin, D.~B.\ 1977, Journal of the
+Royal Statistical Society B, 39, 1
+
 \bibitem[Dillamore et~al.(2024)]{Dillamore2024}
 Dillamore, A.~M., Belokurov, V., \& Evans, N.~W.\ 2024, \mnras,
 532, 4389
 
 \bibitem[Dodd et~al.(2023)]{Dodd2023}
 Dodd, E., Callingham, T.~M., Helmi, A., et~al.\ 2023, \aap, 670, L2
+
+\bibitem[Eddington(1913)]{Eddington1913}
+Eddington, A.~S.\ 1913, \mnras, 73, 359
 
 \bibitem[Eilers et~al.(2019)]{Eilers2019}
 Eilers, A.-C., Hogg, D.~W., Rix, H.-W., \& Ness, M.~K.\ 2019, \apj,
@@ -2203,6 +2576,9 @@ Luri, X., Brown, A.~G.~A., Sarro, L.~M., et~al.\ 2018, \aap, 616, A9
 \bibitem[Marchetti et~al.(2022)]{Marchetti2022}
 Marchetti, T., Evans, F.~A., \& Rossi, E.~M.\ 2022, \mnras, 515, 767
 
+\bibitem[Lucy(1974)]{Lucy1974}
+Lucy, L.~B.\ 1974, \aj, 79, 745
+
 \bibitem[McMillan(2017)]{McMillan2017}
 McMillan, P.~J.\ 2017, \mnras, 465, 76
 
@@ -2258,6 +2634,10 @@ Koppelman, H.~H.\ 2022, \aap, 665, A58
 Rybizki, J., Demleitner, M., Bailer-Jones, C.~A.~L., et~al.\ 2020,
 \pasp, 132, 074501
 
+\bibitem[Richardson(1972)]{Richardson1972}
+Richardson, W.~H.\ 1972, Journal of the Optical Society of America,
+62, 55
+
 \bibitem[Sanders \& Binney(2016)]{Sanders2016}
 Sanders, J.~L., \& Binney, J.\ 2016, \mnras, 457, 2107
 
@@ -2277,6 +2657,10 @@ ACM Transactions on Database Systems, 42, 19
 
 \bibitem[Sharpe et~al.(2024)]{Sharpe2024}
 Sharpe, K., Naidu, R.~P., \& Conroy, C.\ 2024, \apj, 963, 162
+
+\bibitem[Silverman et~al.(1990)]{Silverman1990}
+Silverman, B.~W., Jones, M.~C., Wilson, J.~D., \& Nychka, D.~W.\ 1990,
+Journal of the Royal Statistical Society B, 52, 271
 
 \bibitem[Smith et~al.(2007)]{Smith2007}
 Smith, M.~C., Ruchti, G.~R., Helmi, A., et~al.\ 2007, \mnras,

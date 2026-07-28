@@ -30,6 +30,14 @@ from astropy.table import Table
 BUNDLE = Path(__file__).resolve().parents[1]
 REPO = BUNDLE.parents[1]
 ORBITS = BUNDLE / "catalogues/catalogue_expanded_orbits_tierABC.fits"
+
+# --- population-prior retier switch (Phase 16F) ---
+import os as _os
+_RETIER = _os.environ.get("GAIA_RETIER", "").lower() in ("1", "true", "yes")
+if _RETIER:
+    ORBITS = BUNDLE / "catalogues/catalogue_retier_orbits_tierABC.fits"
+# --------------------------------------------------
+
 PRIVATE_WORK = REPO / "release/_iterations/v2/phase3_agama/_hunter24_workdir"
 POTENTIALS = BUNDLE / "potentials"
 WORK = POTENTIALS if (POTENTIALS / "MWPotentialHunter24_axi.ini").exists() else PRIVATE_WORK
@@ -131,10 +139,19 @@ def compute_cache() -> pd.DataFrame:
 def load_or_compute_cache() -> pd.DataFrame:
     if CACHE.exists():
         cached = pd.read_csv(CACHE)
-        if len(cached) == len(load_orbits()):
-            log(f"loaded {CACHE} ({len(cached)} rows)")
+        want = set(load_orbits()["source_id"].astype("int64").tolist())
+        have = set(cached["source_id"].astype("int64").tolist())
+        # The cache is keyed by source_id, so any catalogue whose members it
+        # already covers can be served by subsetting it. This matters for the
+        # population-prior tiers, which are strict nested subsets of the
+        # forward-defined ones the cache was built for.
+        if want <= have:
+            cached = cached[cached["source_id"].astype("int64").isin(want)]
+            cached = cached.reset_index(drop=True)
+            log(f"loaded {CACHE} ({len(cached)} of {len(have)} cached rows "
+                f"after subsetting to the current tier definition)")
             return cached
-        log("cache row count does not match expanded catalogue; rebuilding")
+        log(f"cache misses {len(want - have)} catalogue members; rebuilding")
     return compute_cache()
 
 

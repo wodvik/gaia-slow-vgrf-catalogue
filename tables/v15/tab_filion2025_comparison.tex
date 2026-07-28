@@ -1,26 +1,29 @@
-\begin{center}
-\refstepcounter{table}\label{tab:filion2025_comparison}
-\begin{minipage}{\linewidth}
-\small\textbf{Table \thetable.} Filion et al. (2025) stars entering the present Monte Carlo candidate pool.
-\end{minipage}
-\vspace{0.4ex}
-
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrrrrrrrl@{}}
+% Two-column-spanning float. This table needs roughly 335pt and an A&A column
+% is about 242pt, so it must not be set inside a single column. It previously
+% relied on \onecolumngrid, which is a no-op stub in this A&A build (an aastex
+% command retained from the AAS-format source), and was silently overfull by
+% 93pt.
+\begin{table*}
+\caption{Filion et al. (2025) stars entering the present Monte Carlo candidate
+pool.  $V_\phi^{\rm F25}$ is an approximate reproduction of the Filion et al.\
+Galactocentric azimuthal-velocity convention using APOGEE DR17 line-of-sight
+velocities and \citet{BailerJones2021} photogeometric distances.  The remaining
+columns are from the present Gaia DR3 RVS low-\vgrf{} release products.  None of
+the three sources is matched in the Gaia DR3 non-single-star two-body-orbit
+table.  All three are classified as Tier~X and are therefore excluded from the
+Tier~A+B+C science catalogue.}
+\label{tab:filion2025_comparison}
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llrrrrrrrl}
 \hline\hline
 Gaia DR3 source\_id & APOGEE ID & $V_\phi^{\rm F25}$ & $\vgrf$ & $P_{<25}$ & $\sigma_{\rm RV}$ & $N_{\rm tr}$ & $p_{\chi^2,{\rm RV}}$ & RUWE & RV class \\
  & & \multicolumn{1}{c}{(\kms)} & \multicolumn{1}{c}{(\kms)} & & \multicolumn{1}{c}{(\kms)} & & & & \\
 \hline
-3685921348377044480 & 2M13041724-0134399 & -37.5 & 27.5 & 0.364 & 1.17 & 18 & -- & 0.95 & ok \\
+3685921348377044480 & 2M13041724-0134399 & $-37.5$ & 27.5 & 0.364 & 1.17 & 18 & -- & 0.95 & ok \\
 1594059695819370624 & 2M14575158+5300140 & 15.2 & 40.0 & 0.090 & 1.14 & 26 & 0.640 & 1.17 & ok \\
-1288956935783694464 & 2M15022633+3248296 & -24.8 & 47.6 & 0.000 & 0.19 & 33 & 0.924 & 1.41 & ok \\
+1288956935783694464 & 2M15022633+3248296 & $-24.8$ & 47.6 & 0.000 & 0.19 & 33 & 0.924 & 1.41 & ok \\
 \hline
-\end{tabular*}
-\vspace{0.5ex}
-
-\begin{minipage}{0.95\linewidth}
-\footnotesize
-\textit{Note.} $V_\phi^{\rm F25}$ is an approximate reproduction of the Filion et al. Galactocentric azimuthal-velocity convention using APOGEE DR17 line-of-sight velocities and Bailer-Jones et al. (2021) photogeometric distances. The remaining columns are from the present Gaia DR3 RVS low-\vgrf{} release products. None of the three sources is matched in the Gaia DR3 non-single-star two-body-orbit table. All three sources are classified as Tier X and therefore are excluded from the Tier A+B+C science catalogue.
-\end{minipage}
-\end{center}
+\end{tabular}
+\end{table*}
