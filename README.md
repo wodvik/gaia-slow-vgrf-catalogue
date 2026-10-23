@@ -7,6 +7,8 @@ Zenodo concept DOI: [10.5281/zenodo.20116134](https://doi.org/10.5281/zenodo.201
 
 Release version: `v1.2.0-review` (see `RELEASE_NOTES.md`).
 
+> **Known issues in `v1.2.0-review`:** see [KNOWN_ISSUES.md](KNOWN_ISSUES.md). In particular, the adopted catalogue is `catalogues/catalogue_retier_*`; the `catalogue_expanded_*` files listed below carry the superseded forward-score tiers, and several orbit-summary numbers in the bundled manuscript are forward-era.
+
 ## Key Counts
 
 Tiers are defined on the population-prior-corrected membership probability
