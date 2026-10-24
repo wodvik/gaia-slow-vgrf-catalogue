@@ -7,7 +7,7 @@ Zenodo concept DOI: [10.5281/zenodo.20116134](https://doi.org/10.5281/zenodo.201
 
 Release version: `v1.2.0-review` (see `RELEASE_NOTES.md`).
 
-> **Known issues in `v1.2.0-review`:** see [KNOWN_ISSUES.md](KNOWN_ISSUES.md). In particular, the adopted catalogue is `catalogues/catalogue_retier_*`; the `catalogue_expanded_*` files listed below carry the superseded forward-score tiers, and several orbit-summary numbers in the bundled manuscript are forward-era.
+> **Known issues in `v1.2.0-review` (revised 2026-10-24):** the population-prior tiers adopted in this release (173 / 276 / 621, `catalogues/catalogue_retier_*`) were found to be biased low by roughly a factor of two. Until the next release, use the forward-score tiers (289 / 541 / 1,952), which ship as `catalogues/catalogue_expanded_*` or as `tier_forward` in `catalogue_retier_master.fits`. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md).
 
 ## Key Counts
 
